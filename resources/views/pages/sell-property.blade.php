@@ -166,7 +166,11 @@
 
     }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+    $(document).ready(function(){
+      google.maps.event.addDomListener(window, 'load', initialize);
+    });
+
+    
 
     function placeMarker(location, map) {
       var marker = new google.maps.Marker({
