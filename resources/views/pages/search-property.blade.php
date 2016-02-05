@@ -81,7 +81,8 @@
                         </div>
                     </div>
                     <div class="col-lg-6 text-right">
-                        <ul class="pagination">
+                        {!! $property->render() !!}
+                        <!-- <ul class="pagination">
                           <li class="disabled"><a href="#">&laquo;</a></li>
                           <li class="active"><a href="#">1</a></li>
                           <li><a href="#">2</a></li>
@@ -89,7 +90,7 @@
                           <li><a href="#">4</a></li>
                           <li><a href="#">5</a></li>
                           <li><a href="#">&raquo;</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
                 <?php $i = 0; ?>
@@ -199,7 +200,7 @@
     </div>
     <div id="map" class=" col-lg-4 well hidden-md hidden-sm hidden-xs" style="height: 1040px; display: inline-block;"></div>
 </section>
-    
+
 
 @endsection
 
@@ -222,7 +223,7 @@
 
         // init map
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 14,
+            zoom: 12,
             center: new google.maps.LatLng(-8.714309, 115.168725), //ambil dari parameter pertama search
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });

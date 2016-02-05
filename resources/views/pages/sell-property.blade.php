@@ -39,20 +39,23 @@
 
           <div class="form-group">
             <div class="col-sm-6">
-              <input type="text" name="owner_name" class="form-control" placeholder="Name">
+              <label class="control-label" for="owner_name">Name</label>
+              <input type="text" name="owner_name" class="form-control" placeholder="">
             </div>
             <div class="col-sm-6">
-              <input type="email" name="owner_email" class="form-control" placeholder="Email">
+              <label class="control-label" for="owner_email">Email</label>
+              <input type="email" name="owner_email" class="form-control" placeholder="">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-sm-6">
-              <input type="text" name="owner_phone" class="form-control" placeholder="Phone">
+              <label class="control-label" for="owner_phone">Phone</label>
+              <input type="text" name="owner_phone" class="form-control" placeholder="">
             </div>
             <div class="col-sm-6">
-
-              <select name="city" class="form-control select-city" placeholder="City">
+            <label class="control-label" for="city">City</label>
+              <select name="city" class="form-control select-city" placeholder="">
 
                 <option value=""></option>
 
@@ -67,20 +70,24 @@
 
           <div class="form-group map">  
             <div class="col-sm-12">
-              <textarea name="sell_note" class="form-control" rows="5" placeholder="Comment"></textarea>
+              <label class="control-label" for="sell_note">Comment</label>
+              <textarea name="sell_note" class="form-control" rows="5" placeholder="" style="margin-bottom: 30px;"></textarea>
             </div>
           </div>
 
           <div class="form-group map-box">
-            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-            <div id="googleMap" style="width:100%;height:500px;"></div>
-            <input type="hidden" value="0" name="map_latitude" id="map_latitude">
-            <input type="hidden" value="0" name="map_longitude" id="map_longitude">
-            
+            <div class="col-sm-12">
+              <input id="pac-input" class="controls" type="text" placeholder="Search">
+              <div id="googleMap" style="width:100%;height:500px;"></div>
+              <input type="hidden" value="0" name="map_latitude" id="map_latitude">
+              <input type="hidden" value="0" name="map_longitude" id="map_longitude">
+            </div>
           </div>
 
           <div class="form-group">
-            <div class="g-recaptcha" data-sitekey="6LcdHRcTAAAAAMUKsjZDzArdb0e8Fk2HU-duNhJP" style=" margin-left: 20px;"></div>
+            <div class="col-sm-12">
+              <div class="g-recaptcha" data-sitekey="6LcdHRcTAAAAAMUKsjZDzArdb0e8Fk2HU-duNhJP" style=" margin-top: 20px; margin-bottom:20px;"></div>
+            </div>
           </div>
 
           <div class="form-group">
@@ -169,8 +176,6 @@
     $(document).ready(function(){
       google.maps.event.addDomListener(window, 'load', initialize);
     });
-
-    
 
     function placeMarker(location, map) {
       var marker = new google.maps.Marker({

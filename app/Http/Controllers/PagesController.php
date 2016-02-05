@@ -228,7 +228,7 @@ class PagesController extends Controller
             $titles = 'All';
         }
 
-        $property = Property::where('id','<','20')->get();
+        $property = Property::where('id','<','20')->paginate(10);
 
         return view('pages.search-property', compact('type', 'titles', 'srctype', 'property'));
     }
