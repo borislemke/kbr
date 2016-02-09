@@ -604,5 +604,38 @@ class PropertiesController extends Controller
         return 'deleted';
     }
 
+    public function getPropertyByFilter(Request $request)
+    {
+        // {domain}/api/property/get?cat={int}&min_price={int}&max_price={int}&lat={double}&lon={double}&rad={int}
+
+        $limit = 20;
+
+        $rad = $request->rad;
+
+        $min_price = $request->min_price;
+
+        $max_price = $request->max_price;
+
+        $category = \App\Category::find($request->cat);
+
+        $lat = $request->lat;
+
+        $lon = $request->long;
+
+        $properties = Property::with(['propertyFiles' => function($query) {
+                $query->where('type', 'image');
+            }])
+            ->where('status', 1)
+            ->filterCategory($category)
+            ->filterPrice($min_price, $max_price)
+            ->filterLocation($lat, $lon, $rad)
+            ->paginate($limit);
+
+        $properties->appends(\Input::except('page'));
+
+        return $properties;
+
+    }
+
 
 }

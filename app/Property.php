@@ -64,18 +64,36 @@ class Property extends Model
         return $this->propertyFiles()->where('type', 'image')->first();
     }
 
+    public function scopeFilterPrice($query, $minprice, $maxprice)
+    {
+        $query->whereBetween('price', [$minprice, $maxprice]);
+
+        return $query;
+    }
+
     public function scopeFilterCategory($query, $category)
     {
-        $query->where('category_id', $category->id);
+        if ($category) {
+            
+            $query->where('category_id', $category->id);
 
-        if ($category->childs) {
+            if ($category->childs) {
 
-            foreach ($category->childs as $key => $value) {
-                
-                $query->orWhere('category_id', $value->id);
+                foreach ($category->childs as $key => $value) {
+                    
+                    $query->orWhere('category_id', $value->id);
+                }
             }
+
         }
 
+        return $query;
+    }
+
+    public function scopeFilterLocation($query, $lat, $lon, $rad)
+    {
+        $query->whereBetween('map_latitude', [$lat - $rad, $lat + $rad])
+            ->whereBetween('map_longitude', [$lon - $rad, $lon + $rad]);
 
         return $query;
     }

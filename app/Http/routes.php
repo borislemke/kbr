@@ -162,6 +162,17 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 });
 
 
+Route::group(['prefix' => 'api'], function () {
+
+    Route::group(['prefix' => 'property'], function () {
+
+        Route::get('get', 'PropertiesController@getPropertyByFilter');
+        
+    });
+    
+});
+
+
 
 Route::group(['middleware' => 'auth'], function () {
 
