@@ -18,6 +18,7 @@ class CreateTestimonialsTable extends Migration
             $table->integer('customer_id');
             $table->string('title');
             $table->text('content');
+            $table->boolean('status')->default(0);
             $table->timeStamps();
         });
     }

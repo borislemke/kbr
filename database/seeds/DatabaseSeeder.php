@@ -68,6 +68,8 @@ class DatabaseSeeder extends Seeder
 
             $c->inquiries()->save(factory(App\Inquiry::class)->make());
 
+            $c->testimonials()->save(factory(App\Testimony::class)->make());
+
         });
 
         Model::reguard();

@@ -33,10 +33,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Testimmony::class, function (Faker\Generator $faker) {
+$factory->define(App\Testimony::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->title,
-        'content' => $faker->sentence($nbWords = 3, $variableNbWords = true)
+        'title' => $faker->sentence($nbWords = 3, $variableNbWords = true),
+        'content' => $faker->sentence($nbWords = 10, $variableNbWords = true),
+        'status' => $faker->randomElement([0, 1])
     ];
 });
 

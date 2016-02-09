@@ -184,4 +184,79 @@ class CustomerController extends Controller
         // return redirect()->back();
         return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'Customer has been deleted'), 'id' => $id));
     }
+
+    public function showTestimony($id)
+    {
+        //
+        $testimony = \App\Testimony::find($id);
+
+        return $testimony;
+    }
+
+    public function postTestimony(Request $request)
+    {
+
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        $testimony = new \App\Testimony;
+
+        $testimony->customer_id = \Auth::customer()->get()->id;
+
+        $testimony->title = $request->title;
+
+        $testimony->content = $request->content;
+
+        $testimony->save();
+
+        $request->session()->flash('alert-success', 'Thanks. Your Testimony will be published soon.');
+
+        return redirect()->back();
+    }
+
+
+    public function storeTestimony(Request $request)
+    {
+
+        if ($request->edit != 0) return $this->updateTestimony($request, $request->edit);
+
+        $testimony = new \App\Testimony;
+
+        $testimony->customer_id = \Auth::customer()->get()->id;
+
+        $testimony->title = $request->title;
+
+        $testimony->content = $request->content;
+
+        $testimony->save();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'save success', 'message' => 'Post has been saved')));
+    }
+
+    public function updateTestimony(Request $request, $id)
+    {
+        $testimony = \App\Testimony::find($id);
+
+        $testimony->title = $request->title;
+
+        $testimony->content = $request->content;
+
+        $testimony->status = $request->status;
+
+        $testimony->save();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'update success', 'message' => 'Testimony has been updated')));
+    }
+
+    public function destroyTestimony($id)
+    {
+        $testimony = \App\Testimony::find($id);
+
+        $testimony->delete();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'Testimony has been deleted'), 'id' => $id));
+    }
+
 }

@@ -42,6 +42,26 @@ class AdminController extends Controller {
         return view('admin.pages.customers', compact('customers'));
     }
 
+    public function testimonials()
+    {
+        $limit = 20;
+
+        $search = \Input::get('q');
+
+        if ($search) {
+
+            $testimonials = \App\Testimony::where('title', 'like', $search .'%')
+                ->orWhere('content', 'like', $search .'%')
+                ->orderBy('created_at', 'desc')
+                ->paginate($limit);
+        } else {
+
+            $testimonials = \App\Testimony::orderBy('created_at', 'desc')->paginate($limit);
+        }
+
+        return view('admin.pages.testimonials', compact('testimonials'));
+    }
+
 
     public function properties() {
 

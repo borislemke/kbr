@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Customer
         Route::get('customers', 'AdminController@customers');
+        Route::get('customer/testimonials', 'AdminController@testimonials');
 
 
         // CMS
@@ -143,6 +144,9 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
         Route::get('/{account}/wishlist', ['as' => 'account.wishlist', 'uses' => 'PagesController@accountWishlist']);
 
         Route::get('/{account}/setting', ['as' => 'account.setting', 'uses' => 'PagesController@accountSetting']);
+
+        Route::post('testimony', ['as' => 'testimony.store', 'uses' => 'CustomerController@postTestimony']);
+
     }); 
 
 
@@ -169,7 +173,13 @@ Route::group(['prefix' => 'api'], function () {
         Route::get('get', 'PropertiesController@getPropertyByFilter');
         
     });
-    
+
+    Route::group(['prefix' => 'testimony'], function () {
+
+        Route::post('save', 'CustomerController@storeTestimony');
+        
+    });
+
 });
 
 
@@ -214,6 +224,16 @@ Route::group(['middleware' => 'auth'], function () {
             Route::any('store', 'CustomerController@store');
 
             Route::any('destroy/{id}', 'CustomerController@destroy');
+
+        });
+
+        Route::group(['prefix' => 'testimony'], function () {
+
+            Route::any('get/{id}', 'CustomerController@showTestimony');
+
+            Route::any('store', 'CustomerController@storeTestimony');
+
+            Route::any('destroy/{id}', 'CustomerController@destroyTestimony');
 
         });
 
