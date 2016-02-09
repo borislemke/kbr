@@ -76,7 +76,7 @@
                                 
                                 <div class="view-detail">
                                     <a href="{{ route('property.detail', str_slug($wishlist->property->lang()->title) . '-' . $wishlist->property->id) }}">View</a>
-                                    <a href="#" class="btn btn-danger" data-id="{{ $wishlist->id }}">Delete</a>
+                                    <button type="button" class="btn btn-danger delete-wishlist" data-id="{{ $wishlist->id }}">Delete</button>
                                 </div>
                             </div>
                         </div>
