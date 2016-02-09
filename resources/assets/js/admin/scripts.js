@@ -775,8 +775,16 @@ var Matter = {
 
             var el = '';
             $(document).ready(function() {
-                el = $('#select-customer').clone();
-                el += $('#select-property').clone();
+                el += $('#enquiry-add').html();
+            });
+
+            $(document).on('click', '[modal-close]', function(e) {
+
+                e.preventDefault();
+
+                modalClose();
+
+                $('#enquiry-add').html(el);
             });
 
             $(document).on('click', 'm-list-menu-item', function() {

@@ -170,6 +170,10 @@
           <textarea name="content" class="form-control" rows="5" placeholder="Comment"></textarea>
         </div>
 
+        <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LcdHRcTAAAAAMUKsjZDzArdb0e8Fk2HU-duNhJP" style=" margin-top: 20px; margin-bottom:20px;"></div>
+        </div>
+
       </div>
 
       <div class="modal-footer">
@@ -187,7 +191,7 @@
 @stop
 
 @section('scripts')
-
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script type="text/javascript">
 
 $(document).ready(function() {

@@ -47,6 +47,7 @@ class InquiryController extends Controller
         if ($request->edit != 0) return $this->update($request, $request->edit);
 
         $validator = \Validator::make($request->all(), [
+            'property_id' => 'required',
             'subject' => 'required'
         ]);
 
@@ -59,7 +60,7 @@ class InquiryController extends Controller
         $inquiry = new Inquiry;
 
         $inquiry->property_id = $request->property_id;
-        $inquiry->customer_id = $request->customer_id;
+        // $inquiry->customer_id = $request->customer_id;
         $inquiry->subject = $request->subject;
         $inquiry->content = $request->content;
         $inquiry->firstname = $request->firstname;
@@ -163,7 +164,8 @@ class InquiryController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'required',
-            'subject' => 'required'
+            'subject' => 'required',
+            'g-recaptcha-response' => 'required'
         ]);
 
         $name = explode(' ', $request->name);
