@@ -8,43 +8,91 @@
         <li class="active">Wishlist</li>
     </ul>
 </div>
-<div class="line-top"></div>
+<div class="line-top"> <h3><small>Wish List</small> </h3></div>
 
-<div class="container">
-    <h3>WISHLIST</h3>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th></th>
-                <th>PROPERTY</th>
-                <th>CREATED</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-
+<div class="container wishlist">
+    <div class="row">
+       
+        <div class="col-md-12 col-sm-12">
+            
+            <div class="user-wrapper">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="icon-user media-object img-circle" src="{{ asset('facex.jpg') }}" alt=""> 
+                        </a>
+                    </div>
+                    <div class="user-desc media-body">
+                        <a href="">
+                            <h4 class="media-heading">andre’s wish lists</h4>
+                        </a>
+                        <p>
+                            Wishlists: <span>3</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
             @foreach($wishlists as $wishlist)
-            <tr>
-                <td>
-                    @if($wishlist->property->thumb())
-                    <img width="150" src="{{ asset('uploads/property/' . $wishlist->property->thumb()->file) }}">
-                    @else
-                    <img width="150" src="{{ asset('no-image.png') }}">
-                    @endif
-                </td>
-                <td><a href="{{ route('property.detail', str_slug($wishlist->property->lang()->title) . '-' . $wishlist->property->id) }}">{{ $wishlist->property->lang()->title }}</a></td>
-                <td>{{ $wishlist->created_at->format('Y-m-d') }}</td>
-                <td><a href="#" class="text-danger delete-wishlist" data-id="{{ $wishlist->id }}"><i class="fa fa-times-circle fa-2x"></i></a></td>
-            </tr>
+            <div class="panel panel-primary col-md-12 col-sm-6">
+                <div class="panel-body">
+                    <div class="col-md-3 display-wishlist-image">
+                        <div class="media">
+                            <div class="media-left">
+                                @if($wishlist->property->thumb())
+                                <img class="media-object img-responsive" src="{{ asset('uploads/property/' . $wishlist->property->thumb()->file) }}">
+                                @else
+                                <img width="150" src="{{ asset('no-image.png') }}">
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="display-wishlist-desc">
+                        
+                        <div class="col-md-5 ">
+                            <div class="media-body">
+                                
+                                <h4>{{ $wishlist->property->lang()->title }}</h4>
+                                
+                                <p>
+                                    {{ $wishlist->property->lang()->description }}
+                                </p>
+                            </div>
+                            <div class="facilities">
+                                <ul>
+                                   @foreach($wishlist->property->facilities as $facility)
+                                    <li> {{ $facility->name }} : <span> {{ $facility->description }}</span> </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="media-body">
+                               <div class="price">
+                                   <h4>{{ $wishlist->property->price }}</h4>
+                               </div>
+                                
+                                <div class="view-detail">
+                                    <a href="{{ route('property.detail', str_slug($wishlist->property->lang()->title) . '-' . $wishlist->property->id) }}">View</a>
+                                    <a href="#" class="btn btn-danger" data-id="{{ $wishlist->id }}">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endforeach
-
-        </tbody>
-    </table>
-
-    <div class="pull-right">
-        {!! $wishlists->render() !!}
+        </div>
+    </div>   
+    
+    <div class="col-md-12">
+        <div class="pagination-wrapper">
+            {!! $wishlists->render() !!}
+        </div>
     </div>
+    
 </div>
 
 @stop

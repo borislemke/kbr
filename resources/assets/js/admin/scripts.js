@@ -377,7 +377,7 @@ $(document).on('click', 'm-caroussel-switch', function(e) {
 });
 
 
-$(document).on('click', '[ripple], [button], m-button, [mono-button]', function(e) {
+$(document).on('click', '[ripple], m-button, m-table-list-more, [mono-button]', function(e) {
 
     var offset = $(this).offset(),
         offsetY = offset.top,

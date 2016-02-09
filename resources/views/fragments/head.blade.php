@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/responsive-slider.css">
     <link rel="stylesheet" href="assets/css/normalize.min.css">
     <link rel="stylesheet" href="assets/css/styles_old.css">
+    <link rel="stylesheet" href="assets/css/mediaqueries.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
