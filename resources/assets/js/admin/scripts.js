@@ -322,6 +322,10 @@ function modalClose() {
 
     $('[id^=property-input-]');
 
+    $('input[type=text]').val('');
+
+    $('textarea').html('');
+
     NProgress.done();
 }
 
@@ -769,6 +773,12 @@ var Matter = {
 
             selectList();
 
+            var el = '';
+            $(document).ready(function() {
+                el = $('#select-customer').clone();
+                el += $('#select-property').clone();
+            });
+
             $(document).on('click', 'm-list-menu-item', function() {
 
                 var id = $(this).parents('m-list-menu').attr('data-id'),
@@ -811,6 +821,9 @@ var Matter = {
             });
 
             function populateInquiryEdit(data) {
+
+                $('#select-customer').remove();
+                $('#select-property').remove();
 
                 $.each(data, function(k, v) {
 

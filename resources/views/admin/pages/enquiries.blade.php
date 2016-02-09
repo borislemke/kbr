@@ -84,7 +84,7 @@
     <h3>Add enquiry</h3>
 
 
-    <m-input data-label="customers" select>
+    <m-input id="select-customer" data-label="customers" select>
         <input type="text" select id="inquiry-input-customer_id" name="customer_id" required>
         <label for="inquiry-input-customer_id">Customers</label>
         <m-select>
@@ -96,7 +96,7 @@
         </m-select>
     </m-input>
 
-    <m-input data-label="properties" select>
+    <m-input id="select-property" data-label="properties" select>
         <input type="text" select id="inquiry-input-property_id" name="property_id" required>
         <label for="inquiry-input-property_id">Properties</label>
         <m-select>

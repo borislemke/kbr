@@ -14,6 +14,26 @@
 <div class="line-top"><h3><small>{{ $property->lang()->title }}</small></h3></div>
 
 <div class="container">
+
+  @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
+
+  <div class="flash-message">
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+      @if(Session::has('alert-' . $msg))
+
+      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+      @endif
+    @endforeach
+  </div> <!-- end .flash-message -->
+
     <div class="row detail">
 
         <div class="col-md-8 property-detail" data-id="{{ $property->id }}" data-customerId="{{ ($custLog)? $custLog->id : 0 }}">
@@ -95,7 +115,7 @@
                 <div class="panel-body">
                     <div class="" >
                         <div class="col-lg-12" style="padding-bottom: 20px;">
-                            <a href="#" class="btn btn-primary btn-lg btn-block">Inquire this property</a>
+                            <a href="#" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#inquiryModal">Inquire this property</a>
                         </div>
                     </div>
                     <br>
@@ -113,6 +133,54 @@
         </div>
 
     </div>
+</div>
+
+
+<!-- Inquiry Modal -->
+<div id="inquiryModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+
+    {!! Form::open([ 'url' => route('property.inquiry') ]) !!}
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Inquire this property</h4>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" name="property_id" value="{{ $property->id }}">
+
+        <div class="form-group">
+          <input name="name" type="text" class="form-control" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <input name="phone" type="text" class="form-control" placeholder="Phone">
+        </div>
+        <div class="form-group">
+          <input name="email" type="email" class="form-control" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <input name="subject" type="text" class="form-control" placeholder="Subject">
+        </div>
+
+        <div class="form-group">
+          <textarea name="content" class="form-control" rows="5" placeholder="Comment"></textarea>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+
+    {!! Form::close() !!}
+
+    </div>
+
+  </div>
 </div>
 
 

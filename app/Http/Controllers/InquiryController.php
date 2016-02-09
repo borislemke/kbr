@@ -124,8 +124,8 @@ class InquiryController extends Controller
 
         $inquiry = Inquiry::find($id);
 
-        $inquiry->property_id = $request->property_id;
-        $inquiry->customer_id = $request->customer_id;
+        // $inquiry->property_id = $request->property_id;
+        // $inquiry->customer_id = $request->customer_id;
         $inquiry->subject = $request->subject;
         $inquiry->content = $request->content;
         $inquiry->firstname = $request->firstname;
@@ -156,4 +156,42 @@ class InquiryController extends Controller
         // return redirect()->back();
         return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'Inquiry has been deleted'), 'id' => $id));
     }
+
+    public function postInquiry(Request $request)
+    {
+
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            'subject' => 'required'
+        ]);
+
+        $name = explode(' ', $request->name);
+
+        DB::beginTransaction();
+
+        $inquiry = new Inquiry;
+
+        $inquiry->property_id = $request->property_id;
+        // $inquiry->customer_id = $request->customer_id;
+        $inquiry->subject = $request->subject;
+        $inquiry->content = $request->content;
+        $inquiry->firstname = $name[0];
+
+        if (count($name) > 1) $inquiry->lastname = $name[1];
+
+        $inquiry->phone = $request->phone;
+        $inquiry->email = $request->email;
+
+        $inquiry->save();
+
+        DB::commit();
+
+        $request->session()->flash('alert-success', 'Thanks. We will check your enquiry soon.');
+
+        return redirect()->back();
+
+    }
+
+
 }
