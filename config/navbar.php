@@ -42,6 +42,7 @@ return [
 
         "my-account" => "my account",
         "accounts" => "admin accounts",
+        "branches" => "branches",
         "settings" => "settings",
         "about" => "about"
     ]

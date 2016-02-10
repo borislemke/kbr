@@ -81,6 +81,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('accounts', 'AdminController@accounts');
 
+        Route::get('branches', 'AdminController@branches');
+
         Route::get('settings', 'AdminController@settings');
 
         Route::get('about', 'AdminController@about');
@@ -300,6 +302,16 @@ Route::group(['middleware' => 'auth'], function () {
             Route::any('get/{id}', 'UserController@show');
 
             Route::any('destroy/{id}', 'UserController@destroy');
+
+        });
+
+        Route::group(['prefix' => 'branch'], function () {
+
+            Route::any('store', 'BranchController@store');
+
+            Route::any('get/{id}', 'BranchController@show');
+
+            Route::any('destroy/{id}', 'BranchController@destroy');
 
         });
 

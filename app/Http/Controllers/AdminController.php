@@ -397,6 +397,25 @@ class AdminController extends Controller {
     }
 
 
+    public function branches() {
+
+
+        $search = \Input::get('q');
+
+        if ($search) {
+
+            $branches = \App\Branch::where('name', 'like', $search . '%')->orderBy('name', 'asc')->paginate($this->limit);
+
+        } else {
+
+            $branches = \App\Branch::orderBy('name', 'asc')->paginate($this->limit);
+        }
+
+        return view('admin.pages.branches', ['branches' => $branches]);
+
+    }
+
+
 
     public function settings() {
 
