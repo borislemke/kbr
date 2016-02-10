@@ -24,7 +24,9 @@ return [
 
     "customers" => [
 
-        "customers" => "manage customers"
+        "customers" => "manage customers",
+        "customer/testimonials" => "testimonials",
+        "messages" => "messages"
 
     ],
 

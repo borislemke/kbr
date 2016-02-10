@@ -62,6 +62,24 @@ class AdminController extends Controller {
         return view('admin.pages.testimonials', compact('testimonials'));
     }
 
+    public function messages()
+    {
+        $limit = 20;        
+
+        $search = \Input::get('q');
+
+        if ($search) {
+
+            $messages = \App\Contact::where('message', 'like', '%'. $search .'%')
+                ->orderBy('created_at', 'desc')
+                ->paginate($limit);
+        } else {
+
+            $messages = \App\Contact::orderBy('created_at', 'desc')->paginate($limit);
+        }
+
+        return view('admin.pages.messages', compact('messages'));
+    }
 
     public function properties() {
 

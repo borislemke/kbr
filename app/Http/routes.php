@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Customer
         Route::get('customers', 'AdminController@customers');
+        Route::get('messages', 'AdminController@messages');
         Route::get('customer/testimonials', 'AdminController@testimonials');
 
 
@@ -99,6 +100,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 });
+
 
 Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 
@@ -165,6 +167,8 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 
 });
 
+// Resources
+Route::resource('contact', 'ContactController');
 
 Route::group(['prefix' => 'api'], function () {
 
@@ -234,6 +238,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::any('store', 'CustomerController@storeTestimony');
 
             Route::any('destroy/{id}', 'CustomerController@destroyTestimony');
+
+        });        
+
+        Route::group(['prefix' => 'message'], function () {
+
+            Route::any('destroy/{id}', 'ContactController@destroy');
 
         });
 

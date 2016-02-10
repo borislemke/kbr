@@ -16,30 +16,51 @@
     </div>
     <div class="row">
     	<div class="col-lg-6 bs-component">
+
+          @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+          @endif
+
+          <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+              @if(Session::has('alert-' . $msg))
+
+              <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+              @endif
+            @endforeach
+          </div> <!-- end .flash-message -->
+
     		<div class="panel panel-primary">
 				<div class="panel-heading">
                   	<h3 class="panel-title">Fill the form</h3>
                 </div>
-	    		<form class="panel-body">
+
+	    		{!! Form::open(['url' => route('contact.store'), 'class' => 'panel-body']) !!}
 	    			<div class="form-group">
 	    				<label for="firstname" class="col-lg-12 ">Full Name</label>
 	                    <div class="col-lg-6">
-	                      	<input type="text" class="" id="firstname" placeholder="First Name">
+	                      	<input value="{{ old('firstname') }}" name="firstname" type="text" class="" id="firstname" placeholder="First Name">
 	                    </div>
 	                    <div class="col-lg-6">
-	                      	<input type="text" class="" id="lastname" placeholder="Last Name">
+	                      	<input value="{{ old('lastname') }}" name="lastname" type="text" class="" id="lastname" placeholder="Last Name">
 	                    </div>
 	    			</div>
 	    			<div class="form-group">
 	                    <label for="inputEmail" class="col-lg-12 ">Email</label>
 	                    <div class="col-lg-12">
-	                    	<input type="text" class="" id="inputEmail" placeholder="Email">
+	                    	<input value="{{ old('email') }}" name="email" type="text" class="" id="inputEmail" placeholder="Email">
 	                    </div>
                   	</div>
                   	<div class="form-group">
 	                    <label for="msg" class="col-lg-12 ">Your Message</label>
 	                    <div class="col-lg-12">
-	                    	<textarea class="" rows="7" id="msg"></textarea>
+	                    	<textarea name="message" class="" rows="7" id="msg">{{ old('message') }}</textarea>
 	                    </div>
                   	</div>
                   	<div class="form-group">
@@ -51,7 +72,8 @@
 		                      <button type="submit" class="btn btn-primary">Submit</button>
 	                    </div>
 	                 </div>
-	    		</form>
+	    		{!! Form::close() !!}
+
 	    	</div>
     	</div>
     	<div class="col-lg-6 ">

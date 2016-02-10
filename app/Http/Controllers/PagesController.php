@@ -17,32 +17,37 @@ class PagesController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function __construct(Request $request) {
+    public function __construct(Request $request)
+    {
 
         $currency = $request->session()->get('currency', 'usd');
 
         \Config::set('currency', $currency);
     }
 
-    public function home() {
+    public function home()
+    {
         //
 
         return view('pages.home_old');
     }
 
-    public function about() {
+    public function about()
+    {
         //
         $titles = 'About';
         return view('pages.about', compact('titles'));
     }
 
-    public function contact() {
+    public function contact()
+    {
         //
         $titles = 'Contact';
         return view('pages.contact', compact('titles'));
     }
 
-    public function testimony() {
+    public function testimony()
+    {
         //
         $titles = 'Testimonial';
         $limit = 20;
@@ -74,19 +79,22 @@ class PagesController extends Controller
 
     }
 
-    public function sellProperty() {
+    public function sellProperty()
+    {
         //
         $titles = 'Sell Property';
         return view('pages.sell-property', compact('titles'));
     }
 
-    public function lawyerNotary() {
+    public function lawyerNotary()
+    {
         //
         $titles = 'Lawyer & Notary';
         return view('pages.lawyer-notary', compact('titles'));
     }
 
-    public function register() {
+    public function register()
+    {
         //
         if (\Auth::customer()->check()) return redirect('account');
 
@@ -115,20 +123,23 @@ class PagesController extends Controller
         return redirect()->route('login', \Lang::get('url')['login'])->with('alert-success', 'You have successfully verified your account.');;
     }
 
-    public function login() {
+    public function login()
+    {
         //
         if (\Auth::customer()->check()) return redirect('account');
 
         return view('pages.login');
     }
 
-    public function account() {
+    public function account()
+    {
         //
 
         return view('pages.account');
     }
 
-    public function accountWishlist() {
+    public function accountWishlist()
+    {
         //
         $limit = 20;
 
@@ -139,14 +150,16 @@ class PagesController extends Controller
         return view('pages.account-wishlist', compact('wishlists', 'customer'));
     }
 
-    public function accountSetting() {
+    public function accountSetting()
+    {
         //
 
         return view('pages.account-setting');
     }
 
 
-    public function propertyListing($cat) {
+    public function propertyListing($cat)
+    {
         
         $limit = 24;
 
@@ -222,7 +235,8 @@ class PagesController extends Controller
     }
 
 
-    public function propertyView($slug) {
+    public function propertyView($slug)
+    {
 
         $slug = explode('-', $slug);
 
@@ -266,7 +280,8 @@ class PagesController extends Controller
     }
 
 
-    public function blogListing() {
+    public function blogListing()
+    {
         //
         $blogs = Blog::orderBy('id', 'DESC')->get();
         
@@ -276,7 +291,8 @@ class PagesController extends Controller
     }
 
 
-    public function blogView($url) {
+    public function blogView($url)
+    {
         //
         $blog = Blog::where('url', $url)->first();
 
