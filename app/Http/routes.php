@@ -155,16 +155,17 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 
 
     // Properties
-    Route::get('/{villa}/', ['as' => 'villa', 'uses' => 'PagesController@propertyListing']);
-    Route::get('/{land}/', ['as' => 'land', 'uses' => 'PagesController@propertyListing']);
-    Route::get('/{search}/', ['as' => 'search', 'uses' => 'PagesController@propertySearch']);
+    // Route::get('/{villa}/', ['as' => 'villa', 'uses' => 'PagesController@propertyListing']);
+    // Route::get('/{land}/', ['as' => 'land', 'uses' => 'PagesController@propertyListing']);
+    Route::get('{search}', ['as' => 'search', 'uses' => 'PagesController@propertySearch']);
 
     // ajax
     Route::post('property/inquiry', ['as' => 'property.inquiry', 'uses' => 'InquiryController@postInquiry']);
     Route::post('property/favorite', ['as' => 'property.favorite', 'uses' => 'PropertiesController@postFavorite']);
     Route::post('property/favorite/delete', ['as' => 'property.favorite.delete', 'uses' => 'PropertiesController@postFavoriteDelete']);
 
-    Route::get('property/{slug}', ['as' => 'property.detail', 'uses' => 'PagesController@propertyView']);
+    // property detail
+    Route::get('{property}/{slug}', ['as' => 'property.detail', 'uses' => 'PagesController@propertyView']);
 
 
 });

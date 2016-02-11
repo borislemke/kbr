@@ -66,25 +66,42 @@ class Property extends Model
 
     public function scopeFilterPrice($query, $minprice, $maxprice)
     {
-        $query->whereBetween('price', [$minprice, $maxprice]);
+        if (isset($minprice) && empty($maxprice)) {
+
+            $query->where('price', '>=', $minprice);
+        }
+
+        if (empty($minprice) && isset($maxprice)) {
+
+            $query->where('price', '<=', $maxprice);
+        }
+
+        if (isset($minprice) && isset($maxprice)) {
+
+            $query->whereBetween('price', [$minprice, $maxprice]);
+        }
 
         return $query;
     }
 
     public function scopeFilterCategory($query, $category)
     {
-        if ($category) {
-            
-            $query->where('category_id', $category->id);
 
-            if ($category->childs) {
+        if (isset($category)) {
+
+            $query->where(function ($q) use ($category) {
+
+                $q->where('category_id', $category->id);
+
+                if ($category->childs) {
 
                 foreach ($category->childs as $key => $value) {
-                    
-                    $query->orWhere('category_id', $value->id);
+                        
+                        $q->orWhere('category_id', $value->id);
+                    }
                 }
-            }
-
+            });
+            
         }
 
         return $query;
@@ -92,8 +109,11 @@ class Property extends Model
 
     public function scopeFilterLocation($query, $lat, $lon, $rad)
     {
-        $query->whereBetween('map_latitude', [$lat - $rad, $lat + $rad])
-            ->whereBetween('map_longitude', [$lon - $rad, $lon + $rad]);
+        if (isset($lat) && isset($lon) && isset($rad)) {
+
+            $query->whereBetween('map_latitude', [$lat - $rad, $lat + $rad])
+                ->whereBetween('map_longitude', [$lon - $rad, $lon + $rad]);
+        }
 
         return $query;
     }

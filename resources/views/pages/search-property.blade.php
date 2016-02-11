@@ -4,11 +4,17 @@
 <div class="bc-bg">
     <ul class="breadcrumb container">
         <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li>{{ ucfirst($type) }}</li>
-        <li class="active">{{ ucfirst($titles) }}</li>
+        <li><a href="{{ route('search', ['search' => Lang::get('url')['search']]) }}">{{ Lang::get('url')['search'] }}</a></li>
+
+        @if ($category)
+        <li class="active">{{ Lang::get('url')[$category->route] }}</li>
+        @else
+        <li class="active">all</li>
+        @endif
+
     </ul>
 </div>
-<div class="line-top"><h3><small>{{ $titles }}</small></h3></div>
+<div class="line-top"><h3><small>{{ $category ? $category->route : 'All' }}</small></h3></div>
 
 <section class="" style="display:inline-block">
     <div class="col-lg-8 well">
@@ -20,19 +26,19 @@
                         <div class="col-lg-8 col-lg-offset">
                             <label class="search-type">
                                 <$500.000 &nbsp;
-                                <input type="radio" name="type" id="radio1" {{ ($srctype == '1') ? 'checked' : '' }} value="<$500000">
+                                <input type="radio" name="type" id="radio1" value="<$500000">
                             </label>
                             <label class="search-type">
                                 >$500.000 &nbsp;
-                                <input type="radio" name="type" id="radio2" {{ ($srctype == '2') ? 'checked' : '' }} value=">$500000">
+                                <input type="radio" name="type" id="radio2" value=">$500000">
                             </label>
                             <label class="search-type">
                                 Home & Retir. &nbsp;
-                                <input type="radio" name="type" id="radio3" {{ ($srctype == '3') ? 'checked' : '' }} value="home">
+                                <input type="radio" name="type" id="radio3" value="home">
                             </label>
                             <label class="search-type">
                                 Beachfront &nbsp;
-                                <input type="radio" name="type" id="radio4" {{ ($srctype == '4') ? 'checked' : '' }} value="beachfront">
+                                <input type="radio" name="type" id="radio4" value="beachfront">
                             </label>
                         </div>
                     </div>
@@ -77,24 +83,15 @@
                             <a href class="btn btn-default fa fa-sort-amount-desc">&nbsp; Prices</a>
                         </div>
                         <div class="col-lg-6 text-right pagination">
-                            <strong><span class="badge">{{ count($property) }}</span></strong>&nbsp;{{ $type }} Found
+                            <strong><span class="badge">{{ count($properties) }}</span></strong>&nbsp;{{ $category ? $category->route : 'property' }} Found
                         </div>
                     </div>
                     <div class="col-lg-6 text-right">
-                        {!! $property->render() !!}
-                        <!-- <ul class="pagination">
-                          <li class="disabled"><a href="#">&laquo;</a></li>
-                          <li class="active"><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
-                          <li><a href="#">&raquo;</a></li>
-                        </ul> -->
+                        @include('fragments.pagination', ['paginator' => $properties])
                     </div>
                 </div>
                 <?php $i = 0; ?>
-                @foreach( $property as $value )
+                @foreach( $properties as $value )
                     <div class="col-lg-6 col-sm-6 col-xs-12" style="margin-bottom:30px;">
                         <a href="#">
                             <div id="myCarousel{{ $i }}" class="carousel slide" data-ride="carousel">
@@ -153,7 +150,7 @@
                                                     <i class="fa fa-star block m-b-xs fa-2x"></i>
                                                     <span>Favorite</span>
                                                 </a>
-                                                <a href="" class="col-md-4">
+                                                <a href="{{ route('property.detail', ['property' => $value->category->route, 'slug' => str_slug($value->lang()->title .'-'. $value->id)]) }}" class="col-md-4">
                                                     <i class="fa fa-list block m-b-xs fa-2x"></i>
                                                     <span>Detail</span>
                                                 </a>
@@ -208,7 +205,7 @@
 
 <script>
     var markersToRemove = [];
-    var property = <?php echo json_encode($property); ?>;
+    var property = <?php echo json_encode($properties); ?>;
 
     $(document).ready(function(){
 
@@ -415,7 +412,7 @@
 
     function searching() {
         var srch = $("#searchTextField").val(),
-            tipe = '<?php echo $type ?>',
+            // tipe = '',
             prices_from = $("#amount_start").val(),
             prices_to = $("#amount_end").val(),
             check = $("input[name='type']:checked").val();

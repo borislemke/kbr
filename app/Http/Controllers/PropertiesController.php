@@ -610,8 +610,6 @@ class PropertiesController extends Controller
 
         $limit = 20;
 
-        $rad = $request->rad;
-
         $min_price = $request->min_price;
 
         $max_price = $request->max_price;
@@ -621,6 +619,8 @@ class PropertiesController extends Controller
         $lat = $request->lat;
 
         $lon = $request->long;
+
+        $rad = $request->rad;
 
         $properties = Property::with(['propertyFiles' => function($query) {
                 $query->where('type', 'image');

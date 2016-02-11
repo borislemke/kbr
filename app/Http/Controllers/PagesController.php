@@ -235,7 +235,7 @@ class PagesController extends Controller
     }
 
 
-    public function propertyView($slug)
+    public function propertyView($category, $slug)
     {
 
         $slug = explode('-', $slug);
@@ -247,31 +247,57 @@ class PagesController extends Controller
         return view('pages.property-view', compact('property'));
     }
 
-
-    public function propertySearch($slug)
+    // search new
+    public function propertySearch(Request $request)
     {
-        $find = \Input::get('find');
+        $limit = 20;
 
-        $category = \Input::get('category');
+        $category = \App\Category::where('route', $request->category)->first();
 
-        $price = \Input::get('price');
+        $minprice = $request->min;
 
-        if ( $find != 'all' ) {
-            $find = explode('-', $find);
-            $type = end($find);
-            $srctype = $find[ 3 ];
-            $titles = ($srctype == '1' || $srctype == '2') ? $find[ 0 ] .' '. $find [ 1 ] .' $'. $find[ 2 ] : $find[ 0 ] .' '. $find [ 1 ] .' '. $find[ 2 ];
-        }
-        else {
-            $type = 'Properties';
-            $srctype = '';
-            $titles = 'All';
-        }
+        $maxprice = $request->max;
 
-        $property = Property::where('id','<','20')->paginate(10);
+        $lat = $request->lat;
 
-        return view('pages.search-property', compact('type', 'titles', 'srctype', 'property'));
+        $lon = $request->long;
+
+        $rad = $request->rad;
+
+        $properties = Property::orderBy('id', 'desc')
+            ->filterCategory($category)
+            ->filterPrice($minprice, $maxprice)
+            ->filterLocation($lat, $lon, $rad)
+            ->paginate($limit);
+
+        return view('pages.search-property', compact('properties', 'category'));
     }
+
+    // search old
+    // public function propertySearch($slug)
+    // {
+    //     $find = \Input::get('find');
+
+    //     $category = \Input::get('category');
+
+    //     $price = \Input::get('price');
+
+    //     if ( $find != 'all' ) {
+    //         $find = explode('-', $find);
+    //         $type = end($find);
+    //         $srctype = $find[ 3 ];
+    //         $titles = ($srctype == '1' || $srctype == '2') ? $find[ 0 ] .' '. $find [ 1 ] .' $'. $find[ 2 ] : $find[ 0 ] .' '. $find [ 1 ] .' '. $find[ 2 ];
+    //     }
+    //     else {
+    //         $type = 'Properties';
+    //         $srctype = '';
+    //         $titles = 'All';
+    //     }
+
+    //     $property = Property::where('id','<','20')->paginate(10);
+
+    //     return view('pages.search-property', compact('type', 'titles', 'srctype', 'property'));
+    // }
 
     public function lawyerPage()
     {

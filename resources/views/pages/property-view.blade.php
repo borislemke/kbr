@@ -8,6 +8,7 @@
 <div class="bc-bg">
     <ul class="breadcrumb container">
         <li><a href="{{ baseUrl() }}">Home</a></li>
+        <li><a href="{{ route('search', ['search' => Lang::get('url')['search'], 'category' => $property->category->route ]) }}">{{ $property->category->lang()->title }}</a></li>
         <li class="active">{{ $property->lang()->title }}</li>
     </ul>
 </div>
