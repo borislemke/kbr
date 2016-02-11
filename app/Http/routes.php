@@ -60,10 +60,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         // CMS
-        Route::get('properties', 'AdminController@properties');
-        Route::get('property/sold', 'AdminController@propertySold');
-        Route::get('property/customer-request', 'AdminController@propertyCustomer');
-        Route::get('property/categories', 'AdminController@propertyCategories');
+        // Route::get('properties', 'AdminController@properties');
+        // Route::get('property/sold', 'AdminController@propertySold');
+        // Route::get('property/customer-request', 'AdminController@propertyCustomer');
+        // Route::get('property/categories', 'AdminController@propertyCategories');
+
+        Route::get('villa/{status}', 'AdminController@villa');
+
+        Route::get('land/{status}', 'AdminController@land');
 
 
         // Blog
@@ -251,6 +255,8 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::group(['prefix' => 'property'], function () {
+
+            Route::any('all', 'PropertiesController@index');
 
             Route::any('translate/get/{id}', 'PropertiesController@getTranslate');
 

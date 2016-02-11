@@ -9,6 +9,9 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Product+Sans' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+
 <script>
     var development = {{ env('APP_DEBUG', 'false') }},
     baseUrl = '{{ url() }}';

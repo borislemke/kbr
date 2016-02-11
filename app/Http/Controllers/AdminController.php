@@ -141,6 +141,165 @@ class AdminController extends Controller {
     }
 
 
+    public function villa($status)
+    {
+        $category = \App\Category::where('route', 'villa')->first();
+
+        $properties = $this->property($category, $status);
+
+        $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
+
+        return view('admin.pages.datatable');
+
+        // if ($status != 'request')
+
+        //     return view('admin.pages.properties', compact('properties', 'categories'));
+        // else
+
+        //     return view('admin.pages.request-properties', compact('properties', 'categories'));
+    }
+
+    public function land($status)
+    {
+        $category = \App\Category::where('route', 'land')->first();
+
+        $properties = $this->property($category, $status);
+
+        $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
+        return view('admin.pages.properties', compact('properties', 'categories'));
+    }
+
+    public function property($category, $status)
+    {
+        $search = \Input::get('q');
+
+        if ($status == 'request') {
+
+            // AGENT
+            if ($this->admin->role_id == 3) {
+
+
+                if ($search) {
+
+                    $properties = \App\Property::select('Properties.*')
+                        ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
+                        ->where('PropertyLanguages.locale', $this->lang)
+                        ->where('PropertyLanguages.title', 'like', $search . '%')
+                        ->where('Properties.user_id', $this->admin->id)
+                        ->where('status', -2)
+                        ->filterCategory($category)
+                        ->orderBy('Properties.created_at', 'desc')
+                        ->paginate($this->limit);
+
+                } else {
+
+                    $properties = \App\Property::where('user_id', $this->admin->id)
+                        ->where('status', -2)
+                        ->filterCategory($category)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate($this->limit);
+                }
+
+            // SUPER ADMIN
+            } else {
+
+
+                if ($search) {
+
+                    $properties = \App\Property::select('Properties.*')
+                        ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
+                        ->where('PropertyLanguages.locale', $this->lang)
+                        ->where('PropertyLanguages.title', 'like', $search . '%')
+                        ->where('status', -2)
+                        ->filterCategory($category)
+                        ->orderBy('Properties.created_at', 'desc')
+                        ->paginate($this->limit);
+
+                } else {
+
+                    $properties = \App\Property::orderBy('created_at', 'desc')
+                        ->where('status', -2)
+                        ->filterCategory($category)
+                        ->paginate($this->limit);
+                }
+
+
+            }
+
+        } else {
+
+            switch ($status) {
+                case 'available':
+                    $status = 1;
+                    break;
+                case 'sold':
+                    $status = 0;
+                    break;
+                case 'hidden':
+                    $status = -1;
+                    break;
+            }
+
+            // AGENT
+            if ($this->admin->role_id == 3) {
+
+
+                if ($search) {
+
+                    $properties = \App\Property::select('Properties.*')
+                        ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
+                        ->where('PropertyLanguages.locale', $this->lang)
+                        ->where('PropertyLanguages.title', 'like', $search . '%')
+                        ->where('Properties.user_id', $this->admin->id)
+                        ->where('status', $status)
+                        ->filterCategory($category)
+                        ->orderBy('Properties.created_at', 'desc')
+                        ->paginate($this->limit);
+
+                } else {
+
+                    $properties = \App\Property::where('user_id', $this->admin->id)
+                        ->where('status', 1)
+                        ->where('sold', 0)
+                        ->filterCategory($category)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate($this->limit);
+                }
+
+            // SUPER ADMIN
+            } else {
+
+
+                if ($search) {
+
+                    $properties = \App\Property::select('Properties.*')
+                        ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
+                        ->where('PropertyLanguages.locale', $this->lang)
+                        ->where('PropertyLanguages.title', 'like', $search . '%')
+                        ->where('status', $status)                  
+                        ->filterCategory($category)
+                        ->orderBy('Properties.created_at', 'desc')
+                        ->paginate($this->limit);
+
+                } else {
+
+                    $properties = \App\Property::orderBy('created_at', 'desc')
+                        ->where('status', $status)
+                        ->filterCategory($category)
+                        ->orderBy('Properties.created_at', 'desc')
+                        ->paginate($this->limit);
+                }
+
+
+            }
+
+        }
+
+
+        return $properties;
+    }
+
+
     public function enquiries() {
 
         $search = \Input::get('q');

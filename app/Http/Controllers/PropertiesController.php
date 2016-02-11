@@ -23,6 +23,46 @@ class PropertiesController extends Controller
     public function index()
     {
         //
+        $_GET['page'] = \Input::get('draw');
+
+        $properties = Property::paginate(10);
+
+        $data_value = array();
+
+        foreach ($properties as $key => $value) {
+
+            // $row = array_values($value->toArray());
+
+            switch ($value->status) {
+                case 1:
+                    $status = 'available';
+                    break;
+                
+                default:
+                    $status = 'unavailable';
+                    break;
+            }
+            
+            $data_value[] = [
+                '<img width="100" src="'. asset('no-image.png') . '">',
+                $value->lang()->title,
+                $value->price,
+                $status,
+                '-',
+                '-'
+            ];
+
+        }
+
+        $data = [
+                "draw" => 0,
+                "recordsTotal" => $properties->total(),
+                "recordsFiltered" => $properties->total(),
+                "data" => $data_value
+
+            ];
+
+        return $data;
     }
 
     /**

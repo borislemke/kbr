@@ -7,12 +7,28 @@ return [
         "dashboard" => "dashboard"
     ],
 
-    "properties" => [
+    // "properties" => [
 
-        "properties" => "available properties",
-        "property/sold" => "sold properties",
-        "property/customer-request" => "customer request",
-        "property/categories" => "categories"
+    //     "properties" => "available properties",
+    //     "property/sold" => "sold properties",
+    //     "property/customer-request" => "customer request",
+    //     "property/categories" => "categories"
+
+    // ],
+
+    "villas" => [
+
+        "villa/available" => "available",
+        "villa/sold" => "sold",
+        "villa/request" => "request"
+
+    ],
+
+    "lands" => [
+
+        "land/available" => "available",
+        "land/sold" => "sold",
+        "land/request" => "request"
 
     ],
 

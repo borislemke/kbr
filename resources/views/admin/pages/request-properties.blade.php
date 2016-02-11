@@ -57,7 +57,7 @@
                     <m-list-item-check single data-id="{{ $property->id }}" class="item-select-single"></m-list-item-check>
                 </td>
                 <td class="image">
-                    {!! ($images->count() > 0) ? '<img width="100" src="'. asset('uploads/property/' . $images->first()->file) . '">' : '-'; !!}
+                    {!! ($images->count() > 0) ? '<img width="100" src="'. asset('uploads/property/' . $images->first()->file) . '">' : '<img width="100" src="'. asset('no-image.png') . '">' !!}
                 </td>
 
                 @if($property->lang())
