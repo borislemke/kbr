@@ -87,7 +87,7 @@
             <label for="branch-input-city">city</label>
             <m-select>
 
-                @foreach(\App\City::all() as $city)
+                @foreach(\App\City::orderBy('city_name')->get() as $city)
                 <m-option value="{{ $city->city_name }}">{{ $city->city_name }}</m-option>
                 @endforeach
 
