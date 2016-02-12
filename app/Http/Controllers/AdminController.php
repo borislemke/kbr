@@ -145,11 +145,9 @@ class AdminController extends Controller {
     {
         $category = \App\Category::where('route', 'villa')->first();
 
-        $properties = $this->property($category, $status);
-
         $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
 
-        return view('admin.pages.properties', compact('properties', 'categories', 'status', 'category'));
+        return view('admin.pages.properties', compact('categories', 'status', 'category'));
 
     }
 
@@ -158,11 +156,9 @@ class AdminController extends Controller {
 
         $category = \App\Category::where('route', 'land')->first();
 
-        $properties = $this->property($category, $status);
-
         $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
 
-        return view('admin.pages.properties', compact('properties', 'categories', 'status', 'category'));
+        return view('admin.pages.properties', compact('categories', 'status', 'category'));
     }
 
     public function property($category, $status)

@@ -17,7 +17,6 @@
 
 <m-template list class="property-wrapper">
 
-    @if(isset($properties) AND count($properties) > 0)
     <table id="property-table" data-list-status="{{ $status }}" data-list-category="{{ $category->route }}">
         <thead>
             <td width="5%">
@@ -38,11 +37,6 @@
 
     </table>
 
-    @else
-
-    <p class="empty-content">No properties created yet. Create one now</p>
-
-    @endif
 
 </m-template>
 

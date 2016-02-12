@@ -31,7 +31,7 @@ class CreatePropertiesTable extends Migration
 
             $table->boolean('sold')->default(0);
             $table->string('code')->nullable();
-            $table->enum('status', array(1, 0, -1, -2));
+            $table->enum('status', array(1, 0, -1, -2))->default(-1);
             $table->string('year')->nullable();
 
             $table->double('map_latitude')->nullable();

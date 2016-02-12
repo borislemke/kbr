@@ -20,6 +20,7 @@ return [
 
         "villa/available" => "available",
         "villa/sold" => "sold",
+        "villa/hidden" => "hidden",
         "villa/request" => "request"
 
     ],
@@ -28,6 +29,7 @@ return [
 
         "land/available" => "available",
         "land/sold" => "sold",
+        "land/hidden" => "hidden",
         "land/request" => "request"
 
     ],
