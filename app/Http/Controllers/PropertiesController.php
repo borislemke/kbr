@@ -20,49 +20,98 @@ class PropertiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $category, $status)
     {
         //
-        $_GET['page'] = \Input::get('draw');
+        $category = \App\Category::where('route', $category)->first();
 
-        $properties = Property::paginate(10);
+        $draw = $request->draw;
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
 
-        $data_value = array();
+        $column = 'created_at';
 
-        foreach ($properties as $key => $value) {
 
-            // $row = array_values($value->toArray());
+        $status = statusToInteger($status);
 
-            switch ($value->status) {
-                case 1:
-                    $status = 'available';
-                    break;
-                
-                default:
-                    $status = 'unavailable';
-                    break;
+        $sort = $request->order[0]['dir'] ? $request->order[0]['dir'] : 'desc'; //asc
+
+        if ($search) {
+
+            $properties = Property::with(['propertyLanguages' => function ($q){
+
+                    $q->where('locale', 'en')->orderBy('title', 'asc');
+                }])
+                ->with(['propertyFiles' => function ($q){
+
+                    $q->where('type', 'image');
+                }])
+                ->with('user')
+                ->whereHas('propertyLanguages', function ($q) use ($search) {
+
+                    $q->where(function ($q) use ($search) {
+
+                        $q->where('title', 'like', $search . '%');
+                    });
+                })
+                ->filterCategory($category);
+
+        } else {
+
+            $properties = Property::with(['propertyLanguages' => function ($q){
+
+                    $q->where('locale', 'en')->orderBy('title', 'asc');
+                }])
+                ->with(['propertyFiles' => function ($q){
+
+                    $q->where('type', 'image');
+                }])
+                ->with('user')
+                ->filterCategory($category);
+        }      
+
+        $count = $properties->count();
+
+        if ($request->order[0]['column']) {
+
+            $column = $request->columns[$request->order[0]['column']]['data']; //property_languages.0.title
+
+            if ($column == 'property_languages') {
+
+                $column = 'created_at';
+
+                $properties = $properties->select('Properties.*')
+                    ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
+                    ->where('PropertyLanguages.locale', 'en')
+                    ->orderBy('PropertyLanguages.title', $sort);
+
+            } else {
+
+                $properties = $properties->orderBy($column, $sort);
             }
-            
-            $data_value[] = [
-                '<img width="100" src="'. asset('no-image.png') . '">',
-                $value->lang()->title,
-                $value->price,
-                $status,
-                '-',
-                '-'
-            ];
 
+        } else {
+
+            $properties = $properties->orderBy($column, $sort);
         }
 
-        $data = [
-                "draw" => 0,
-                "recordsTotal" => $properties->total(),
-                "recordsFiltered" => $properties->total(),
-                "data" => $data_value
+        $properties = $properties->where('status', $status)
+            ->take($length)
+            ->skip($start)
+            // ->orderBy($column, $sort)
+            ->get();
+
+
+        $output = [
+                "draw" => $draw,
+                "recordsTotal" => $count,
+                "recordsFiltered" => $count,
+                "data" => $properties
 
             ];
 
-        return $data;
+        return $output;
     }
 
     /**
@@ -535,7 +584,7 @@ class PropertiesController extends Controller
 
         $ruLang = \App\PropertyLanguage::where('property_id', $id)->where('locale', 'ru')->first();
 
-        return response()->json(['en' => $enLang, 'id' => $idLang, 'fr' => $frLang, 'ru' => $ruLang]);
+        return response()->json(['en' => $enLang, 'id' => $idLang, 'fr' => $frLang, 'ru' => $ruLang, 'property_id' => $id]);
     }
 
 

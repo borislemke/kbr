@@ -127,3 +127,21 @@ function propertyStatus($status) {
 
 }
 
+function statusToInteger($status) {
+
+    switch ($status) {
+        case 'request':
+            return -2;
+        case 'hidden':
+            return -1;
+        case 'unavailable':
+            return 0;
+        case 'available':
+            return 1;
+        
+        default:
+            return 0;
+    }
+
+}
+

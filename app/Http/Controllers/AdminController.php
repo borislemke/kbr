@@ -149,24 +149,20 @@ class AdminController extends Controller {
 
         $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
 
-        return view('admin.pages.datatable');
+        return view('admin.pages.properties', compact('properties', 'categories', 'status', 'category'));
 
-        // if ($status != 'request')
-
-        //     return view('admin.pages.properties', compact('properties', 'categories'));
-        // else
-
-        //     return view('admin.pages.request-properties', compact('properties', 'categories'));
     }
 
     public function land($status)
     {
+
         $category = \App\Category::where('route', 'land')->first();
 
         $properties = $this->property($category, $status);
 
         $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
-        return view('admin.pages.properties', compact('properties', 'categories'));
+
+        return view('admin.pages.properties', compact('properties', 'categories', 'status', 'category'));
     }
 
     public function property($category, $status)

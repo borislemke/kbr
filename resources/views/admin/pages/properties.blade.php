@@ -5,34 +5,20 @@
 
 <m-fab salmon class="modal-open" data-target="#property-add"><i class="material-icons">add</i></m-fab>
 
-<!--
-<div class="small-fab-wrapper sub-fab-wrapper">
-<a class="fab-button fab-button-small shadow-hover modal-open" data-target="#properties-add">
-<i class="material-icons">business</i>
-<span class="drop-fab-hint">add properties</span>
-</a>
-
-<a class="fab-button fab-button-small shadow-hover modal-open" data-target="#land-add">
-<i class="material-icons">event</i>
-<span class="drop-fab-hint">add land</span>
-</a>
-</div>
--->
-
 @stop
 
 @section('content')
-
+<!-- 
 <div class="search-input w25-6">
     <form>
         <input value="{{ Input::get('q') }}" class="w50-6" name="q" type="text" placeholder="search">
     </form>
-</div>
+</div> -->
 
 <m-template list class="property-wrapper">
 
     @if(isset($properties) AND count($properties) > 0)
-    <table>
+    <table id="property-table" data-list-status="{{ $status }}" data-list-category="{{ $category->route }}">
         <thead>
             <td width="5%">
                 <m-list-item-check all class="item-select-all"></m-list-item-check>
@@ -42,49 +28,14 @@
             <td>Created</td>
             <td>Code</td>
             <td>Type</td>
-            <td>Category</td>
+            <!-- <td>Category</td> -->
             <td>Status</td>
             <td>Agent</td>
             <td>Price</td>
             <td>View</td>
-            <td></td>
+            <td>Action</td>
         </thead>
-        <tbody>
-            @foreach($properties as $property)
-            <?php $images = $property->propertyFiles()->where('type', 'image'); ?>
-            <tr class="property-item" id="property-item-{{ $property->id }}">
-                <td width="5%">
-                    <m-list-item-check single data-id="{{ $property->id }}" class="item-select-single"></m-list-item-check>
-                </td>
-                <td class="image">
-                    {!! ($images->count() > 0) ? '<img width="100" src="'. asset('uploads/property/' . $images->first()->file) . '">' : '<img width="100" src="'. asset('no-image.png') . '">' !!}
-                </td>
 
-                <td class="title">{{ $property->lang()->title }}</td>
-
-                <td class="created_at">{{ $property->created_at }}</td>
-                <td class="code">{{ $property->code }}</td>
-                <td class="type">{{ ucwords($property->type) }}</td>
-
-                <td class="type">{{ ucwords($property->category->lang()->title) }}</td>
-
-                <td class="publish">{{ propertyStatus($property->status) }}</td>
-                <td class="view">{{ $property->user->firstname }}</td>
-                <td class="price align-center">{{ number_format($property->price, 2) }}</td>
-                <td class="view align-center">{{ humanize($property->view) }}</td>
-                <td button>
-                    <m-table-list-more>
-                        <i class="material-icons">more_horiz</i>
-                        <m-list-menu data-id="{{ $property->id }}">
-                            <m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item>
-                            <m-list-menu-item translate data-function="populatePropertyTranslate">TRANSLATION</m-list-menu-item>
-                            <m-list-menu-item delete data-url="property/destroy">DELETE</m-list-menu-item>
-                        </m-list-menu>
-                    </m-table-list-more>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
     </table>
 
     @else
@@ -94,10 +45,6 @@
     @endif
 
 </m-template>
-
-<p style="float: left">Total: {{ $properties->total() }} rows</p>
-
-@include('admin.fragments.pagination', ['paginator' => $properties])
 
 @endsection
 

@@ -107,6 +107,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
+Route::controllers([
+
+    'auth' => 'Auth\AuthController',
+
+    'password' => 'Auth\PasswordController',
+]);
 
 Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 
@@ -256,8 +262,6 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'property'], function () {
 
-            Route::any('all', 'PropertiesController@index');
-
             Route::any('translate/get/{id}', 'PropertiesController@getTranslate');
 
             Route::any('translate/store', 'PropertiesController@storeTranslate');
@@ -269,6 +273,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::any('destroy/{id}', 'PropertiesController@destroy');
 
             Route::any('image/destroy/{id}', 'PropertiesController@destroyImage');
+
+            Route::any('data/{category}/{status}/', 'PropertiesController@index');
 
         });
 
@@ -357,9 +363,3 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-Route::controllers([
-
-    'auth' => 'Auth\AuthController',
-
-    'password' => 'Auth\PasswordController',
-]);
