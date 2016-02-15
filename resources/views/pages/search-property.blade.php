@@ -88,7 +88,7 @@
                 <?php $i = 0; ?>
                 @foreach( $properties as $value )
                     <div class="col-lg-6 col-sm-6 col-xs-12" style="margin-bottom:30px;">
-                        <a href="#">
+                        <a href="">
                             <div id="myCarousel{{ $i }}" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
@@ -145,7 +145,7 @@
                                                     <i class="fa fa-star block m-b-xs fa-2x"></i>
                                                     <span>Favorite</span>
                                                 </a>
-                                                <a href="{{ route('property.detail', ['property' => $value->category->route, 'slug' => str_slug($value->lang()->title .'-'. $value->id)]) }}" class="col-md-4">
+                                                <a href="{{ route('property', ['property' => trans('url.property'), 'term' => $value->slug]) }}" class="col-md-4">
                                                     <i class="fa fa-list block m-b-xs fa-2x"></i>
                                                     <span>Detail</span>
                                                 </a>
