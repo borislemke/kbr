@@ -14,6 +14,8 @@ class CreatePageTermsTable extends Migration
     {
         Schema::create('page_terms', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('page_id');
+            $table->integer('term_id');
             $table->timestamps();
         });
     }

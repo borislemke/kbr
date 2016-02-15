@@ -14,6 +14,10 @@ class CreatePageLocalesTable extends Migration
     {
         Schema::create('page_locales', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('page_id');
+            $table->string('title');
+            $table->text('content');
+            $table->string('locale');
             $table->timestamps();
         });
     }

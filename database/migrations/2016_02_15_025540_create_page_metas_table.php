@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePagesTable extends Migration
+class CreatePageMetasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,13 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('page_metas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('slug');
-            $table->string('route');
-            $table->boolean('status');
+            $table->integer('page_id');
+            $table->string('name');
+            $table->string('value');
+            $table->string('type');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pages');
+        Schema::drop('page_metas');
     }
 }
