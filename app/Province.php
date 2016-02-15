@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Province extends Model
 {
     //
-    protected $table = 'Provinces';
-
     public function country()
     {
         return $this->belongsTo('App\Country', 'country_iso', 'iso');

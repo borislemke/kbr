@@ -37,21 +37,6 @@ class Property extends Model
         return $this->hasMany('App\Enquiry');
     }
 
-    public function facilities()
-    {
-        return $this->hasMany('App\Facility');
-    }
-
-    public function documents()
-    {
-        return $this->hasMany('App\Document');
-    }
-
-    public function distances()
-    {
-        return $this->hasMany('App\Distance');
-    }
-
     public function thumb()
     {
         return $this->propertyFiles()->where('type', 'image')->first();

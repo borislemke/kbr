@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Enquiry extends Model
 {
     //
+    public function property()
+    {
+        return $this->belongsTo('App\property');
+    }
 
     public static function boot()
     {
