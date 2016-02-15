@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class BranchController extends Controller
+use App\Contact;
+
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,6 +40,24 @@ class BranchController extends Controller
     public function store(Request $request)
     {
         //
+
+        $this->validate($request, [
+            'email' => 'required',
+            'g-recaptcha-response' => 'required'
+            ]);
+
+        $contact = new Contact;
+
+        $contact->firstname = $request->firstname;
+        $contact->lastname = $request->lastname;
+        $contact->email = $request->email;
+        $contact->message = $request->message;
+
+        $contact->save();
+
+        $request->session()->flash('alert-success', 'Thanks. We will check your message soon.');
+
+        return redirect()->back();
     }
 
     /**
@@ -83,5 +103,10 @@ class BranchController extends Controller
     public function destroy($id)
     {
         //
+
+        $contact = Contact::find($id);
+        $contact->delete();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'Message has been deleted'), 'id' => $id));
     }
 }

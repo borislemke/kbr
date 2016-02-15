@@ -30,90 +30,41 @@ foreach(Lang::get('url') as $k => $v) {
     Route::pattern($k, $v);
 }
 
-/*
- * show frontend theme elements
- */
-Route::get('theme', function () {
-
-    return view('pages.theme');
-
-});
-
 
 // Back-End
 Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'admin'], function () {
 
-        // General
-        Route::get('/', 'AdminController@dashboard');
-        
-        Route::get('dashboard', 'AdminController@dashboard');
+        // dashbord
+        Route::get('/',['as' => 'admin.home', 'uses' => 'AdminController@dashboard']);
 
-        Route::get('enquiries', 'AdminController@enquiries');
+        Route::get('dashboard',['as' => 'admin.dashboard', 'uses' => 'AdminController@dashboard']);
 
+        // property
+        Route::get('properties/{term?}',['as' => 'admin.properties', 'uses' => 'AdminController@properties']);
 
-        // Customer
-        Route::get('customers', 'AdminController@customers');
-        Route::get('messages', 'AdminController@messages');
-        Route::get('customer/testimonials', 'AdminController@testimonials');
+        // enquiry
+        Route::get('enquiries/{term?}',['as' => 'admin.enquiries', 'uses' => 'AdminController@enquiries']);
 
+        // customer
+        Route::get('customers/{term?}',['as' => 'admin.customers', 'uses' => 'AdminController@customers']);
 
-        // CMS
-        // Route::get('properties', 'AdminController@properties');
-        // Route::get('property/sold', 'AdminController@propertySold');
-        // Route::get('property/customer-request', 'AdminController@propertyCustomer');
-        // Route::get('property/categories', 'AdminController@propertyCategories');
+        // Page
+        Route::get('pages/{term?}',['as' => 'admin.pages', 'uses' => 'AdminController@pages']);
 
-        Route::get('villa/{status}', 'AdminController@villa');
+        // Post
+        Route::get('posts/{term?}',['as' => 'admin.posts', 'uses' => 'AdminController@posts']);
 
-        Route::get('land/{status}', 'AdminController@land');
-
-        Route::group(['prefix' => 'property'], function () {
-
-            Route::get('add', 'PropertiesController@create');
-
-            Route::get('edit/{id}', 'PropertiesController@edit');
-        });
-
-
-        // Blog
-        Route::get('blog', 'AdminController@blog');
-
-        Route::get('blog-categories', 'AdminController@blogCategories');
-
-        Route::get('blog-comments', 'AdminController@blogComments');
-
-        Route::get('blog-settings', 'AdminController@blogSettings');
-
-
-        // Misc
-        Route::get('my-account', 'AdminController@myAccount');
-
-        Route::get('accounts', 'AdminController@accounts');
-
-        Route::get('branches', 'AdminController@branches');
-
+        // setting
         Route::get('settings', 'AdminController@settings');
 
-        Route::get('about', 'AdminController@about');
-
-        Route::get('pdfD', 'PdfController@test');
-
-        Route::get('email', 'UserController@test');
-
-        Route::get('pdf', function() {
-
-            return view('pdf.property');
-        });
-
-        Route::any('register', function() {
-
-            return view('admin.pages.register');
-        });
     });
+
 });
 
+
+// User Auth
 Route::controllers([
 
     'auth' => 'Auth\AuthController',
@@ -121,252 +72,115 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
+
+// Front-End
 Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 
-    // Home
-    Route::get('/', ['as' => 'home', 'uses' => 'PagesController@home']);
+    // property
+    Route::get('{property}/{term?}/{slug?}',['as' => 'property', 'uses' => 'PropertyController@detail']);
 
-    Route::get('/{about}/', ['as' => 'about', 'uses' => 'PagesController@about']);
+    // post
+    Route::get('{blog}/{term?}/{slug?}',['as' => 'blog', 'uses' => 'PostController@detail']);
 
-    Route::get('/{contact}/', ['as' => 'contact', 'uses' => 'PagesController@contact']);
+    // about
+    Route::get('{about}',['as' => 'about', 'uses' => 'PageController@about']);
 
-    Route::get('/{testimony}/', ['as' => 'testimony', 'uses' => 'PagesController@testimony']);
+    // contact    
+    Route::get('{contact}',['as' => 'contact', 'uses' => 'PageController@contact']);
 
-    Route::get('/{lawyer_notary}/', ['as' => 'lawyer_notary', 'uses' => 'PagesController@lawyerNotary']);
+    // page
+    Route::get('{page?}',['as' => 'page', 'uses' => 'PageController@index']);
 
-    Route::get('/{sell_property}/', ['as' => 'sell_property', 'uses' => 'PagesController@sellProperty']);
-
-    Route::post('sell-property', ['as' => 'sell_property.store', 'uses' => 'PropertiesController@postSellProperty']);
-
-    // Blogs
-    Route::get('{blog}', ['as' => 'blog', 'uses' => 'PagesController@blogListing']);
-
-    Route::get('blog/{url}', ['as' => 'url','uses' => 'PagesController@blogView']);
+    // home
+    Route::get('/',['as' => 'home', 'uses' => 'PageController@home']);
 
 
-    // Customer
-    Route::get('/{login}/', ['as' => 'login', 'uses' => 'PagesController@login']);
+    // customer
+    Route::post('{login}',['as' => 'login.attempt', 'as' => 'Auth\AuthController@postLogin']);  
+    Route::get('{login}', ['as' => 'login', 'uses' => 'Auth\AuthController@getCustomerLogin']);  
+    Route::get('{logout}', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
-    Route::post('login', 'Auth\AuthController@postLogin');
-    Route::get('/{logout}/', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+    Route::post('{register}',['as' => 'register.store', 'as' => 'Auth\AuthController@postRegister']);
+    Route::get('{register}', ['as' => 'register', 'uses' => 'Auth\AuthController@getCustomerRegister']);
 
-    Route::get('/{register}/', ['as' => 'register', 'uses' => 'PagesController@register']);
-    Route::post('register', 'Auth\AuthController@postRegister');
-
-    Route::get('register/verify/{confirmationCode}', [
+    Route::get('{confirm}/{confirmationCode}', [
         'as' => 'confirm',
-        'uses' => 'PagesController@confirm'
+        'uses' => 'Auth\AuthController@getCustomerConfirm'
     ]);
 
     Route::group(['middleware' => 'auth.customer'], function () {
 
         Route::get('/{account}/', ['as' => 'account', 'uses' => 'PagesController@account']);
 
-        Route::get('/{account}/wishlist', ['as' => 'account.wishlist', 'uses' => 'PagesController@accountWishlist']);
+        Route::get('/{account}/{wishlist}', ['as' => 'account.wishlist', 'uses' => 'PagesController@accountWishlist'])
+            ->where('wishlist', trans('url.wishlist'));
 
-        Route::get('/{account}/setting', ['as' => 'account.setting', 'uses' => 'PagesController@accountSetting']);
-
-        Route::post('testimony', ['as' => 'testimony.store', 'uses' => 'CustomerController@postTestimony']);
+        Route::get('/{account}/{setting}', ['as' => 'account.setting', 'uses' => 'PagesController@accountSetting'])
+            ->where('wishlist', trans('url.setting'));
 
     }); 
 
-
-    // Properties
-    // Route::get('/{villa}/', ['as' => 'villa', 'uses' => 'PagesController@propertyListing']);
-    // Route::get('/{land}/', ['as' => 'land', 'uses' => 'PagesController@propertyListing']);
-    Route::get('{search}', ['as' => 'search', 'uses' => 'PagesController@propertySearch']);
-
-    // ajax
-    Route::post('property/inquiry', ['as' => 'property.inquiry', 'uses' => 'InquiryController@postInquiry']);
-    Route::post('property/favorite', ['as' => 'property.favorite', 'uses' => 'PropertiesController@postFavorite']);
-    Route::post('property/favorite/delete', ['as' => 'property.favorite.delete', 'uses' => 'PropertiesController@postFavoriteDelete']);
-
-    // property detail
-    Route::get('{property}/{slug}', ['as' => 'property.detail', 'uses' => 'PagesController@propertyView']);
-
-
-});
-
-// Resources
-Route::resource('contact', 'ContactController');
-
-Route::group(['prefix' => 'api'], function () {
-
-    Route::group(['prefix' => 'property'], function () {
-
-        Route::get('get', 'PropertiesController@getPropertyByFilter');
-        
-    });
-
-    Route::group(['prefix' => 'testimony'], function () {
-
-        Route::post('save', 'CustomerController@storeTestimony');
-        
-    });
-
 });
 
 
+// API
+Route::group(['prefix' => 'api'], function() {
 
-Route::group(['middleware' => 'auth'], function () {
+    Route::resource('branch', 'BranchController');
 
-    Route::group(['prefix' => 'system/ajax'], function () {
+    Route::resource('city', 'CityController');
 
-        Route::group(['prefix' => 'notifications'], function () {
+    Route::resource('contact', 'ContactController');
 
-            Route::any('insert', 'AnalyticsController@insert');
+    Route::resource('country', 'CountryController');
 
-            Route::any('getall', 'AnalyticsController@index');
+    Route::resource('customer', 'CustomerController');
 
-            Route::any('getunread', 'AnalyticsController@getUnread');
-        });
+    Route::resource('enquiry', 'EnquiryController');
 
-        Route::group(['prefix' => 'blog'], function () {
+    Route::resource('locale', 'LocaleController');
 
-            Route::any('index', 'BlogController@index');
+    Route::resource('log_customer', 'LogCustomerController');
 
-            Route::any('create', 'BlogController@create');
+    Route::resource('log_user', 'LogUserController');
 
-            Route::get('retrieve/{id}', ['as' => 'id', 'uses' => 'BlogController@retrieve']);
+    Route::resource('notification', 'NotificationController');
 
-            Route::any('delete/{id}', ['as' => 'id', 'uses' => 'BlogController@destroy']);
-        });
+    Route::resource('page', 'PageController');
 
-        Route::group(['prefix' => 'analytics'], function () {
+    Route::resource('page_locale', 'PageLocaleController');
 
-            Route::any('getall', 'AnalyticsController@getData');
-        });
+    Route::resource('page_meta', 'PageMetaController');
 
-        Route::group(['prefix' => 'customer'], function () {
+    Route::resource('page_term', 'PageTermController');
 
-            Route::any('login', 'CustomerController@login');
+    Route::resource('post', 'PostController');
 
-            Route::any('register', 'CustomerController@register');
+    Route::resource('post_locale', 'PostLocaleController');
 
-            Route::any('get/{id}', 'CustomerController@show');
+    Route::resource('post_meta', 'PostMetaController');
 
-            Route::any('store', 'CustomerController@store');
+    Route::resource('post_term', 'PostTermController');
 
-            Route::any('destroy/{id}', 'CustomerController@destroy');
+    Route::resource('property', 'PropertyController');
 
-        });
+    Route::resource('property_locale', 'PropertyLocaleController');
 
-        Route::group(['prefix' => 'testimony'], function () {
+    Route::resource('property_meta', 'PropertyMetaController');
 
-            Route::any('get/{id}', 'CustomerController@showTestimony');
+    Route::resource('property_term', 'PropertyTermController');
 
-            Route::any('store', 'CustomerController@storeTestimony');
+    Route::resource('province', 'ProvinceController');
 
-            Route::any('destroy/{id}', 'CustomerController@destroyTestimony');
+    Route::resource('role', 'RoleController');
 
-        });        
+    Route::resource('term', 'TermController');
 
-        Route::group(['prefix' => 'message'], function () {
+    Route::resource('testimony', 'TestimonyController');
 
-            Route::any('destroy/{id}', 'ContactController@destroy');
+    Route::resource('user', 'UserController');
 
-        });
+    Route::resource('wishlist', 'WishlistController');
 
-        Route::group(['prefix' => 'property'], function () {
-
-            Route::any('translate/get/{id}', 'PropertiesController@getTranslate');
-
-            Route::any('translate/store', 'PropertiesController@storeTranslate');
-
-            Route::any('get/{id}', 'PropertiesController@show');
-
-            Route::any('store', 'PropertiesController@store');
-
-            Route::any('destroy/{id}', 'PropertiesController@destroy');
-
-            Route::any('image/destroy/{id}', 'PropertiesController@destroyImage');
-
-            Route::any('data/{category}/{status}/', 'PropertiesController@index');
-
-        });
-
-        Route::group(['prefix' => 'category'], function () {
-
-            Route::any('translate/get/{id}', 'CategoryController@getTranslate');
-
-            Route::any('translate/store', 'CategoryController@storeTranslate');
-
-            Route::any('get/{id}', 'CategoryController@show');
-
-            Route::any('store', 'CategoryController@store');
-
-            Route::any('destroy/{id}', 'CategoryController@destroy');
-
-        });
-
-        Route::group(['prefix' => 'inquiry'], function () {
-
-            Route::any('get/{id}', 'InquiryController@show');
-
-            Route::any('store', 'InquiryController@store');
-
-            Route::any('destroy/{id}', 'InquiryController@destroy');
-
-        });
-
-        Route::group(['prefix' => 'account'], function () {
-
-            Route::any('prepare', 'UserController@invite');
-
-            Route::any('store', 'UserController@store');
-
-            Route::any('update', 'UserController@update');
-
-            Route::any('profile/store', 'UserController@storeProfile');
-
-            Route::any('get/{id}', 'UserController@show');
-
-            Route::any('destroy/{id}', 'UserController@destroy');
-
-        });
-
-        Route::group(['prefix' => 'branch'], function () {
-
-            Route::any('store', 'BranchController@store');
-
-            Route::any('get/{id}', 'BranchController@show');
-
-            Route::any('destroy/{id}', 'BranchController@destroy');
-
-        });
-
-        Route::group(['prefix' => 'settings'], function () {
-
-            Route::group(['social' => 'general'], function () {
-
-                Route::any('get', 'SystemController@getGeneral');
-
-                Route::any('set', 'SystemController@setGeneral');
-            });
-
-            Route::group(['prefix' => 'social'], function () {
-
-                Route::any('get', 'SystemController@getSocial');
-
-                Route::any('set', 'SystemController@setSocial');
-            });
-
-            Route::group(['prefix' => 'currency'], function () {
-
-                Route::any('get', 'SystemController@getExchange');
-
-                Route::any('update', 'SystemController@updateExchange');
-
-                Route::any('set', 'SystemController@setExchange');
-
-                Route::any('auto/{state}', ['as' => 'state', 'uses' => 'SystemController@setExchangeAuto']);
-            });
-
-            Route::any('reindexdata', 'SystemController@reindexData');
-
-            Route::any('clearcache', 'SystemController@clearCache');
-        });
-    });
 });
-
 
