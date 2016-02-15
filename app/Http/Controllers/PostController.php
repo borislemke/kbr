@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Property;
+use App\Post;
 
-class PropertyController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -87,16 +87,49 @@ class PropertyController extends Controller
         //
     }
 
-    public function search(Request $request)
+    public function listing($term = null)
     {
-        $limit = 24;
 
-        $properties = new Property;
+        $posts = new Post;
 
-        $properties = $properties->paginate($limit);
+        if ($term != null) {
+
+            $segments = explode('/', $term);
+
+            $slug = end($segments);
+
+            $posts = $posts->join('slug', $slug);
+
+        }
+
+        $posts = $posts->where('status', 1);
+
+        $posts = $posts->get();
+
+        return view('pages.blog-listing', compact('posts'));
+    }
+
+    public function detail($page, $term = null)
+    {
+
+        if ($term == null) return $this->listing();
+
+        $segments = explode('/', $term);
+
+        $slug = end($segments);
+
+        $post = new Post;
+
+        $post = $post->where('slug', $slug);
+
+        if ($post->count() == 0) return $this->listing($term);
 
 
-        return view('pages.search-property', compact('properties'));
+        $post = $post->where('status', 1);
+
+        $post = $post->first();
+
+        return view('pages.blog-view', compact('post'));
     }
 
 }

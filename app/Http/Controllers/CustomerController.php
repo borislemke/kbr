@@ -84,4 +84,11 @@ class CustomerController extends Controller
     {
         //
     }
+
+    public function account()
+    {
+        return view('pages.account');
+    }
+
+    
 }

@@ -84,4 +84,43 @@ class PageController extends Controller
     {
         //
     }
+
+    public function home()
+    {
+        return view('pages.home');
+    }
+
+    public function about()
+    {
+        return view('pages.about');
+    }
+
+    public function contact()
+    {
+        return view('pages.contact');
+    }
+
+    public function testimony()
+    {
+        $limit = 24;
+
+        $testimonials = new \App\Testimony;
+
+        $testimonials = $testimonials->orderBy('created_at', 'desc');
+
+        $testimonials = $testimonials->paginate($limit);
+
+        return view('pages.testimony', compact('testimonials'));
+    }
+
+    public function sellProperty()
+    {
+        return view('pages.sell-property');
+    }
+
+    public function lawyerNotary()
+    {
+        return view('pages.lawyer-notary');
+    }
+
 }

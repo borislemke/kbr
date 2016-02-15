@@ -13,58 +13,23 @@ return [
     |
     */
 
-    'home' => 'beranda',
-    'search' => 'cari',
-    'properties' => 'properti',
-
-    // property
-    'villa' => 'vila',
-    'land' => 'tanah',
-    'beachfront-property' => 'beachfront-property',
-    'home-and-retirement' => 'home-and-retirement',
-
-    // lawyer
-    'lawyer_notary' => 'notaris',
-
-    // testimony
-    'testimony' => 'testimoni',
-
-    'overstock' => 'overstock',
-    'bestseller' => 'bestseller',
-    'projects' => 'proyek',
-    'materials' => 'material',
-    'showroom' => 'showroom',
-
-    'account' => 'akun',
-
-    'contact' => 'hubungi-kami',
-
+    'home' => 'home',
+    'property' => 'property',
     'blog' => 'blog',
-
-    'sell_property' => 'jual-properti',
-
-    'contact_us' => 'hubungi-kami',
-    'about' => 'tentang',
-    'about_us' => 'tentang-kami',
-    'login' => 'masuk',
-    'logout' => 'keluar',
-    'register' => 'daftar',
-    'create_an_account' => 'daftar-akun',
-    'my_orders' => 'pesanan',
-    'my_personal_info' => 'data-pribadi',
-    'faqs' => 'FAQs',
-    'privacy_policy' => 'aturan-penjualan',
-    'condition_of_sales' => 'kondisi-pembelanjaan',
-    'terms_and_conditions' => 'syarat-dan-ketentuan',
-    'submit' => 'kirim',
-    'view' => 'lihat',
-    'name' => 'nama',
-    'catalogues' => 'catalogues',
-    'product_detail' => 'detail-produk',
-    'account' => 'akun',
-    'checkout' => 'checkout',
-    'blogs' => 'blogs',
-    'blog-detail' => 'detail-blog',
-    'fabrics' => 'kain',
+    'about' => 'about',
+    'contact' => 'contact',
+    'login' => 'login',
+    'logout' => 'logout',
+    'register' => 'register',
+    'confirm' => 'confirm',
+    'account' => 'account',
+    'wishlist' => 'wishlist',
+    'setting' => 'setting',
+    'blog' => 'blog',
+    'confirm' => 'confirm',
+    'search' => 'search',
+    'testimony' => 'testimony',
+    'lawyer_notary' => 'lawyer-notary',
+    'sell_property' => 'sell-property',
 
 ];

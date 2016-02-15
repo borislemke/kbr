@@ -3,12 +3,12 @@
 
 <div class="bc-bg">
     <ul class="breadcrumb container">
-        <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li><a href="{{ route('account', Lang::get('url')['account']) }}">Account</a></li>
-        <li class="active">Wishlist</li>
+        <li><a href="{{ route('home') }}">{{ trans('url.home') }}</a></li>
+        <li><a href="{{ route('account', trans('url.account')) }}">{{ trans('url.account') }}</a></li>
+        <li class="active">{{ trans('url.wishlist')}}</li>
     </ul>
 </div>
-<div class="line-top"> <h3><small>Wish List</small> </h3></div>
+<div class="line-top"> <h3><small>{{ trans('url.wishlist') }}</small> </h3></div>
 
 <div class="container wishlist">
     <div class="row">
@@ -76,7 +76,7 @@
                                 
                                 <div class="view-detail">
                                     <a href="{{ route('property.detail', str_slug($wishlist->property->lang()->title) . '-' . $wishlist->property->id) }}">View</a>
-                                    <button type="button" class="btn btn-danger delete-wishlist" data-id="{{ $wishlist->id }}">Delete</button>
+                                    <button type="button" class="btn btn-danger delete-wishlist" data-url="{{ route('api.wishlist.destroy', $wishlist->id) }}">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -107,12 +107,12 @@
 
             if(confirm(question)){
 
-                var url = "{{ route('property.favorite.delete') }}";
-                var id = $(this).attr('data-id');;
+                var url = $(this).attr('data-url');
                 var customerId = "{{ $customer->id }}";
                 var token = "{{ csrf_token() }}";
+                var method = 'delete';
 
-                $.post(url, {id: id, customer_id: customerId, _token: token}, function(data, textStatus, xhr) {
+                $.post(url, {id: id, customer_id: customerId, _token: token, _method: method}, function(data, textStatus, xhr) {
                     
                     console.log(data);
                     if (data == 'deleted') location.reload();

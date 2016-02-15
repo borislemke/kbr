@@ -3,11 +3,11 @@
 
 <div class="bc-bg">
     <ul class="breadcrumb container">
-        <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li class="active">{{ ucfirst($titles) }}</li>
+        <li><a href="{{ route('home') }}">{{ trans('url.home') }}</a></li>
+        <li class="active">{{ trans('url.contact') }}</li>
     </ul>
 </div>
-<div class="line-top"><h3><small>{{ $titles }}</small></h3></div>
+<div class="line-top"><h3><small>{{ trans('url.contact') }}</small></h3></div>
 <div class="container">
     <div class="row">
     	<div class="col-lg-12 bs-component" style="height:340px;">
@@ -41,7 +41,7 @@
                   	<h3 class="panel-title">Fill the form</h3>
                 </div>
 
-	    		{!! Form::open(['url' => route('contact.store'), 'class' => 'panel-body']) !!}
+	    		{!! Form::open(['url' => route('contact', trans('url.contact')), 'class' => 'panel-body']) !!}
 	    			<div class="form-group">
 	    				<label for="firstname" class="col-lg-12 ">Full Name</label>
 	                    <div class="col-lg-6">

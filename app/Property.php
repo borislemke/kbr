@@ -32,6 +32,11 @@ class Property extends Model
         return $this->hasMany('App\PropertyMeta');
     }
 
+    public function propertyTerms()
+    {
+        return $this->hasMany('App\PropertyTerm');
+    }
+
     public function enquiries()
     {
         return $this->hasMany('App\Enquiry');

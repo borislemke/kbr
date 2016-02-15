@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class LanguagesTableSeeder extends Seeder
+class LocalesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,25 +12,25 @@ class LanguagesTableSeeder extends Seeder
     public function run()
     {
         //
-        \App\Language::create([
+        \App\Locale::create([
             'name' => 'english',
             'code' => 'en',
             'icon' => 'en.png'
         ]);
 
-        \App\Language::create([
+        \App\Locale::create([
             'name' => 'bahasa',
             'code' => 'id',
             'icon' => 'id.png'
         ]);
 
-        \App\Language::create([
+        \App\Locale::create([
             'name' => 'french',
             'code' => 'fr',
             'icon' => 'fr.png'
         ]);
 
-        \App\Language::create([
+        \App\Locale::create([
             'name' => 'rusian',
             'code' => 'ru',
             'icon' => 'ru.png'

@@ -3,17 +3,17 @@
 
 <div class="bc-bg">
     <ul class="breadcrumb container">
-        <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li class="active">Account</li>
+        <li><a href="{{ route('home') }}">{{ trans('url.home') }}</a></li>
+        <li class="active">{{ trans('url.account') }}</li>
     </ul>
 </div>
 <div class="line-top"></div>
 <div class="container">
     <h3>ACCOUNT</h3>
     <ul>
-        <li><a href="{{ route('account.wishlist', ['account' => Lang::get('url')['account']]) }}">Wishlist</a></li>
-        <li><a href="{{ route('account.setting', ['account' => Lang::get('url')['account']]) }}">Setting</a></li>
-        <li><a href="{{ route('logout', Lang::get('url')['logout']) }}">Logout</a></li>
+        <li><a href="{{ route('account.wishlist', ['account' => trans('url.account'), 'wishlist' => trans('url.wishlist')]) }}">{{ trans('url.wishlist') }}</a></li>
+        <li><a href="{{ route('account.setting', ['account' => trans('url.account'), 'setting' => trans('url.setting')]) }}">{{ trans('url.setting') }}</a></li>
+        <li><a href="{{ route('logout', trans('url.logout')) }}">{{ trans('url.logout') }}</a></li>
     </ul>
 </div>
 

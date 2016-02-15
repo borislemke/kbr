@@ -115,7 +115,7 @@ class AuthController extends Controller
 
         if (Auth::customer()->check()) {
             Auth::customer()->logout();
-            return redirect('login');
+            return redirect()->route('login', trans('url.login'));
         }
 
         return redirect()->back();
@@ -175,6 +175,21 @@ class AuthController extends Controller
         });
 
         return true;
+    }
+
+    public function getCustomerLogin()
+    {        
+        if (\Auth::customer()->check()) return redirect()->route('account', trans('url.account'));
+
+        return view('pages.login');
+    }
+
+    public function getCustomerRegister()
+    {        
+        //
+        if (\Auth::customer()->check()) return redirect()->route('account', trans('url.account'));
+
+        return view('pages.register');
     }
 
 }

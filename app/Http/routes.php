@@ -76,32 +76,13 @@ Route::controllers([
 // Front-End
 Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 
-    // property
-    Route::get('{property}/{term?}/{slug?}',['as' => 'property', 'uses' => 'PropertyController@detail']);
-
-    // post
-    Route::get('{blog}/{term?}/{slug?}',['as' => 'blog', 'uses' => 'PostController@detail']);
-
-    // about
-    Route::get('{about}',['as' => 'about', 'uses' => 'PageController@about']);
-
-    // contact    
-    Route::get('{contact}',['as' => 'contact', 'uses' => 'PageController@contact']);
-
-    // page
-    Route::get('{page?}',['as' => 'page', 'uses' => 'PageController@index']);
-
-    // home
-    Route::get('/',['as' => 'home', 'uses' => 'PageController@home']);
-
-
     // customer
-    Route::post('{login}',['as' => 'login.attempt', 'as' => 'Auth\AuthController@postLogin']);  
     Route::get('{login}', ['as' => 'login', 'uses' => 'Auth\AuthController@getCustomerLogin']);  
+    Route::post('{login}',['as' => 'login.attempt', 'uses' => 'Auth\AuthController@postLogin']);  
     Route::get('{logout}', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
-    Route::post('{register}',['as' => 'register.store', 'as' => 'Auth\AuthController@postRegister']);
     Route::get('{register}', ['as' => 'register', 'uses' => 'Auth\AuthController@getCustomerRegister']);
+    Route::post('{register}',['as' => 'register.store', 'as' => 'Auth\AuthController@postRegister']);
 
     Route::get('{confirm}/{confirmationCode}', [
         'as' => 'confirm',
@@ -110,7 +91,7 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 
     Route::group(['middleware' => 'auth.customer'], function () {
 
-        Route::get('/{account}/', ['as' => 'account', 'uses' => 'PagesController@account']);
+        Route::get('/{account}/', ['as' => 'account', 'uses' => 'CustomerController@account']);
 
         Route::get('/{account}/{wishlist}', ['as' => 'account.wishlist', 'uses' => 'PagesController@accountWishlist'])
             ->where('wishlist', trans('url.wishlist'));
@@ -119,6 +100,37 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
             ->where('wishlist', trans('url.setting'));
 
     }); 
+
+
+    // home
+    Route::get('/',['as' => 'home', 'uses' => 'PageController@home']);
+
+    // about
+    Route::get('{about}',['as' => 'about', 'uses' => 'PageController@about']);
+
+    // contact    
+    Route::any('{contact}',['as' => 'contact', 'uses' => 'PageController@contact']);
+
+    // testimony    
+    Route::any('{testimony}',['as' => 'testimony', 'uses' => 'PageController@testimony']);
+
+    // sell_property    
+    Route::any('{sell_property}',['as' => 'sell_property', 'uses' => 'PageController@sellProperty']);
+
+    // lawyer_notary    
+    Route::any('{lawyer_notary}',['as' => 'lawyer_notary', 'uses' => 'PageController@lawyerNotary']);
+
+    // search    
+    Route::get('{search}',['as' => 'search', 'uses' => 'PropertyController@search']);
+
+    // property
+    Route::get('{property}/{term?}',['as' => 'property', 'uses' => 'PropertyController@detail']);
+
+    // post
+    Route::get('{blog}/{term?}',['as' => 'blog', 'uses' => 'PostController@detail']);
+
+    // page
+    Route::get('{page?}',['as' => 'page', 'uses' => 'PageController@index']);
 
 });
 

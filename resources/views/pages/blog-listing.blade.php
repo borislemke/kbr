@@ -4,17 +4,17 @@
 
 <div class="bc-bg">
     <ul class="breadcrumb container">
-        <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li class="active">{{ ucfirst($titles) }}</li>
+        <li><a href="{{ route('home') }}">{{ trans('url.home') }}</a></li>
+        <li class="active">{{ trans('url.blog') }}</li>
     </ul>
 </div>
-<div class="line-top"><h3><small>{{ $titles }}</small></h3></div>
+<div class="line-top"><h3><small>{{ trans('url.blog') }}</small></h3></div>
 
 <div class="content blogs container">
     <div class="wrapper">
         <div class="column-left">
 
-            @foreach($blogs as $blog)
+            @foreach($posts as $blog)
             <a href="{{ baseUrl() }}/blog/{{ $blog->url }}">
                 <div class="blog-item">
                     <div class="blog-img" style="background-image: url({{ baseUrl() . '/media/blog/' . $blog->image }})">

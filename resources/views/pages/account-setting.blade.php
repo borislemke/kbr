@@ -4,9 +4,9 @@
 
 <div class="bc-bg">
     <ul class="breadcrumb container">
-        <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li><a href="{{ route('account', Lang::get('url')['account']) }}">Account</a></li>
-        <li class="active">Setting</li>
+        <li><a href="{{ route('home') }}">{{ trans('url.home') }}</a></li>
+        <li><a href="{{ route('account', trans('url.account')) }}">{{ trans('url.account') }}</a></li>
+        <li class="active">{{ trans('url.setting')}}</li>
     </ul>
 </div>
 <div class="line-top"> <h3><small>SETTING</small> </h3></div>
