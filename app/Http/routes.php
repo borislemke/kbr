@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('posts/{term?}',['as' => 'admin.posts', 'uses' => 'AdminController@posts']);
 
         // setting
-        Route::get('settings', 'AdminController@settings');
+        Route::get('settings',['as' => 'admin.setting', 'uses' => 'AdminController@settings']);
 
     });
 
