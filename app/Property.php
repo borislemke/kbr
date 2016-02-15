@@ -10,13 +10,6 @@ class Property extends Model
     //
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-    
-    protected $table = 'Properties';
-
-    public function category()
-    {
-        return $this->belongsTo('App\Category');
-    }
 
     public function user()
     {
@@ -29,19 +22,19 @@ class Property extends Model
         return $this->belongsTo('App\Customer');
     }
 
-    public function propertyLanguages()
+    public function propertyLocales()
     {
-        return $this->hasMany('App\PropertyLanguage');
+        return $this->hasMany('App\PropertyLocale');
     }
 
-    public function propertyFiles()
+    public function propertyMetas()
     {
-        return $this->hasMany('App\PropertyFile');
+        return $this->hasMany('App\PropertyMeta');
     }
 
-    public function inquiries()
+    public function enquiries()
     {
-        return $this->hasMany('App\Inquiry');
+        return $this->hasMany('App\Enquiry');
     }
 
     public function facilities()

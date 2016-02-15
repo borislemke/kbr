@@ -7,22 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     //
-    protected $table = 'Posts';
-
-    public function category() {
-
-        return $this->belongsTo('App\PostCategory');
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
-    public function language() {
-
-        return $this->hasMany('App\PostLanguage');
+    public function postLocales()
+    {
+        return $this->hasMany('App\PostLocale');
     }
 
-    // public function branch() {
+    public function postTerms()
+    {
+        return $this->hasMany('App\PostTerm');   
+    }
 
-    //     return $this->belongsTo('App\Branch');
-    // }
+    public function postMetas()
+    {
+        return $this->hasMany('App\PostMeta');   
+    }
 
     public static function boot()
     {

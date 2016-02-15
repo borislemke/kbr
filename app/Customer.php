@@ -27,7 +27,7 @@ CanResetPasswordContract
      *
      * @var string
      */
-    protected $table = 'Customers';
+    protected $table = 'customers';
 
     /**
      * The attributes that are mass assignable.
