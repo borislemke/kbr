@@ -81,7 +81,14 @@
                                             <td align="left" width="50%" style="padding: 0px;">
                                                 <p style="line-height: 1.5; font-size: 14px;">		
 
-                                                    <ul style="list-style:none;  font-size: 12px; padding:0px; margin: 30px 0px 0px 0px;">
+                                                    <ul style="list-style:none;  font-size: 12px; padding:0px; margin: 30px 40px 0px 0px;">
+                                                        <li style=" margin-bottom: 10px;
+                                                                    margin-top: 10px;
+                                                                    font-size: 14px;
+                                                                    font-weight: 600;
+                                                                    color: #ee5b2c;
+                                                                    border-bottom: 1px solid #e8e8e8;
+                                                                    padding-top: 5px;">Shipping Address</li>
                                                         <li><strong>Andre Mahendra</strong></li>
                                                         <li>Denpasar</li>
                                                         <li>+62 85737054xxx</li>
@@ -96,13 +103,24 @@
                                             <td align="left" width="50%" style="padding: 0px;">
                                                 <p style="line-height: 1.5; font-size: 14px;">		
 
-                                                    <ul style="list-style:none;  font-size: 12px; padding:0px; margin: 30px 0px 0px 0px;">
-                                                        <li><strong>Andre Mahendra</strong></li>
-                                                        <li>Denpasar</li>
-                                                        <li>+62 85737054xxx</li>
-                                                        <li>info.andremahendra@gmail.com</li>
-                                                        
-                                                    </ul>
+                                                <ul style="list-style:none;  font-size: 12px; padding:0px; margin: 30px 0px 0px 0px;">
+                                                    <li style=" margin-bottom: 10px;
+                                                               margin-top: 10px;
+                                                               font-size: 14px;
+                                                               font-weight: 600;
+                                                               color: #ee5b2c;
+                                                               border-bottom: 1px solid #e8e8e8;
+                                                               padding-top: 5px;">Date Ordered</li>
+                                                    <li><strong>2016, June 15</strong></li>
+                                                    <li style=" margin-bottom: 10px;
+                                                               margin-top: 10px;
+                                                               font-size: 14px;
+                                                               font-weight: 600;
+                                                               color: #ee5b2c;
+                                                               border-bottom: 1px solid #e8e8e8;
+                                                               padding-top: 5px;">No. Invoice</li>
+                                                    <li><strong>KBR-001-20160215</strong></li>
+                                                </ul>
 
                                                 </p>
                                             </td>
