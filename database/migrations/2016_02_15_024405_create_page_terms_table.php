@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFacilitiesTable extends Migration
+class CreatePageTermsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,8 @@ class CreateFacilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Facilities', function (Blueprint $table) {
+        Schema::create('page_terms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('property_id');
-            $table->string('name');
-            $table->string('description');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ class CreateFacilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Facilities');
+        Schema::drop('page_terms');
     }
 }

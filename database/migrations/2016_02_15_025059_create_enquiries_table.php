@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInquiriesTable extends Migration
+class CreateEnquiriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,7 @@ class CreateInquiriesTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('Inquiries', function (Blueprint $table) {
+        Schema::create('enquiries', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id');
             $table->integer('customer_id');
@@ -24,7 +23,7 @@ class CreateInquiriesTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->timeStamps();
-            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -35,7 +34,6 @@ class CreateInquiriesTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('Inquiries');
+        Schema::drop('enquiries');
     }
 }

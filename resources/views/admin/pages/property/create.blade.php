@@ -8,37 +8,7 @@
 @stop
 
 @section('content')
-<br>
 
-<m-template list class="property-wrapper">
-
-    <table id="property-table" data-list-status="{{ $status }}" data-list-category="{{ $category->route }}">
-        <thead>
-            <td width="5%">
-                <m-list-item-check all class="item-select-all"></m-list-item-check>
-            </td>
-            <td>Image</td>
-            <td>Title</td>
-            <td>Code</td>
-            <td>Type</td>
-            <td>Status</td>
-            <td>Agent</td>
-            <td>Price</td>
-            <td>View</td>
-            <td>Created</td>
-            <td>Action</td>
-        </thead>
-
-    </table>
-
-
-</m-template>
-
-@endsection
-
-@section('modal')
-
-<m-modal-wrapper id="property-add">
 
     {!! Form::open(array('class' => 'modal-window', 'id' => 'property-form', 'data-function' => 'modalClose', 'data-url' => 'property/store')) !!}
     <h3>Add Property</h3>
@@ -449,81 +419,7 @@
         <m-button save-form plain>save</m-button>
     </m-buttons>
     {!! Form::close() !!}
-</m-modal-wrapper>
 
-
-<!-- MODAL TRANSLATE -->
-
-<m-modal-wrapper id="property-translate">
-    {!! Form::open(array('class' => 'modal-window', 'id' => 'property-translate-form', 'data-function' => 'modalClose', 'data-url' => 'property/translate/store')) !!}
-
-    <!-- en -->
-    <h3 class="input-group-title">English</h3>
-    <div class="m-input-wrapper fwidth">
-        <input type="text" name="title[en]" id="property-input-en-title" required>
-        <label for="title">title</label>
-    </div>
-
-    <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
-        <h3 class="input-group-title">Description</h3>
-        <div class="input-wrapper fwidth">
-            <textarea name="description[en]" id="property-input-en-description" rows="10" style="padding-top: 0"></textarea>
-        </div>
-    </div>
-    <br><br><br>
-
-    <!-- id -->
-    <h3 class="input-group-title">Indonesian</h3>
-    <div class="m-input-wrapper fwidth">
-        <input type="text" name="title[id]" id="property-input-id-title" required>
-        <label for="title">title</label>
-    </div>
-
-    <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
-        <h3 class="input-group-title">Description</h3>
-        <div class="input-wrapper fwidth">
-            <textarea name="description[id]" id="property-input-id-description" rows="10" style="padding-top: 0"></textarea>
-        </div>
-    </div>
-    <br><br><br>
-
-    <!-- fr -->
-    <h3 class="input-group-title">French</h3>
-    <div class="m-input-wrapper fwidth">
-        <input type="text" name="title[fr]" id="property-input-fr-title" required>
-        <label for="title">title</label>
-    </div>
-
-    <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
-        <h3 class="input-group-title">Description</h3>
-        <div class="input-wrapper fwidth">
-            <textarea name="description[fr]" id="property-input-fr-description" rows="10" style="padding-top: 0"></textarea>
-        </div>
-    </div>
-    <br><br><br>
-
-    <!-- ru -->
-    <h3 class="input-group-title">Rusian</h3>
-    <div class="m-input-wrapper fwidth">
-        <input type="text" name="title[ru]" id="property-input-ru-title" required>
-        <label for="title">title</label>
-    </div>
-
-    <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
-        <h3 class="input-group-title">Description</h3>
-        <div class="input-wrapper fwidth">
-            <textarea name="description[ru]" id="property-input-ru-description" rows="10" style="padding-top: 0"></textarea>
-        </div>
-    </div>
-    <br><br><br>
-    <input type="hidden" name="edit_translate" value="0" id="edit-translate-flag">
-
-    <m-buttons flexbox justify-end>
-        <m-button plain class="modal-close" id="close-property-translate-form">cancel</m-button>
-        <m-button save-form plain>save</m-button>
-    </m-buttons>
-    {!! Form::close() !!}
-</m-modal-wrapper>
 @endsection
 
 @section('scripts')

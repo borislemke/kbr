@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLanguagesTable extends Migration
+class CreatePostMetasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,14 @@ class CreateLanguagesTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('Languages', function (Blueprint $table) {
+        Schema::create('post_metas', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('post_id');
             $table->string('name');
-            $table->string('code');
-            $table->string('icon');
-            $table->timeStamps();
+            $table->string('value');
+            $table->string('type');
+            $table->boolean('status')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -29,7 +30,6 @@ class CreateLanguagesTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('Languages');
+        Schema::drop('post_metas');
     }
 }

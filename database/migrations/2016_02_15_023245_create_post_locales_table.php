@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostcategorylanguagesTable extends Migration
+class CreatePostLocalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,13 @@ class CreatePostcategorylanguagesTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('PostCategoryLanguages', function (Blueprint $table) {
+        Schema::create('post_locales', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id');
-            $table->string('locale')->index();
+            $table->integer('post_id');
             $table->string('title');
-            $table->string('description');
-            $table->timeStamps();
+            $table->text('content');
+            $table->string('locale');
+            $table->timestamps();
         });
     }
 
@@ -30,7 +29,6 @@ class CreatePostcategorylanguagesTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('PostCategoryLanguages');
+        Schema::drop('post_locales');
     }
 }

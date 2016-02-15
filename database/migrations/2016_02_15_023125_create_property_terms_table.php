@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePropertyfilesTable extends Migration
+class CreatePropertyTermsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,11 @@ class CreatePropertyfilesTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('PropertyFiles', function (Blueprint $table) {
+        Schema::create('property_terms', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id');
-            $table->string('file');
-            $table->string('title');
-            $table->string('description');
-            $table->enum('type', array('image', 'video', 'pdf'));
-            $table->timeStamps();
+            $table->integer('term_id');
+            $table->timestamps();
         });
     }
 
@@ -31,7 +27,6 @@ class CreatePropertyfilesTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('PropertyFiles');
+        Schema::drop('property_terms');
     }
 }

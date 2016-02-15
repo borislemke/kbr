@@ -12,7 +12,7 @@ class CreateCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Countries', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->increments('id');
             $table->string('iso');
             $table->string('name');
@@ -31,6 +31,6 @@ class CreateCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Countries');
+        Schema::drop('countries');
     }
 }

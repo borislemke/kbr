@@ -773,6 +773,126 @@ var Matter = {
 
             selectList();
 
+            $('#enquiry-table').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": baseUrl + "/system/ajax/enquiry/data",
+                "deferRender": true,
+                "columns": [
+                    {
+                        "orderable": false,
+                        "targets": 0,
+                        "data": null,
+                        "defaultContent": '<m-list-item-check all class="item-select-all"></m-list-item-check>'
+                    },{
+                        "orderable": false,
+                        "targets": 1,
+                        "data": "property_files",
+                        "render": function (data, type, row) {
+
+                            if (data.length != 0) {
+
+                                return '<img width="100" src="'+ baseUrl +'/uploads/property/' + data[0].file +'">';
+                            } else {
+
+                                return '<img width="100" src="'+ baseUrl +'/no-image.png">';
+                            }
+
+                        }
+                        
+                    },
+                    {
+                        "data": "property_languages",
+                        "render": function (data, type, row) {
+
+                            if (data.length != 0) {
+
+                                return data[0].title;
+                            } else {
+
+                                return '-';
+                            }
+
+                        }
+
+                    },
+                    {"data": "code"},
+                    {"data": "type"},
+                    {
+                        "data": "status",
+                        "render": function (data, type, row) {
+                            var output = '';
+
+                            switch(data) {
+                                case '0':
+                                    output = 'UNAVAILABLE';
+                                    break;
+                                case '1':
+                                    output = 'AVAILABLE';
+                                    break;
+                                case '-1':
+                                    output = 'HIDDEN';
+                                    break;
+                                case '-2':
+                                    output = 'MODERATION';
+                                    break;
+                            }
+                            return output;
+                        }
+                    },
+                    {
+                        "data": "user",
+                        "render": function (data, type, row) {
+                            return  data.username;
+                        }
+                    },
+                    {
+                        "data": "price",
+                        "render": function (data, type, row) {
+
+                            return (""+ data).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+                        }
+                    },
+                    {"data": "view"},
+                    {
+                        "data": "created_at",
+                        "render": function (data, type, row) {
+                            var date = new Date(data);
+                            var newDate = date.toISOString().split('T')[0];
+                            return newDate;
+                        }
+                    },
+                    {
+                        "orderable": false,
+                        "data": 'id',
+                        "render": function (data, type, row) {
+
+                            return ''
+                            + '<m-table-list-more>'
+                                + '<i class="material-icons">more_horiz</i>'
+                                + '<m-list-menu data-id="'+ data +'">'
+                                    + '<a href="'+ baseUrl +'/admin/property/edit/'+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
+                                    + '<m-list-menu-item translate data-function="populatePropertyTranslate">TRANSLATION</m-list-menu-item>'
+                                    + '<m-list-menu-item delete data-url="property/destroy">DELETE</m-list-menu-item>'
+                                + '</m-list-menu>'
+                            + '</m-table-list-more>';
+                        }
+                    }
+
+                ],
+                "createdRow": function ( row, data, index ) {
+
+                    $('td', row).eq(7).css('text-align', 'right');
+                    $('td', row).eq(8).css('text-align', 'right');
+
+                    $(row).addClass('property-item').attr('id', 'property-item-' + data.id);
+
+                    $('td:last-child', row).attr('button', '');
+                },
+                "order": [[ 3, "desc" ]]
+            });
+
+
             var el = '';
             $(document).ready(function() {
                 el += $('#enquiry-add').html();
@@ -1168,10 +1288,11 @@ var Matter = {
                 var status = $('#property-table').attr('data-list-status');
                 var category = $('#property-table').attr('data-list-category');
 
-                $('#property-table').DataTable( {
+                $('#property-table').DataTable({
                     "processing": true,
                     "serverSide": true,
                     "ajax": baseUrl + "/system/ajax/property/data/"+ category + "/" + status,
+                    "deferRender": true,
                     "columns": [
                         {
                             "orderable": false,
@@ -1193,7 +1314,6 @@ var Matter = {
                                 }
 
                             }
-                            // "defaultContent": '<img width="100" src="'+ baseUrl +'/no-image.png">',
                             
                         },
                         {
@@ -1211,20 +1331,8 @@ var Matter = {
                             }
 
                         },
-
-                        {
-                            "data": "created_at",
-                            "render": function (data, type, row) {
-                                var date = new Date(data);
-                                var newDate = date.toISOString().split('T')[0];
-                                return newDate;
-                            }
-                        },
                         {"data": "code"},
                         {"data": "type"},
-
-                        // {"data": "customer_id"},
-                        // {"data": "category_id"},
                         {
                             "data": "status",
                             "render": function (data, type, row) {
@@ -1247,8 +1355,12 @@ var Matter = {
                                 return output;
                             }
                         },
-                        // {"data": "currency"},
-                        {"data": "user_id"},
+                        {
+                            "data": "user",
+                            "render": function (data, type, row) {
+                                return  data.username;
+                            }
+                        },
                         {
                             "data": "price",
                             "render": function (data, type, row) {
@@ -1256,39 +1368,15 @@ var Matter = {
                                 return (""+ data).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
                             }
                         },
-                        // {"data": "discount"},
-                        // {"data": "building_size"},
-                        // {"data": "land_size"},
-                        // {"data": "sold"},
-                        // {"data": "year"},
-                        // {"data": "map_latitude"},
-                        // {"data": "map_longitude"},
-                        // {"data": "city"},
-                        // {"data": "province"},
-                        // {"data": "country"},
-                        // {"data": "slug"},
                         {"data": "view"},
-                        // {"data": "view_north"},
-                        // {"data": "view_east"},
-                        // {"data": "view_west"},
-                        // {"data": "view_south"},
-                        // {"data": "is_price_request"},
-                        // {"data": "is_exclusive"},
-                        // {"data": "owner_name"},
-                        // {"data": "owner_email"},
-                        // {"data": "owner_phone"},
-                        // {"data": "agent_commission"},
-                        // {"data": "agent_contact"},
-                        // {"data": "agent_meet_date"},
-                        // {"data": "agent_inspector"},
-                        // {"data": "sell_reason"},
-                        // {"data": "sell_note"},
-                        // {"data": "other_agent"},
-                        // {"data": "display"},
-                        // {"data": "orientation"},
-                        // {"data": "sell_in_furnish"},
-                        // {"data": "lease_period"},
-                        // {"data": "lease_year"},
+                        {
+                            "data": "created_at",
+                            "render": function (data, type, row) {
+                                var date = new Date(data);
+                                var newDate = date.toISOString().split('T')[0];
+                                return newDate;
+                            }
+                        },
                         {
                             "orderable": false,
                             "data": 'id',
@@ -1298,7 +1386,7 @@ var Matter = {
                                 + '<m-table-list-more>'
                                     + '<i class="material-icons">more_horiz</i>'
                                     + '<m-list-menu data-id="'+ data +'">'
-                                        + '<m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item>'
+                                        + '<a href="'+ baseUrl +'/admin/property/edit/'+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
                                         + '<m-list-menu-item translate data-function="populatePropertyTranslate">TRANSLATION</m-list-menu-item>'
                                         + '<m-list-menu-item delete data-url="property/destroy">DELETE</m-list-menu-item>'
                                     + '</m-list-menu>'
@@ -1309,6 +1397,7 @@ var Matter = {
                     ],
                     "createdRow": function ( row, data, index ) {
 
+                        $('td', row).eq(7).css('text-align', 'right');
                         $('td', row).eq(8).css('text-align', 'right');
 
                         $(row).addClass('property-item').attr('id', 'property-item-' + data.id);
@@ -1322,14 +1411,14 @@ var Matter = {
 
             selectList();
 
-            $(document).on('click', '[edit]', function() {
+            // $(document).on('click', '[edit]', function() {
 
-                var id = $(this).parents('m-list-menu').attr('data-id'),
-                    func = $(this).attr('data-function'),
-                    source = $(this).attr('data-source');
+            //     var id = $(this).parents('m-list-menu').attr('data-id'),
+            //         func = $(this).attr('data-function'),
+            //         source = $(this).attr('data-source');
 
-                Ajax.get(source + '/' + id, eval(func));
-            });
+            //     Ajax.get(source + '/' + id, eval(func));
+            // });
 
             $(document).on('click', '[delete]', function() {
 

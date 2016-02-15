@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserlogsTable extends Migration
+class CreatePropertyLocalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,13 @@ class CreateUserlogsTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('UserLogs', function (Blueprint $table) {
+        Schema::create('property_locales', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username');
-            $table->string('activity');
-            $table->string('data');
-            $table->string('ip_address');
-            $table->timeStamps();
+            $table->integer('property_id');
+            $table->string('title');
+            $table->text('content');
+            $table->string('locale');
+            $table->timestamps();
         });
     }
 
@@ -30,7 +29,6 @@ class CreateUserlogsTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('UserLogs');
+        Schema::drop('property_locales');
     }
 }

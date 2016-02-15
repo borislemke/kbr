@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePropertylanguagesTable extends Migration
+class CreatePropertyMetasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,14 @@ class CreatePropertylanguagesTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('PropertyLanguages', function (Blueprint $table) {
+        Schema::create('property_metas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id');
-            $table->string('locale')->index();
-            $table->string('title');
-            $table->string('description');
-            $table->timeStamps();
+            $table->string('name');
+            $table->string('value');
+            $table->string('type');
+            $table->boolean('status')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -30,7 +30,6 @@ class CreatePropertylanguagesTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('PropertyLanguages');
+        Schema::drop('property_metas');
     }
 }

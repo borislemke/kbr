@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsTable extends Migration
+class CreateTermsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,15 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('terms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->string('name');
             $table->string('slug');
             $table->string('route');
-            $table->boolean('status');
-            $table->timeStamps();
+            $table->string('type');
+            $table->string('order');
+            $table->integer('parent_id');
+            $table->timestamps();
         });
     }
 
@@ -30,7 +31,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('Posts');
+        Schema::drop('terms');
     }
 }

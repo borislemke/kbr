@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDistancesTable extends Migration
+class CreateLogUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,8 @@ class CreateDistancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Distances', function (Blueprint $table) {
+        Schema::create('log_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('property_id');
-            $table->string('from');
-            $table->double('value');
-            $table->enum('unit', array('km','m','minutes','hours'));
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ class CreateDistancesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Distances');
+        Schema::drop('log_users');
     }
 }

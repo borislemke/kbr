@@ -69,6 +69,13 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('land/{status}', 'AdminController@land');
 
+        Route::group(['prefix' => 'property'], function () {
+
+            Route::get('add', 'PropertiesController@create');
+
+            Route::get('edit/{id}', 'PropertiesController@edit');
+        });
+
 
         // Blog
         Route::get('blog', 'AdminController@blog');
