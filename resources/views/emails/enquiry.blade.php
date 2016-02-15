@@ -50,17 +50,17 @@
                                     <table cellpadding="20" cellspacing="0" width="100%">
                                         <tr>
                                             <td align="center" width="50%">
-                                                <img src="logo.png" style="display: block; padding-bottom:20px;">
+                                                <img src="http://dev.kesato.com/newsletter/kbr/email/assets/logo.png" style="display: block; padding-bottom:20px;">
 
                                             </td>
 
                                             <td align="center" width="50%">
-                                                <a href="https://www.facebook.com/kesato"><img src="facebook.png" style="display: inline-block; width:28px;"></a>
-                                                <a href="https://www.facebook.com/kesato"><img src="g-plus.png" style="display: inline-block; width:28px;"></a>
-                                                <a href="https://www.facebook.com/kesato"><img src="twitter.png" style="display: inline-block; width:28px;"></a>
-                                                <a href="https://www.facebook.com/kesato"><img src="linkedin.png" style="display: inline-block; width:28px;"></a>
-                                                <a href="https://www.facebook.com/kesato"><img src="youtube.png" style="display: inline-block; width:28px;"></a>
-                                                <a href="https://www.facebook.com/kesato"><img src="skype.png" style="display: inline-block; width:28px;"></a>
+                                                <a href="https://www.facebook.com/kesato"><img src="http://dev.kesato.com/newsletter/kbr/email/assets/facebook.png" style="display: inline-block; width:28px;"></a>
+                                                <a href="https://www.facebook.com/kesato"><img src="http://dev.kesato.com/newsletter/kbr/email/assets/g-plus.png" style="display: inline-block; width:28px;"></a>
+                                                <a href="https://www.facebook.com/kesato"><img src="http://dev.kesato.com/newsletter/kbr/email/assets/twitter.png" style="display: inline-block; width:28px;"></a>
+                                                <a href="https://www.facebook.com/kesato"><img src="http://dev.kesato.com/newsletter/kbr/email/assets/linkedin.png" style="display: inline-block; width:28px;"></a>
+                                                <a href="https://www.facebook.com/kesato"><img src="http://dev.kesato.com/newsletter/kbr/email/assets/youtube.png" style="display: inline-block; width:28px;"></a>
+                                                <a href="https://www.facebook.com/kesato"><img src="http://dev.kesato.com/newsletter/kbr/email/assets/skype.png" style="display: inline-block; width:28px;"></a>
                                             </td>
                                         </tr>
 
@@ -69,7 +69,7 @@
                             </tr>
                             <tr>
                                 <td align="center">
-                                    <img src="banner-sm.jpg" style="max-width:600px; display: block; ">
+                                    <img src="http://dev.kesato.com/newsletter/kbr/email/assets/banner-sm.jpg" style="max-width:600px; display: block; ">
                                 </td>
                             </tr>
 
@@ -81,7 +81,7 @@
                                             <td align="left" width="50%" style="padding: 0px;">
                                                 <p style="line-height: 1.5; font-size: 14px;">		
 
-                                                    <ul style="list-style:none;  font-size: 12px; padding:0px;">
+                                                    <ul style="list-style:none;  font-size: 12px; padding:0px; margin: 30px 0px 0px 0px;">
                                                         <li><strong>Andre Mahendra</strong></li>
                                                         <li>Denpasar</li>
                                                         <li>+62 85737054xxx</li>
@@ -96,7 +96,7 @@
                                             <td align="left" width="50%" style="padding: 0px;">
                                                 <p style="line-height: 1.5; font-size: 14px;">		
 
-                                                    <ul style="list-style:none;  font-size: 12px; padding:0px;">
+                                                    <ul style="list-style:none;  font-size: 12px; padding:0px; margin: 30px 0px 0px 0px;">
                                                         <li><strong>Andre Mahendra</strong></li>
                                                         <li>Denpasar</li>
                                                         <li>+62 85737054xxx</li>
@@ -114,9 +114,13 @@
 
                             <tr>
                                 <td>
+                                    <p style="font-size: 24px; font-weight: 600; color: #666; margin-top:10px; text-align:left;">Title</p>
                                     <table width="100%" >
-                                        <tr class="td-category">
-                                            <p style="font-size: 24px; font-weight: 600; color: #666; margin-top:10px;">Title</p>
+                                        <tr style="text-transform: uppercase;
+                                                   color: #868686;
+                                                   font-weight: 600;
+                                                   font-size: 11px;">
+                                            
                                             <td>No</td>
                                             <td>Picture</td>
                                             <td>Title</td>
@@ -126,62 +130,66 @@
                                         </tr>
 
                                         <tr>
-                                            <td class="invoice" colspan="5"></td>
+                                            <td style="border-bottom: 1px solid #e8e8e8; padding-top: 5px;" colspan="5"></td>
                                         </tr>
                                         <tr>
-                                            <td class="" colspan="5"></td>
+                                            <td colspan="5"></td>
                                         </tr>
 
-                                        <tr class="td-content">
+                                        <tr style="color:#868686; font-size:12px;">
                                             <td>1</td>
-                                            <td><img src="villa_dummy.jpg" width="100px"></td>
+                                            <td><img src="http://dev.kesato.com/newsletter/kbr/email/assets/villa_dummy.jpg" width="100px"></td>
                                             <td align="left">Jalan Petitenget No.9, Badung, Bali 80361 </td>
-                                            <td width="10%" align="right">1</td>
+                                            <td width="15%" align="right">1</td>
                                             <td width="20%" align="right">$ 14.000</td>
                                         </tr>
-                                        <tr class="td-content">
+                                        <tr style="color:#868686; font-size:12px;">
                                             <td>2</td>
-                                            <td><img src="villa_dummy2.jpg" width="100px"></td>
+                                            <td><img src="http://dev.kesato.com/newsletter/kbr/email/assets/villa_dummy.jpg" width="100px"></td>
                                             <td align="left">Jalan Petitenget No.9, Badung, Bali 80361 </td>
-                                            <td width="10%" align="right">1</td>
+                                            <td width="15%" align="right">1</td>
                                             <td width="20%" align="right">$ 14.000</td>
                                         </tr>
-                                        <tr class="td-content">
+                                        <tr style="color:#868686; font-size:12px;">
                                             <td>3</td>
-                                            <td><img src="villa_dummy.jpg" width="100px"></td>
+                                            <td><img src="http://dev.kesato.com/newsletter/kbr/email/assets/villa_dummy.jpg" width="100px"></td>
                                             <td align="left">Jalan Petitenget No.9, Badung, Bali 80361 </td>
-                                            <td width="10%" align="right">1</td>
+                                            <td width="15%" align="right">1</td>
                                             <td width="20%" align="right">$ 14.000</td>
                                         </tr>
 
                                         <tr>
                                             <tr>
-                                                <td class="line-break" colspan="5"></td>
+                                                <td style="border-bottom: 1px solid #e8e8e8;
+                                                           border-top: 1px solid #e8e8e8;
+                                                           margin-bottom: 5px;" colspan="5"></td>
                                             </tr>
 
-                                            <tr class="td-content bold">
+                                            <tr style="color:#868686; font-size:12px; font-weight:600;">
                                                 <td colspan="3"></td>
                                                 <td align="right">Subtotal</td>
                                                 <td align="right" style="white-space:nowrap;">$ 42.000.000</td>
                                             </tr>
 
-                                            <tr class="td-content bold">
+                                            <tr style="color:#868686; font-size:12px; font-weight:600;">
                                                 <td colspan="3"></td>
                                                 <td align="right">Deposit</td>
                                                 <td align="right">$ 2.000.000</td>
                                             </tr>  
 
-                                            <tr>
-                                                <td class="line-break" colspan="5"></td>
+                                        <tr>
+                                            <td style="border-bottom: 1px solid #e8e8e8;
+                                                        border-top: 1px solid #e8e8e8;
+                                                        margin-bottom: 5px;" colspan="5"></td>
                                             </tr>
 
                                             <tr>
                                                 <td colspan="5"></td>
                                             </tr>
-                                            <tr class="td-content  bold">
+                                            <tr  style="color:#868686; font-size:12px; font-weight:600;">
                                                 <td colspan="3"></td>
-                                                <td align="right" class="orange">Total</td>
-                                                <td align="right" class="orange" style="white-space:nowrap;">$ 40.000.000</td>
+                                                <td align="right" style="color: #ee5b2c;">Total</td>
+                                                <td align="right"  style="color: #ee5b2c; white-space:nowrap;">$ 40.000.000</td>
                                             </tr>
 
                                         </tr>
@@ -192,8 +200,8 @@
                             </tr>
 
                             <tr>
-                                <td style="padding: 20px 0px;" align="right" >
-                                    <a href="" style=" background: #ee5b2c; padding: 10px 15px; color: #fff; text-decoration: none;border-radius: 4px; font-size:12px; font-weight: 600;">Download Invoice</a>
+                                <td style="padding: 50px 0px;" align="right" >
+                                    <a href="http://flettyproject.com" style=" background: #ee5b2c; padding: 10px 15px; color: #fff; text-decoration: none; border-radius: 4px; font-size:12px; font-weight: 600;">Download Invoice</a>
                                 </td>
                             </tr>
 
@@ -209,7 +217,7 @@
                                                     Jalan Petitenget No.9, Badung, Bali 80361 <br><br>
                                                 </p>
 
-                                                <img src="logo-sm.png" alt="">
+                                                <img src="http://dev.kesato.com/newsletter/kbr/email/assets/logo-sm.png" alt="">
 
                                             </td>
 
