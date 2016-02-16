@@ -17,6 +17,62 @@ class TestimonyController extends Controller
     public function index()
     {
         //
+        $category = $request->category;
+        $status = $request->status;
+
+        // datatable parameter
+        $draw = $request->draw;
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+
+        // sorting
+        $column = 'id';
+        $sort = $request->order[0]['dir'] ? $request->order[0]['dir'] : 'desc'; //asc
+
+        // new object
+        $testimony = new Customer;
+
+        // searching
+        if ($search) {
+
+            $testimony = $testimony->where(function ($q) use ($search) {
+                    $q->where('testimony.username', 'like', $search . '%')
+                        ->orWhere('testimony.firstname', 'like', $search . '%');
+                });
+        }
+
+        // total records
+        $count = $testimony->count();
+
+        // pagination
+        $testimony = $testimony->take($length)->skip($start);
+
+        // order
+        if ($request->order[0]['column']) {
+
+            $column = $request->columns[$request->order[0]['column']]['data'];
+
+            $testimony = $testimony->orderBy('testimony.' . $column, $sort);
+
+        } else {
+
+            $testimony = $testimony->orderBy('testimony.' . $column, $sort);
+        }
+
+        // get data
+        $testimony = $testimony->get();
+
+        // datatable response
+        $respose = [
+                "draw" => $draw,
+                "recordsTotal" => $count,
+                "recordsFiltered" => $count,
+                "data" => $testimony
+
+            ];
+
+        return $respose;
     }
 
     /**

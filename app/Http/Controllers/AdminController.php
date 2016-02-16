@@ -86,22 +86,39 @@ class AdminController extends Controller
 
     public function testimonials(Request $request)
     {
-        $limit = 20;
+        // $limit = 20;
 
-        $search = \Input::get('q');
+        // $search = \Input::get('q');
 
-        if ($search) {
+        // if ($search) {
 
-            $testimonials = \App\Testimony::where('title', 'like', $search .'%')
-                ->orWhere('content', 'like', $search .'%')
-                ->orderBy('created_at', 'desc')
-                ->paginate($limit);
-        } else {
+        //     $testimonials = \App\Testimony::where('title', 'like', $search .'%')
+        //         ->orWhere('content', 'like', $search .'%')
+        //         ->orderBy('created_at', 'desc')
+        //         ->paginate($limit);
+        // } else {
 
-            $testimonials = \App\Testimony::orderBy('created_at', 'desc')->paginate($limit);
+        //     $testimonials = \App\Testimony::orderBy('created_at', 'desc')->paginate($limit);
+        // }
+
+        // return view('admin.pages.testimonials', compact('testimonials'));
+
+        if ($request->action == 'create') return view('admin.pages.testimony.create');
+
+        if ($request->action == 'edit' && isset($request->id)) {
+
+            $testimony = \App\Testimony::find($request->id);
+
+            return view('admin.pages.testimony.edit', compact('testimony'));
         }
-        
-        return view('admin.pages.testimonials', compact('testimonials'));
+
+        $request = json_encode($request->all());
+
+        $request = json_decode($request, true);
+
+        $api_url = route('api.testimony.index', $request);
+
+        return view('admin.pages.testimony.listing', compact('api_url'));
     }
     
     public function pages($term = null)
