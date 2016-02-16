@@ -134,11 +134,9 @@
                         </m-input>
 
                         <m-input data-label="category" fwidth select w50-6>
-                            <input type="text" value="{{ $categories[0]->id }}" select id="property-input- gory_id" name="category_id" required>
-                            <label for="property-input-category_id">{{ $categories[0]->name() }}</label>
+                            <input type="text" value="" select id="property-input- gory_id" name="category_id" required>
+                            <label for="property-input-category_id">Category</label>
                             <m-select>
-
-                                {!! renderCategory($categories) !!}
 
                             </m-select>
                         </m-input>
@@ -415,7 +413,7 @@
     <input type="hidden" name="edit" value="0" id="edit-flag">
 
     <m-buttons flexbox justify-end>
-        <m-button plain class="modal-close" id="close-properties-form">cancel</m-button>
+        <m-button plain onclick="window.history.back()" id="close-properties-form">cancel</m-button>
         <m-button save-form plain>save</m-button>
     </m-buttons>
     {!! Form::close() !!}

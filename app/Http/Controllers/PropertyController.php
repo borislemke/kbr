@@ -16,9 +16,85 @@ class PropertyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $category = $request->category;
+        $status = $request->status;
+
+        // datatable parameter
+        $draw = $request->draw;
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+
+
+        // sorting
+        $column = 'id';
+        $sort = $request->order[0]['dir'] ? $request->order[0]['dir'] : 'desc'; //asc
+
+        // new object
+        $properties = new Property;
+
+        // with user
+        $properties = $properties->with('user');
+
+        // with locale
+        $properties = $properties->with(['propertyLocales' => function ($q) {
+            $q->where('locale', 'en');
+        }]);
+
+        // with image
+        $properties = $properties->with(['attachments' => function ($q) {
+            $q->where('type', 'img');
+        }]);
+
+        // searching
+        if ($search) {            
+
+            $properties = $properties->select('properties.*')
+                ->join('property_locales', 'property_locales.property_id', '=', 'properties.id')
+                ->where('property_locales.locale', 'en')
+                ->where('property_locales.title', 'like', $search . '%');
+        }
+
+        $properties = $properties->orderBy('properties.' . $column, $sort);
+
+        // villa or land, ..
+        if ($category) {
+
+            $properties = $properties->select('properties.*')
+                ->join('property_terms', 'property_terms.property_id', '=', 'properties.id')
+                ->join('terms', 'terms.id', '=', 'property_terms.term_id')
+                ->where('terms.slug', $category);
+        }
+
+        // availbale, un ,...
+        if ($status) {
+
+            $properties = $properties->where('properties.status', statusToInteger($status));
+        }
+
+        // total records
+        $count = $properties->count();
+
+        // pagination
+        $properties = $properties->take($length)->skip($start);
+
+        // get data
+        $properties = $properties->get();
+
+        // datatable response
+        $respose = [
+                "draw" => $draw,
+                "recordsTotal" => $count,
+                "recordsFiltered" => $count,
+                "data" => $properties
+
+            ];
+
+        return $respose;
+
     }
 
     /**

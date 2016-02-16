@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard',['as' => 'admin.dashboard', 'uses' => 'AdminController@dashboard']);
 
         // property
-        Route::get('properties/{term?}',['as' => 'admin.properties', 'uses' => 'AdminController@properties']);
+        Route::get('properties/{term?}',['as' => 'admin.properties', 'uses' => 'AdminController@properties'])->where('term', '(.*)');
 
         // enquiry
         Route::get('enquiries/{term?}',['as' => 'admin.enquiries', 'uses' => 'AdminController@enquiries']);

@@ -27,6 +27,11 @@ class Property extends Model
         return $this->hasMany('App\PropertyLocale');
     }
 
+    public function attachments()
+    {
+        return $this->hasMany('App\Attachment', 'object_id')->where('name', 'property');
+    }
+
     public function propertyMetas()
     {
         return $this->hasMany('App\PropertyMeta');
