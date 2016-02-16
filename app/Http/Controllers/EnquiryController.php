@@ -123,6 +123,20 @@ class EnquiryController extends Controller
     public function store(Request $request)
     {
         //
+        $enquiry = new Enquiry;
+
+        $enquiry->property_id = $request->property_id;
+        // $enquiry->customer_id = $request->customer_id;
+        $enquiry->subject = $request->subject;
+        $enquiry->content = $request->content;
+        $enquiry->firstname = $request->firstname;
+        $enquiry->lastname = $request->lastname;
+        $enquiry->phone = $request->phone;
+        $enquiry->email = $request->email;
+
+        $enquiry->save();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));
     }
 
     /**
@@ -157,6 +171,20 @@ class EnquiryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $enquiry = Enquiry::find($id);
+
+        $enquiry->property_id = $request->property_id;
+        // $enquiry->customer_id = $request->customer_id;
+        $enquiry->subject = $request->subject;
+        $enquiry->content = $request->content;
+        $enquiry->firstname = $request->firstname;
+        $enquiry->lastname = $request->lastname;
+        $enquiry->phone = $request->phone;
+        $enquiry->email = $request->email;
+
+        $enquiry->save();
+        
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been updated')));
     }
 
     /**
@@ -172,6 +200,6 @@ class EnquiryController extends Controller
 
         $enquiry->delete();
 
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'Property has been deleted'), 'id' => $id));
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));
     }
 }

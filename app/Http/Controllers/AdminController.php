@@ -44,6 +44,14 @@ class AdminController extends Controller
     
     public function enquiries(Request $request, $term = null)
     {
+        if ($request->action == 'create') return view('admin.pages.enquiry.create');
+
+        if ($request->action == 'edit' && isset($request->id)) {
+
+            $enquiry = \App\Enquiry::find($request->id);
+
+            return view('admin.pages.enquiry.edit', compact('enquiry'));
+        }
 
         $request = json_encode($request->all());
 
@@ -54,9 +62,46 @@ class AdminController extends Controller
         return view('admin.pages.enquiry.listing', compact('api_url'));
     }
     
-    public function customers($term = null)
+    public function customers(Request $request, $term = null)
     {
-        return view('admin.pages.customers');
+        if ($term != null) return $this->testimonials($request);
+
+        if ($request->action == 'create') return view('admin.pages.customer.create');
+
+        if ($request->action == 'edit' && isset($request->id)) {
+
+            $customer = \App\Customer::find($request->id);
+
+            return view('admin.pages.customer.edit', compact('customer'));
+        }
+
+        $request = json_encode($request->all());
+
+        $request = json_decode($request, true);
+
+        $api_url = route('api.customer.index', $request);
+
+        return view('admin.pages.customer.listing', compact('api_url'));
+    }
+
+    public function testimonials(Request $request)
+    {
+        $limit = 20;
+
+        $search = \Input::get('q');
+
+        if ($search) {
+
+            $testimonials = \App\Testimony::where('title', 'like', $search .'%')
+                ->orWhere('content', 'like', $search .'%')
+                ->orderBy('created_at', 'desc')
+                ->paginate($limit);
+        } else {
+
+            $testimonials = \App\Testimony::orderBy('created_at', 'desc')->paginate($limit);
+        }
+        
+        return view('admin.pages.testimonials', compact('testimonials'));
     }
     
     public function pages($term = null)
