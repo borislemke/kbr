@@ -7,168 +7,203 @@
         <li class="active">{{ ucfirst($titles) }}</li>
     </ul>
 </div>
-<div class="line-top"><h3><small>{{ $titles }}</small></h3></div>
-<div class="container">
+
+<div class="contact-us">
     <div class="row">
-    	<div class="col-lg-12 bs-component" style="height:340px;">
-	    	<div id="googleMap" style="width:100%;height:300px;"></div>
-    	</div>
+        <div class="col-md-4 address-wrapper">
+           <div class="desc">
+              
+               <h3>Kibarer Property</h3><br>
+               <div class="border-spacer"></div>
+                <p>
+                    Jalan Petitenget No.9, Badung, Bali 80361 <br>
+
+                    T. <a href="tel:623614741212">(+62361) 4741212</a><br>
+                    C. <a href="mailto:contact@kibarerproperty.com">contact@kibarerproperty.com</a> <br>
+                    <img src="{{ baseUrl() }}/assets/img/logo-sm.png" class="logo" alt="">
+               </p>
+           </div>
+        </div>
+        <div class="col-md-8 bg-kibarer">
+        </div>
     </div>
+    
     <div class="row">
-    	<div class="col-lg-6 bs-component">
 
-          @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        <div class="col-md-4 col-sm-6 company-other-location ">
+            <img src="{{ baseUrl() }}/assets/img/contact/au.jpg" alt="">
+               <div class="caption">
+                   <h1>AU</h1> 
+                   <p>Australia <span><a href="tel:61-865-558-999">+61 865 558 999</a></span></p>
             </div>
-          @endif
+        </div>
+        <div class="col-md-4 col-sm-6 company-other-location ">
+            <img src="{{ baseUrl() }}/assets/img/contact/uk.jpg" alt="">
+               <div class="caption">
+                   <h1>UK</h1>
+                   <p>United Kingdom <span><a href="tel:44-203-514-2999">+44 203 514 2999</a></span></p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 company-other-location ">
+            <img src="{{ baseUrl() }}/assets/img/contact/gr.jpg" alt="">
+               <div class="caption">
+                   <h1>GR</h1>
+                   <p>Germany <span><a href="tel:49-893-803-875">+49 893 803 875</a></span></p>
+            </div>
+        </div>
 
-          <div class="flash-message">
-            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-              @if(Session::has('alert-' . $msg))
-
-              <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-              @endif
-            @endforeach
-          </div> <!-- end .flash-message -->
-
-    		<div class="panel panel-primary">
-				<div class="panel-heading">
-                  	<h3 class="panel-title">Fill the form</h3>
+        <div class="col-md-4 col-sm-6 company-other-location ">
+            <img src="{{ baseUrl() }}/assets/img/contact/za.jpg" alt="">
+               <div class="caption">
+                   <h1>ZA</h1>
+                   <p>South Africa <span><a href="tel:27-213-002-088">+27 213 002 088</a></span></p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 company-other-location ">
+            <img src="{{ baseUrl() }}/assets/img/contact/hk.jpg" alt="">
+               <div class="caption">
+                   <h1>HK</h1>
+                   <p>Hongkong <span><a href="tel:852-5808-4180">+852 5808 4180</a></span></p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 company-other-location ">
+            <img src="{{ baseUrl() }}/assets/img/contact/usa.jpg" alt="">
+               <div class="caption">
+                   <h1>USA</h1>
+                   <p>United States of Amrica <span><a href="tel:1-518-574-2272">+1 518 574 2272</a></span></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 company-desc-wrapper">
+           <div class="container">
+               <div class="title">
+                   <h3>PARLEZ-NOUS DE VOTRE PROJET !</h3>
+               </div>
+               <div class="border-spacer"></div>
+               <div class="desc">
+                   <p>
+                       D’abord, merci de considérer Lubie pour votre projet. Nous vous invitons à nous donner les grandes lignes de votre projet, et nous nous ferons un plaisir de vous contacter afin de bien saisir vos besoins. Il est préférable de prévoir une bonne rencontre dans nos bureaux de Sherbrooke, situé au coeur du centre-ville de Sherbrooke, afin de vous fournir une évaluation complète et précise. Veuillez noter que cette rencontre est sans frais et vous permet de bénéficier de conseils provenant d’experts dans leur domaine.
+                   </p>
+               </div>
+           </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 contact-form-wrapper">
+            <div class="container">
+                <div class="title">
+                    <h3>Contact Us</h3>
                 </div>
-
-	    		{!! Form::open(['url' => route('contact.store'), 'class' => 'panel-body']) !!}
-	    			<div class="form-group">
-	    				<label for="firstname" class="col-lg-12 ">Full Name</label>
-	                    <div class="col-lg-6">
-	                      	<input value="{{ old('firstname') }}" name="firstname" type="text" class="" id="firstname" placeholder="First Name">
-	                    </div>
-	                    <div class="col-lg-6">
-	                      	<input value="{{ old('lastname') }}" name="lastname" type="text" class="" id="lastname" placeholder="Last Name">
-	                    </div>
-	    			</div>
-	    			<div class="form-group">
-	                    <label for="inputEmail" class="col-lg-12 ">Email</label>
-	                    <div class="col-lg-12">
-	                    	<input value="{{ old('email') }}" name="email" type="text" class="" id="inputEmail" placeholder="Email">
-	                    </div>
-                  	</div>
-                  	<div class="form-group">
-	                    <label for="msg" class="col-lg-12 ">Your Message</label>
-	                    <div class="col-lg-12">
-	                    	<textarea name="message" class="" rows="7" id="msg">{{ old('message') }}</textarea>
-	                    </div>
-                  	</div>
-                  	<div class="form-group">
-                  		<div class="g-recaptcha" data-sitekey="6LcdHRcTAAAAAMUKsjZDzArdb0e8Fk2HU-duNhJP" style=" margin-left: 20px; margin-top: 350px;"></div>
-                  		<!-- reCAPTCHA secret : 6LcdHRcTAAAAANdDPV40G9bgBMdW8EyJnYnrVuUQ -->
-                  	</div>
-                  	<div class="form-group">
-	                    <div class="col-lg-12">
-		                      <button type="submit" class="btn btn-primary">Submit</button>
-	                    </div>
-	                 </div>
-	    		{!! Form::close() !!}
-
-	    	</div>
-    	</div>
-    	<div class="col-lg-6 ">
-    		<div class="well bs-component">
-	    		<div class="row">
-	    			<div class="col-lg-12">
-	    				<a href="#">
-                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                                    <li data-target="#myCarousel" data-slide-to="3"></li>
-                                </ol>
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active hovereffect">
-					    				<img src="{{ asset('assets/img/photo.jpg') }}">
-					    				
-					    			</div>
-					    			<div class="item hovereffect">
-                                        <img src="http://placehold.it/800x600" alt="Chania" height="345">
-                                        
-                                    </div>
-                                    <div class="item hovereffect">
-                                        <img src="http://placehold.it/800x600" alt="Chania" height="345">
-                                        
-                                    </div>
-                                    <div class="item hovereffect">
-                                        <img src="http://placehold.it/800x600" alt="Chania" height="345">
-                                        
-                                    </div>
-					    		</div>
-					    		<!-- Left and right controls -->
-                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-					    	</div>
-					    </a>
-	    			</div>
-	    			<div class="col-lg-3"><strong>Address</strong></div><div class="col-lg-9">: Jalan Petitenget No.9, Badung, Bali 80361</div>
-	    			<div class="col-lg-3"><strong>Phone</strong></div><div class="col-lg-9">: (0361) 4741212 </div>
-	    			<div class="col-lg-3"><strong>Email</strong></div><div class="col-lg-9">: contact@kibarerproperty.com</div>
-	    		</div>
-	    		<div class="row" style="text-align:center;">
-	    			
-	    			<hr>
-	    			Our Local phone numbers :<br>
-					<strong>Australia</strong> : +61 865 558 999 , <strong>UK</strong> : +44 203 514 2999<br>
-					<strong>Germany</strong> : +49 893 803 875 , <strong>South Africa</strong> : +27 213 002 088<br>
-					<strong>Hong Kong</strong> : +852 5808 4180 , <strong>USA</strong> : +1 518 574 2272<br>
-	    		</div>
-	    	</div>
-    	</div>
+                <div class="border-spacer"></div>
+                {!! Form::open(['url' => route('contact.store'), 'class' => 'panel-body']) !!}
+                <div class="form-group">
+                    <label for="firstname" class="col-lg-12 ">Full Name</label>
+                    <div class="col-lg-6">
+                        <input value="{{ old('firstname') }}" name="firstname" type="text" class="" id="firstname" placeholder="First Name">
+                    </div>
+                    <div class="col-lg-6">
+                        <input value="{{ old('lastname') }}" name="lastname" type="text" class="" id="lastname" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-12 ">Email</label>
+                    <div class="col-lg-12">
+                        <input value="{{ old('email') }}" name="email" type="text" class="" id="inputEmail" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="msg" class="col-lg-12 ">Your Message</label>
+                    <div class="col-lg-12">
+                        <textarea name="message" class="" rows="7" id="msg">{{ old('message') }}</textarea>
+                    </div>
+                </div>
+                <div class="form-group captcha">
+                    <div class="col-lg-12 g-recaptcha" data-sitekey="6LcdHRcTAAAAAMUKsjZDzArdb0e8Fk2HU-duNhJP" style=""></div>
+                    <!-- reCAPTCHA secret : 6LcdHRcTAAAAANdDPV40G9bgBMdW8EyJnYnrVuUQ -->
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary btn-custom">Submit</button>
+                    </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+    
+    <!--    .rc-anchor-light -->
+    
+    <div class="row">
+        <div class="col-md-12 company-map-wrapper">
+            <div id="googleMap" style="width:100%;height:50vh;"></div>
+        </div>
     </div>
 </div>
 
 
 @endsection
 
+
 @section('scripts')
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<script type="text/javascript">
 
-		$(document).ready(function(){
-			$('.carousel').each(function(){
-                $(this).carousel({
-                    interval: false
-                });
-            });
-		});
 		var myCenter=new google.maps.LatLng(-8.6714246,115.1607031);
-
+        var pin = 'assets/img/map-pin.png';
+        var marker=new google.maps.Marker({
+            position:myCenter,
+            animation: google.maps.Animation.DROP,
+            icon : pin,
+            title : 'Kibarer Property'
+        });
+        var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="title" style="font-size: 1.5em;color: #ee5b2c;font-weight: 600; font-color">Kibarer Property</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+            'sandstone rock formation in the southern part of the '+
+            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+            'south west of the nearest large town, Alice Springs; 450&#160;km '+
+            'Heritage Site.</p>'+
+            '</div>'+
+            '</div>';
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString,
+            maxWidth: 300
+        });
+        
 		function initialize() {
 			var mapProp = {
 				center:myCenter,
 				zoom:15,
+                scrollwheel: false,
 				mapTypeId:google.maps.MapTypeId.ROADMAP
 			};
 
 			var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
-			var marker=new google.maps.Marker({
-		  		position:myCenter,
-		  	});
-
 			marker.setMap(map);
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+                
+            });
+            
 		}
+        function toggleBounce() {
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+            } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+        }
+
 
 		google.maps.event.addDomListener(window, 'load', initialize);
+
+
 	</script>
 @endsection
