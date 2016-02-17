@@ -28,7 +28,7 @@ return [
     'blog' => 'blog',
     'confirm' => 'confirm',
     'search' => 'search',
-    'testimony' => 'testimony',
+    'testimonials' => 'testimonials',
     'lawyer_notary' => 'lawyer-notary',
     'sell_property' => 'sell-property',
 

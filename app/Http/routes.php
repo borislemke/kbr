@@ -112,7 +112,7 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
     Route::any('{contact}',['as' => 'contact', 'uses' => 'PageController@contact']);
 
     // testimony    
-    Route::any('{testimony}',['as' => 'testimony', 'uses' => 'PageController@testimony']);
+    Route::any('{testimonials}',['as' => 'testimonials', 'uses' => 'PageController@testimony']);
 
     // sell_property    
     Route::any('{sell_property}',['as' => 'sell_property', 'uses' => 'PageController@sellProperty']);
@@ -142,7 +142,7 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::resource('city', 'CityController');
 
-    Route::resource('contact', 'ContactController');
+    Route::resource('message', 'ContactController');
 
     Route::resource('country', 'CountryController');
 

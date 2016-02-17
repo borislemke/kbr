@@ -154,3 +154,13 @@ $factory->define(App\PropertyTerm::class, function (Faker\Generator $faker) {
         'term_id' => $faker->randomElement([1, 2])
     ];
 });
+
+$factory->define(App\Contact::class, function (Faker\Generator $faker) {
+    return [
+        'firstname' => $faker->firstName,
+        'lastname' => $faker->lastName,
+        'email' => $faker->email,
+        'message' => $faker->sentence($nbWords = 3, $variableNbWords = true)
+    ];
+});
+

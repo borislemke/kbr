@@ -11,7 +11,7 @@
                         <li><a href="{{ route('search', ['search' => trans('url.search'), 'category' => 'villa']) }}">Villas</a></li>
                         <li><a href="{{ route('search', ['search' => Lang::get('url')['search'], 'category' => 'land']) }}">Lands</a></li>
                         <li><a href="{{ route('page', trans('url.lawyer_notary')) }}">Lawyer &amp; Notary</a></li>
-                        <li><a href="{{ route('testimony', trans('url.testimony')) }}">Testimonials</a></li>
+                        <li><a href="{{ route('testimonials', trans('url.testimonials')) }}">Testimonials</a></li>
                         <li><a href="{{ route('contact', trans('url.contact')) }}">Contact</a></li>
                         <li><a href="{{ route('search', trans('url.search')) }}"><i class="fa fa-search"></i></a></li>
                     </ul>

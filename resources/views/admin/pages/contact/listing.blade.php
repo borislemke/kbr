@@ -3,15 +3,15 @@
 
 @section('fab')
 
-<!-- <m-fab salmon class="modal-open" data-target="#testimony-add"><i class="material-icons">add</i></m-fab> -->
-<a href="{{ route('admin.customers', ['term' => 'testimonials', 'action' => 'create']) }}"><m-fab salmon data-target="#testimony-add"><i class="material-icons">add</i></m-fab></a>
+<!-- <m-fab salmon class="modal-open" data-target="#message-add"><i class="material-icons">add</i></m-fab> -->
+<!-- <a href="{{ route('admin.customers', ['term' => 'messages', 'action' => 'create']) }}"><m-fab salmon data-target="#message-add"><i class="material-icons">add</i></m-fab></a> -->
 
 @stop
 
 @section('content')
 <br>
 
-<m-template list class="testimony-wrapper">
+<m-template list class="message-wrapper">
 
     <table>
         <thead>
@@ -19,10 +19,10 @@
                 <!-- <m-list-item-check all class="item-select-all"></m-list-item-check> -->
                 Id
             </td>
-            <td>Customer</td>
-            <td>Title</td>
-            <td>Content</td>
-            <td>Status</td>
+            <td>firstname</td>
+            <td>lastname</td>
+            <td>email</td>
+            <td>message</td>
             <td>Created</td>
             <td>Action</td>
         </thead>
@@ -37,7 +37,7 @@
 @section('scripts')
 
 <script>
-    // Matter.admin.testimonials();
+    // Matter.admin.enquiries();
 
     $(document).ready(function() {
 
@@ -45,7 +45,7 @@
             event.preventDefault();
 
             var id = $(this).parent().attr('data-id');            
-            var url = "{{ route('api.testimony.destroy', $id = null) }}/" + id;
+            var url = "{{ route('api.message.destroy', $id = null) }}/" + id;
             var method = 'delete';
             var token = "{{ csrf_token() }}";
 
@@ -84,16 +84,10 @@
             "deferRender": true,
             "columns": [
                 {"data": "id"},
-                {"data": "customer.username"},
-                {"data": "title"},
-                {"data": "content"},
-                {
-                    "data": "status",
-                    "render": function (data, type, row) {
-                        return data == 1 ? 'publish' : 'hidden';
-                    }
-                },
-
+                {"data": "firstname"},
+                {"data": "lastname"},
+                {"data": "email"},
+                {"data": "message"},
                 {
                     "data": "created_at",
                     "render": function (data, type, row) {
@@ -111,8 +105,8 @@
                         + '<m-table-list-more>'
                             + '<i class="material-icons">more_horiz</i>'
                             + '<m-list-menu data-id="'+ data +'">'
-                                + '<a href="'+ baseUrl +'/admin/customers/testimonials?action=edit&id='+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
-                                + '<m-list-menu-item delete data-url="property/destroy">DELETE</m-list-menu-item>'
+                                // + '<a href="'+ baseUrl +'/admin/customers/messages?action=edit&id='+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
+                                + '<m-list-menu-item delete>DELETE</m-list-menu-item>'
                             + '</m-list-menu>'
                         + '</m-table-list-more>';
                     }

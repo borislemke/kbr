@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Testimony;
+
 class TestimonyController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class TestimonyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $category = $request->category;
@@ -31,44 +33,56 @@ class TestimonyController extends Controller
         $sort = $request->order[0]['dir'] ? $request->order[0]['dir'] : 'desc'; //asc
 
         // new object
-        $testimony = new Customer;
+        $testimonials = new Testimony;
+
+        $testimonials = $testimonials->select('testimonials.*')
+            ->join('customers', 'customers.id', '=', 'testimonials.customer_id');
+
+        // with user
+        $testimonials = $testimonials->with('customer');
 
         // searching
         if ($search) {
 
-            $testimony = $testimony->where(function ($q) use ($search) {
-                    $q->where('testimony.username', 'like', $search . '%')
-                        ->orWhere('testimony.firstname', 'like', $search . '%');
+            $testimonials = $testimonials->where(function ($q) use ($search) {
+                    $q->where('testimonials.title', 'like', $search . '%')
+                        ->orWhere('testimonials.content', 'like', $search . '%');
                 });
         }
 
         // total records
-        $count = $testimony->count();
+        $count = $testimonials->count();
 
         // pagination
-        $testimony = $testimony->take($length)->skip($start);
+        $testimonials = $testimonials->take($length)->skip($start);
 
         // order
         if ($request->order[0]['column']) {
 
             $column = $request->columns[$request->order[0]['column']]['data'];
 
-            $testimony = $testimony->orderBy('testimony.' . $column, $sort);
+            if ($column == 'customer.username') {
+
+                $testimonials = $testimonials->orderBy('customers.username', $sort);
+            } else {
+
+                $testimonials = $testimonials->orderBy('testimonials.' . $column, $sort);
+            }            
 
         } else {
 
-            $testimony = $testimony->orderBy('testimony.' . $column, $sort);
+            $testimonials = $testimonials->orderBy('testimonials.' . $column, $sort);
         }
 
         // get data
-        $testimony = $testimony->get();
+        $testimonials = $testimonials->get();
 
         // datatable response
         $respose = [
                 "draw" => $draw,
                 "recordsTotal" => $count,
                 "recordsFiltered" => $count,
-                "data" => $testimony
+                "data" => $testimonials
 
             ];
 
@@ -94,6 +108,17 @@ class TestimonyController extends Controller
     public function store(Request $request)
     {
         //
+
+        $testimony = new Testimony;
+
+        $testimony->customer_id = $request->customer_id;
+        $testimony->title = $request->title;
+        $testimony->content = $request->content;
+        $testimony->status = $request->status;
+
+        $testimony->save();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));
     }
 
     /**
@@ -128,6 +153,17 @@ class TestimonyController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $testimony = Testimony::find($id);
+
+        $testimony->customer_id = $request->customer_id;
+        $testimony->title = $request->title;
+        $testimony->content = $request->content;
+        $testimony->status = $request->status;
+
+        $testimony->save();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been updated')));
     }
 
     /**
@@ -139,5 +175,10 @@ class TestimonyController extends Controller
     public function destroy($id)
     {
         //
+        $testimony = Testimony::find($id);
+
+        $testimony->delete();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));
     }
 }

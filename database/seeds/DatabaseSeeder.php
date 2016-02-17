@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(TermsTableSeeder::class);
 
+        factory(App\Contact::class, 100)->create();
+
         factory(App\User::class, 100)->create()->each(function ($u) {
 
             factory(App\Property::class, 10)->create(['user_id' => $u->id])->each(function($p) {

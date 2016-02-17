@@ -53,7 +53,7 @@ return [
 
         "customers" => "manage customers",
         "customers/testimonials" => "testimonials",
-        "messages" => "messages"
+        "customers/messages" => "messages"
 
     ],
 
