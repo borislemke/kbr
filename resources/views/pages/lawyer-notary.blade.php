@@ -3,11 +3,11 @@
 
 <div class="bc-bg">
     <ul class="breadcrumb container">
-        <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li class="active">{{ ucfirst($titles) }}</li>
+        <li><a href="{{ route('home', trans('url.home')) }}">{{ trans('url.home') }}</a></li>
+        <li class="active">{{ trans('url.lawyer_notary') }}</li>
     </ul>
 </div>
-<div class="line-top"><h3><small>{{ $titles }}</small></h3></div>
+<div class="line-top"><h3><small>{{ trans('url.lawyer_notary') }}</small></h3></div>
 <div class="container">
 	<br>
 	<div class="tab-container">

@@ -17,46 +17,51 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RolesTableSeeder::class);
         $this->call(BranchesTableSeeder::class);
-        $this->call(CategoriesTableSeeder::class);
 
         $this->call(CountriesTableSeeder::class);
         $this->call(ProvincesTableSeeder::class);
         $this->call(CitiesTableSeeder::class);
 
-        $this->call(LanguagesTableSeeder::class);
+        $this->call(LocalesTableSeeder::class);
 
         $this->call(UsersTableSeeder::class);
 
-        factory(App\User::class, 10000)->create()->each(function ($u) {
+        $this->call(TermsTableSeeder::class);
+
+        factory(App\Contact::class, 100)->create();
+
+        factory(App\User::class, 100)->create()->each(function ($u) {
 
             factory(App\Property::class, 10)->create(['user_id' => $u->id])->each(function($p) {
 
-                $p->propertyLanguages()->save(factory(App\PropertyLanguage::class)->make());
-
                 Model::unguard();
 
-                $p->documents()->saveMany([
-                    new \App\Document(['name' => 'Agent Agreement', 'description' => 'ready']),
-                    new \App\Document(['name' => 'Pondok Wisata Lcs', 'description' => 'ready']),
-                    new \App\Document(['name' => 'Tax Construction', 'description' => 'ready']),
-                    new \App\Document(['name' => 'Photographs', 'description' => 'ready']),
-                    new \App\Document(['name' => 'IMB', 'description' => 'ready']),
-                    new \App\Document(['name' => 'Land Certf.', 'description' => 'ready']),
-                    new \App\Document(['name' => 'Notary Details', 'description' => 'ready']),
-                    new \App\Document(['name' => 'Owner KTP', 'description' => 'ready'])
+                $p->propertyLocales()->save(factory(App\PropertyLocale::class)->make());
+
+                $p->propertyMetas()->saveMany([
+
+                    // document
+                    new \App\PropertyMeta(['name' => 'Agent Agreement', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'Pondok Wisata Lcs', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'Tax Construction', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'Photographs', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'IMB', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'Land Certf.', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'Notary Details', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'Owner KTP', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+
+                    // facilities
+                    new \App\PropertyMeta(['name' => 'Bedroom', 'value' => '2 room', 'type' => 'facility', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'Bathroom', 'value' => '1 room', 'type' => 'facility', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'Sale in Furnish', 'value' => 'include furnish', 'type' => 'facility', 'status' => 1]),
+
+                    // distance                    
+                    new \App\PropertyMeta(['name' => 'Beach', 'value' => '1 hour', 'type' => 'distance', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'Airport', 'value' => '2 minutes', 'type' => 'distance', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'Market', 'value' => '3 kilometres', 'type' => 'distance', 'status' => 1])
                 ]);
 
-                $p->facilities()->saveMany([
-                    new \App\Facility(['name' => 'Bedroom', 'description' => '2 room']),
-                    new \App\Facility(['name' => 'Bathroom', 'description' => '1 room']),
-                    new \App\Facility(['name' => 'Sale in Furnish', 'description' => 'include furnish'])
-                ]);
-
-                $p->distances()->saveMany([
-                    new \App\Distance(['from' => 'Beach', 'value' => 1, 'unit' => 'km']),
-                    new \App\Distance(['from' => 'Airport', 'value' => 2, 'unit' => 'minutes']),
-                    new \App\Distance(['from' => 'Market', 'value' => 3, 'unit' => 'hours'])
-                ]);
+                $p->propertyTerms()->save(factory(App\PropertyTerm::class)->make());
 
                 Model::reguard();
 
@@ -66,7 +71,7 @@ class DatabaseSeeder extends Seeder
 
         factory(App\Customer::class, 100)->create()->each(function ($c) {
 
-            $c->inquiries()->save(factory(App\Inquiry::class)->make());
+            $c->enquiries()->save(factory(App\Enquiry::class)->make());
 
             $c->testimonials()->save(factory(App\Testimony::class)->make());
 

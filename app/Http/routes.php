@@ -30,83 +30,53 @@ foreach(Lang::get('url') as $k => $v) {
     Route::pattern($k, $v);
 }
 
-/*
- * show frontend theme elements
- */
-Route::get('theme', function () {
-
-    return view('pages.theme');
-
-});
-
 
 // Back-End
 Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'admin'], function () {
 
-        // General
-        Route::get('/', 'AdminController@dashboard');
-        
-        Route::get('dashboard', 'AdminController@dashboard');
+        // dashbord
+        Route::get('/',['as' => 'admin.home', 'uses' => 'AdminController@dashboard']);
 
-        Route::get('enquiries', 'AdminController@enquiries');
+        Route::get('dashboard',['as' => 'admin.dashboard', 'uses' => 'AdminController@dashboard']);
 
+        // property
+        Route::get('properties/{term?}',['as' => 'admin.properties', 'uses' => 'AdminController@properties'])->where('term', '(.*)');
 
-        // Customer
-        Route::get('customers', 'AdminController@customers');
-        Route::get('messages', 'AdminController@messages');
-        Route::get('customer/testimonials', 'AdminController@testimonials');
+        // enquiry
+        Route::get('enquiries/{term?}',['as' => 'admin.enquiries', 'uses' => 'AdminController@enquiries']);
 
+        // customer
+        Route::get('customers/{term?}',['as' => 'admin.customers', 'uses' => 'AdminController@customers']);
 
-        // CMS
-        // Route::get('properties', 'AdminController@properties');
-        // Route::get('property/sold', 'AdminController@propertySold');
-        // Route::get('property/customer-request', 'AdminController@propertyCustomer');
-        // Route::get('property/categories', 'AdminController@propertyCategories');
+        // Page
+        Route::get('pages/{term?}',['as' => 'admin.pages', 'uses' => 'AdminController@pages']);
 
-        Route::get('villa/{status}', 'AdminController@villa');
+        // Post
+        Route::get('posts/{term?}',['as' => 'admin.posts', 'uses' => 'AdminController@posts']);
 
-        Route::get('land/{status}', 'AdminController@land');
+        // my-account
+        Route::get('my-account',['as' => 'admin.my_account', 'uses' => 'AdminController@my_account']);
 
+        // accounts
+        Route::get('accounts',['as' => 'admin.accounts', 'uses' => 'AdminController@accounts']);
 
-        // Blog
-        Route::get('blog', 'AdminController@blog');
+        // branches
+        Route::get('branches',['as' => 'admin.branches', 'uses' => 'AdminController@branches']);
 
-        Route::get('blog-categories', 'AdminController@blogCategories');
+        // setting
+        Route::get('settings',['as' => 'admin.setting', 'uses' => 'AdminController@settings']);
 
-        Route::get('blog-comments', 'AdminController@blogComments');
+        // about
+        Route::get('about',['as' => 'admin.about', 'uses' => 'AdminController@about']);
 
-        Route::get('blog-settings', 'AdminController@blogSettings');
-
-
-        // Misc
-        Route::get('my-account', 'AdminController@myAccount');
-
-        Route::get('accounts', 'AdminController@accounts');
-
-        Route::get('branches', 'AdminController@branches');
-
-        Route::get('settings', 'AdminController@settings');
-
-        Route::get('about', 'AdminController@about');
-
-        Route::get('pdfD', 'PdfController@test');
-
-        Route::get('email', 'UserController@test');
-
-        Route::get('pdf', function() {
-
-            return view('pdf.property');
-        });
-
-        Route::any('register', function() {
-
-            return view('admin.pages.register');
-        });
     });
+
 });
 
+
+// User Auth
 Route::controllers([
 
     'auth' => 'Auth\AuthController',
@@ -114,91 +84,129 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
+
+// Front-End
 Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 
-    // Home
-    Route::get('/', ['as' => 'home', 'uses' => 'PagesController@home']);
+    // customer
+    Route::get('{login}', ['as' => 'login', 'uses' => 'Auth\AuthController@getCustomerLogin']);  
+    Route::post('{login}',['as' => 'login.attempt', 'uses' => 'Auth\AuthController@postLogin']);  
+    Route::get('{logout}', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
-    Route::get('/{about}/', ['as' => 'about', 'uses' => 'PagesController@about']);
+    Route::get('{register}', ['as' => 'register', 'uses' => 'Auth\AuthController@getCustomerRegister']);
+    Route::post('{register}',['as' => 'register.store', 'as' => 'Auth\AuthController@postRegister']);
 
-    Route::get('/{contact}/', ['as' => 'contact', 'uses' => 'PagesController@contact']);
-
-    Route::get('/{testimony}/', ['as' => 'testimony', 'uses' => 'PagesController@testimony']);
-
-    Route::get('/{lawyer_notary}/', ['as' => 'lawyer_notary', 'uses' => 'PagesController@lawyerNotary']);
-
-    Route::get('/{sell_property}/', ['as' => 'sell_property', 'uses' => 'PagesController@sellProperty']);
-
-    Route::post('sell-property', ['as' => 'sell_property.store', 'uses' => 'PropertiesController@postSellProperty']);
-
-    // Blogs
-    Route::get('{blog}', ['as' => 'blog', 'uses' => 'PagesController@blogListing']);
-
-    Route::get('blog/{url}', ['as' => 'url','uses' => 'PagesController@blogView']);
-
-
-    // Customer
-    Route::get('/{login}/', ['as' => 'login', 'uses' => 'PagesController@login']);
-
-    Route::post('login', 'Auth\AuthController@postLogin');
-    Route::get('/{logout}/', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
-
-    Route::get('/{register}/', ['as' => 'register', 'uses' => 'PagesController@register']);
-    Route::post('register', 'Auth\AuthController@postRegister');
-
-    Route::get('register/verify/{confirmationCode}', [
+    Route::get('{confirm}/{confirmationCode}', [
         'as' => 'confirm',
-        'uses' => 'PagesController@confirm'
+        'uses' => 'Auth\AuthController@getCustomerConfirm'
     ]);
 
     Route::group(['middleware' => 'auth.customer'], function () {
 
-        Route::get('/{account}/', ['as' => 'account', 'uses' => 'PagesController@account']);
+        Route::get('/{account}/', ['as' => 'account', 'uses' => 'CustomerController@account']);
 
-        Route::get('/{account}/wishlist', ['as' => 'account.wishlist', 'uses' => 'PagesController@accountWishlist']);
+        Route::get('/{account}/{wishlist}', ['as' => 'account.wishlist', 'uses' => 'PagesController@accountWishlist'])
+            ->where('wishlist', trans('url.wishlist'));
 
-        Route::get('/{account}/setting', ['as' => 'account.setting', 'uses' => 'PagesController@accountSetting']);
-
-        Route::post('testimony', ['as' => 'testimony.store', 'uses' => 'CustomerController@postTestimony']);
+        Route::get('/{account}/{setting}', ['as' => 'account.setting', 'uses' => 'PagesController@accountSetting'])
+            ->where('wishlist', trans('url.setting'));
 
     }); 
 
 
-    // Properties
-    // Route::get('/{villa}/', ['as' => 'villa', 'uses' => 'PagesController@propertyListing']);
-    // Route::get('/{land}/', ['as' => 'land', 'uses' => 'PagesController@propertyListing']);
-    Route::get('{search}', ['as' => 'search', 'uses' => 'PagesController@propertySearch']);
+    // home
+    Route::get('/',['as' => 'home', 'uses' => 'PageController@home']);
 
-    // ajax
-    Route::post('property/inquiry', ['as' => 'property.inquiry', 'uses' => 'InquiryController@postInquiry']);
-    Route::post('property/favorite', ['as' => 'property.favorite', 'uses' => 'PropertiesController@postFavorite']);
-    Route::post('property/favorite/delete', ['as' => 'property.favorite.delete', 'uses' => 'PropertiesController@postFavoriteDelete']);
+    // about
+    Route::get('{about}',['as' => 'about', 'uses' => 'PageController@about']);
 
-    // property detail
-    Route::get('{property}/{slug}', ['as' => 'property.detail', 'uses' => 'PagesController@propertyView']);
+    // contact    
+    Route::any('{contact}',['as' => 'contact', 'uses' => 'PageController@contact']);
 
+    // testimony    
+    Route::any('{testimonials}',['as' => 'testimonials', 'uses' => 'PageController@testimony']);
 
-});
+    // sell_property    
+    Route::any('{sell_property}',['as' => 'sell_property', 'uses' => 'PageController@sellProperty']);
 
-// Resources
-Route::resource('contact', 'ContactController');
+    // lawyer_notary    
+    Route::any('{lawyer_notary}',['as' => 'lawyer_notary', 'uses' => 'PageController@lawyerNotary']);
 
-Route::group(['prefix' => 'api'], function () {
+    // search    
+    Route::get('{search}',['as' => 'search', 'uses' => 'PropertyController@search']);
 
-    Route::group(['prefix' => 'property'], function () {
+    // property
+    Route::get('{property}/{term?}',['as' => 'property', 'uses' => 'PropertyController@detail']);
 
-        Route::get('get', 'PropertiesController@getPropertyByFilter');
-        
-    });
+    // post
+    Route::get('{blog}/{term?}',['as' => 'blog', 'uses' => 'PostController@detail']);
 
-    Route::group(['prefix' => 'testimony'], function () {
-
-        Route::post('save', 'CustomerController@storeTestimony');
-        
-    });
+    // page
+    Route::get('{page?}',['as' => 'page', 'uses' => 'PageController@index']);
 
 });
 
+
+// API
+Route::group(['prefix' => 'api'], function() {
+
+    Route::resource('branch', 'BranchController');
+
+    Route::resource('city', 'CityController');
+
+    Route::resource('message', 'ContactController');
+
+    Route::resource('country', 'CountryController');
+
+    Route::resource('customer', 'CustomerController');
+
+    Route::resource('enquiry', 'EnquiryController');
+
+    Route::resource('locale', 'LocaleController');
+
+    Route::resource('log_customer', 'LogCustomerController');
+
+    Route::resource('log_user', 'LogUserController');
+
+    Route::resource('notification', 'NotificationController');
+
+    Route::resource('page', 'PageController');
+
+    Route::resource('page_locale', 'PageLocaleController');
+
+    Route::resource('page_meta', 'PageMetaController');
+
+    Route::resource('page_term', 'PageTermController');
+
+    Route::resource('post', 'PostController');
+
+    Route::resource('post_locale', 'PostLocaleController');
+
+    Route::resource('post_meta', 'PostMetaController');
+
+    Route::resource('post_term', 'PostTermController');
+
+    Route::resource('property', 'PropertyController');
+
+    Route::resource('property_locale', 'PropertyLocaleController');
+
+    Route::resource('property_meta', 'PropertyMetaController');
+
+    Route::resource('property_term', 'PropertyTermController');
+
+    Route::resource('province', 'ProvinceController');
+
+    Route::resource('role', 'RoleController');
+
+    Route::resource('term', 'TermController');
+
+    Route::resource('testimony', 'TestimonyController');
+
+    Route::resource('user', 'UserController');
+
+    Route::resource('wishlist', 'WishlistController');
+
+});
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -361,5 +369,4 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 });
-
 

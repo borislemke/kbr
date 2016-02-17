@@ -3,18 +3,13 @@
 
 <div class="bc-bg">
     <ul class="breadcrumb container">
-        <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li><a href="{{ route('search', ['search' => Lang::get('url')['search']]) }}">{{ Lang::get('url')['search'] }}</a></li>
-
-        @if ($category)
-        <li class="active">{{ Lang::get('url')[$category->route] }}</li>
-        @else
-        <li class="active">all</li>
-        @endif
+        <li><a href="{{ baseUrl() }}">{{ trans('url.home') }}</a></li>
+        <li class="active">{{ trans('url.search') }}</li>
 
     </ul>
 </div>
-<div class="line-top"><h3><small>{{ $category ? $category->route : 'All' }}</small></h3></div>
+
+<div class="line-top"><h3><small>{{ trans('url.search') }}</small></h3></div>
 
 <section class="" style="display:inline-block">
     <div class="col-lg-8 well">
@@ -83,7 +78,7 @@
                             <a href class="btn btn-default fa fa-sort-amount-desc">&nbsp; Prices</a>
                         </div>
                         <div class="col-lg-6 text-right pagination">
-                            <strong><span class="badge">{{ count($properties) }}</span></strong>&nbsp;{{ $category ? $category->route : 'property' }} Found
+                            <strong><span class="badge">{{ count($properties) }} Found
                         </div>
                     </div>
                     <div class="col-lg-6 text-right">
@@ -93,7 +88,7 @@
                 <?php $i = 0; ?>
                 @foreach( $properties as $value )
                     <div class="col-lg-6 col-sm-6 col-xs-12" style="margin-bottom:30px;">
-                        <a href="#">
+                        <a href="">
                             <div id="myCarousel{{ $i }}" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
@@ -150,7 +145,7 @@
                                                     <i class="fa fa-star block m-b-xs fa-2x"></i>
                                                     <span>Favorite</span>
                                                 </a>
-                                                <a href="{{ route('property.detail', ['property' => $value->category->route, 'slug' => str_slug($value->lang()->title .'-'. $value->id)]) }}" class="col-md-4">
+                                                <a href="{{ route('property', ['property' => trans('url.property'), 'term' => $value->slug]) }}" class="col-md-4">
                                                     <i class="fa fa-list block m-b-xs fa-2x"></i>
                                                     <span>Detail</span>
                                                 </a>

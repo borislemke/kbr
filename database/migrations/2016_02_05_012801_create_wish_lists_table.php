@@ -12,7 +12,7 @@ class CreateWishListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('WishLists', function (Blueprint $table) {
+        Schema::create('wish_lists', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('customer_id');
             $table->integer('property_id');
@@ -27,6 +27,6 @@ class CreateWishListsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('WishLists');
+        Schema::drop('wish_lists');
     }
 }

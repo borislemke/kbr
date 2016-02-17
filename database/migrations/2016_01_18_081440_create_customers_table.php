@@ -13,7 +13,7 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         //
-        Schema::create('Customers', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username')->unique();
             $table->string('email')->unique();
@@ -48,6 +48,6 @@ class CreateCustomersTable extends Migration
     public function down()
     {
         //
-        Schema::drop('Customers');
+        Schema::drop('customers');
     }
 }

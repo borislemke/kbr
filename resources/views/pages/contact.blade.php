@@ -3,8 +3,8 @@
 
 <div class="bc-bg">
     <ul class="breadcrumb container">
-        <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li class="active">{{ ucfirst($titles) }}</li>
+        <li><a href="{{ route('home') }}">{{ trans('url.home') }}</a></li>
+        <li class="active">{{ trans('url.contact') }}</li>
     </ul>
 </div>
 
@@ -98,7 +98,7 @@
                     <h3>Contact Us</h3>
                 </div>
                 <div class="border-spacer"></div>
-                {!! Form::open(['url' => route('contact.store'), 'class' => 'panel-body']) !!}
+                {!! Form::open(['url' => route('api.message.store'), 'class' => 'panel-body']) !!}
                 <div class="form-group">
                     <label for="firstname" class="col-lg-12 ">Full Name</label>
                     <div class="col-lg-6">

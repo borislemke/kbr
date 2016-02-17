@@ -4,65 +4,99 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Mail;
-use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller {
+use App\User;
 
-
-
+class UserController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
+    {
+        //
+        $category = $request->category;
+        $status = $request->status;
+
+        // datatable parameter
+        $draw = $request->draw;
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+
+        // sorting
+        $column = 'id';
+        $sort = $request->order[0]['dir'] ? $request->order[0]['dir'] : 'desc'; //asc
+
+        // new object
+        $users = new User;
+
+        $users = $users->select('users.*')
+            ->join('branches', 'branches.id', '=', 'users.branch_id');
+
+        $users = $users->with('branch');
+
+        // searching
+        if ($search) {
+
+            $users = $users->where(function ($q) use ($search) {
+                    $q->where('users.username', 'like', $search . '%')
+                        ->orWhere('users.firstname', 'like', $search . '%');
+                });
+        }
+
+        // total records
+        $count = $users->count();
+
+        // pagination
+        $users = $users->take($length)->skip($start);
+
+        // order
+        if ($request->order[0]['column']) {
+
+            $column = $request->columns[$request->order[0]['column']]['data'];
+
+            if ($column == 'branch.name') {
+
+                $users = $users->orderBy('branches.name', $sort);
+            } else {
+
+                $users = $users->orderBy('users.' . $column, $sort);
+            }
+
+        } else {
+
+            $users = $users->orderBy('users.' . $column, $sort);
+        }
+
+        // get data
+        $users = $users->get();
+
+        // datatable response
+        $respose = [
+                "draw" => $draw,
+                "recordsTotal" => $count,
+                "recordsFiltered" => $count,
+                "data" => $users
+
+            ];
+
+        return $respose;
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         //
     }
-    public function test()
-    {
-        //
-
-        Mail::send('emails.invite', ['email' => 'boris@kesato.com'], function ($message) {
-
-            $message->from('boris@kesato.com', 'Kibarer');
-
-            $message->to('boris@kesato.com', 'boris@kesato.com')->subject('Kibarer Administrator Account Registration');
-        });
-    }
-
-
-
-    public function invite(Request $request) {
-        //
-        $user = new User;
-
-        $user->email = $request->email;
-
-        $user->role_id = $request->role;
-
-        $password = str_random(8);
-
-        $user->password = bcrypt($password);
-
-
-        Mail::send('emails.invite', ['email' => $user->email, 'password' => $password], function ($message) use ($user) {
-
-            $message->from('boris@kesato.com', 'Kibarer');
-
-            $message->to($user->email, $user->email)->subject('Kibarer Administrator Account Registration');
-        });
-
-
-        $user->save();
-
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'recipient notified', 'message' => 'We have emailed the recipient with a link and password to create an account. Password: ' . $password)));
-    }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -73,40 +107,43 @@ class UserController extends Controller {
     public function store(Request $request)
     {
         //
-        $user = User::where('email', $request->email);
+        $user = new User;
 
-        if($user->password != bcrypt($request->password)) return reponse()->json(['status' => 403, 'message' => 'Wrong credential. No matching account with those credentials found!']);
+        $user->username = $user->getUsername($request->firstname);
+        $user->email = $request->email;
 
-        $user->username = $request->username;
-        $user->position_id = $request->position_id; // REMOVE?
-        $user->branch_id = $request->branch_id;
+        // pass: kibarer // $2y$10$STb5v6UVqr7ZxGj2ixQvseLTpW14aYUiIdKtyUrESkXCh6EAmmXju
+        $user->password = \Hash::make($request->password);
+
+        // $user->remember_token = $request->remember_token;
+        // $user->confirmation_code = $request->confirmation_code;
+        // $user->confirmed = $request->confirmed;
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->address = $request->address;
         $user->phone = $request->phone;
+
+        // find province, country
+        $city = \App\City::where('city_name', $request->city)->first();
+
         $user->city = $request->city;
-        $user->province = $request->province;
-        $user->country = $request->country;
+        $user->province = $city->province->province_name;
+        $user->country = $city->province->country->nicename;
+
         $user->zipcode = $request->zipcode;
+
+        // $user->image_profile = $request->image_profile;
+
+        $user->role_id = $request->role_id;
+
+        $user->branch_id = $request->branch_id;
 
         $user->active = 1;
 
-        if(Input::hasFile('profile_pic')) {
-
-            $pp = Input::get('profile_pic');
-
-            $extension = $pp->getClientOriginalExtension();
-
-            $fileName = $user->username . '.' . $extension;
-
-            $pp->move(public_path('media/agents'), $user->username . '.' . $extension);
-        }
-
-        $user->image = $fileName;
-
         $user->save();
 
-        return redirect('/admin/account');
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));        
+
     }
 
     /**
@@ -118,66 +155,64 @@ class UserController extends Controller {
     public function show($id)
     {
         //
-
-        $user = User::find($id);
-
-        return $user;
     }
 
-
-    public function update(Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
+        //
+    }
 
-        $user = User::find($request->user_id);
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+        $user = User::find($id);
 
-        $validator = \Validator::make($request->all(), [
-            'username' => 'required|unique:Users,username,'. $user->id,
-            'email' => 'required|unique:Users,email,'. $user->id,
-            'firstname' => 'required'
-        ]);
-
-
-        if ($validator->fails()) {
-            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => implode($validator->errors()->all(), '<br>') )));
-        }
-
-        $user->username = $request->username;
+        // $user->username = $user->getUsername($request->firstname);
         $user->email = $request->email;
-        $user->role_id = $request->role_id;
-        $user->branch_id = $request->branch_id;
 
+        // pass: kibarer // $2y$10$STb5v6UVqr7ZxGj2ixQvseLTpW14aYUiIdKtyUrESkXCh6EAmmXju
+        if ($request->password)
+            $user->password = \Hash::make($request->password);
+
+        // $user->remember_token = $request->remember_token;
+        // $user->confirmation_code = $request->confirmation_code;
+        // $user->confirmed = $request->confirmed;
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->address = $request->address;
         $user->phone = $request->phone;
+
+        // find province, country
+        $city = \App\City::where('city_name', $request->city)->first();
+
         $user->city = $request->city;
-        $user->province = $request->province;
-        $user->country = $request->country;
+        $user->province = $city->province->province_name;
+        $user->country = $city->province->country->nicename;
+
         $user->zipcode = $request->zipcode;
+
+        $user->role_id = $request->role_id;
+
+        $user->branch_id = $request->branch_id;
 
         $user->active = $request->active;
 
-        if ($request->password) $user->password = \Hash::make($request->password);
-
-        // if ($request->hasFile('file')) {
-
-        //     if ($user->image) {
-        //         \File::delete('uploads/user/' . $user->image);
-        //     }
-
-        //     $destinationPath = 'uploads/user';
-        //     $extension = $request->file('file')->getClientOriginalExtension();
-        //     $fileName = date('YmdHis') . '_' . strtolower($request->firstname) . '_user' . '.' . $extension;
-
-        //     $request->file('file')->move($destinationPath, $fileName);
-
-        //     $user->image = $fileName;
-
-        // }
-
         $user->save();
 
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'account updated', 'message' => 'Account has been updated.')));
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been updated')));    
     }
 
     /**
@@ -189,66 +224,5 @@ class UserController extends Controller {
     public function destroy($id)
     {
         //
-
-        $user = User::find($id);
-
-        $user->delete();
-        
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'account updated', 'message' => 'Account has been updated.'), 'id' => $id));
     }
-
-    public function storeProfile(Request $request)
-    {
-
-        $user = User::find($request->edit);
-
-        $validator = \Validator::make($request->all(), [
-            'username' => 'required|unique:Users,username,'. $user->id,
-            'email' => 'required|unique:Users,email,'. $user->id,
-            'firstname' => 'required'
-        ]);
-
-
-        if ($validator->fails()) {
-            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => implode($validator->errors()->all(), '<br>') )));
-        }
-
-        $user->username = $request->username;
-        $user->email = $request->email;
-        // $user->position_id = $request->position_id;
-        $user->branch_id = $request->branch_id;
-
-        $user->firstname = $request->firstname;
-        $user->lastname = $request->lastname;
-        $user->address = $request->address;
-        $user->phone = $request->phone;
-        $user->city = $request->city;
-        $user->province = $request->province;
-        $user->country = $request->country;
-        $user->zipcode = $request->zipcode;
-
-        if ($request->password) $user->password = \Hash::make($request->password);
-
-        if ($request->hasFile('file')) {
-
-            if ($user->image) {
-                \File::delete('uploads/user/' . $user->image);
-            }
-
-            $destinationPath = 'uploads/user';
-            $extension = $request->file('file')->getClientOriginalExtension();
-            $fileName = date('YmdHis') . '_' . strtolower($request->firstname) . '_user' . '.' . $extension;
-
-            $request->file('file')->move($destinationPath, $fileName);
-
-            $user->image = $fileName;
-
-        }
-
-        $user->save();
-
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'account updated', 'message' => 'Account has been updated.')));
-
-    }
-
 }

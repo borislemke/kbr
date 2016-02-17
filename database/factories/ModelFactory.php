@@ -61,7 +61,7 @@ $factory->define(App\Customer::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Inquiry::class, function (Faker\Generator $faker) {
+$factory->define(App\Enquiry::class, function (Faker\Generator $faker) {
     return [    
         'property_id' => rand(1, 100),
         'subject' => $faker->sentence($nbWords = 6, $variableNbWords = true),
@@ -79,32 +79,18 @@ $factory->define(App\Branch::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\PostCategory::class, function (Faker\Generator $faker) {
-    return [
-        'parent' => 0,
-        'order' => 1
-    ];
-});
-
-$factory->define(App\PostCategoryLanguage::class, function (Faker\Generator $faker) {
-    return [
-        'title' => $faker->word,
-        'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'locale' => 'en'
-    ];
-});
-
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
-        'category_id' => 1,
+        'slug' => $slug = str_slug($faker->sentence($nbWords = 6, $variableNbWords = true)),
+        'route' => str_replace('-', '_', $slug),
         'status' => 1
     ];
 });
 
-$factory->define(App\PostLanguage::class, function (Faker\Generator $faker) {
+$factory->define(App\PostLocale::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'content' => $faker->paragraph($nbSentences = 6, $variableNbSentences = true),
+        'content' => '<p>' . $faker->paragraph($nbSentences = 70, $variableNbSentences = true) . '</p>',
         'locale' => 'en'
     ];
 });
@@ -154,25 +140,27 @@ $factory->define(App\Property::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\PropertyLanguage::class, function (Faker\Generator $faker) {
+$factory->define(App\PropertyLocale::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence($nbWords = 3, $variableNbWords = true),
-        'description' => $faker->sentence($nbWords = 10, $variableNbWords = true),
+        'content' => '<p>'. $faker->sentence($nbWords = 20, $variableNbWords = true) .'</p>',
         'locale' => 'en'
     ];
 });
 
-$factory->define(App\Category::class, function (Faker\Generator $faker) {
+$factory->define(App\PropertyTerm::class, function (Faker\Generator $faker) {
+
     return [
-        'parent' => 0,
-        'order' => 1,
+        'term_id' => $faker->randomElement([1, 2])
     ];
 });
 
-$factory->define(App\CategoryLanguage::class, function (Faker\Generator $faker) {
+$factory->define(App\Contact::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->word,
-        'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'locale' => 'en'
+        'firstname' => $faker->firstName,
+        'lastname' => $faker->lastName,
+        'email' => $faker->email,
+        'message' => $faker->sentence($nbWords = 3, $variableNbWords = true)
     ];
 });
+

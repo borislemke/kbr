@@ -12,7 +12,7 @@ class CreateProvincesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Provinces', function (Blueprint $table) {
+        Schema::create('provinces', function (Blueprint $table) {
 
             $table->increments('id');
             $table->string('province_name', 50);
@@ -47,6 +47,6 @@ class CreateProvincesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Provinces');
+        Schema::drop('provinces');
     }
 }

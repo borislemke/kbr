@@ -16,9 +16,65 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $category = $request->category;
+        $status = $request->status;
+
+        // datatable parameter
+        $draw = $request->draw;
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+
+        // sorting
+        $column = 'id';
+        $sort = $request->order[0]['dir'] ? $request->order[0]['dir'] : 'desc'; //asc
+
+        // new object
+        $contacts = new Contact;
+
+        // searching
+        if ($search) {
+
+            $contacts = $contacts->where(function ($q) use ($search) {
+                    $q->where('contacts.email', 'like', $search . '%')
+                        ->orWhere('contacts.message', 'like', $search . '%');
+                });
+        }
+
+        // total records
+        $count = $contacts->count();
+
+        // pagination
+        $contacts = $contacts->take($length)->skip($start);
+
+        // order
+        if ($request->order[0]['column']) {
+
+            $column = $request->columns[$request->order[0]['column']]['data'];
+
+            $contacts = $contacts->orderBy('contacts.' . $column, $sort);
+
+        } else {
+
+            $contacts = $contacts->orderBy('contacts.' . $column, $sort);
+        }
+
+        // get data
+        $contacts = $contacts->get();
+
+        // datatable response
+        $respose = [
+                "draw" => $draw,
+                "recordsTotal" => $count,
+                "recordsFiltered" => $count,
+                "data" => $contacts
+
+            ];
+
+        return $respose;
     }
 
     /**
@@ -40,24 +96,6 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         //
-
-        $this->validate($request, [
-            'email' => 'required',
-            'g-recaptcha-response' => 'required'
-            ]);
-
-        $contact = new Contact;
-
-        $contact->firstname = $request->firstname;
-        $contact->lastname = $request->lastname;
-        $contact->email = $request->email;
-        $contact->message = $request->message;
-
-        $contact->save();
-
-        $request->session()->flash('alert-success', 'Thanks. We will check your message soon.');
-
-        return redirect()->back();
     }
 
     /**
@@ -103,10 +141,10 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
-
         $contact = Contact::find($id);
+
         $contact->delete();
 
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'Message has been deleted'), 'id' => $id));
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));
     }
 }

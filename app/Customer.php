@@ -27,7 +27,7 @@ CanResetPasswordContract
      *
      * @var string
      */
-    protected $table = 'Customers';
+    protected $table = 'customers';
 
     /**
      * The attributes that are mass assignable.
@@ -54,9 +54,9 @@ CanResetPasswordContract
         return $this->hasMany('App\Property');
     }
 
-    public function inquiries() {
+    public function enquiries() {
 
-        return $this->hasMany('App\Inquiry');
+        return $this->hasMany('App\Enquiry');
     }
 
     public function getUsername($firstName) {

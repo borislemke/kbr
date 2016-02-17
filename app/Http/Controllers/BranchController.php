@@ -16,9 +16,65 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $category = $request->category;
+        $status = $request->status;
+
+        // datatable parameter
+        $draw = $request->draw;
+        $start = $request->start;
+        $length = $request->length;
+        $search = $request->search['value'];
+
+        // sorting
+        $column = 'id';
+        $sort = $request->order[0]['dir'] ? $request->order[0]['dir'] : 'desc'; //asc
+
+        // new object
+        $branches = new Branch;
+
+        // searching
+        if ($search) {
+
+            $branches = $branches->where(function ($q) use ($search) {
+                    $q->where('branches.name', 'like', $search . '%')
+                        ->orWhere('branches.city', 'like', $search . '%');
+                });
+        }
+
+        // total records
+        $count = $branches->count();
+
+        // pagination
+        $branches = $branches->take($length)->skip($start);
+
+        // order
+        if ($request->order[0]['column']) {
+
+            $column = $request->columns[$request->order[0]['column']]['data'];
+
+            $branches = $branches->orderBy('branches.' . $column, $sort);
+
+        } else {
+
+            $branches = $branches->orderBy('branches.' . $column, $sort);
+        }
+
+        // get data
+        $branches = $branches->get();
+
+        // datatable response
+        $respose = [
+                "draw" => $draw,
+                "recordsTotal" => $count,
+                "recordsFiltered" => $count,
+                "data" => $branches
+
+            ];
+
+        return $respose;
     }
 
     /**
@@ -40,21 +96,11 @@ class BranchController extends Controller
     public function store(Request $request)
     {
         //
-        $validator = \Validator::make($request->all(), [
-            'name' => 'required',
-            'city' => 'required'
-            ]);
-
-        if ($validator->fails()) {
-            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => implode($validator->errors()->all(), '<br>') )));
-        }
-
-        if ($request->edit != 0) return $this->update($request, $request->edit);
-
         $branch = new Branch;
 
-        $branch->name = $request->name;
+        $branch->name = $request->name;      
 
+        // find province, country
         $city = \App\City::where('city_name', $request->city)->first();
 
         $branch->city = $request->city;
@@ -65,8 +111,7 @@ class BranchController extends Controller
 
         $branch->save();
 
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'post success', 'message' => 'Branch has been saved')));
-
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));
     }
 
     /**
@@ -78,9 +123,6 @@ class BranchController extends Controller
     public function show($id)
     {
         //
-        $branch = Branch::find($id);
-
-        return $branch;
     }
 
     /**
@@ -108,6 +150,7 @@ class BranchController extends Controller
 
         $branch->name = $request->name;
 
+        // find province, country
         $city = \App\City::where('city_name', $request->city)->first();
 
         $branch->city = $request->city;
@@ -118,7 +161,7 @@ class BranchController extends Controller
 
         $branch->save();
 
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'post success', 'message' => 'Branch has been updated')));
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been updated')));
     }
 
     /**
@@ -130,12 +173,10 @@ class BranchController extends Controller
     public function destroy($id)
     {
         //
-        $branch = Branch::find($id);
+        $branch = new Branch;
 
         $branch->delete();
 
-        // return redirect()->back();
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'Branch has been deleted'), 'id' => $id));
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));
     }
-
 }

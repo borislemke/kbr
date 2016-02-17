@@ -18,19 +18,28 @@ return [
 
     "villas" => [
 
-        "villa/available" => "available",
-        "villa/sold" => "sold",
-        "villa/hidden" => "hidden",
-        "villa/request" => "request"
+        "properties?category=villa&status=available" => "available",
+        "properties?category=villa&status=sold" => "sold",
+        "properties?category=villa&status=hidden" => "hidden",
+        "properties?category=villa&status=request" => "request"
+
+    ],
+
+    "villa rentals" => [
+
+        "properties?category=villa-rental&status=available" => "available",
+        "properties?category=villa-rental&status=sold" => "sold",
+        "properties?category=villa-rental&status=hidden" => "hidden",
+        "properties?category=villa-rental&status=request" => "request"
 
     ],
 
     "lands" => [
 
-        "land/available" => "available",
-        "land/sold" => "sold",
-        "land/hidden" => "hidden",
-        "land/request" => "request"
+        "properties?category=land&status=available" => "available",
+        "properties?category=land&status=sold" => "sold",
+        "properties?category=land&status=hidden" => "hidden",
+        "properties?category=land&status=request" => "request"
 
     ],
 
@@ -43,8 +52,8 @@ return [
     "customers" => [
 
         "customers" => "manage customers",
-        "customer/testimonials" => "testimonials",
-        "messages" => "messages"
+        "customers/testimonials" => "testimonials",
+        "customers/messages" => "messages"
 
     ],
 

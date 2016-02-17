@@ -29,7 +29,7 @@ CanResetPasswordContract
      *
      * @var string
      */
-    protected $table = 'Users';
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -65,6 +65,14 @@ CanResetPasswordContract
     public function role() {
 
         return $this->belongsTo('App\Role');
+    }
+
+    public function getUsername($firstName) {
+        $username = str_slug($firstName);
+        $userRows  = $this->whereRaw("username REGEXP '^{$username}([0-9]*)?$'")->get();
+        $countUser = count($userRows) + 1;
+
+        return ($countUser > 1) ? "{$username}{$countUser}" : $username;
     }
 
     public static function boot()

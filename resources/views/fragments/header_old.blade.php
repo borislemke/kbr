@@ -2,18 +2,18 @@
 <header>
     <section id="main" class=" flexbox justify-between">
 
-        <h1 class="logo"><a href="{{ url('/') }}"><img src="{{ asset('assets/img/logo.png') }}" alt="Kibarer Property"></a>Kibarer Property</h1>
+        <h1 class="logo"><a href="{{ route('home') }}"><img src="{{ asset('assets/img/logo.png') }}" alt="Kibarer Property"></a>Kibarer Property</h1>
 
         <div class="fullscreen-nav flexbox flex-wrap justify-between">
             <section class="bottom-nav">
                 <div class="navbottom">
                     <ul>
-                        <li><a href="{{ route('search', ['search' => Lang::get('url')['search'], 'category' => 'villa']) }}">Villas</a></li>
+                        <li><a href="{{ route('search', ['search' => trans('url.search'), 'category' => 'villa']) }}">Villas</a></li>
                         <li><a href="{{ route('search', ['search' => Lang::get('url')['search'], 'category' => 'land']) }}">Lands</a></li>
-                        <li><a href="{{ route('lawyer_notary', Lang::get('url')['lawyer_notary']) }}">Lawyer &amp; Notary</a></li>
-                        <li><a href="{{ route('testimony', Lang::get('url')['testimony']) }}">Testimonials</a></li>
-                        <li><a href="{{ route('contact', Lang::get('url')['contact']) }}">Contact</a></li>
-                        <li><a href="{{ route('search', ['search' => Lang::get('url')['search']]) }}"><i class="fa fa-search"></i></a></li>
+                        <li><a href="{{ route('page', trans('url.lawyer_notary')) }}">Lawyer &amp; Notary</a></li>
+                        <li><a href="{{ route('testimonials', trans('url.testimonials')) }}">Testimonials</a></li>
+                        <li><a href="{{ route('contact', trans('url.contact')) }}">Contact</a></li>
+                        <li><a href="{{ route('search', trans('url.search')) }}"><i class="fa fa-search"></i></a></li>
                     </ul>
                 </div>
 
@@ -21,9 +21,9 @@
 
                 <section class="top-nav">
                     <ul>
-                        <li><a href="{{ route('sell_property', Lang::get('url')['sell_property']) }}"><i class="material-icons">business</i> Sell my Property</a></li>
-                        <li><a href="{{ route('blog', Lang::get('url')['blog']) }}"><i class="material-icons">chat</i> Blog</a></li>
-                        <li><a href="{{ route('account', Lang::get('url')['account']) }}"><i class="material-icons">person</i> Account</a></li>
+                        <li><a href="{{ route('sell_property', ['sell_property' => trans('url.sell_property')]) }}"><i class="material-icons">business</i> {{ trans('url.sell_property') }}</a></li>
+                        <li><a href="{{ route('blog', ['blog' => trans('url.blog')]) }}"><i class="material-icons">chat</i> {{ trans('url.blog') }}</a></li>
+                        <li><a href="{{ route('account', ['account' => trans('url.account')]) }}"><i class="material-icons">person</i> {{ trans('url.account') }}</a></li>
                     </ul>
                 </section>
 

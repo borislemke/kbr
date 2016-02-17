@@ -13,7 +13,7 @@ class CreatePropertiesTable extends Migration
     public function up()
     {
         //
-        Schema::create('Properties', function (Blueprint $table) {
+        Schema::create('properties', function (Blueprint $table) {
             // index
             $table->increments('id');
             $table->integer('user_id')->default(0);
@@ -85,6 +85,6 @@ class CreatePropertiesTable extends Migration
     public function down()
     {
         //
-        Schema::drop('Properties');
+        Schema::drop('properties');
     }
 }

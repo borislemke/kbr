@@ -25,7 +25,7 @@
       <div class="panel panel-primary">
         
         <div class="panel-body">
-          {!! Form::open(array('url' => url('login'))) !!}
+          {!! Form::open(['url' => route('login.attempt', trans('url.login'))]) !!}
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input class="form-control" type="text" name="email" value="{{ old('email') }}">
@@ -37,7 +37,7 @@
           <button type="submit" class="btn btn-primary">Login</button>
           {!! Form::close() !!}
 
-          <p class="pull-right"><a href="{{ route('register', Lang::get('url')['register']) }}">Register</a></p>
+          <p class="pull-right"><a href="{{ route('register', trans('url.register')) }}">Register</a></p>
         </div>
       </div>
     </div>

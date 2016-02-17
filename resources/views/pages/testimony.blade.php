@@ -2,11 +2,11 @@
 @section('content')
 <div class="bc-bg">
     <ul class="breadcrumb container">
-        <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li class="active">{{ ucfirst($titles) }}</li>
+        <li><a href="{{ route('home') }}">{{ trans('url.home') }}</a></li>
+        <li class="active">{{ trans('url.testimony') }}</li>
     </ul>
 </div>
-<div class="line-top"><h3><small>{{ $titles }}</small></h3></div>
+<div class="line-top"><h3><small>{{ trans('url.testimony') }}</small></h3></div>
 <div class="container">
 
 <br>
@@ -61,7 +61,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-        {!! Form::open(['url' => route('testimony.store'),'id' => 'testimony-form']) !!}
+        {!! Form::open(['url' => route('testimony', trans('url.testimony')),'id' => 'testimony-form']) !!}
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

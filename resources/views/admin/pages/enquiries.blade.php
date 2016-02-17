@@ -1,11 +1,6 @@
 @extends('admin.master')
 @section('page', 'enquiries')
 
-@section('fab')
-
-<m-fab salmon class="modal-open" data-target="#enquiry-add"><i class="material-icons">add</i></m-fab>
-
-@stop
 
 @section('content')
 
@@ -19,7 +14,7 @@
 
     @if(isset($enquiries) AND count($enquiries) > 0)
 
-    <table class="m-table-list enquiry-table">
+    <table id="enquiry-table" class="m-table-list enquiry-table">
         <thead>
             <td><a href class="m-table-item-select m-table-item-select-all inquiry-item-select-all"><i class="m-checkbox"></i></a></td>
             <td>Property</td>
@@ -27,6 +22,7 @@
             <td>Name</td>
             <td>Phone</td>
             <td>Email</td>
+            <td>Action</td>
 
         </thead>
         <tbody>
@@ -38,14 +34,6 @@
                 <td class="name">{{ $inquiry->firstname . ' ' . $inquiry->lastname }}</td>
                 <td class="phone">{{ $inquiry->phone }}</td>
                 <td class="email">{{ $inquiry->email }}</td>
-                <!-- <td class="m-table-item-options">
-                    <a href class="m-list-item-more"><i class="material-icons">more_horiz</i></a>
-                    <div class="m-list-item-option" data-id="{{ $inquiry->id }}"><ul>
-                        <li><a href="{{ $inquiry->id }}" class="item-edit">edit</a></li>
-                        <li><a href="{{ url('system/ajax/inquiry/delete/' . $inquiry->id) }}" class="item-delete direct-delete">delete</a></li>
-                        </ul>
-                    </div>
-                </td> -->
 
                 <td button>
                     <m-table-list-more>
@@ -82,32 +70,6 @@
 
     {!! Form::open(array('class' => 'modal-window', 'id' => 'enquiry-form', 'data-function' => 'modalClose', 'data-url' => 'inquiry/store')) !!}
     <h3>Add enquiry</h3>
-
-    <!--
-    <m-input id="select-customer" data-label="customers" select>
-        <input type="text" select id="inquiry-input-customer_id" name="customer_id" required>
-        <label for="inquiry-input-customer_id">Customers</label>
-        <m-select>
-
-            @foreach(\App\Customer::orderBy('firstname', 'asc')->get() as $customer)
-            <m-option value="{{ $customer->id }}">{{ $customer->firstname }}</m-option>
-            @endforeach
-
-        </m-select>
-    </m-input>
-    -->
-
-    <m-input id="select-property" data-label="properties" select>
-        <input type="text" select id="inquiry-input-property_id" name="property_id" required>
-        <label for="inquiry-input-property_id">Properties</label>
-        <m-select>
-
-            @foreach(\App\Property::orderBy('created_at', 'desc')->get() as $property)
-            <m-option value="{{ $property->id }}">{{ $property->lang()->title }}</m-option>
-            @endforeach
-
-        </m-select>
-    </m-input>
 
     <m-input>
         <input type="text" id="inquiry-input-subject" name="subject" required>

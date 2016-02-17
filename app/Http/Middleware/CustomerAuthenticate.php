@@ -39,7 +39,7 @@ class CustomerAuthenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('login');
+                return redirect()->route('login', trans('url.login'));
             }
         }
 

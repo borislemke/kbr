@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Testimony extends Model
 {
     //
-    protected $table = 'Testimonials';
-
+    protected $table = 'testimonials';
+    
     public function customer() {
 
         return $this->belongsTo('App\Customer');

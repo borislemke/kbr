@@ -74,7 +74,7 @@ var Ajax = {
 
         $.ajax({
 
-            url: aurl + targetUrl,
+            url: targetUrl,
 
             type: ajaxType,
 

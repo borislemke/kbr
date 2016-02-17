@@ -8,12 +8,7 @@
 @stop
 
 @section('content')
-<!-- 
-<div class="search-input w25-6">
-    <form>
-        <input value="{{ Input::get('q') }}" class="w50-6" name="q" type="text" placeholder="search">
-    </form>
-</div> -->
+<br>
 
 <m-template list class="property-wrapper">
 
@@ -24,14 +19,13 @@
             </td>
             <td>Image</td>
             <td>Title</td>
-            <td>Created</td>
             <td>Code</td>
             <td>Type</td>
-            <!-- <td>Category</td> -->
             <td>Status</td>
             <td>Agent</td>
             <td>Price</td>
             <td>View</td>
+            <td>Created</td>
             <td>Action</td>
         </thead>
 

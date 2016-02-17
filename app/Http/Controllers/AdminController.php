@@ -4,594 +4,200 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\User;
-use Response;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\AnalyticsController;
 
-class AdminController extends Controller {
+class AdminController extends Controller
+{
 
-    private $limit = 20;
-    private $lang = '';
     private $admin;
 
     public function __construct()
     {
-        $this->lang = \Lang::getLocale();
-
         $this->admin = \Auth::user()->get();
     }
 
-    public function dashboard() {
-
+    public function dashboard()
+    {
         return view('admin.pages.dashboard');
     }
-
-
-    public function customers() {
-
-        $search = \Input::get('q');
-
-        if ($search) {
-            $customers = \App\Customer::where('firstname', 'like', $search . '%')->orWhere('lastname', 'like', $search . '%')->orderBy('created_at', 'desc')->paginate($this->limit);
-        } else {
-            $customers = \App\Customer::orderBy('created_at', 'desc')->paginate($this->limit);
-        }
-
-        return view('admin.pages.customers', compact('customers'));
-    }
-
-    public function testimonials()
+    
+    public function properties(Request $request, $term = null)
     {
-        $limit = 20;
+        if ($request->action == 'create') return view('admin.pages.property.create');
 
-        $search = \Input::get('q');
+        if ($request->action == 'edit' && isset($request->id)) {
 
-        if ($search) {
+            $property = \App\Property::find($request->id);
 
-            $testimonials = \App\Testimony::where('title', 'like', $search .'%')
-                ->orWhere('content', 'like', $search .'%')
-                ->orderBy('created_at', 'desc')
-                ->paginate($limit);
-        } else {
-
-            $testimonials = \App\Testimony::orderBy('created_at', 'desc')->paginate($limit);
+            return view('admin.pages.property.edit', compact('property'));
         }
 
-        return view('admin.pages.testimonials', compact('testimonials'));
-    }
+        $request = json_encode($request->all());
 
-    public function messages()
+        $request = json_decode($request, true);
+
+        $api_url = route('api.property.index', $request);
+
+        return view('admin.pages.property.listing', compact('api_url'));
+    }
+    
+    public function enquiries(Request $request, $term = null)
     {
-        $limit = 20;        
+        if ($request->action == 'create') return view('admin.pages.enquiry.create');
 
-        $search = \Input::get('q');
+        if ($request->action == 'edit' && isset($request->id)) {
 
-        if ($search) {
+            $enquiry = \App\Enquiry::find($request->id);
 
-            $messages = \App\Contact::where('message', 'like', '%'. $search .'%')
-                ->orderBy('created_at', 'desc')
-                ->paginate($limit);
-        } else {
-
-            $messages = \App\Contact::orderBy('created_at', 'desc')->paginate($limit);
+            return view('admin.pages.enquiry.edit', compact('enquiry'));
         }
 
-        return view('admin.pages.messages', compact('messages'));
+        $request = json_encode($request->all());
+
+        $request = json_decode($request, true);
+
+        $api_url = route('api.enquiry.index', $request);
+
+        return view('admin.pages.enquiry.listing', compact('api_url'));
     }
-
-    public function properties() {
-
-        $search = \Input::get('q');
-
-        // AGENT
-        if ($this->admin->role_id == 3) {
-
-
-            if ($search) {
-
-                $properties = \App\Property::select('Properties.*')
-                    ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                    ->where('PropertyLanguages.locale', $this->lang)
-                    ->where('PropertyLanguages.title', 'like', $search . '%')
-                    ->where('Properties.user_id', $this->admin->id)
-                    ->where('status', '!=', -2)
-                    ->where('sold', 0)
-                    ->orderBy('Properties.created_at', 'desc')->paginate($this->limit);
-
-            } else {
-
-                $properties = \App\Property::where('user_id', $this->admin->id)
-                    ->where('status', '!=', -2)
-                    ->where('sold', 0)
-                    ->orderBy('created_at', 'desc')
-                    ->paginate($this->limit);
-            }
-
-        // SUPER ADMIN
-        } else {
-
-
-            if ($search) {
-
-                $properties = \App\Property::select('Properties.*')
-                    ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                    ->where('PropertyLanguages.locale', $this->lang)
-                    ->where('PropertyLanguages.title', 'like', $search . '%')
-                    ->where('status', '!=', -2)
-                    ->where('sold', 0)
-                    ->orderBy('Properties.created_at', 'desc')->paginate($this->limit);
-
-            } else {
-
-                $properties = \App\Property::orderBy('created_at', 'desc')
-                    ->where('status', '!=', -2)
-                    ->where('sold', 0)
-                    ->paginate($this->limit);
-            }
-
-
-        }
-
-        $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
-
-        return view('admin.pages.properties', compact('properties', 'categories'));
-
-    }
-
-
-    public function villa($status)
+    
+    public function customers(Request $request, $term = null)
     {
-        $category = \App\Category::where('route', 'villa')->first();
+        if ($term == 'testimonials') return $this->testimonials($request);
 
-        $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
+        if ($term == 'messages') return $this->messages($request);
 
-        return view('admin.pages.properties', compact('categories', 'status', 'category'));
+        if ($request->action == 'create') return view('admin.pages.customer.create');
 
+        if ($request->action == 'edit' && isset($request->id)) {
+
+            $customer = \App\Customer::find($request->id);
+
+            return view('admin.pages.customer.edit', compact('customer'));
+        }
+
+        $request = json_encode($request->all());
+
+        $request = json_decode($request, true);
+
+        $api_url = route('api.customer.index', $request);
+
+        return view('admin.pages.customer.listing', compact('api_url'));
     }
 
-    public function land($status)
+    public function testimonials(Request $request)
     {
 
-        $category = \App\Category::where('route', 'land')->first();
+        if ($request->action == 'create') return view('admin.pages.testimony.create');
 
-        $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
+        if ($request->action == 'edit' && isset($request->id)) {
 
-        return view('admin.pages.properties', compact('categories', 'status', 'category'));
-    }
+            $testimony = \App\Testimony::find($request->id);
 
-    public function property($category, $status)
-    {
-        $search = \Input::get('q');
-
-        if ($status == 'request') {
-
-            // AGENT
-            if ($this->admin->role_id == 3) {
-
-
-                if ($search) {
-
-                    $properties = \App\Property::select('Properties.*')
-                        ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                        ->where('PropertyLanguages.locale', $this->lang)
-                        ->where('PropertyLanguages.title', 'like', $search . '%')
-                        ->where('Properties.user_id', $this->admin->id)
-                        ->where('status', -2)
-                        ->filterCategory($category)
-                        ->orderBy('Properties.created_at', 'desc')
-                        ->paginate($this->limit);
-
-                } else {
-
-                    $properties = \App\Property::where('user_id', $this->admin->id)
-                        ->where('status', -2)
-                        ->filterCategory($category)
-                        ->orderBy('created_at', 'desc')
-                        ->paginate($this->limit);
-                }
-
-            // SUPER ADMIN
-            } else {
-
-
-                if ($search) {
-
-                    $properties = \App\Property::select('Properties.*')
-                        ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                        ->where('PropertyLanguages.locale', $this->lang)
-                        ->where('PropertyLanguages.title', 'like', $search . '%')
-                        ->where('status', -2)
-                        ->filterCategory($category)
-                        ->orderBy('Properties.created_at', 'desc')
-                        ->paginate($this->limit);
-
-                } else {
-
-                    $properties = \App\Property::orderBy('created_at', 'desc')
-                        ->where('status', -2)
-                        ->filterCategory($category)
-                        ->paginate($this->limit);
-                }
-
-
-            }
-
-        } else {
-
-            switch ($status) {
-                case 'available':
-                    $status = 1;
-                    break;
-                case 'sold':
-                    $status = 0;
-                    break;
-                case 'hidden':
-                    $status = -1;
-                    break;
-            }
-
-            // AGENT
-            if ($this->admin->role_id == 3) {
-
-
-                if ($search) {
-
-                    $properties = \App\Property::select('Properties.*')
-                        ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                        ->where('PropertyLanguages.locale', $this->lang)
-                        ->where('PropertyLanguages.title', 'like', $search . '%')
-                        ->where('Properties.user_id', $this->admin->id)
-                        ->where('status', $status)
-                        ->filterCategory($category)
-                        ->orderBy('Properties.created_at', 'desc')
-                        ->paginate($this->limit);
-
-                } else {
-
-                    $properties = \App\Property::where('user_id', $this->admin->id)
-                        ->where('status', 1)
-                        ->where('sold', 0)
-                        ->filterCategory($category)
-                        ->orderBy('created_at', 'desc')
-                        ->paginate($this->limit);
-                }
-
-            // SUPER ADMIN
-            } else {
-
-
-                if ($search) {
-
-                    $properties = \App\Property::select('Properties.*')
-                        ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                        ->where('PropertyLanguages.locale', $this->lang)
-                        ->where('PropertyLanguages.title', 'like', $search . '%')
-                        ->where('status', $status)                  
-                        ->filterCategory($category)
-                        ->orderBy('Properties.created_at', 'desc')
-                        ->paginate($this->limit);
-
-                } else {
-
-                    $properties = \App\Property::orderBy('created_at', 'desc')
-                        ->where('status', $status)
-                        ->filterCategory($category)
-                        ->orderBy('Properties.created_at', 'desc')
-                        ->paginate($this->limit);
-                }
-
-
-            }
-
+            return view('admin.pages.testimony.edit', compact('testimony'));
         }
 
+        $request = json_encode($request->all());
 
-        return $properties;
+        $request = json_decode($request, true);
+
+        $api_url = route('api.testimony.index', $request);
+
+        return view('admin.pages.testimony.listing', compact('api_url'));
     }
 
-
-    public function enquiries() {
-
-        $search = \Input::get('q');
-
-        $locale = $this->lang;
-
-        // AGENT
-        if ($this->admin->role_id == 3) {
-
-            if ($search) {
-
-                $enquiries = \App\Inquiry::whereHas('property', function ($q) use ($search, $locale) {
-
-                        $q->where('user_id', $this->admin->id)
-                            ->whereHas('propertyLanguages', function ($q) use ($search, $locale) {
-
-                                $q->where('locale', $locale)->where('title', 'like', $search .'%');
-                            });
-                    })
-                    ->orderBy('created_at', 'desc')
-                    ->paginate($this->limit);
-
-            } else {
-
-                $enquiries = \App\Inquiry::whereHas('property', function ($q) {
-
-                        $q->where('user_id', $this->admin->id);
-                    })
-                    ->orderBy('created_at', 'desc')
-                    ->paginate($this->limit);
-            }
-
-        } else {
-
-            if ($search) {
-
-                $enquiries = \App\Inquiry::whereHas('property', function ($q) use ($search, $locale) {
-
-                        $q->whereHas('propertyLanguages', function ($q) use ($search, $locale) {
-
-                            $q->where('locale', $locale)->where('title', 'like', $search .'%');
-                        });
-
-                    })->orderBy('created_at', 'desc')->paginate($this->limit);
-
-            } else {
-
-                $enquiries = \App\Inquiry::orderBy('created_at', 'desc')->paginate($this->limit);
-            }
-        }
-
-        return view('admin.pages.enquiries', compact('enquiries'));
-
-    }
-
-
-    public function propertyCategories()
+    public function messages(Request $request)
     {
 
-        $search = \Input::get('q');
+        if ($request->action == 'create') return view('admin.pages.contact.create');
 
-        if ($search) {
+        if ($request->action == 'edit' && isset($request->id)) {
 
-            $categories = \App\Category::select('Categories.*')
-                ->join('CategoryLanguages', 'CategoryLanguages.property_id', '=', 'Categories.id')
-                ->where('CategoryLanguages.locale', $this->lang)
-                ->where('CategoryLanguages.title', 'like', $search . '%')
-                ->orderBy('Categories.created_at', 'desc')->paginate($this->limit);
+            $contact = \App\Contact::find($request->id);
 
-        } else {
-
-            $categories = \App\Category::orderBy('order', 'asc')->paginate($this->limit);
+            return view('admin.pages.contact.edit', compact('contact'));
         }
 
-        return view('admin.pages.categories', compact('categories'));
+        $request = json_encode($request->all());
 
+        $request = json_decode($request, true);
+
+        $api_url = route('api.message.index', $request);
+
+        return view('admin.pages.contact.listing', compact('api_url'));
+    }
+    
+    public function pages($term = null)
+    {
+        return view('admin.pages.pages');
+    }
+    
+    public function posts($term = null)
+    {
+        return view('admin.pages.posts');
     }
 
-
-    public function propertySold()
+    public function branches(Request $request)
     {
 
-        $search = \Input::get('q');
+        if ($request->action == 'create') return view('admin.pages.branch.create');
 
-        // AGENT
-        if ($this->admin->role_id == 3) {
+        if ($request->action == 'edit' && isset($request->id)) {
 
+            $branch = \App\branch::find($request->id);
 
-            if ($search) {
-
-                $properties = \App\Property::select('Properties.*')
-                    ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                    ->where('PropertyLanguages.locale', $this->lang)
-                    ->where('PropertyLanguages.title', 'like', $search . '%')
-                    ->where('Properties.user_id', $this->admin->id)
-                    ->where('status', -2)
-                    ->where('sold', 1)
-                    ->orderBy('Properties.created_at', 'desc')->paginate($this->limit);
-
-            } else {
-
-                $properties = \App\Property::where('user_id', $this->admin->id)
-                    ->where('status', '!=', -2)
-                    ->where('sold', 1)
-                    ->orderBy('created_at', 'desc')
-                    ->paginate($this->limit);
-            }
-
-        // SUPER ADMIN
-        } else {
-
-
-            if ($search) {
-
-                $properties = \App\Property::select('Properties.*')
-                    ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                    ->where('PropertyLanguages.locale', $this->lang)
-                    ->where('PropertyLanguages.title', 'like', $search . '%')
-                    ->where('status', '!=', -2)
-                    ->where('sold', 1)
-                    ->orderBy('Properties.created_at', 'desc')->paginate($this->limit);
-
-            } else {
-
-                $properties = \App\Property::orderBy('created_at', 'desc')
-                    ->where('status', '!=', -2)
-                    ->where('sold', 1)
-                    ->paginate($this->limit);
-            }
-
-
+            return view('admin.pages.branch.edit', compact('branch'));
         }
 
-        $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
+        $request = json_encode($request->all());
 
-        return view('admin.pages.properties', compact('properties', 'categories'));
+        $request = json_decode($request, true);
+
+        $api_url = route('api.branch.index', $request);
+
+        return view('admin.pages.branch.listing', compact('api_url'));
     }
 
-
-    public function propertyCustomer()
+    public function my_account(Request $request)
     {
-        $search = \Input::get('q');
+        $user = $this->admin;
 
-        // AGENT
-        if ($this->admin->role_id == 3) {
+        return view('admin.pages.user.my-account', compact('user'));
+    }
 
+    public function accounts(Request $request)
+    {
 
-            if ($search) {
+        if ($request->action == 'create') return view('admin.pages.user.create');
 
-                $properties = \App\Property::select('Properties.*')
-                    ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                    ->where('PropertyLanguages.locale', $this->lang)
-                    ->where('PropertyLanguages.title', 'like', $search . '%')
-                    ->where('Properties.user_id', $this->admin->id)
-                    ->where('status', -2)
-                    ->orderBy('Properties.created_at', 'desc')->paginate($this->limit);
+        if ($request->action == 'edit' && isset($request->id)) {
 
-            } else {
+            $user = \App\User::find($request->id);
 
-                $properties = \App\Property::where('user_id', $this->admin->id)
-                    ->where('status', -2)
-                    ->orderBy('created_at', 'desc')
-                    ->paginate($this->limit);
-            }
-
-        // SUPER ADMIN
-        } else {
-
-
-            if ($search) {
-
-                $properties = \App\Property::select('Properties.*')
-                    ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                    ->where('PropertyLanguages.locale', $this->lang)
-                    ->where('PropertyLanguages.title', 'like', $search . '%')
-                    ->where('status', -2)
-                    ->orderBy('Properties.created_at', 'desc')->paginate($this->limit);
-
-            } else {
-
-                $properties = \App\Property::orderBy('created_at', 'desc')
-                    ->where('status', -2)
-                    ->paginate($this->limit);
-            }
-
-
+            return view('admin.pages.user.edit', compact('user'));
         }
 
-        $categories = \App\Category::orderBy('order', 'asc')->where('parent_id', 0)->get();
+        $request = json_encode($request->all());
 
-        return view('admin.pages.request-properties', compact('properties', 'categories'));
+        $request = json_decode($request, true);
 
+        $api_url = route('api.user.index', $request);
+
+        return view('admin.pages.user.listing', compact('api_url'));
     }
 
-
-    public function blog() {
-
-        return view('admin.pages.blog');
-
-    }
-
-
-
-    public function blogCategories() {
-
-        return view('admin.pages.blog-categories');
-
-    }
-
-
-
-    public function blogComments() {
-
-        return view('admin.pages.blog-comments');
-
-    }
-
-
-
-    public function blogSettings() {
-
-        return view('admin.pages.blog-settings');
-
-    }
-
-
-
-    public function myAccount() {
-
-        $user = \Auth::user()->get();
-
-        return view('admin.pages.my-account', compact('user'));
-
-    }
-
-
-
-    public function accounts() {
-
-
-        $search = \Input::get('q');
-
-        if ($search) {
-
-            $accounts = \App\User::where('firstname', 'like', $search . '%')->orWhere('lastname', 'like', $search . '%')->orderBy('firstname', 'asc')->paginate($this->limit);
-
-        } else {
-
-            $accounts = \App\User::orderBy('firstname', 'asc')->paginate($this->limit);
-        }
-
-        return view('admin.pages.accounts', ['accounts' => $accounts]);
-
-    }
-
-
-    public function branches() {
-
-
-        $search = \Input::get('q');
-
-        if ($search) {
-
-            $branches = \App\Branch::where('name', 'like', $search . '%')->orderBy('name', 'asc')->paginate($this->limit);
-
-        } else {
-
-            $branches = \App\Branch::orderBy('name', 'asc')->paginate($this->limit);
-        }
-
-        return view('admin.pages.branches', ['branches' => $branches]);
-
-    }
-
-
-
-    public function settings() {
-
+    public function settings()
+    {
         $autoCurrency = file_exists(storage_path('config/autocurrency.flag'));
 
         return view('admin.pages.settings', ['autoCurrency' => $autoCurrency]);
     }
-
-
-
-    public function index() {
-
-        return view('admin.pages.index');
-
-    }
-
-
-
     public function currency() {
 
         return view('admin.pages.currency');
 
     }
-
-
 
     public function notifications() {
 
@@ -599,22 +205,16 @@ class AdminController extends Controller {
 
     }
 
-
-
     public function io() {
 
         return view('admin.pages.io');
 
     }
 
-
-
     public function about() {
 
         return view('admin.pages.about');
 
     }
-
-
 
 }

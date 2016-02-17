@@ -37,71 +37,56 @@ class PropertiesController extends Controller
 
         $sort = $request->order[0]['dir'] ? $request->order[0]['dir'] : 'desc'; //asc
 
+        $properties = Property::with(['propertyLanguages' => function ($q){
+
+                $q->where('locale', 'en')->orderBy('title', 'asc');
+            }])
+            ->with(['propertyFiles' => function ($q){
+
+                $q->where('type', 'image');
+            }])
+            ->with('user')
+            ->filterCategory($category);
+
         if ($search) {
 
-            $properties = Property::with(['propertyLanguages' => function ($q){
-
-                    $q->where('locale', 'en')->orderBy('title', 'asc');
-                }])
-                ->with(['propertyFiles' => function ($q){
-
-                    $q->where('type', 'image');
-                }])
-                ->with('user')
-                ->whereHas('propertyLanguages', function ($q) use ($search) {
-
-                    $q->where(function ($q) use ($search) {
-
-                        $q->where('title', 'like', $search . '%');
-                    });
-                })
-                ->filterCategory($category);
+            $properties = $properties->select('Properties.*')
+                ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
+                ->where('PropertyLanguages.locale', 'en')
+                ->where('PropertyLanguages.title', 'like', $search . '%');
 
         } else {
 
-            $properties = Property::with(['propertyLanguages' => function ($q){
-
-                    $q->where('locale', 'en')->orderBy('title', 'asc');
-                }])
-                ->with(['propertyFiles' => function ($q){
-
-                    $q->where('type', 'image');
-                }])
-                ->with('user')
-                ->filterCategory($category);
+            $properties = $properties->select('Properties.*')
+                ->leftJoin('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
+                ->where('PropertyLanguages.locale', 'en');
         }      
-
-        $count = $properties->count();
 
         if ($request->order[0]['column']) {
 
             $column = $request->columns[$request->order[0]['column']]['data']; //property_languages.0.title
 
+            if ($column == 'user') $column = 'user_id';
+            
             if ($column == 'property_languages') {
 
-                $column = 'created_at';
-
-                $properties = $properties->select('Properties.*')
-                    ->join('PropertyLanguages', 'PropertyLanguages.property_id', '=', 'Properties.id')
-                    ->where('PropertyLanguages.locale', 'en')
-                    ->orderBy('PropertyLanguages.title', $sort);
+                $properties = $properties->orderBy('PropertyLanguages.title', $sort);
 
             } else {
 
-                $properties = $properties->orderBy($column, $sort);
+                $properties = $properties->orderBy('Properties.' . $column, $sort);
             }
 
         } else {
 
-            $properties = $properties->orderBy($column, $sort);
+            $properties = $properties->orderBy('Properties.' . $column, $sort);
         }
 
-        $properties = $properties->where('status', $status)
-            ->take($length)
-            ->skip($start)
-            // ->orderBy($column, $sort)
-            ->get();
+        $properties = $properties->where('status', $status);
 
+        $count = $properties->count();
+
+        $properties = $properties->take($length)->skip($start)->get();
 
         $output = [
                 "draw" => $draw,
@@ -122,6 +107,8 @@ class PropertiesController extends Controller
     public function create()
     {
         //
+
+        return view('admin.pages.property.create');
     }
 
 
@@ -348,6 +335,8 @@ class PropertiesController extends Controller
     public function edit($id)
     {
         //
+
+        return view('admin.pages.property.edit');
     }
 
     /**

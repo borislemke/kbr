@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class WishList extends Model
 {
     //
-    protected $table = 'WishLists';
-
     public function customer()
     {
         return $this->belongsTo('App\Customer');
