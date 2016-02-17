@@ -56,8 +56,20 @@ Route::group(['middleware' => 'auth'], function () {
         // Post
         Route::get('posts/{term?}',['as' => 'admin.posts', 'uses' => 'AdminController@posts']);
 
+        // my-account
+        Route::get('my-account',['as' => 'admin.my_account', 'uses' => 'AdminController@my_account']);
+
+        // accounts
+        Route::get('accounts',['as' => 'admin.accounts', 'uses' => 'AdminController@accounts']);
+
+        // branches
+        Route::get('branches',['as' => 'admin.branches', 'uses' => 'AdminController@branches']);
+
         // setting
         Route::get('settings',['as' => 'admin.setting', 'uses' => 'AdminController@settings']);
+
+        // about
+        Route::get('about',['as' => 'admin.about', 'uses' => 'AdminController@about']);
 
     });
 
@@ -194,5 +206,167 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::resource('wishlist', 'WishlistController');
 
+});
+
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::group(['prefix' => 'system/ajax'], function () {
+
+        Route::group(['prefix' => 'notifications'], function () {
+
+            Route::any('insert', 'AnalyticsController@insert');
+
+            Route::any('getall', 'AnalyticsController@index');
+
+            Route::any('getunread', 'AnalyticsController@getUnread');
+        });
+
+        Route::group(['prefix' => 'blog'], function () {
+
+            Route::any('index', 'BlogController@index');
+
+            Route::any('create', 'BlogController@create');
+
+            Route::get('retrieve/{id}', ['as' => 'id', 'uses' => 'BlogController@retrieve']);
+
+            Route::any('delete/{id}', ['as' => 'id', 'uses' => 'BlogController@destroy']);
+        });
+
+        Route::group(['prefix' => 'analytics'], function () {
+
+            Route::any('getall', 'AnalyticsController@getData');
+        });
+
+        Route::group(['prefix' => 'customer'], function () {
+
+            Route::any('login', 'CustomerController@login');
+
+            Route::any('register', 'CustomerController@register');
+
+            Route::any('get/{id}', 'CustomerController@show');
+
+            Route::any('store', 'CustomerController@store');
+
+            Route::any('destroy/{id}', 'CustomerController@destroy');
+
+        });
+
+        Route::group(['prefix' => 'testimony'], function () {
+
+            Route::any('get/{id}', 'CustomerController@showTestimony');
+
+            Route::any('store', 'CustomerController@storeTestimony');
+
+            Route::any('destroy/{id}', 'CustomerController@destroyTestimony');
+
+        });        
+
+        Route::group(['prefix' => 'message'], function () {
+
+            Route::any('destroy/{id}', 'ContactController@destroy');
+
+        });
+
+        Route::group(['prefix' => 'property'], function () {
+
+            Route::any('translate/get/{id}', 'PropertiesController@getTranslate');
+
+            Route::any('translate/store', 'PropertiesController@storeTranslate');
+
+            Route::any('get/{id}', 'PropertiesController@show');
+
+            Route::any('store', 'PropertiesController@store');
+
+            Route::any('destroy/{id}', 'PropertiesController@destroy');
+
+            Route::any('image/destroy/{id}', 'PropertiesController@destroyImage');
+
+            Route::any('data/{category}/{status}/', 'PropertiesController@index');
+
+        });
+
+        Route::group(['prefix' => 'category'], function () {
+
+            Route::any('translate/get/{id}', 'CategoryController@getTranslate');
+
+            Route::any('translate/store', 'CategoryController@storeTranslate');
+
+            Route::any('get/{id}', 'CategoryController@show');
+
+            Route::any('store', 'CategoryController@store');
+
+            Route::any('destroy/{id}', 'CategoryController@destroy');
+
+        });
+
+        Route::group(['prefix' => 'inquiry'], function () {
+
+            Route::any('get/{id}', 'InquiryController@show');
+
+            Route::any('store', 'InquiryController@store');
+
+            Route::any('destroy/{id}', 'InquiryController@destroy');
+
+        });
+
+        Route::group(['prefix' => 'account'], function () {
+
+            Route::any('prepare', 'UserController@invite');
+
+            Route::any('store', 'UserController@store');
+
+            Route::any('update', 'UserController@update');
+
+            Route::any('profile/store', 'UserController@storeProfile');
+
+            Route::any('get/{id}', 'UserController@show');
+
+            Route::any('destroy/{id}', 'UserController@destroy');
+
+        });
+
+        Route::group(['prefix' => 'branch'], function () {
+
+            Route::any('store', 'BranchController@store');
+
+            Route::any('get/{id}', 'BranchController@show');
+
+            Route::any('destroy/{id}', 'BranchController@destroy');
+
+        });
+
+        Route::group(['prefix' => 'settings'], function () {
+
+            Route::group(['social' => 'general'], function () {
+
+                Route::any('get', 'SystemController@getGeneral');
+
+                Route::any('set', 'SystemController@setGeneral');
+            });
+
+            Route::group(['prefix' => 'social'], function () {
+
+                Route::any('get', 'SystemController@getSocial');
+
+                Route::any('set', 'SystemController@setSocial');
+            });
+
+            Route::group(['prefix' => 'currency'], function () {
+
+                Route::any('get', 'SystemController@getExchange');
+
+                Route::any('update', 'SystemController@updateExchange');
+
+                Route::any('set', 'SystemController@setExchange');
+
+                Route::any('auto/{state}', ['as' => 'state', 'uses' => 'SystemController@setExchangeAuto']);
+            });
+
+            Route::any('reindexdata', 'SystemController@reindexData');
+
+            Route::any('clearcache', 'SystemController@clearCache');
+        });
+    });
 });
 

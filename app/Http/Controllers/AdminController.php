@@ -138,6 +138,55 @@ class AdminController extends Controller
         return view('admin.pages.posts');
     }
 
+    public function branches(Request $request)
+    {
+
+        if ($request->action == 'create') return view('admin.pages.branch.create');
+
+        if ($request->action == 'edit' && isset($request->id)) {
+
+            $branch = \App\branch::find($request->id);
+
+            return view('admin.pages.branch.edit', compact('branch'));
+        }
+
+        $request = json_encode($request->all());
+
+        $request = json_decode($request, true);
+
+        $api_url = route('api.branch.index', $request);
+
+        return view('admin.pages.branch.listing', compact('api_url'));
+    }
+
+    public function my_account(Request $request)
+    {
+        $user = $this->admin;
+
+        return view('admin.pages.user.my-account', compact('user'));
+    }
+
+    public function accounts(Request $request)
+    {
+
+        if ($request->action == 'create') return view('admin.pages.user.create');
+
+        if ($request->action == 'edit' && isset($request->id)) {
+
+            $user = \App\User::find($request->id);
+
+            return view('admin.pages.user.edit', compact('user'));
+        }
+
+        $request = json_encode($request->all());
+
+        $request = json_decode($request, true);
+
+        $api_url = route('api.user.index', $request);
+
+        return view('admin.pages.user.listing', compact('api_url'));
+    }
+
     public function settings()
     {
         $autoCurrency = file_exists(storage_path('config/autocurrency.flag'));
