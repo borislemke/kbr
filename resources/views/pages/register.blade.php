@@ -128,6 +128,13 @@
 
         if (data.status == 200) {
 
+          $('input[name=email]').val('');
+          $('input[name=password]').val('');
+          $('input[name=password_confirmation]').val('');
+          $('input[name=firstname]').val('');
+          $('input[name=lastname]').val('');
+          $('input[name=address]').val('');
+
           var html = ''          
             + '<div class="flash-message">'
                 + '<p class="alert alert-success">'
@@ -148,7 +155,7 @@
             $('input[name=password]').closest('.form-group').addClass('has-error');
 
           if (data.monolog.message.firstname)
-            $('input[name=fistname]').closest('.form-group').addClass('has-error');
+            $('input[name=firstname]').closest('.form-group').addClass('has-error');
 
           if (data.monolog.message.city)
             $('select[name=city]').closest('.form-group').find('.select2-selection').css('border', '1px solid #a94442');

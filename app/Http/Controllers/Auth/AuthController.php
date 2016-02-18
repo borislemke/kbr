@@ -167,7 +167,7 @@ class AuthController extends Controller
 
         // $request->session()->flash('alert-success', 'Thankyou for registration. Please check your email address to activate your account.');
 
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'Thanks. Your property has been sent successfully.')));
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'Thanks for registration. Please check your email to activate your account.')));
     }
 
     public function sendConfirmationEmail($firstname, $email, $confirmation_code)
