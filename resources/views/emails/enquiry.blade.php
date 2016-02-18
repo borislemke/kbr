@@ -67,11 +67,6 @@
                                     </table>
                                 </td>
                             </tr>
-                            <tr>
-                                <td align="center">
-                                    <img src="http://dev.kesato.com/newsletter/kbr/email/assets/banner-sm.jpg" style="max-width:600px; display: block; ">
-                                </td>
-                            </tr>
 
                             <tr>
 
@@ -88,11 +83,12 @@
                                                                     font-weight: 600;
                                                                     color: #ee5b2c;
                                                                     border-bottom: 1px solid #e8e8e8;
-                                                                    padding-top: 5px;">Shipping Address</li>
-                                                        <li><strong>Andre Mahendra</strong></li>
-                                                        <li>Denpasar</li>
-                                                        <li>+62 85737054xxx</li>
-                                                        <li>info.andremahendra@gmail.com</li>
+                                                                    padding-top: 5px;">Customer</li>
+                                                        <li><strong>{{ $enquiry->firstname . ' ' . $enquiry->lastname}}</strong></li>
+                                                        <li>{{ $enquiry->phone }}</li>
+                                                        <li>{{ $enquiry->email }}</li>
+                                                        <li>subject: {{ $enquiry->subject }}</li>
+                                                        <li>message: {{ $enquiry->content }}</li>
                                                         
                                                     </ul>
 
@@ -110,16 +106,16 @@
                                                                font-weight: 600;
                                                                color: #ee5b2c;
                                                                border-bottom: 1px solid #e8e8e8;
-                                                               padding-top: 5px;">Date Ordered</li>
-                                                    <li><strong>2016, June 15</strong></li>
+                                                               padding-top: 5px;">Date Enquiry</li>
+                                                    <li><strong>{{ $enquiry->created_at->format('Y-m-d') }}</strong></li>
                                                     <li style=" margin-bottom: 10px;
                                                                margin-top: 10px;
                                                                font-size: 14px;
                                                                font-weight: 600;
                                                                color: #ee5b2c;
                                                                border-bottom: 1px solid #e8e8e8;
-                                                               padding-top: 5px;">No. Invoice</li>
-                                                    <li><strong>KBR-001-20160215</strong></li>
+                                                               padding-top: 5px;">No.</li>
+                                                    <li><strong>{{ $enquiry->id }}</strong></li>
                                                 </ul>
 
                                                 </p>
@@ -131,95 +127,8 @@
                             </tr>
 
                             <tr>
-                                <td>
-                                    <p style="font-size: 24px; font-weight: 600; color: #666; margin-top:10px; text-align:left;">Title</p>
-                                    <table width="100%" >
-                                        <tr style="text-transform: uppercase;
-                                                   color: #868686;
-                                                   font-weight: 600;
-                                                   font-size: 11px;">
-                                            
-                                            <td>No</td>
-                                            <td>Picture</td>
-                                            <td>Title</td>
-                                            <td align="right">Quantity</td>
-                                            <td align="right">Subtotal</td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <td style="border-bottom: 1px solid #e8e8e8; padding-top: 5px;" colspan="5"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5"></td>
-                                        </tr>
-
-                                        <tr style="color:#868686; font-size:12px;">
-                                            <td>1</td>
-                                            <td><img src="http://dev.kesato.com/newsletter/kbr/email/assets/villa_dummy.jpg" width="100px"></td>
-                                            <td align="left">Jalan Petitenget No.9, Badung, Bali 80361 </td>
-                                            <td width="15%" align="right">1</td>
-                                            <td width="20%" align="right">$ 14.000</td>
-                                        </tr>
-                                        <tr style="color:#868686; font-size:12px;">
-                                            <td>2</td>
-                                            <td><img src="http://dev.kesato.com/newsletter/kbr/email/assets/villa_dummy.jpg" width="100px"></td>
-                                            <td align="left">Jalan Petitenget No.9, Badung, Bali 80361 </td>
-                                            <td width="15%" align="right">1</td>
-                                            <td width="20%" align="right">$ 14.000</td>
-                                        </tr>
-                                        <tr style="color:#868686; font-size:12px;">
-                                            <td>3</td>
-                                            <td><img src="http://dev.kesato.com/newsletter/kbr/email/assets/villa_dummy.jpg" width="100px"></td>
-                                            <td align="left">Jalan Petitenget No.9, Badung, Bali 80361 </td>
-                                            <td width="15%" align="right">1</td>
-                                            <td width="20%" align="right">$ 14.000</td>
-                                        </tr>
-
-                                        <tr>
-                                            <tr>
-                                                <td style="border-bottom: 1px solid #e8e8e8;
-                                                           border-top: 1px solid #e8e8e8;
-                                                           margin-bottom: 5px;" colspan="5"></td>
-                                            </tr>
-
-                                            <tr style="color:#868686; font-size:12px; font-weight:600;">
-                                                <td colspan="3"></td>
-                                                <td align="right">Subtotal</td>
-                                                <td align="right" style="white-space:nowrap;">$ 42.000.000</td>
-                                            </tr>
-
-                                            <tr style="color:#868686; font-size:12px; font-weight:600;">
-                                                <td colspan="3"></td>
-                                                <td align="right">Deposit</td>
-                                                <td align="right">$ 2.000.000</td>
-                                            </tr>  
-
-                                        <tr>
-                                            <td style="border-bottom: 1px solid #e8e8e8;
-                                                        border-top: 1px solid #e8e8e8;
-                                                        margin-bottom: 5px;" colspan="5"></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td colspan="5"></td>
-                                            </tr>
-                                            <tr  style="color:#868686; font-size:12px; font-weight:600;">
-                                                <td colspan="3"></td>
-                                                <td align="right" style="color: #ee5b2c;">Total</td>
-                                                <td align="right"  style="color: #ee5b2c; white-space:nowrap;">$ 40.000.000</td>
-                                            </tr>
-
-                                        </tr>
-                        
-                                    </table>
-                                </td>
-                                
-                            </tr>
-
-                            <tr>
                                 <td style="padding: 50px 0px;" align="right" >
-                                    <a href="http://flettyproject.com" style=" background: #ee5b2c; padding: 10px 15px; color: #fff; text-decoration: none; border-radius: 4px; font-size:12px; font-weight: 600;">Download Invoice</a>
+                                    <a href="http://flettyproject.com" style=" background: #ee5b2c; padding: 10px 15px; color: #fff; text-decoration: none; border-radius: 4px; font-size:12px; font-weight: 600;">Download PDF</a>
                                 </td>
                             </tr>
 

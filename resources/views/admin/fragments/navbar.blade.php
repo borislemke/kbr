@@ -9,7 +9,7 @@ if ($admin->role_id == 3) {
 
 $first = TRUE;
 
-$link = str_replace('/admin/', '', $_SERVER['REQUEST_URI']);
+$link = str_replace(url('/admin') . '/', '', "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 
 $link = strtok($link, '?');
 

@@ -8,7 +8,6 @@
 <div class="bc-bg">
     <ul class="breadcrumb container">
         <li><a href="{{ baseUrl() }}">Home</a></li>
-        <li><a href="{{ route('search', ['search' => Lang::get('url')['search'], 'category' => $property->category->route ]) }}">{{ $property->category->lang()->title }}</a></li>
         <li class="active">{{ $property->lang()->title }}</li>
     </ul>
 </div>
@@ -40,13 +39,9 @@
         <div class="col-md-8 property-detail" data-id="{{ $property->id }}" data-customerId="{{ ($custLog)? $custLog->id : 0 }}">
 
             <div class="thumbnail nohovereffect">
-                @if(count($property->propertyFiles) > 0)
-                <img src="{{ asset('uploads/property/' . $property->propertyFiles[0]->file) }}">
-                <p for=""><span class="currency">{!! \Config::get('currency') !!}</span> {{ number_format($property->price, 2) }}</p>
-                @else
+
                 <img src="{{ asset('no-image.png') }}">
                 <p for=""><span class="currency">{!! \Config::get('currency') !!}</span> {{ number_format($property->price, 2) }}</p>
-                @endif
 
                 
             </div>
@@ -54,56 +49,72 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Description</div>
                 <div class="panel-body">
-                    {{ $property->lang()->description }}
+                    {!! $property->lang()->content !!}
                 </div>
             </div>
 
             <div class="panel panel-default">
                 <div class="panel-heading">Facilities</div>
 
-                <ul class="list-group">
-
-                    @foreach($property->facilities as $facility)
-                    <li class="list-group-item">
-                        <span class="badge">{{ $facility->description }}</span>
-                        {{ $facility->name }}
-                    </li>
-                    @endforeach
-
-                </ul>
+                <div class="panel-body">
+                    <ul>
+                        @foreach($property->facilities() as $facility)
+                        <li>
+                            {{ $facility->name }} : {{ $facility->value }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
 
             <div class="panel panel-default">
                 <div class="panel-heading">Distances</div>
 
-                <ul class="list-group">
-
-                    @foreach($property->distances as $distance)
-                    <li class="list-group-item">
-                        <span class="badge">{{ $distance->value }} {{ $distance->unit }}</span>
-                        {{ $distance->from }}
-                    </li>
-                    @endforeach
-
-                </ul>
+                <div class="panel-body">
+                    <ul>
+                        @foreach($property->distances() as $distance)
+                        <li>
+                            {{ $distance->name }} : {{ $distance->value }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
 
             <div class="panel panel-default">
                 <div class="panel-heading">Details</div>
 
-                <ul class="list-group">
+                <div class="panel-body">
+                    <ul>
                    
-                    <li class="list-group-item">
-                        <span class="badge">{{ $property->land_size }} m2</span>
-                        Land:
-                    </li>
-                   
-                    <li class="list-group-item">
-                        <span class="badge">{{ $property->building_size }} m2</span>
-                        Building:
-                    </li>
+                        <li>
+                            Land: {{ $property->land_size }}
+                        </li>
+                       
+                        <li>
+                            Buliding: {{ $property->building_size }}
+                        </li>
 
-                </ul>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">View</div>
+
+                <div class="panel-body">
+                    <ul>
+                   
+                        <li>
+                            North: {{ $property->view_north }}
+                        </li>
+                       
+                        <li>
+                            West: {{ $property->view_west }}
+                        </li>
+
+                    </ul>
+                </div>
             </div>
             
         </div>
@@ -125,7 +136,7 @@
                             <a href="#" class="btn btn-default fa fa-print"> Print PDF</a>
                         </div>
                         <div class="col-lg-6">
-                            <a href="#" class="btn btn-default fa fa-heart-o" id="btn-favorite"> Favorites</a>
+                            <a href="#" class="btn btn-default fa <? if ($custLog) echo checkWishlist($custLog->id, $property->id) ? 'fa-heart' : 'fa-heart-o'; else echo 'fa-heart-o'; ?>" id="btn-favorite"> Favorites</a>
                         </div>
                     </div>
                         
@@ -144,7 +155,7 @@
     <!-- Modal content-->
     <div class="modal-content">
 
-    {!! Form::open([ 'url' => route('property.inquiry') ]) !!}
+    {!! Form::open([ 'url' => route('api.enquiry.store'), 'id' => 'form-enquiry' ]) !!}
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -178,7 +189,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Send</button>
+        <button type="submit" class="btn btn-primary send-enquiry">Send</button>
       </div>
 
     {!! Form::close() !!}
@@ -208,12 +219,23 @@ $(document).ready(function() {
 
         if (customerId != 0) {
 
-            var url = "{{ route('property.favorite') }}";
+            var url = "{{ route('api.wishlist.store') }}";
             var token = "{{ csrf_token() }}";
 
             $.post(url, {property_id: propertyId, customer_id: customerId, _token: token}, function(data, textStatus, xhr) {
                 
                 console.log(data);
+
+                if (data.status == 200) {
+
+                    $('#btn-favorite').removeClass('fa-heart-o').addClass('fa-heart');
+                }
+
+                if (data.status == 300) {
+
+                    $('#btn-favorite').removeClass('fa-heart').addClass('fa-heart-o');
+                }
+
             });
 
         } else {
@@ -222,6 +244,46 @@ $(document).ready(function() {
         }
 
         event.preventDefault();
+    });
+
+    $('#form-enquiry').submit(function(event) {
+        event.preventDefault();
+
+        $('.send-enquiry').html('Sending...');
+
+        console.log('send enquiry');
+
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+
+        $.post(url, data, function(data, textStatus, xhr) {
+            
+            console.log(data);
+
+            if (data.status == 200) {
+
+                $('#inquiryModal').modal('hide');
+
+                console.log(data.monolog.message);
+                // todo show success dialog;
+            }
+
+            if (data.status == 500) {
+
+                if (data.monolog.message.name)
+                    $('input[name=name]').closest('.form-group').addClass('has-error');
+
+                if (data.monolog.message.subject)
+                    $('input[name=subject]').closest('.form-group').addClass('has-error');
+
+                if (data.monolog.message.phone)
+                    $('input[name=phone]').closest('.form-group').addClass('has-error');
+            }
+
+            $('.send-enquiry').html('Send');
+
+        });
+
     });
 });
 

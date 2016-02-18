@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 
 use App\Property;
 
+use Mail;
+use DB;
+
 class PropertyController extends Controller
 {
     /**
@@ -163,7 +166,7 @@ class PropertyController extends Controller
         //
     }
 
-    public function search(Request $request, $page, $category = null)
+    public function search(Request $request, $page, $term = null)
     {
         $limit = 24;
 
@@ -172,7 +175,13 @@ class PropertyController extends Controller
         $properties = $properties->select('properties.*');
 
         // filter category
-        if ($category != null) {
+        if ($term != null) {
+
+            $segment = explode('/', $term);
+
+            $category = end($segment);
+
+            // $segment = 
             $properties = $properties->join('property_terms', 'property_terms.property_id', '=', 'properties.id')
                 ->join('terms', 'terms.id', '=', 'property_terms.term_id')
                 ->where('terms.slug', $category);
@@ -181,7 +190,97 @@ class PropertyController extends Controller
         $properties = $properties->paginate($limit);
 
 
-        return view('pages.search-property', compact('properties'));
+        return view('pages.search-property', compact('properties', 'term'));
+    }
+
+    public function detail(Request $request, $page, $term = null)
+    {
+        if ($term == null) return $this->search($request, $page, $term);
+
+        $segment = explode('/', $term);
+
+        $slug = end($segment);
+
+        // $slug = str_replace('.asp', '', $slug);
+
+        $property = new Property;
+
+        $property = $property->where('slug', $slug);
+
+        if ($property->count() == 0) return $this->search($request, $page, $term);
+
+        $property = $property->first();
+
+        return view('pages.property-view', compact('property'));
+    }
+
+    public function sellProperty(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'owner_name' => 'required',
+            'owner_phone' => 'required',
+            'city' => 'required',
+            'g-recaptcha-response' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => $validator->errors() )));
+        }
+
+        DB::beginTransaction();
+
+        $property = new Property;
+
+        $property->map_latitude = $request->map_latitude;
+        $property->map_longitude = $request->map_longitude;
+        $property->owner_name = $request->owner_name;
+        $property->owner_email = $request->owner_email;
+        $property->owner_phone = $request->owner_phone;
+        $property->sell_note = $request->sell_note;
+
+
+        // find province, country
+        $city = \App\City::where('city_name', $request->city)->first();
+
+        $property->city = $request->city;
+        $property->province = $city->province->province_name;
+        $property->country = $city->province->country->nicename;
+
+
+        //moderation
+        $property->status = -2;
+
+        $property->save();
+
+        // category
+
+        $propertyTerm = new \App\PropertyTerm;
+
+        $propertyTerm->term_id = $request->category;
+        $propertyTerm->property_id = $property->id;
+
+        $propertyTerm->save();
+
+        $this->email($property);
+
+        DB::commit();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'Thanks. Your property has been sent successfully.')));
+    }
+
+    public function email($property)
+    {
+        $email = 'gusman@kesato.com';
+
+        Mail::send('emails.property-listing', ['property' => $property], function($message) use ($email) {
+
+            $message->from('boris@kesato.com', 'Kibarer');
+
+            $message->to($email, $email)->subject('Listing Request Kibarer');
+        });
+
+        return true;
     }
 
 }

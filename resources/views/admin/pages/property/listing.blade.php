@@ -114,7 +114,7 @@
                 {
                     "data": "user",
                     "render": function (data, type, row) {
-                        return  data.username;
+                        return  data ? data.username : '-';
                     }
                 },
                 {

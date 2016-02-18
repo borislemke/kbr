@@ -47,11 +47,6 @@ class Property extends Model
         return $this->hasMany('App\Enquiry');
     }
 
-    public function thumb()
-    {
-        return $this->propertyFiles()->where('type', 'image')->first();
-    }
-
     public function scopeFilterPrice($query, $minprice, $maxprice)
     {
         if (isset($minprice) && empty($maxprice)) {
@@ -72,29 +67,6 @@ class Property extends Model
         return $query;
     }
 
-    public function scopeFilterCategory($query, $category)
-    {
-
-        if (isset($category)) {
-
-            $query->where(function ($q) use ($category) {
-
-                $q->where('category_id', $category->id);
-
-                if ($category->childs) {
-
-                foreach ($category->childs as $key => $value) {
-                        
-                        $q->orWhere('category_id', $value->id);
-                    }
-                }
-            });
-            
-        }
-
-        return $query;
-    }
-
     public function scopeFilterLocation($query, $lat, $lon, $rad)
     {
         if (isset($lat) && isset($lon) && isset($rad)) {
@@ -109,36 +81,32 @@ class Property extends Model
     public function lang()
     {
 
-        $propertyLanguages = $this->propertyLanguages()->where('locale', \Lang::getLocale());
+        $locale = $this->propertyLocales()->where('locale', \Lang::getLocale());
 
-        if ($propertyLanguages->count() > 0) {
+        if ($locale->count() > 0) {
 
-            return $propertyLanguages->first();
+            return $locale->first();
 
         } else {
 
-            return $this->propertyLanguages()->where('locale', 'en')->first();
+            return $this->propertyLocales()->where('locale', 'en')->first();
         }
+
     }
 
-    public function categoryName()
+    public function facilities()
     {
-        if ($this->category) {
-            $categoryLanguages = $this->category->categoryLanguages()->where('locale', \Lang::getLocale());
+        return $this->propertyMetas()->where('type', 'facility')->get();
+    }
 
-            if ($categoryLanguages->count() > 0) {
+    public function distances()
+    {
+        return $this->propertyMetas()->where('type', 'distance')->get();
+    }
 
-                return $categoryLanguages->first()->title;
-
-            } else {
-
-                return $this->category->categoryLanguages()->where('locale', 'en')->first()->title;
-            }
-
-        } else {
-            return '-';
-        }
-
+    public function documents()
+    {
+        return $this->propertyMetas()->where('type', 'document')->get();
     }
 
     public static function boot()

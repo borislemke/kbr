@@ -71,6 +71,14 @@ Route::group(['middleware' => 'auth'], function () {
         // about
         Route::get('about',['as' => 'admin.about', 'uses' => 'AdminController@about']);
 
+
+        Route::get('pdf', function() {
+
+            $property = \App\Property::find(1);
+
+            return view('pdf.property', compact('property'));
+        });
+
     });
 
 });
@@ -127,16 +135,16 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
     Route::any('{testimonials}.asp',['as' => 'testimonials', 'uses' => 'PageController@testimony']);
 
     // sell_property    
-    Route::any('{sell_property}',['as' => 'sell_property', 'uses' => 'PageController@sellProperty']);
+    Route::get('{sell_property}',['as' => 'sell_property', 'uses' => 'PageController@sellProperty']);
 
     // lawyer_notary    
     Route::any('{lawyer_notary}',['as' => 'lawyer_notary', 'uses' => 'PageController@lawyerNotary']);
 
     // search    
-    Route::get('{search}/{category?}',['as' => 'search', 'uses' => 'PropertyController@search']);
+    // Route::get('{search}/{category?}',['as' => 'search', 'uses' => 'PropertyController@search']);
 
     // property
-    Route::get('{property}/{term?}',['as' => 'property', 'uses' => 'PropertyController@detail']);
+    Route::get('{search}/{term?}',['as' => 'search', 'uses' => 'PropertyController@detail'])->where('term', '(.*)');
 
     // post
     Route::get('{blog}/{term?}',['as' => 'blog', 'uses' => 'PostController@detail']);
@@ -205,6 +213,8 @@ Route::group(['prefix' => 'api'], function() {
     Route::resource('user', 'UserController');
 
     Route::resource('wishlist', 'WishlistController');
+
+    Route::post('sellproperty', ['as' => 'sellproperty.store', 'uses' => 'PropertyController@sellProperty']);
 
 });
 

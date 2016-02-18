@@ -35,7 +35,7 @@
       <div class="panel panel-primary">
         
         <div class="panel-body">
-          {!! Form::open(array('url' => route('register.store', trans('url.register')))) !!}
+          {!! Form::open(array('url' => route('register.store', trans('url.register')), 'id' => 'form-register')) !!}
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input class="form-control" type="email" name="email" value="{{ old('email') }}">
@@ -110,6 +110,56 @@
   $(".select-city").select2({
     placeholder: "Select a city",
     allowClear: true
+  });
+
+  $(document).ready(function() {
+    
+    $('#form-register').submit(function(event) {
+      /* Act on the event */
+      event.preventDefault();
+
+      $('button[type=submit]').html('Sending...');
+
+      var url = $(this).attr('action');
+      var data = $(this).serialize();
+
+      $.post(url, data, function(data, textStatus, xhr) {
+        /*optional stuff to do after success */
+
+        if (data.status == 200) {
+
+          var html = ''          
+            + '<div class="flash-message">'
+                + '<p class="alert alert-success">'
+                + data.monolog.message
+                  + '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>'
+            + '</div>';
+
+          $('.panel-body').prepend(html);
+
+        }
+
+        if (data.status == 500) {
+
+          if (data.monolog.message.email)
+            $('input[name=email]').closest('.form-group').addClass('has-error');
+
+          if (data.monolog.message.password)
+            $('input[name=password]').closest('.form-group').addClass('has-error');
+
+          if (data.monolog.message.firstname)
+            $('input[name=fistname]').closest('.form-group').addClass('has-error');
+
+          if (data.monolog.message.city)
+            $('select[name=city]').closest('.form-group').find('.select2-selection').css('border', '1px solid #a94442');
+        }
+
+        $('button[type=submit]').html('Register');
+
+      });
+
+    });
+
   });
 
 </script>

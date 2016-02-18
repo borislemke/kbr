@@ -12,30 +12,11 @@
 <div class="container">
 
 
-  @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-  @endif
-
-  <div class="flash-message">
-    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-      @if(Session::has('alert-' . $msg))
-
-      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-      @endif
-    @endforeach
-  </div> <!-- end .flash-message -->
-  
   <div class="col-md-12">
     <div class="panel panel-primary">
       <div class="panel-body">
 
-        {!! Form::open(['url' => route('sell_property', trans('url.sell_property'))]) !!}
+        {!! Form::open(['url' => route('sellproperty.store'), 'id' => 'form-sellproperty']) !!}
 
           <div class="form-group">
             <div class="col-sm-6">
@@ -68,6 +49,21 @@
             </div>
           </div>
 
+          <div class="clearfix"></div>
+          <div class="form-group">
+            <div class="col-sm-6">
+              <label class="control-label" for="owner_name">Category</label>
+              <select name="category" class="form-control" placeholder="">
+
+                <?php $categories = \App\Term::where('type', 'property_category')->get(); ?>
+                @foreach($categories as $category)
+                  <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+
+              </select>
+            </div>
+          </div>
+
           <div class="form-group map">  
             <div class="col-sm-12">
               <label class="control-label" for="sell_note">Comment</label>
@@ -92,7 +88,7 @@
 
           <div class="form-group">
             <div class="col-sm-12">
-              <button type="submit" class="btn btn-primary">Send</button>
+              <button type="submit" class="btn btn-primary" id="send-property">Send</button>
             </div>
           </div>
         {!! Form::close() !!}
@@ -112,6 +108,55 @@
   $(".select-city").select2({
     placeholder: "Select a city",
     allowClear: true
+  });
+
+  $(document).ready(function() {
+    
+    $('#form-sellproperty').submit(function(event) {
+      /* Act on the event */
+      event.preventDefault();
+
+      console.log('send property');
+
+      $('#send-property').html('Sending...');
+
+      var url = $(this).attr('action'),
+        data = $(this).serialize();
+
+      $.post(url, data, function(data, textStatus, xhr) {
+        /*optional stuff to do after success */
+
+        if (data.status == 200) {
+
+          var html = ''          
+            + '<div class="flash-message">'
+                + '<p class="alert alert-success">'
+                + data.monolog.message
+                  + '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>'
+            + '</div>';
+
+          $('.panel-body').prepend(html);
+
+        }
+
+        if (data.status == 500) {
+
+          if (data.monolog.message.owner_name)
+            $('input[name=owner_name]').closest('.form-group').addClass('has-error');
+
+          if (data.monolog.message.owner_phone)
+            $('input[name=owner_phone]').closest('.form-group').addClass('has-error');
+
+          if (data.monolog.message.city)
+            $('select[name=city]').closest('.form-group').find('.select2-selection').css('border', '1px solid #a94442');
+
+        }
+
+        $('#send-property').html('Send');
+      });
+
+    });
+
   });
 
 </script>

@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use App\Enquiry;
 
+use Mail;
+
 class EnquiryController extends Controller
 {
     /**
@@ -123,18 +125,43 @@ class EnquiryController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'subject' => 'required',
+            'phone' => 'required',
+            'g-recaptcha-response' => 'required'
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => $validator->errors() )));
+        }
+
         $enquiry = new Enquiry;
 
         $enquiry->property_id = $request->property_id;
         // $enquiry->customer_id = $request->customer_id;
         $enquiry->subject = $request->subject;
         $enquiry->content = $request->content;
-        $enquiry->firstname = $request->firstname;
-        $enquiry->lastname = $request->lastname;
+
+        if ($request->name) {
+            $name = explode(' ', $request->name);
+            $enquiry->firstname = $name[0];
+
+            if (count($name) > 1)
+                $enquiry->lastname = $name[1];
+
+        } else {            
+            $enquiry->firstname = $request->firstname;
+            $enquiry->lastname = $request->lastname;
+        }
+
         $enquiry->phone = $request->phone;
         $enquiry->email = $request->email;
 
         $enquiry->save();
+
+        $this->email($enquiry);
 
         return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));
     }
@@ -201,5 +228,21 @@ class EnquiryController extends Controller
         $enquiry->delete();
 
         return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));
+    }
+
+    public function email($enquiry)
+    {
+
+        // $email = $enquiry->property->user->email;
+        $email = 'gusman@kesato.com';
+
+        Mail::send('emails.enquiry', ['enquiry' => $enquiry], function($message) use ($email) {
+
+            $message->from('boris@kesato.com', 'Kibarer');
+
+            $message->to($email, $email)->subject('Enquiry Kibarer');
+        });
+
+        return true;
     }
 }

@@ -145,3 +145,13 @@ function statusToInteger($status) {
 
 }
 
+function checkWishlist($id, $property_id) {
+
+    $count = \App\WishList::where('customer_id', $id)
+        ->where('property_id', $property_id)
+        ->count();
+
+    return $count > 0 ? true : false;
+
+}
+

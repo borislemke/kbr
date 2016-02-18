@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\WishList;
+
 class WishListController extends Controller
 {
     /**
@@ -38,6 +40,28 @@ class WishListController extends Controller
     public function store(Request $request)
     {
         //
+        $check = checkWishlist($request->customer_id, $request->property_id);
+
+        if (!$check) {
+
+            $wishlist = new WishList;
+
+            $wishlist->customer_id = $request->customer_id;
+            $wishlist->property_id = $request->property_id;
+
+            $wishlist->save();
+
+            return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));
+
+        } else {
+
+            $wishlist = WishList::where('customer_id', $request->customer_id)
+                ->where('property_id', $request->property_id)->delete();
+
+            return response()->json(array('status' => 300, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));
+
+        }
+        
     }
 
     /**

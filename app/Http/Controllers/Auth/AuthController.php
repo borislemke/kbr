@@ -127,12 +127,17 @@ class AuthController extends Controller
     public function postRegister(Request $request)
     {
 
-        $this->validate($request, [
+        $validator = \Validator::make($request->all(), [
             'email' => 'required|unique:customers',
             'password' => 'required|confirmed',
             'firstname' => 'required',
-            'city' => 'required'
+            'city' => 'required',
+            'g-recaptcha-response' => 'required'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => $validator->errors() )));
+        }
 
 
         $confirmation_code = str_random(30);
@@ -160,9 +165,9 @@ class AuthController extends Controller
         // send confirm email
         $this->sendConfirmationEmail($customer->firstname, $customer->email, $confirmation_code);
 
-        $request->session()->flash('alert-success', 'Thankyou for registration. Please check your email address to activate your account.');
+        // $request->session()->flash('alert-success', 'Thankyou for registration. Please check your email address to activate your account.');
 
-        return redirect()->back();
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'Thanks. Your property has been sent successfully.')));
     }
 
     public function sendConfirmationEmail($firstname, $email, $confirmation_code)

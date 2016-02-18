@@ -44,7 +44,7 @@
             <!-- Title -->
             <tr>
                 <td>
-                    <h1>{{ $property->language->title }}</h1>
+                    <h1>{{ $property->lang()->title }}</h1>
                 </td>
             </tr>
 
