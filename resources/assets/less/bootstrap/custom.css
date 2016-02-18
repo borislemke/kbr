@@ -471,6 +471,7 @@ body header section #burger-nav #burger.active span:last-child {
 }
 .contact-us .contact-form-wrapper textarea {
   color: #666;
+  background: none;
 }
 .contact-us .contact-form-wrapper .btn-custom {
   width: 100%;
