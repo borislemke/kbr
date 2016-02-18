@@ -1,17 +1,17 @@
 @extends('admin.master')
-@section('page', 'properties')
+@section('page', 'blog')
 
 @section('fab')
 
-<!-- <m-fab salmon class="modal-open" data-target="#customer-add"><i class="material-icons">add</i></m-fab> -->
-<a href="{{ route('admin.customers', ['term' => null, 'action' => 'create']) }}"><m-fab salmon data-target="#customer-add"><i class="material-icons">add</i></m-fab></a>
+<!-- <m-fab salmon class="modal-open" data-target="#post-add"><i class="material-icons">add</i></m-fab> -->
+<a href="{{ route('admin.posts', ['term' => null, 'action' => 'create']) }}"><m-fab salmon data-target="#post-add"><i class="material-icons">add</i></m-fab></a>
 
 @stop
 
 @section('content')
 <br>
 
-<m-template list class="customer-wrapper">
+<m-template list class="post-wrapper">
 
     <table>
         <thead>
@@ -19,11 +19,10 @@
                 <!-- <m-list-item-check all class="item-select-all"></m-list-item-check> -->
                 Id
             </td>
-            <td>Username</td>
-            <td>Firstname</td>
-            <td>Email</td>
-            <td>City</td>
-            <td>Country</td>
+            <td>title</td>
+            <td>slug</td>
+            <!-- <td>route</td> -->
+            <td>status</td>
             <td>Created</td>
             <td>Action</td>
         </thead>
@@ -38,7 +37,7 @@
 @section('scripts')
 
 <script>
-    // Matter.admin.customers();
+    // Matter.admin.posts();
 
     $(document).ready(function() {
 
@@ -46,7 +45,7 @@
             event.preventDefault();
 
             var id = $(this).parent().attr('data-id');            
-            var url = "{{ route('api.customer.destroy', $id = null) }}/" + id;
+            var url = "{{ route('api.post.destroy', $id = null) }}/" + id;
             var method = 'delete';
             var token = "{{ csrf_token() }}";
 
@@ -85,11 +84,15 @@
             "deferRender": true,
             "columns": [
                 {"data": "id"},
-                {"data": "username"},
-                {"data": "firstname"},
-                {"data": "email"},
-                {"data": "city"},
-                {"data": "country"},
+                {"data": "post_locales.0.title"},
+                {"data": "slug"},
+                // {"data": "route"},
+                {
+                    "data": "status",
+                    "render": function (data, type, row) {
+                        return data == 1 ? 'publish' : 'draft';
+                    }
+                },
                 {
                     "data": "created_at",
                     "render": function (data, type, row) {
@@ -107,7 +110,7 @@
                         + '<m-table-list-more>'
                             + '<i class="material-icons">more_horiz</i>'
                             + '<m-list-menu data-id="'+ data +'">'
-                                + '<a href="'+ baseUrl +'/admin/customers?action=edit&id='+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
+                                + '<a href="'+ baseUrl +'/admin/blog?action=edit&id='+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
                                 + '<m-list-menu-item delete data-url="property/destroy">DELETE</m-list-menu-item>'
                             + '</m-list-menu>'
                         + '</m-table-list-more>';

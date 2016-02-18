@@ -128,14 +128,44 @@ class AdminController extends Controller
         return view('admin.pages.contact.listing', compact('api_url'));
     }
     
-    public function pages($term = null)
+    public function pages(Request $request, $term = null)
     {
-        return view('admin.pages.pages');
+        if ($request->action == 'create') return view('admin.pages.page.create');
+
+        if ($request->action == 'edit' && isset($request->id)) {
+
+            $page = \App\Page::find($request->id);
+
+            return view('admin.pages.page.edit', compact('page'));
+        }
+
+        $request = json_encode($request->all());
+
+        $request = json_decode($request, true);
+
+        $api_url = route('api.page.index', $request);
+
+        return view('admin.pages.page.listing', compact('api_url'));
     }
     
-    public function posts($term = null)
+    public function posts(Request $request, $term = null)
     {
-        return view('admin.pages.posts');
+        if ($request->action == 'create') return view('admin.pages.post.create');
+
+        if ($request->action == 'edit' && isset($request->id)) {
+
+            $post = \App\Post::find($request->id);
+
+            return view('admin.pages.post.edit', compact('post'));
+        }
+
+        $request = json_encode($request->all());
+
+        $request = json_decode($request, true);
+
+        $api_url = route('api.post.index', $request);
+
+        return view('admin.pages.post.listing', compact('api_url'));
     }
 
     public function branches(Request $request)

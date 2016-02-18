@@ -43,7 +43,7 @@ class Page extends Model
 
         static::deleting(function($page)
         {
-
+            $page->pageLocales()->delete();
         });
 
         static::created(function($page)

@@ -1,56 +1,175 @@
 @extends('admin.master')
-@section('page', 'properties')
+@section('page', 'pages')
 
 @section('content')
-<h3>Add Customer</h3>
+<h3>Add Page</h3>
 <br>
 
-{!! Form::open(['url' => route('api.customer.store')]) !!}
+{!! Form::open(['url' => route('api.page.store')]) !!}
 
+    <m-caroussel>
+
+        <m-caroussel-header class="flexbox justify-end">
+            <m-caroussel-switch-wrapper class="flexbox">
+                <?php $numberOfSlides = 4 ?>
+                <m-caroussel-switch class="active">english</m-caroussel-switch>
+                <m-caroussel-switch>french</m-caroussel-switch>
+                <m-caroussel-switch>russian</m-caroussel-switch>
+                <m-caroussel-switch>bahasa</m-caroussel-switch>
+            </m-caroussel-switch-wrapper>
+        </m-caroussel-header>
+
+        <m-caroussel-body>
+            <m-caroussel-slider class="flexbox align-start" style="width: <?= $numberOfSlides ?>00%;">
+
+                <m-caroussel-slide class="flexbox flexbox-wrap" id="caroussel-general" style="width: calc(100% / <?= $numberOfSlides ?>)">
+
+                    <div class="m-input-group fwidth flexbox justify-between">                    
+                        <div class="m-input-wrapper w50-6">
+                            <input url-format data-target="#page-input-slug" type="text" name="title[en]" id="page-input-title" required>
+                            <label for="title">title</label>
+                        </div>
+
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="slug[en]" id="page-input-slug" required>
+                            <label for="slug">url</label>
+                        </div>
+                    </div>
+
+                    <div class="m-input-group fwidth flexbox justify-between">
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="meta_keyword[en]" required>
+                            <label for="title">keyword</label>
+                        </div>
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="meta_description[en]" required>
+                            <label for="title">description</label>
+                        </div>
+                    </div>
+
+                    <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
+                        <h3 class="input-group-title">content</h3>
+                        <div class="input-wrapper fwidth">
+                            <textarea name="content[en]" rows="10" style="padding-top: 0"></textarea>
+                        </div>
+                    </div>                
+
+                </m-caroussel-slide>
+
+                <m-caroussel-slide class="flexbox flexbox-wrap" id="caroussel-general" style="width: calc(100% / <?= $numberOfSlides ?>)">
+
+                    <div class="m-input-group fwidth flexbox justify-between">                    
+                        <div class="m-input-wrapper w50-6">
+                            <input url-format data-target="#page-input-slug2" type="text" name="title[fr]" id="page-input-title" required>
+                            <label for="title">title</label>
+                        </div>
+
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="slug[fr]" id="page-input-slug2" required>
+                            <label for="slug">url</label>
+                        </div>
+                    </div>
+
+                    <div class="m-input-group fwidth flexbox justify-between">
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="meta_keyword[fr]" required>
+                            <label for="title">keyword</label>
+                        </div>
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="meta_description[fr]" required>
+                            <label for="title">description</label>
+                        </div>
+                    </div>
+
+                    <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
+                        <h3 class="input-group-title">content</h3>
+                        <div class="input-wrapper fwidth">
+                            <textarea name="content[fr]" rows="10" style="padding-top: 0"></textarea>
+                        </div>
+                    </div>
+
+                </m-caroussel-slide>
+
+                <m-caroussel-slide class="flexbox flexbox-wrap" id="caroussel-general" style="width: calc(100% / <?= $numberOfSlides ?>)">
+
+                    <div class="m-input-group fwidth flexbox justify-between">                    
+                        <div class="m-input-wrapper w50-6">
+                            <input url-format data-target="#page-input-slug3" type="text" name="title[ru]" id="page-input-title" required>
+                            <label for="title">title</label>
+                        </div>
+
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="slug[ru]" id="page-input-slug3" required>
+                            <label for="slug">url</label>
+                        </div>
+                    </div>
+
+                    <div class="m-input-group fwidth flexbox justify-between">
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="meta_keyword[ru]" required>
+                            <label for="title">keyword</label>
+                        </div>
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="meta_description[ru]" required>
+                            <label for="title">description</label>
+                        </div>
+                    </div>
+
+                    <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
+                        <h3 class="input-group-title">content</h3>
+                        <div class="input-wrapper fwidth">
+                            <textarea name="content[ru]" rows="10" style="padding-top: 0"></textarea>
+                        </div>
+                    </div>
+
+                </m-caroussel-slide>
+
+                <m-caroussel-slide class="flexbox flexbox-wrap" id="caroussel-general" style="width: calc(100% / <?= $numberOfSlides ?>)">
+
+                    <div class="m-input-group fwidth flexbox justify-between">                    
+                        <div class="m-input-wrapper w50-6">
+                            <input url-format data-target="#page-input-slug4" type="text" name="title[id]" id="page-input-title" required>
+                            <label for="title">title</label>
+                        </div>
+
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="slug[id]" id="page-input-slug4" required>
+                            <label for="slug">url</label>
+                        </div>
+                    </div>
+
+                    <div class="m-input-group fwidth flexbox justify-between">
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="meta_keyword[id]" required>
+                            <label for="title">keyword</label>
+                        </div>
+                        <div class="m-input-wrapper w50-6">
+                            <input type="text" name="meta_description[id]" required>
+                            <label for="title">description</label>
+                        </div>
+                    </div>
+
+                    <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
+                        <h3 class="input-group-title">content</h3>
+                        <div class="input-wrapper fwidth">
+                            <textarea name="content[id]" rows="10" style="padding-top: 0"></textarea>
+                        </div>
+                    </div>
+
+                </m-caroussel-slide>
+
+            </m-caroussel-slider>
+        </m-caroussel-body>
+
+    </m-caroussel>
 
     <div class="m-input-group fwidth flexbox justify-between">
         <div class="m-input-wrapper w50-6">
-            <input type="text" name="firstname" required>
-            <label for="title">firstname</label>
-        </div>
-        <div class="m-input-wrapper w50-6">
-            <input type="text" name="lastname" required>
-            <label for="title">lastname</label>
-        </div>
-    </div>
-
-    <div class="m-input-group fwidth flexbox justify-between">
-        <div class="m-input-wrapper w50-6">
-            <input type="text" name="phone" required>
-            <label for="title">phone</label>
-        </div>
-        <div class="m-input-wrapper w50-6">
-            <input type="text" name="email" required>
-            <label for="title">email</label>
-        </div>
-    </div>
-
-    <div class="m-input-group fwidth flexbox justify-between">
-        <div class="m-input-wrapper w50-6">
-            <input type="text" name="address" required>
-            <label for="title">address</label>
-        </div>
-        <div class="m-input-wrapper w50-6">
-            <select name="city">
-
-                @foreach(\App\City::all() as $city)
-                <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
-                @endforeach
-
+            <select name="status">
+                <option value="1">publish</option>
+                <option value="0">draft</option>
             </select>
-            <label for="title">city</label>
-        </div>
-    </div>
-
-    <div class="m-input-group fwidth flexbox justify-between">
-        <div class="m-input-wrapper w50-6">
-            <input type="password" name="password" required>
-            <label for="title">password</label>
+            <label for="title">status</label>
         </div>
     </div>
 
@@ -73,7 +192,7 @@
             
             console.log('save clicked!');
 
-            var url = "{{ route('api.customer.store') }}";
+            var url = "{{ route('api.page.store') }}";
             var fd = new FormData($('form')[0]);
 
             NProgress.start();

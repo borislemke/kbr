@@ -89,8 +89,11 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
 
 $factory->define(App\PostLocale::class, function (Faker\Generator $faker) {
     return [
+        'meta_keyword' => 'your keyword',
+        'meta_description' => 'your description',
         'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'content' => '<p>' . $faker->paragraph($nbSentences = 70, $variableNbSentences = true) . '</p>',
+        'slug' => $slug = str_slug($faker->sentence($nbWords = 6, $variableNbWords = true)),
         'locale' => 'en'
     ];
 });
@@ -142,8 +145,11 @@ $factory->define(App\Property::class, function (Faker\Generator $faker) {
 
 $factory->define(App\PropertyLocale::class, function (Faker\Generator $faker) {
     return [
+        'meta_keyword' => 'your keyword',
+        'meta_description' => 'your description',
         'title' => $faker->sentence($nbWords = 3, $variableNbWords = true),
         'content' => '<p>'. $faker->sentence($nbWords = 20, $variableNbWords = true) .'</p>',
+        'slug' => $slug = str_slug($faker->sentence($nbWords = 6, $variableNbWords = true)),
         'locale' => 'en'
     ];
 });

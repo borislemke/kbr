@@ -96,6 +96,15 @@ class BranchController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'city' => 'required'
+            ]);
+
+        if ($validator->fails()) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => implode($validator->errors()->all(), '<br>') )));
+        }
+
         $branch = new Branch;
 
         $branch->name = $request->name;      
@@ -146,6 +155,15 @@ class BranchController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'city' => 'required'
+            ]);
+
+        if ($validator->fails()) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => implode($validator->errors()->all(), '<br>') )));
+        }
+
         $branch = Branch::find($id);
 
         $branch->name = $request->name;

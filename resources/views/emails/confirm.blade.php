@@ -41,23 +41,34 @@
                             
                             <tr>
                                 <td>
-                                    <p style="line-height: 1.5; font-size: 14px; color:#666666;">		
-                                        Hi <strong>Dimas</strong>, <br><br>
+                                    <p style="line-height: 1.5; font-size: 14px; color:#666666;">       
+                                        Hi <strong>{{ ucfirst($firstname) }}</strong>, <br><br>
 
-                                        You have successfully created an app password for your Google Account <a href="" style="color: #ee5b2c; font-weight: 600;">dimaslemke@gmail.com</a> named Laravel Mailer on Tuesday, February 9, 2016 12:34 AM (GMT). <br><br>
-
-                                        This app password will allow you to access your Google account from a device or application that can only be configured with a username and password, rather than a username, password and a verification code. <br><br>
-
-                                        <strong>Don't recognize this activity?</strong>
-                                        Review your <a href="" style="color: #ee5b2c; font-weight: 600;">recently used devices </a> now. <br><br>
-
-                                        Best, <br>
-                                        The Google Accounts team.<br><br>
-
-                                        
+                                        Thanks for creating an account. Please follow the link below to verify your email address. 
+                                        <br><br>
                                     </p>
                                 </td>
                             </tr>
+                            
+                            <tr>
+                                <td align="center">
+                                    
+                                    <a href="{{ route('confirm', ['confirm' => trans('url.confirm'), 'confirmation_code' => $confirmation_code]) }}" style=" background: #ee5b2c; padding: 10px 15px; color: #fff; text-decoration: none;border-radius: 4px; font-size:12px; font-weight: 600;">{{ trans('word.confirmation') }}</a>
+
+                                        <br><br>
+                                    </p>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <p style="line-height: 1.5; font-size: 14px; color:#666666;">       
+                                        Best, <br>
+                                        The Kibarer Accounts team.<br><br>
+                                    </p>
+                                </td>
+                            </tr>
+
                             <tr>
                                 <td>
                                     <table cellpadding="20" cellspacing="0" width="100%" bgcolor="#ee5b2c">

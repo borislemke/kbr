@@ -15,9 +15,12 @@ class CreatePropertyLocalesTable extends Migration
         Schema::create('property_locales', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id');
+            $table->string('meta_keyword')->nullable();
+            $table->string('meta_description')->nullable();
             $table->string('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->string('locale');
+            $table->string('slug');
             $table->timestamps();
         });
     }

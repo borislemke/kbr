@@ -98,26 +98,26 @@
                     <h3>Contact Us</h3>
                 </div>
                 <div class="border-spacer"></div>
-                {!! Form::open(['url' => route('api.message.store'), 'class' => 'panel-body']) !!}
+                {!! Form::open(['url' => route('api.message.store'), 'class' => 'panel-body', 'id' => 'form-contact']) !!}
                 <div class="form-group">
                     <label for="firstname" class="col-lg-12 ">Full Name</label>
                     <div class="col-lg-6">
-                        <input value="{{ old('firstname') }}" name="firstname" type="text" class="" id="firstname" placeholder="First Name">
+                        <input value="{{ old('firstname') }}" name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name">
                     </div>
                     <div class="col-lg-6">
-                        <input value="{{ old('lastname') }}" name="lastname" type="text" class="" id="lastname" placeholder="Last Name">
+                        <input value="{{ old('lastname') }}" name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-12 ">Email</label>
                     <div class="col-lg-12">
-                        <input value="{{ old('email') }}" name="email" type="text" class="" id="inputEmail" placeholder="Email">
+                        <input value="{{ old('email') }}" name="email" type="text" class="form-control" id="inputEmail" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="msg" class="col-lg-12 ">Your Message</label>
                     <div class="col-lg-12">
-                        <textarea name="message" class="" rows="7" id="msg">{{ old('message') }}</textarea>
+                        <textarea name="message" class="form-control" rows="7" id="msg">{{ old('message') }}</textarea>
                     </div>
                 </div>
                 <div class="form-group captcha">
@@ -203,6 +203,45 @@
 
 
 		google.maps.event.addDomListener(window, 'load', initialize);
+      
+      $(document).on('click', 'button[type=submit]', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+
+        console.log('submit clicked');
+
+        $(this).html('Sending...');
+
+        var frm = $('#form-contact'),
+            url = frm.attr('action'),
+            data = frm.serialize();
+
+        $.post(url, data, function(data, textStatus, xhr) {
+
+          if (data.status == 200) {
+            
+            console.log(data);
+
+            $('input[name=firstname]').val('');
+            $('input[name=lastname]').val('');
+            $('input[name=email]').val('');
+            $('textarea').val('');
+
+          } else {
+
+            console.log(data);
+
+            if (data.monolog.message.email) {
+              $('input[name=email]').closest('.form-group').addClass('has-error');
+            }
+
+          }
+
+          $('button[type=submit]').html('Submit');
+
+        });
+
+      });
 
 
 	</script>

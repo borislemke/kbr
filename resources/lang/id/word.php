@@ -12,6 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'search' => 'search',
 
     'related_items' => 'barang yang mirip',
     'similar_items' => 'dari koleksi yang sama',
@@ -58,4 +59,5 @@ return [
     'catalogues' => 'katalog',
     'read_more' => 'lebih rinci',
     'load_more' => 'unduh lagi',
+    'confirmation' => 'confirmation'
 ];

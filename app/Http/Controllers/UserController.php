@@ -107,6 +107,17 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+
+        $validator = \Validator::make($request->all(), [
+            'email' => 'required|unique:users,email',
+            'firstname' => 'required'
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => implode($validator->errors()->all(), '<br>') )));
+        }
+        
         $user = new User;
 
         $user->username = $user->getUsername($request->firstname);
@@ -130,7 +141,7 @@ class UserController extends Controller
         $user->province = $city->province->province_name;
         $user->country = $city->province->country->nicename;
 
-        $user->zipcode = $request->zipcode;
+        // $user->zipcode = $request->zipcode;
 
         // $user->image_profile = $request->image_profile;
 
@@ -178,7 +189,19 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+
         $user = User::find($id);
+
+        $validator = \Validator::make($request->all(), [
+            // 'username' => 'required|unique:users,username,'. $user->id,
+            'email' => 'required|unique:users,email,'. $user->id,
+            'firstname' => 'required'
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => implode($validator->errors()->all(), '<br>') )));
+        }
 
         // $user->username = $user->getUsername($request->firstname);
         $user->email = $request->email;
@@ -202,7 +225,7 @@ class UserController extends Controller
         $user->province = $city->province->province_name;
         $user->country = $city->province->country->nicename;
 
-        $user->zipcode = $request->zipcode;
+        // $user->zipcode = $request->zipcode;
 
         $user->role_id = $request->role_id;
 
@@ -224,5 +247,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::find($id);
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));
+
     }
 }

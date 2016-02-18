@@ -7,15 +7,6 @@ return [
         "dashboard" => "dashboard"
     ],
 
-    // "properties" => [
-
-    //     "properties" => "available properties",
-    //     "property/sold" => "sold properties",
-    //     "property/customer-request" => "customer request",
-    //     "property/categories" => "categories"
-
-    // ],
-
     "villas" => [
 
         "properties?category=villa&status=available" => "available",
@@ -60,9 +51,14 @@ return [
     "blog" => [
 
         "blog" => "blog",
-        "blog-categories" => "categories",
-        "blog-comments" => "comments",
-        "blog-settings" => "settings"
+        "blog/categories" => "categories",
+        "blog/comments" => "comments",
+        "blog/settings" => "settings"
+    ],
+
+    "pages" => [
+
+        "pages" => "manage pages"
     ],
 
     "settings" => [

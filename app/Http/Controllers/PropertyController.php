@@ -163,11 +163,20 @@ class PropertyController extends Controller
         //
     }
 
-    public function search(Request $request)
+    public function search(Request $request, $page, $category = null)
     {
         $limit = 24;
 
         $properties = new Property;
+
+        $properties = $properties->select('properties.*');
+
+        // filter category
+        if ($category != null) {
+            $properties = $properties->join('property_terms', 'property_terms.property_id', '=', 'properties.id')
+                ->join('terms', 'terms.id', '=', 'property_terms.term_id')
+                ->where('terms.slug', $category);
+        }
 
         $properties = $properties->paginate($limit);
 

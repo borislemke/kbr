@@ -3,8 +3,8 @@
 
 <div class="bc-bg">
     <ul class="breadcrumb container">
-        <li><a href="{{ baseUrl() }}">{{ trans('url.home') }}</a></li>
-        <li class="active">{{ trans('url.search') }}</li>
+        <li><a href="{{ baseUrl() }}">{{ trans('word.home') }}</a></li>
+        <li class="active">{{ trans('word.search') }}</li>
 
     </ul>
 </div>

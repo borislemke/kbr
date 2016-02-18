@@ -35,7 +35,7 @@
       <div class="panel panel-primary">
         
         <div class="panel-body">
-          {!! Form::open(array('url' => url('register'))) !!}
+          {!! Form::open(array('url' => route('register.store', trans('url.register')))) !!}
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input class="form-control" type="email" name="email" value="{{ old('email') }}">
@@ -93,7 +93,7 @@
           <button type="submit" class="btn btn-primary">Register</button>
           {!! Form::close() !!}
 
-          <p class="pull-right"><a href="{{ route('login', Lang::get('url')['login']) }}">Login</a></p>
+          <p class="pull-right"><a href="{{ route('login', trans('url.login')) }}">Login</a></p>
         </div>
       </div>
     </div>

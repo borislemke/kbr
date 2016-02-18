@@ -61,7 +61,7 @@ return [
      * List of alternative languages (not including the one specified as 'locale')
      *
      */
-    'alt_langs' => array ('id', 'fr', 'ru'),
+    'alt_langs' => array ('en', 'fr', 'ru', 'id'),
 
     /*
      *

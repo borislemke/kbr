@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use App\Contact;
 
+use Mail;
+
 class ContactController extends Controller
 {
     /**
@@ -96,6 +98,27 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = \Validator::make($request->all(), [
+            'email' => 'email|required',
+            'g-recaptcha-response' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => $validator->errors() )));
+        }
+
+        $contact = new Contact;
+
+        $contact->firstname = $request->firstname;
+        $contact->lastname = $request->lastname;
+        $contact->email = $request->email;
+        $contact->message = $request->message;
+
+        $contact->save();
+
+        $this->email($contact);
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'success')));
     }
 
     /**
@@ -147,4 +170,19 @@ class ContactController extends Controller
 
         return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));
     }
+
+    public function email($contact)
+    {
+        $email = \Config::get('mail.contact');
+
+        Mail::send('emails.contact', ['contact' => $contact], function($message) use ($email) {
+
+            $message->from('boris@kesato.com', 'Kibarer');
+
+            $message->to($email, $email)->subject('Contact Kibarer');
+        });
+
+        return true;
+    }
+
 }

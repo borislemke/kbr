@@ -96,6 +96,16 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = \Validator::make($request->all(), [
+            'email' => 'required|unique:customers,email',
+            'firstname' => 'required'
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => implode($validator->errors()->all(), '<br>') )));
+        }
+
         $customer = new Customer;
 
         $customer->username = $customer->getUsername($request->firstname);
@@ -132,7 +142,7 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));        
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));
 
     }
 
@@ -168,6 +178,18 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $validator = \Validator::make($request->all(), [
+            // 'username' => 'required|unique:users,username,'. $user->id,
+            'email' => 'required|unique:users,email,'. $user->id,
+            'firstname' => 'required'
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => implode($validator->errors()->all(), '<br>') )));
+        }
+        
         $customer = Customer::find($id);
 
         // $customer->username = $customer->getUsername($request->firstname);

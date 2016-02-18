@@ -12,7 +12,8 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
+    'search' => 'search',
+    
     'related_items' => 'related items',
     'similar_items' => 'similar items',
     'product_description' => 'product description',
@@ -86,4 +87,5 @@ return [
     'catalogues' => 'catalogues',
     'read_more' => 'read more',
     'load_more' => 'load more it',
+    'confirmation' => 'confirmation'
 ];

@@ -28,6 +28,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(TermsTableSeeder::class);
 
+        $this->call(PagesTableSeeder::class);
+
+        $this->call(PageLocalesTableSeeder::class);
+
         factory(App\Contact::class, 100)->create();
 
         factory(App\User::class, 100)->create()->each(function ($u) {
@@ -65,6 +69,11 @@ class DatabaseSeeder extends Seeder
 
                 Model::reguard();
 
+            });
+
+            factory(App\Post::class, 10)->create(['user_id' => $u->id])->each(function($p) {
+
+                $p->postLocales()->save(factory(App\PostLocale::class)->make());
             });
 
         });

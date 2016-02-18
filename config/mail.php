@@ -122,4 +122,6 @@ return [
 
     'pretend' => env('MAIL_PRETEND', false),
 
+    'contact' => env('MAIL_CONTACT', 'gusman@kesato.com'),
+
 ];

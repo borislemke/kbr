@@ -126,8 +126,9 @@ class AuthController extends Controller
     // Customer registration
     public function postRegister(Request $request)
     {
+
         $this->validate($request, [
-            'email' => 'required|unique:Customers',
+            'email' => 'required|unique:customers',
             'password' => 'required|confirmed',
             'firstname' => 'required',
             'city' => 'required'
@@ -157,17 +158,17 @@ class AuthController extends Controller
         $customer->save();
 
         // send confirm email
-        $this->sendConfirmationEmail($customer->email, $confirmation_code);
+        $this->sendConfirmationEmail($customer->firstname, $customer->email, $confirmation_code);
 
         $request->session()->flash('alert-success', 'Thankyou for registration. Please check your email address to activate your account.');
 
         return redirect()->back();
     }
 
-    public function sendConfirmationEmail($email, $confirmation_code)
+    public function sendConfirmationEmail($firstname, $email, $confirmation_code)
     {
 
-        Mail::send('emails.confirmation', ['confirmation_code' => $confirmation_code], function($message) use ($email) {
+        Mail::send('emails.confirm', ['firstname' => $firstname, 'confirmation_code' => $confirmation_code], function($message) use ($email) {
 
             $message->from('boris@kesato.com', 'Kibarer');
 
@@ -190,6 +191,29 @@ class AuthController extends Controller
         if (\Auth::customer()->check()) return redirect()->route('account', trans('url.account'));
 
         return view('pages.register');
+    }
+
+
+    public function confirm($confirm, $confirmation_code)
+    {
+        if( ! $confirmation_code)
+        {
+            throw \App::abort(404);
+        }
+
+        $customer = \App\Customer::where('confirmation_code', $confirmation_code)->first();
+
+        if ( ! $customer)
+        {
+            throw \App::abort(404);
+        }
+
+        $customer->active = 1;
+        $customer->confirmed = 1;
+        $customer->confirmation_code = null;
+        $customer->save();
+
+        return redirect()->route('login', trans('url.login'))->with('alert-success', 'You have successfully verified your account.');;
     }
 
 }

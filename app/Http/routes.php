@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('pages/{term?}',['as' => 'admin.pages', 'uses' => 'AdminController@pages']);
 
         // Post
-        Route::get('posts/{term?}',['as' => 'admin.posts', 'uses' => 'AdminController@posts']);
+        Route::get('blog/{term?}',['as' => 'admin.posts', 'uses' => 'AdminController@posts']);
 
         // my-account
         Route::get('my-account',['as' => 'admin.my_account', 'uses' => 'AdminController@my_account']);
@@ -94,11 +94,11 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
     Route::get('{logout}', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
     Route::get('{register}', ['as' => 'register', 'uses' => 'Auth\AuthController@getCustomerRegister']);
-    Route::post('{register}',['as' => 'register.store', 'as' => 'Auth\AuthController@postRegister']);
+    Route::post('{register}',['as' => 'register.store', 'uses' => 'Auth\AuthController@postRegister']);
 
-    Route::get('{confirm}/{confirmationCode}', [
+    Route::get('email/{confirm}/{confirmation_code}', [
         'as' => 'confirm',
-        'uses' => 'Auth\AuthController@getCustomerConfirm'
+        'uses' => 'Auth\AuthController@confirm'
     ]);
 
     Route::group(['middleware' => 'auth.customer'], function () {
@@ -124,7 +124,7 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
     Route::any('{contact}',['as' => 'contact', 'uses' => 'PageController@contact']);
 
     // testimony    
-    Route::any('{testimonials}',['as' => 'testimonials', 'uses' => 'PageController@testimony']);
+    Route::any('{testimonials}.asp',['as' => 'testimonials', 'uses' => 'PageController@testimony']);
 
     // sell_property    
     Route::any('{sell_property}',['as' => 'sell_property', 'uses' => 'PageController@sellProperty']);
@@ -133,7 +133,7 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
     Route::any('{lawyer_notary}',['as' => 'lawyer_notary', 'uses' => 'PageController@lawyerNotary']);
 
     // search    
-    Route::get('{search}',['as' => 'search', 'uses' => 'PropertyController@search']);
+    Route::get('{search}/{category?}',['as' => 'search', 'uses' => 'PropertyController@search']);
 
     // property
     Route::get('{property}/{term?}',['as' => 'property', 'uses' => 'PropertyController@detail']);
