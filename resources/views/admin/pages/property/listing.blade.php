@@ -4,7 +4,7 @@
 @section('fab')
 
 <!-- <m-fab salmon class="modal-open" data-target="#property-add"><i class="material-icons">add</i></m-fab> -->
-<a href="{{ route('admin.properties', ['term' => null, 'action' => 'create']) }}"><m-fab salmon><i class="material-icons">add</i></m-fab></a>
+<a href="{{ route('admin.properties', ['term' => null, 'action' => 'create', 'category' => $request['category']]) }}"><m-fab salmon><i class="material-icons">add</i></m-fab></a>
 
 @stop
 
@@ -41,9 +41,42 @@
 @section('scripts')
 
 <script>
-    Matter.admin.properties();
+    // Matter.admin.properties();
 
-    $(document).ready(function() {
+    $(document).ready(function() {        
+
+        $(document).on('click', '[delete]', function(event) {
+            event.preventDefault();
+
+            var id = $(this).parent().attr('data-id');            
+            var url = "{{ route('api.property.delete', $id = null) }}/" + id;
+            // var method = 'delete';
+            var token = "{{ csrf_token() }}";
+
+            Monolog.confirm('delete item', 'are you sure to delete this item? this cannot be undone', function() {
+                NProgress.start();
+                $.post(url, {_token: token}, function(data, textStatus, xhr) {
+                    
+                    switch(data.status) {
+
+                        case 200:
+
+                            Monolog.notify(data.monolog.title, data.monolog.message);
+
+                            removeItem(data);
+
+                            break;
+
+                        default:
+
+                            Monolog.notify(data.monolog.title, data.monolog.message);
+
+                            consoleLog(data);
+                    }
+                });
+            });
+
+        });
 
         $('#property-table').DataTable({
             "processing": true,
@@ -143,7 +176,7 @@
                             + '<i class="material-icons">more_horiz</i>'
                             + '<m-list-menu data-id="'+ data +'">'
                                 + '<a href="'+ baseUrl +'/admin/properties?category={{ Input::get("category") }}&action=edit&id='+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
-                                + '<m-list-menu-item translate data-function="populatePropertyTranslate">TRANSLATION</m-list-menu-item>'
+                                + '<a href="'+ baseUrl +'/admin/properties?category={{ Input::get("category") }}&action=edit-translation&id='+ data +'"><m-list-menu-item data-function="populatePropertyTranslate">TRANSLATION</m-list-menu-item></a>'
                                 + '<m-list-menu-item delete data-url="property/destroy">DELETE</m-list-menu-item>'
                             + '</m-list-menu>'
                         + '</m-table-list-more>';
@@ -156,7 +189,7 @@
                 $('td', row).eq(7).css('text-align', 'right');
                 $('td', row).eq(8).css('text-align', 'right');
 
-                $(row).addClass('property-item').attr('id', 'property-item-' + data.id);
+                $(row).attr('id', 'row-item-' + data.id);
 
                 $('td:last-child', row).attr('button', '');
             },
@@ -164,6 +197,15 @@
         });
 
     });
+
+    function removeItem(data) {
+
+        var id = data.id;
+
+        $('#row-item-' + id).remove();
+
+        NProgress.done();
+    }
 
 </script>
 

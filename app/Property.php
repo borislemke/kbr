@@ -47,6 +47,15 @@ class Property extends Model
         return $this->hasMany('App\Enquiry');
     }
 
+    public function category()
+    {
+        return $this->select('terms.*')
+            ->join('property_terms', 'property_terms.property_id', '=', 'properties.id')
+            ->join('terms', 'terms.id', '=', 'property_terms.term_id')
+            ->where('terms.type', 'property_category')
+            ->first();
+    }
+
     public function scopeAccess($query)
     {
         $user = \Auth::user()->get();
@@ -111,6 +120,11 @@ class Property extends Model
 
     }
 
+    public function localeEN()
+    {
+        return $this->propertyLocales()->where('locale', 'en')->first();
+    }
+
     public function facilities()
     {
         return $this->propertyMetas()->where('type', 'facility')->get();
@@ -142,29 +156,24 @@ class Property extends Model
 
         static::deleting(function($property)
         {
-            if ($property->propertyLanguages) {
+            if ($property->propertyLocales) {
 
-                $property->propertyLanguages()->delete();
+                $property->propertyLocales()->delete();
             }
 
-            if ($property->propertyFiles) {
+            if ($property->attachments) {
                 
-                $property->propertyFiles()->delete();
+                $property->attachments()->delete();
             }
             
-            if ($property->inquiries) {
+            if ($property->enquiries) {
                 
-                $property->inquiries()->delete();
+                $property->enquiries()->delete();
             }
             
-            if ($property->facilities) {
+            if ($property->propertyMetas) {
                 
-                $property->facilities()->delete();
-            }
-            
-            if ($property->documents) {
-                
-                $property->documents()->delete();
+                $property->propertyMetas()->delete();
             }
 
         });

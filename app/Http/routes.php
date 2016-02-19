@@ -132,7 +132,7 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
     Route::any('{contact}',['as' => 'contact', 'uses' => 'PageController@contact']);
 
     // testimony    
-    Route::any('{testimonials}.asp',['as' => 'testimonials', 'uses' => 'PageController@testimony']);
+    Route::any('{testimonials}',['as' => 'testimonials', 'uses' => 'PageController@testimony']);
 
     // sell_property    
     Route::get('{sell_property}',['as' => 'sell_property', 'uses' => 'PageController@sellProperty']);
@@ -215,6 +215,8 @@ Route::group(['prefix' => 'api'], function() {
     Route::resource('wishlist', 'WishlistController');
 
     Route::post('sellproperty', ['as' => 'sellproperty.store', 'uses' => 'PropertyController@sellProperty']);
+
+    Route::post('property/delete/{id}', ['as' => 'api.property.delete', 'uses' => 'PropertyController@delete']);
 
 });
 

@@ -18,10 +18,11 @@ class CreatePropertiesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->default(0);
             $table->integer('customer_id')->default(0);
-            $table->integer('category_id')->default(0);
+            // $table->integer('category_id')->default(0);
 
             $table->enum('currency', array('IDR', 'USD', 'EUR'));
             $table->double('price')->default(0);
+            $table->enum('price_label', ['none', 'daily', 'weekly', 'monthly', 'annually'])->default('none');
             $table->double('discount')->default(0);
             $table->enum('type', array('free hold', 'lease hold'));
 
@@ -41,7 +42,6 @@ class CreatePropertiesTable extends Migration
             $table->string('province')->nullable();
             $table->string('country')->nullable();
 
-            $table->string('slug');
             $table->integer('view')->default(0);
 
             $table->string('view_north')->nullable();

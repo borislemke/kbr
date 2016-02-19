@@ -27,8 +27,34 @@ class AdminController extends Controller
     
     public function properties(Request $request, $term = null)
     {
-        // 
-        if ($request->action == 'create') return view('admin.pages.property.create');
+        //
+        $categories = new \App\Term;
+
+        $categories = $categories->where('type', 'property_category');
+
+        if ($request->category) {
+
+            $category_slug = $request->category;
+
+            $category = \App\Term::where('slug', $category_slug)
+                ->where('type', 'property_category')->first();
+
+            if ($category) {
+
+                $categories = $categories->where(function ($q) use ($category_slug, $category) {
+                        $q->where('slug', $category_slug)
+                            ->orWhere('parent_id', $category->id);
+                    });
+            }
+
+        }
+
+        $categories = $categories->get();
+
+        if ($request->action == 'create') {
+
+            return view('admin.pages.property.create', compact('request', 'categories'));
+        }
 
         if ($request->action == 'edit' && isset($request->id)) {
 
@@ -36,7 +62,16 @@ class AdminController extends Controller
 
             $property = \App\Property::find($request->id);
 
-            return view('admin.pages.property.edit', compact('property'));
+            return view('admin.pages.property.edit', compact('property', 'request', 'categories'));
+        }
+
+        if ($request->action == 'edit-translation' && isset($request->id)) {
+
+            if (Gate::denies('property-edit', $request->id)) return redirect()->back();
+
+            $property = \App\Property::find($request->id);
+
+            return view('admin.pages.property.edit-translation', compact('property', 'request', 'categories'));
         }
 
         $request = json_encode($request->all());
@@ -45,7 +80,7 @@ class AdminController extends Controller
 
         $api_url = route('api.property.index', $request);
 
-        return view('admin.pages.property.listing', compact('api_url'));
+        return view('admin.pages.property.listing', compact('api_url', 'request'));
     }
     
     public function enquiries(Request $request, $term = null)

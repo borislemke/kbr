@@ -22,6 +22,15 @@ class TermsTableSeeder extends Seeder
         ]);
 
         \App\Term::create([
+            'name' => 'villa rental',
+            'slug' => 'villa-rental',
+            'route' => 'villa_rental',
+            'type' => 'property_category',
+            'order' => 0,
+            'parent_id' => 0
+        ]);
+
+        \App\Term::create([
             'name' => 'land',
             'slug' => 'land',
             'route' => 'land',
@@ -34,18 +43,18 @@ class TermsTableSeeder extends Seeder
             'name' => 'beachfront property',
             'slug' => 'beachfront-property',
             'route' => 'beachfront_property',
-            'type' => 'property_category',
+            'type' => 'property_tag',
             'order' => 0,
-            'parent_id' => 1
+            'parent_id' => 0
         ]);
 
         \App\Term::create([
             'name' => 'home and retirement',
             'slug' => 'home-and-retirement',
             'route' => 'home_and_retirement',
-            'type' => 'property_category',
+            'type' => 'property_tag',
             'order' => 0,
-            'parent_id' => 1
+            'parent_id' => 0
         ]);
     }
 }

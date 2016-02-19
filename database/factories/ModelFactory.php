@@ -100,9 +100,9 @@ $factory->define(App\PostLocale::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Property::class, function (Faker\Generator $faker) {
     return [
-        'category_id' => 1,
         'currency' => $faker->randomElement($array = array ('IDR', 'USD', 'EUR')),
         'price' => $faker->randomNumber(7),
+        'price_label' => $faker->randomElement($array = array ('none', 'daily', 'weekly', 'monthly', 'annually')),
         'discount' => $faker->randomNumber(2),
         'type' => $faker->randomElement($array = array ('free hold', 'lease hold')),
         // 'publish' => $faker->randomElement($array = array ('draft', 'moderation', 'publish')),
@@ -137,9 +137,8 @@ $factory->define(App\Property::class, function (Faker\Generator $faker) {
 
         'sell_reason' => $faker->sentence($nbWords = 10, $variableNbWords = true),
         'sell_note' => $faker->sentence($nbWords = 10, $variableNbWords = true),
-        'other_agent' => $faker->name,
-
-        'slug' => $faker->slug
+        'other_agent' => $faker->name
+        
     ];
 });
 

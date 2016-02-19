@@ -274,9 +274,31 @@ class PageController extends Controller
 
         $testimonials = $testimonials->orderBy('created_at', 'desc');
 
+        $testimonials = $testimonials->where('status', 1);
+
         $testimonials = $testimonials->paginate($limit);
 
-        return view('pages.testimony', compact('testimonials'));
+        if (\Input::get('page') > 1) {
+
+            $html = '';
+
+            foreach ($testimonials as $testimony) {
+                $html .= '<div class="well">
+                            <h4>'. $testimony->title .'</h4>
+                            <p>'. $testimony->content .'</p>
+                            <small>--'. $testimony->customer->firstname .' '. $testimony->customer->lastname .'</small>
+                        </div>';
+            }
+            
+            $html .= '<a class="jscroll-next hidden" href="'. $testimonials->nextPageUrl() .'">next page</a>';
+
+            return $html;
+
+        } else {
+
+            return view('pages.testimony', compact('testimonials'));
+        }
+
     }
 
     public function sellProperty()
