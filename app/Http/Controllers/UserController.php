@@ -49,6 +49,9 @@ class UserController extends Controller
                 });
         }
 
+        // access
+        $users = $users->access();
+
         // total records
         $count = $users->count();
 

@@ -21,6 +21,10 @@ class RolesTableSeeder extends Seeder
         ]);
 
         \App\Role::create([
+            'name' => 'super agent'
+        ]);
+
+        \App\Role::create([
             'name' => 'agent'
         ]);
     }

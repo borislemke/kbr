@@ -40,33 +40,33 @@ return [
 
     ],
 
-    "customers" => [
+    // "customers" => [
 
-        "customers" => "manage customers",
-        "customers/testimonials" => "testimonials",
-        "customers/messages" => "messages"
+    //     "customers" => "manage customers",
+    //     "customers/testimonials" => "testimonials",
+    //     "customers/messages" => "messages"
 
-    ],
+    // ],
 
-    "blog" => [
+    // "blog" => [
 
-        "blog" => "blog",
-        "blog/categories" => "categories",
-        "blog/comments" => "comments",
-        "blog/settings" => "settings"
-    ],
+    //     "blog" => "blog",
+    //     "blog/categories" => "categories",
+    //     "blog/comments" => "comments",
+    //     "blog/settings" => "settings"
+    // ],
 
-    "pages" => [
+    // "pages" => [
 
-        "pages" => "manage pages"
-    ],
+    //     "pages" => "manage pages"
+    // ],
 
     "settings" => [
 
         "my-account" => "my account",
         "accounts" => "admin accounts",
-        "branches" => "branches",
-        "settings" => "settings",
+        // "branches" => "branches",
+        // "settings" => "settings",
         "about" => "about"
     ]
 ];

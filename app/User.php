@@ -65,6 +65,19 @@ CanResetPasswordContract
     public function role() {
 
         return $this->belongsTo('App\Role');
+    }    
+
+    public function scopeAccess($query)
+    {
+        $user = \Auth::user()->get();
+
+        // manager
+        if ($user->role_id == 2) {
+
+            $query->where('users.branch_id', $user->branch_id);
+        }
+
+        return $query;
     }
 
     public function getUsername($firstName) {

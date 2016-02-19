@@ -63,7 +63,7 @@
             <label for="title">city</label>
         </div>
     </div>
-
+<!-- 
     <div class="m-input-group fwidth flexbox justify-between">
         <div class="m-input-wrapper w50-6">
             <select name="role_id">
@@ -84,7 +84,7 @@
             <label for="title">active</label>
         </div>
     </div>
-
+ -->
     <m-buttons flexbox justify-end>
         <!-- <m-button plain onclick="window.history.back()">cancel</m-button> -->
         <m-button save-form plain>save</m-button>

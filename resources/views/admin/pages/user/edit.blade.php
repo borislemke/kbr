@@ -68,9 +68,15 @@
         <div class="m-input-wrapper w50-6">
             <select name="role_id">
 
-                @foreach(\App\Role::all() as $role)
-                <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : ''}}>{{ $role->name }}</option>
-                @endforeach
+                @if(Auth::user()->get()->role_id == 1)
+                    @foreach(\App\Role::all() as $role)
+                    <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : ''}}>{{ $role->name }}</option>
+                    @endforeach
+                @else                
+                    @foreach(\App\Role::where('id', '!=', 1)->get() as $role)
+                    <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : ''}}>{{ $role->name }}</option>
+                    @endforeach
+                @endif
 
             </select>
             <label for="title">role</label>

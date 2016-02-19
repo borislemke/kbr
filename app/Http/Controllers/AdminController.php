@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Gate;
+
 class AdminController extends Controller
 {
 
@@ -19,14 +21,18 @@ class AdminController extends Controller
 
     public function dashboard()
     {
+        // 
         return view('admin.pages.dashboard');
     }
     
     public function properties(Request $request, $term = null)
     {
+        // 
         if ($request->action == 'create') return view('admin.pages.property.create');
 
         if ($request->action == 'edit' && isset($request->id)) {
+
+            if (Gate::denies('property-edit', $request->id)) return redirect()->back();
 
             $property = \App\Property::find($request->id);
 
@@ -44,9 +50,12 @@ class AdminController extends Controller
     
     public function enquiries(Request $request, $term = null)
     {
+        // 
         if ($request->action == 'create') return view('admin.pages.enquiry.create');
 
         if ($request->action == 'edit' && isset($request->id)) {
+
+            if (Gate::denies('enquiry-edit', $request->id)) return redirect()->back();
 
             $enquiry = \App\Enquiry::find($request->id);
 
@@ -64,6 +73,9 @@ class AdminController extends Controller
     
     public function customers(Request $request, $term = null)
     {
+        // access only super admin
+        if ($this->admin->role_id != 1) return redirect()->back();
+
         if ($term == 'testimonials') return $this->testimonials($request);
 
         if ($term == 'messages') return $this->messages($request);
@@ -71,6 +83,8 @@ class AdminController extends Controller
         if ($request->action == 'create') return view('admin.pages.customer.create');
 
         if ($request->action == 'edit' && isset($request->id)) {
+
+            if (Gate::denies('customer-edit', $request->id)) return redirect()->back();
 
             $customer = \App\Customer::find($request->id);
 
@@ -88,7 +102,7 @@ class AdminController extends Controller
 
     public function testimonials(Request $request)
     {
-
+        // 
         if ($request->action == 'create') return view('admin.pages.testimony.create');
 
         if ($request->action == 'edit' && isset($request->id)) {
@@ -109,7 +123,7 @@ class AdminController extends Controller
 
     public function messages(Request $request)
     {
-
+        // 
         if ($request->action == 'create') return view('admin.pages.contact.create');
 
         if ($request->action == 'edit' && isset($request->id)) {
@@ -130,6 +144,9 @@ class AdminController extends Controller
     
     public function pages(Request $request, $term = null)
     {
+        // access only super admin
+        if ($this->admin->role_id != 1) return redirect()->back();
+
         if ($request->action == 'create') return view('admin.pages.page.create');
 
         if ($request->action == 'edit' && isset($request->id)) {
@@ -150,6 +167,9 @@ class AdminController extends Controller
     
     public function posts(Request $request, $term = null)
     {
+        // access denied only agent
+        if ($this->admin->role_id == 4) return redirect()->back();
+
         if ($request->action == 'create') return view('admin.pages.post.create');
 
         if ($request->action == 'edit' && isset($request->id)) {
@@ -170,6 +190,8 @@ class AdminController extends Controller
 
     public function branches(Request $request)
     {
+        // access only super admin
+        if ($this->admin->role_id != 1) return redirect()->back();
 
         if ($request->action == 'create') return view('admin.pages.branch.create');
 
@@ -191,6 +213,7 @@ class AdminController extends Controller
 
     public function my_account(Request $request)
     {
+        // access all users
         $user = $this->admin;
 
         return view('admin.pages.user.my-account', compact('user'));
@@ -198,10 +221,14 @@ class AdminController extends Controller
 
     public function accounts(Request $request)
     {
+        // access only super admin & manager
+        if ($this->admin->role_id == 3 OR $this->admin->role_id == 4) return redirect()->back();
 
         if ($request->action == 'create') return view('admin.pages.user.create');
 
         if ($request->action == 'edit' && isset($request->id)) {
+
+            if (Gate::denies('user-edit', $request->id)) return redirect()->back();
 
             $user = \App\User::find($request->id);
 

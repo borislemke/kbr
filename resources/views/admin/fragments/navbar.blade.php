@@ -1,10 +1,24 @@
 <?php
 
 // Set navbar for each user role_id
-if ($admin->role_id == 3) {
-    $navigation = Config::get('navbaragent');
-} else {
-    $navigation = Config::get('navbar');
+
+switch ($admin->role_id) {
+    case 1:
+        $navigation = Config::get('navbar');
+        break;
+    case 2:
+        $navigation = Config::get('navbar_manager');
+        break;
+    case 3:
+        $navigation = Config::get('navbar_superagent');
+        break;
+    case 4:
+        $navigation = Config::get('navbar_agent');
+        break;
+    
+    default:
+        $navigation = Config::get('navbar_agent');
+        break;
 }
 
 $first = TRUE;

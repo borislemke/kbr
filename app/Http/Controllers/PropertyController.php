@@ -78,6 +78,9 @@ class PropertyController extends Controller
             $properties = $properties->where('properties.status', statusToInteger($status));
         }
 
+        // access
+        $properties = $properties->access();
+
         // total records
         $count = $properties->count();
 

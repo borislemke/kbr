@@ -47,6 +47,23 @@ class Property extends Model
         return $this->hasMany('App\Enquiry');
     }
 
+    public function scopeAccess($query)
+    {
+        $user = \Auth::user()->get();
+
+        // agent
+        if ($user->role_id == 4) $query->where('properties.user_id', $user->id);
+
+        // super agent or manager
+        if ($user->role_id == 2 or $user->role_id == 3) {
+
+            $query->join('users', 'users.id', '=', 'properties.user_id')
+                ->where('users.branch_id', $user->branch_id);
+        }
+
+        return $query;
+    }
+
     public function scopeFilterPrice($query, $minprice, $maxprice)
     {
         if (isset($minprice) && empty($maxprice)) {

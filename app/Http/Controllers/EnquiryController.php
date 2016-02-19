@@ -67,6 +67,9 @@ class EnquiryController extends Controller
                 });
         }
 
+        // access
+        $enquiries = $enquiries->access();
+
         // total records
         $count = $enquiries->count();
 
