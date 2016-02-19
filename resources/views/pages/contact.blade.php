@@ -1,13 +1,6 @@
 @extends('index')
 @section('content')
 
-<div class="bc-bg">
-    <ul class="breadcrumb container">
-        <li><a href="{{ route('home') }}">{{ trans('url.home') }}</a></li>
-        <li class="active">{{ trans('url.contact') }}</li>
-    </ul>
-</div>
-
 <div class="contact-us">
     <div class="row">
         <div class="col-md-4 address-wrapper">
@@ -102,7 +95,7 @@
                 <div class="form-group">
                     <label for="firstname" class="col-lg-12 ">Full Name</label>
                     <div class="col-lg-6">
-                        <input value="{{ old('firstname') }}" name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name">
+                        <input value="{{ old('firstname') }}" name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name" required>
                     </div>
                     <div class="col-lg-6">
                         <input value="{{ old('lastname') }}" name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name">
@@ -111,7 +104,7 @@
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-12 ">Email</label>
                     <div class="col-lg-12">
-                        <input value="{{ old('email') }}" name="email" type="text" class="form-control" id="inputEmail" placeholder="Email">
+                        <input value="{{ old('email') }}" name="email" type="text" class="form-control" id="inputEmail" placeholder="Email" required>
                     </div>
                 </div>
                 <div class="form-group">

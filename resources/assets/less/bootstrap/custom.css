@@ -299,6 +299,130 @@ body header section #burger-nav #burger.active span:last-child {
   -o-transform: translate3d(0, 0, 0) rotate(-45deg);
   transform: translate3d(0, 0, 0) rotate(-45deg);
 }
+.auth-holder {
+  padding: 100px 0px;
+  /* Form */
+}
+.auth-holder .login {
+  width: 70%;
+  margin: 0 auto;
+  border: 1px solid #ebebeb;
+  padding: 30px;
+}
+.auth-holder .register {
+  width: 100%;
+  border: 1px solid #ebebeb;
+  margin: 0 auto;
+  padding: 30px;
+}
+.auth-holder .auth-title {
+  border-bottom: 1px solid #ebebeb;
+  margin: 20px 0px;
+}
+.auth-holder .auth-title h3 {
+  font-weight: 600;
+  font-size: 1.5em;
+  color: #ee5b2c;
+}
+.auth-holder .form-control {
+  box-shadow: none;
+}
+.auth-holder input[type="text"],
+.auth-holder input[type="password"],
+.auth-holder input[type="email"],
+.auth-holder textarea {
+  -moz-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  -webkit-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  -ms-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: solid 1px #ebebeb;
+  color: #666;
+  display: block;
+  padding: 0.75em;
+  text-decoration: none;
+  width: 100%;
+  outline: 0;
+  border-radius: 0px;
+  background: #fff;
+  -webkit-transition: all 0.33s ease;
+  -moz-transition: all 0.33s ease;
+  -o-transition: all 0.33s ease;
+  -ms-transition: all 0.33s ease;
+  transition: all 0.33s ease;
+}
+.auth-holder input[type="text"]:focus,
+.auth-holder input[type="password"]:focus,
+.auth-holder input[type="email"]:focus,
+.auth-holder textarea:focus {
+  border-color: #ee5b2c;
+}
+.auth-holder input[type="text"],
+.auth-holder input[type="password"],
+.auth-holder input[type="email"] {
+  line-height: 1em;
+}
+.auth-holder ::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+.auth-holder :-moz-placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+.auth-holder ::-moz-placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+.auth-holder :-ms-input-placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+.auth-holder label {
+  font-weight: 300;
+}
+.auth-holder select .form-control {
+  height: 40px;
+}
+.auth-holder button[type="submit"] {
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border: 1px solid #DDD;
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  -webkit-transition: all 0.33s ease;
+  -moz-transition: all 0.33s ease;
+  -o-transition: all 0.33s ease;
+  -ms-transition: all 0.33s ease;
+  transition: all 0.33s ease;
+}
+.auth-holder button[type="submit"]:hover {
+  background: none;
+  border: 1px solid #ee5b2c;
+  color: #ee5b2c;
+  font-weight: 600;
+}
+.auth-holder .goto {
+  border-top: 1px solid #ebebeb;
+  margin: 20px 0px;
+  color: #666;
+  padding-top: 10px;
+}
+.auth-holder .goto p {
+  text-align: center;
+  text-transform: uppercase;
+}
+.auth-holder .goto a {
+  color: #ee5b2c;
+  font-weight: 600;
+  text-decoration: none;
+}
 .wishlist {
   padding: 3em 3em 0em 3em ;
 }

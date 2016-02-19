@@ -1,64 +1,51 @@
+
 @extends('index')
 @section('title', 'Blogs')
 @section('content')
 
-<div class="bc-bg">
-    <ul class="breadcrumb container">
-        <li><a href="{{ route('home') }}">{{ trans('url.home') }}</a></li>
-        <li class="active">{{ trans('url.blog') }}</li>
-    </ul>
-</div>
-<div class="line-top"><h3><small>{{ trans('url.blog') }}</small></h3></div>
-
-<div class="content blogs container">
-    <div class="wrapper">
-        <div class="column-left">
-
-            @foreach($posts as $blog)
-            <a href="{{ baseUrl() }}/blog/{{ $blog->url }}">
-                <div class="blog-item">
-                    <div class="blog-img" style="background-image: url({{ baseUrl() . '/media/blog/' . $blog->image }})">
+<div class="blog-holder container">
+    <div class="col-md-12 col-sm-12">
+        <div class="col-md-9 col-sm-12">
+           
+            <div class="blog-content-holder">
+                <div class="blog-content-item-holder">
+                    <div class="blog-item-image"> <img src="{{ baseUrl() }}/assets/img/contact/au.jpg" alt=""> </div>
+                    <div class="blog-item-title"><h3>Image Post Type</h3></div>
+                    <div class="blog-item-post-date"> 
+                        <ul>
+                            <li><a href=""><i class="material-icons">date_range</i>2016-1-1</a></li>
+                            <li><a href=""><i class="material-icons">style</i> Real Estate</a></li>
+                            <li><a href=""><i class="material-icons">comment</i> 3 </a></li>
+                        </ul>
                     </div>
-                    <div class="blog-text">
-                        <h2>{{ $blog->title }}</h2>
-                        <p>{{ $blog->meta_desc }}</p>
-                        <div class="sec-line">
-                            <button class="red-border-btn">Read more</button>
-                            <span class="detail-info"><i class="fa fa-calendar"></i> {{ $blog->created_at }}
-                                <i class="material-icons">visibility</i> {{ $blog->views }}
-                                <!--                                <i class="fa fa-folder-open-o"></i> Wood, Customer Review-->
-                            </span>
-                        </div>
+                    
+                    <div class="blog-item-content">
+                        <p>
+                            Porttitor feugiat mus cras quisque pharetra sagittis non laoreet augue nulla lectus auctor accumsan cubilia sollicitudin mattis leo vel morbi class sollicitudin cubilia quisque penatibus dictumst faucibus dui natoque ultricies montes congue pellentesque aliquet lectus dictum est volutpat class odio elementum quis commodo dolor ultrices scelerisque montes class curabitur class
+                        </p>
+                    </div>
+                    
+                    <div class="blog-item-readmore">
+                        <a href="" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
-            </a>
-            @endforeach
-
+                
+                <div class="blog-content-item-holder">
+                    <div class="blog-item-image"></div>
+                    <div class="blog-item-title"></div>
+                    <div class="blog-item-post-date"></div>
+                    <div class="blog-item-content"></div>
+                    <div class="blog-item-readmore"></div>
+                </div>
+            </div>
         </div>
-        <div class="column-right">
-            <div class="wrap">
-                <h3>Categories</h3>
-                <ul>
-                    <li><a>Wood</a></li>
-                    <li><a>Metal</a></li>
-                    <li><a>Hospitality</a></li>
-                    <li><a>Customers review</a></li>
-                </ul>
-                <h3>Date</h3>
-                <ul>
-                    <li><a>January</a></li>
-                    <li><a>Febuary</a></li>
-                    <li><a>March</a></li>
-                    <li><a>April</a></li>
-                    <li><a>May</a></li>
-                    <li><a>June</a></li>
-                    <li><a>July</a></li>
-                    <li><a>August</a></li>
-                    <li><a>September</a></li>
-                    <li><a>October</a></li>
-                    <li><a>November</a></li>
-                    <li><a>December</a></li>
-                </ul>
+        
+        <div class="col-md-3 col-sm-12">
+            <div class="blog-menu-holder">
+                <div class="blog-menu-search"></div>
+                <div class="blog-menu-categories"></div>
+                <div class="blog-menu-popular-post"></div>
+                <div class="blog-menu-archives"></div>
             </div>
         </div>
     </div>
