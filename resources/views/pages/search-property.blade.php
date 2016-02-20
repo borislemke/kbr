@@ -145,7 +145,11 @@
                                                     <i class="fa fa-star block m-b-xs fa-2x"></i>
                                                     <span>Favorite</span>
                                                 </a>
+                                                @if($term != null)
                                                 <a href="{{ route('search', ['property' => trans('url.search'), 'term' => $term . '/' . $value->lang()->slug]) }}" class="col-md-4">
+                                                @else
+                                                <a href="{{ route('search', ['property' => trans('url.search'), 'term' => $value->lang()->slug]) }}" class="col-md-4">
+                                                @endif
                                                     <i class="fa fa-list block m-b-xs fa-2x"></i>
                                                     <span>Detail</span>
                                                 </a>

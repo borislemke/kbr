@@ -179,6 +179,7 @@
                             + '<m-list-menu data-id="'+ data +'">'
                                 + '<a href="'+ baseUrl +'/admin/properties?category={{ Input::get("category") }}&action=edit&id='+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
                                 + '<a href="'+ baseUrl +'/admin/properties?category={{ Input::get("category") }}&action=edit-translation&id='+ data +'"><m-list-menu-item data-function="populatePropertyTranslate">TRANSLATION</m-list-menu-item></a>'
+                                + '<m-list-menu-item>EXPORT PDF</m-list-menu-item>'
                                 + '<m-list-menu-item delete data-url="property/destroy">DELETE</m-list-menu-item>'
                             + '</m-list-menu>'
                         + '</m-table-list-more>';
