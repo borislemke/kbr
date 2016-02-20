@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\PropertyMeta;
+use App\Attachment;
 
-class PropertyMetaController extends Controller
+class AttachmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,16 +40,6 @@ class PropertyMetaController extends Controller
     public function store(Request $request)
     {
         //
-        $propertyMeta = new PropertyMeta;
-
-        $propertyMeta->property_id = $request->property_id;
-        $propertyMeta->name = $request->name;
-        $propertyMeta->value = $request->value;
-        $propertyMeta->type = $request->type;
-
-        $propertyMeta->save();
-
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));
     }
 
     /**
@@ -95,27 +85,19 @@ class PropertyMetaController extends Controller
     public function destroy($id)
     {
         //
+        $attachment = Attachment::find($id);
+
+        if ($attachment->file) {
+
+            if (\Input::get('name'))
+                \File::delete('uploads/' . \Input::get('name') . '/' . $attachment->file);
+
+            else
+                \File::delete('uploads/property/' . $attachment->file);
+        }
+
+        $attachment->delete();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));
     }
-
-    public function thumb(Request $request)
-    {
-        //
-        $thumb = PropertyMeta::where('property_id', $request->property_id)
-            ->where('type', 'thumbnail')->first();
-
-        if ($thumb)
-            $thumb->delete();
-
-        $propertyMeta = new PropertyMeta;
-
-        $propertyMeta->property_id = $request->property_id;
-        $propertyMeta->name = 'thumbnail';
-        $propertyMeta->value = $request->value;
-        $propertyMeta->type = 'thumbnail';
-
-        $propertyMeta->save();
-
-        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));
-    }
-
 }

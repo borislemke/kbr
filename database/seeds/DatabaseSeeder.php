@@ -45,24 +45,24 @@ class DatabaseSeeder extends Seeder
                 $p->propertyMetas()->saveMany([
 
                     // document
-                    new \App\PropertyMeta(['name' => 'Agent Agreement', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'Pondok Wisata Lcs', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'Tax Construction', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'Photographs', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'IMB', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'Land Certf.', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'Notary Details', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'Owner KTP', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'agent agreement', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'pondok wisata license', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'tax construction', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'photographs', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'imb', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'land certificate', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'notary details', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'owner idcard', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
 
                     // facilities
-                    new \App\PropertyMeta(['name' => 'Bedroom', 'value' => '2 room', 'type' => 'facility', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'Bathroom', 'value' => '1 room', 'type' => 'facility', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'Sale in Furnish', 'value' => 'include furnish', 'type' => 'facility', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'bedroom', 'value' => '2 room', 'type' => 'facility', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'bathroom', 'value' => '1 room', 'type' => 'facility', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'sale in furnish', 'value' => 'include furnish', 'type' => 'facility', 'status' => 1]),
 
                     // distance                    
-                    new \App\PropertyMeta(['name' => 'Beach', 'value' => '1 hour', 'type' => 'distance', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'Airport', 'value' => '2 minutes', 'type' => 'distance', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'Market', 'value' => '3 kilometres', 'type' => 'distance', 'status' => 1])
+                    new \App\PropertyMeta(['name' => 'beach', 'value' => '1 hour', 'type' => 'distance', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'airport', 'value' => '2 minutes', 'type' => 'distance', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'market', 'value' => '3 kilometres', 'type' => 'distance', 'status' => 1])
                 ]);
 
                 $p->propertyTerms()->save(factory(App\PropertyTerm::class)->make());

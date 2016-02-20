@@ -344,45 +344,16 @@
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap" id="documents-received">
                         <h3 class="input-group-title">Documents Received</h3>
 
-                        <m-checkbox data-label="Agent Agreement" w25-9>
-                            <input type="checkbox" value="agent agreement" name="document_name[]" id="property-input-document_name[agent agreement]">
-                            <lever></lever>
-                        </m-checkbox>
+                        <?php 
+                            $arr_documents = Config::get('document');
+                        ?>
 
-                        <m-checkbox data-label="pondok wisata license" w25-9>
-                            <input type="checkbox" value="pondok wisata license" name="document_name[]" id="property-input-document_name[pondok wisata license]">
+                        @foreach($arr_documents as $key => $document)
+                        <m-checkbox data-label="{{ $document }}" w25-9>
+                            <input type="checkbox" value="{{ $document }}" name="document_name[]">
                             <lever></lever>
                         </m-checkbox>
-
-                        <m-checkbox data-label="tax construction" w25-9>
-                            <input type="checkbox" value="tax construction" name="document_name[]" id="property-input-document_name[tax construction]">
-                            <lever></lever>
-                        </m-checkbox>
-
-                        <m-checkbox data-label="photographs" w25-9>
-                            <input type="checkbox" value="photographs" name="document_name[]" id="property-input-document_name[photographs]">
-                            <lever></lever>
-                        </m-checkbox>
-
-                        <m-checkbox data-label="imb" w25-9>
-                            <input type="checkbox" value="imb" name="document_name[]" id="property-input-document_name[imb]">
-                            <lever></lever>
-                        </m-checkbox>
-
-                        <m-checkbox data-label="land certificate" w25-9>
-                            <input type="checkbox" value="land certificate" name="document_name[]" id="property-input-document_name[land certificate]">
-                            <lever></lever>
-                        </m-checkbox>
-
-                        <m-checkbox data-label="Notary Details" w25-9>
-                            <input type="checkbox" value="Notary Details" name="document_name[]" id="property-input-document_name[Notary Details]">
-                            <lever></lever>
-                        </m-checkbox>
-
-                        <m-checkbox data-label="owner idcard" w25-9>
-                            <input type="checkbox" value="owner idcard" name="document_name[]" id="property-input-document_name[owner idcard]">
-                            <lever></lever>
-                        </m-checkbox>
+                        @endforeach
                     </div>
 
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
@@ -410,8 +381,6 @@
             </m-caroussel-slider>
         </m-caroussel-body>
     </m-caroussel>
-    <input type="hidden" name="author" id="property-input-admin" value="admin">
-    <input type="hidden" name="property_type" id="property-input-type" value="property">
     <input type="hidden" name="edit" value="0" id="edit-flag">
 
     <m-buttons flexbox justify-end>
@@ -434,7 +403,7 @@
             
             console.log('save clicked!');
 
-            var url = "{{ route('api.property.store') }}";
+            var url = "{{ route('api.properties.store') }}";
             var fd = new FormData($('form')[0]);
 
             NProgress.start();

@@ -15,20 +15,22 @@
 
     <table id="property-table">
         <thead>
-            <td width="5%">
-                <!-- <m-list-item-check all class="item-select-all"></m-list-item-check> -->
-                Id
-            </td>
-            <td>Image</td>
-            <td>Title</td>
-            <td>Code</td>
-            <td>Type</td>
-            <td>Status</td>
-            <td>Agent</td>
-            <td>Price</td>
-            <td>View</td>
-            <td>Created</td>
-            <td>Action</td>
+            <tr>
+                <th width="5%">
+                    <!-- <m-list-item-check all class="item-select-all"></m-list-item-check> -->
+                    Id
+                </th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Code</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Agent</th>
+                <th>Price</th>
+                <th>View</th>
+                <th>Created</th>
+                <th>Action</th>
+            </tr>
         </thead>
 
     </table>
@@ -91,12 +93,12 @@
                 ,{
                     "orderable": false,
                     "targets": 1,
-                    "data": "attachments",
+                    "data": "thumb",
                     "render": function (data, type, row) {
 
                         if (data.length != 0) {
 
-                            return '<img width="100" src="'+ baseUrl +'/uploads/property/' + data[0].file +'">';
+                            return '<img width="100" src="'+ baseUrl +'/uploads/property/' + data[0].value +'">';
                         } else {
 
                             return '<img width="100" src="'+ baseUrl +'/no-image.png">';

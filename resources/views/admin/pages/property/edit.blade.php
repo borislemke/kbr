@@ -5,6 +5,7 @@
 
 
     {!! Form::open(array('class' => 'modal-window', 'id' => 'property-form', 'data-function' => 'modalClose', 'data-url' => 'property/store')) !!}
+
     <h3>Edit Property</h3>
     <m-caroussel>
 
@@ -77,7 +78,7 @@
 
                     <div class="m-input-group fwidth flexbox justify-between">
                         <m-input w25-9>
-                            <input value="{{ $property->period }}" type="text" name="lease_period" id="property-input-lease_period" required>
+                            <input value="{{ $property->lease_period }}" type="text" name="lease_period" id="property-input-lease_period" required>
                             <label for="lease_period">period</label>
                         </m-input>
 
@@ -195,36 +196,21 @@
                     <div class="m-input-group fwidth flexbox flexbox-wrap justify-between">
 
                         <div class="m-input-group fwidth flexbox flexbox-wrap justify-between" id="facility-wrapper">
-                            <m-input w50-6>
-                                <input type="text" value="bedroom" name="facility_name[]">
-                                <label>name</label>
-                            </m-input>
-                            <m-input w50-6>
-                                <input type="text" name="facility_value[]">
-                                <label>value</label>
-                            </m-input>
-
-                            <m-input w50-6>
-                                <input type="text" value="bathroom" name="facility_name[]">
-                                <label>name</label>
-                            </m-input>
-
-                            <m-input w50-6>
-                                <input type="text" name="facility_value[]">
-                                <label>value</label>
-                            </m-input>
-
-                            <m-input w50-6>
-                                <input type="text" value="sale in furnish" name="facility_name[]">
-                                <label>name</label>
-                            </m-input>
                             
+                            @foreach($property->facilities() as $facility)
                             <m-input w50-6>
-                                <input type="text" name="facility_value[]">
+                                <input type="text" value="{{ $facility->name }}" name="facility_name[]">
+                                <label>name</label>
+                            </m-input>
+
+                            <m-input w50-6>
+                                <input type="text" value="{{ $facility->value }}" name="facility_value[]">
                                 <label>value</label>
                             </m-input>
+                            @endforeach
 
                         </div>
+
                         <button class="add-facility">add more</button>
 
                         <div class="push-bottom"></div>
@@ -238,34 +224,17 @@
                     <div class="m-input-group fwidth flexbox flexbox-wrap justify-between">
 
                         <div class="m-input-group fwidth flexbox flexbox-wrap justify-between" id="distance-wrapper">
+
+                            @foreach($property->distances() as $distance)
                             <m-input w50-6>
-                                <input type="text" value="beach" name="distance_name[]">
+                                <input type="text" value="{{ $distance->name }}" name="distance_name[]">
                                 <label>name</label>
                             </m-input>
                             <m-input w50-6>
-                                <input type="text" name="distance_value[]">
+                                <input type="text" value="{{ $distance->value }}" name="distance_value[]">
                                 <label>value</label>
                             </m-input>
-
-                            <m-input w50-6>
-                                <input type="text" value="airport" name="distance_name[]">
-                                <label>name</label>
-                            </m-input>
-
-                            <m-input w50-6>
-                                <input type="text" name="distance_value[]">
-                                <label>value</label>
-                            </m-input>
-
-                            <m-input w50-6>
-                                <input type="text" value="market" name="distance_name[]">
-                                <label>name</label>
-                            </m-input>
-                            
-                            <m-input w50-6>
-                                <input type="text" name="distance_value[]">
-                                <label>value</label>
-                            </m-input>
+                            @endforeach
 
                         </div>
                         <button class="add-distance">add more</button>
@@ -287,18 +256,20 @@
                     </m-input>
 
                     <div id="gallery-wrapper" flexwrap style="width: 100%">
-<!--
-                        <m-gallery-item style="background-image: url('http://loremflickr.com/320/240?t={{ microtime() }}')" data-id="23">
+
+                        @foreach($property->galleries as $gallery)
+                        <m-gallery-item class="gallery-item" style="background-image: url({{ asset('uploads/property/' . $gallery->file) }})" data-id="{{ $gallery->id }}" id="gallery-item-{{ $gallery->id }}" data-file="{{ $gallery->file }}">
                             <m-gallery-item-menu>
                                 <m-button class="make-thumbnail" data-function="makeThumbnail">
-                                    <i class="material-icons">star_border</i>
+                                    <i class="material-icons {{ $gallery->file == $thumbnail ? 'yellow' : '' }}">{{ $gallery->file == $thumbnail ? 'star' : 'star_border' }}</i>
                                 </m-button>
-                                <m-button delete data-url="propertyimage/destroy">
+                                <m-button delete data-id="{{ $gallery->id }}" class="delete-gallery-item">
                                     <i class="material-icons">close</i>
                                 </m-button>
                             </m-gallery-item-menu>
                         </m-gallery-item>
- -->
+                        @endforeach
+
                     </div>
 
                 </m-caroussel-slide>
@@ -344,45 +315,17 @@
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap" id="documents-received">
                         <h3 class="input-group-title">Documents Received</h3>
 
-                        <m-checkbox data-label="Agent Agreement" w25-9>
-                            <input type="checkbox" value="agent agreement" name="document_name[]" id="property-input-document_name[agent agreement]">
-                            <lever></lever>
-                        </m-checkbox>
+                        <?php 
+                            $arr_documents = Config::get('document');
+                        ?>
 
-                        <m-checkbox data-label="pondok wisata license" w25-9>
-                            <input type="checkbox" value="pondok wisata license" name="document_name[]" id="property-input-document_name[pondok wisata license]">
+                        @foreach($arr_documents as $key => $document)
+                        <m-checkbox data-label="{{ $document }}" w25-9>
+                            <input type="checkbox" value="{{ $document }}" name="document_name[]" {{ in_array($document, $exist_document) ? 'checked' : '' }}>
                             <lever></lever>
                         </m-checkbox>
+                        @endforeach
 
-                        <m-checkbox data-label="tax construction" w25-9>
-                            <input type="checkbox" value="tax construction" name="document_name[]" id="property-input-document_name[tax construction]">
-                            <lever></lever>
-                        </m-checkbox>
-
-                        <m-checkbox data-label="photographs" w25-9>
-                            <input type="checkbox" value="photographs" name="document_name[]" id="property-input-document_name[photographs]">
-                            <lever></lever>
-                        </m-checkbox>
-
-                        <m-checkbox data-label="imb" w25-9>
-                            <input type="checkbox" value="imb" name="document_name[]" id="property-input-document_name[imb]">
-                            <lever></lever>
-                        </m-checkbox>
-
-                        <m-checkbox data-label="land certificate" w25-9>
-                            <input type="checkbox" value="land certificate" name="document_name[]" id="property-input-document_name[land certificate]">
-                            <lever></lever>
-                        </m-checkbox>
-
-                        <m-checkbox data-label="Notary Details" w25-9>
-                            <input type="checkbox" value="Notary Details" name="document_name[]" id="property-input-document_name[Notary Details]">
-                            <lever></lever>
-                        </m-checkbox>
-
-                        <m-checkbox data-label="owner idcard" w25-9>
-                            <input type="checkbox" value="owner idcard" name="document_name[]" id="property-input-document_name[owner idcard]" checked>
-                            <lever></lever>
-                        </m-checkbox>
                     </div>
 
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
@@ -410,9 +353,7 @@
             </m-caroussel-slider>
         </m-caroussel-body>
     </m-caroussel>
-    <input type="hidden" name="author" id="property-input-admin" value="admin">
-    <input type="hidden" name="property_type" id="property-input-type" value="property">
-    <input type="hidden" name="edit" value="0" id="edit-flag">
+    <input type="hidden" name="edit" value="{{ $property->id }}" id="edit-flag">
 
     <m-buttons flexbox justify-end>
         <m-button plain onclick="window.history.back()" id="close-properties-form">cancel</m-button>
@@ -434,7 +375,7 @@
             
             console.log('save clicked!');
 
-            var url = "{{ route('api.property.store') }}";
+            var url = "{{ route('api.properties.store') }}";
             var fd = new FormData($('form')[0]);
 
             NProgress.start();
@@ -481,11 +422,72 @@
 
         });
 
+        $(document).on('click', '.delete-gallery-item', function(event) {
+            event.preventDefault();
+
+            var id = $(this).attr('data-id');
+            var url = "{{ route('api.attachment.destroy', $id = null) }}/" + id + "?name=property";
+            var method = 'delete';
+            var token = "{{ csrf_token() }}";
+
+            Monolog.confirm('delete item', 'are you sure to delete this item? this cannot be undone', function() {
+                NProgress.start();
+                $.post(url, {_method: method, _token: token}, function(data, textStatus, xhr) {
+                    
+                    switch(data.status) {
+
+                        case 200:
+
+                            Monolog.notify(data.monolog.title, data.monolog.message);
+
+                            removeItem(data);
+
+                            break;
+
+                        default:
+
+                            Monolog.notify(data.monolog.title, data.monolog.message);
+
+                            consoleLog(data);
+                    }
+                });
+            });
+
+        });
+
+        $(document).on('click', '.make-thumbnail', function(event) {
+            event.preventDefault();
+
+            var $this = $(this);
+
+            var url = "{{ route('api.thumb.store') }}";
+            var token = "{{ csrf_token() }}";
+            var property_id = {{ $property->id }};
+            var value = $(this).closest('.gallery-item').attr('data-file');
+
+            $.post(url, {property_id: property_id, value: value, _token: token}, function(data, textStatus, xhr) {
+                
+                $('.make-thumbnail').find('.material-icons').html('star_border');
+
+                $this.find('.material-icons').html('star').addClass('yellow');
+            });            
+
+        });
+
     });
 
     function saved() {
 
         location.reload();
+    }
+
+    function removeItem(data) {
+
+        var id = data.id;
+
+        $('#gallery-item-' + id).remove();
+
+        NProgress.done();
     }
 
 </script>

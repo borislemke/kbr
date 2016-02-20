@@ -52,6 +52,8 @@ class PropertyController extends Controller
             $q->where('type', 'img');
         }]);
 
+        $properties = $properties->with('thumb');
+
         // searching
         if ($search) {            
 
@@ -127,10 +129,11 @@ class PropertyController extends Controller
             'city' =>'required'
         ]);
 
-
         if ($validator->fails()) {
             return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => implode($validator->errors()->all(), '<br>') )));
         }
+
+        if ($request->edit != 0) return $this->update($request, $request->edit);
 
         DB::beginTransaction();
 
@@ -325,6 +328,177 @@ class PropertyController extends Controller
     public function update(Request $request, $id)
     {
         //
+        DB::beginTransaction();
+
+        $user_id = \Auth::user()->get()->id;
+
+        $property = Property::find($id);
+
+        $property->user_id = $user_id;
+
+        // $property->customer_id = $request->customer_id;
+        // $property->category_id = $request->category_id;
+
+        $property->currency = $request->currency;
+        $property->price = $request->price;
+        $property->price_label = $request->price_label;
+        $property->type = $request->type;
+
+        $property->building_size = $request->building_size;
+        $property->land_size = $request->land_size;
+
+        $property->code = $request->code;
+        $property->status = $request->status;
+        $property->year = $request->year;
+
+        $property->map_latitude = $request->map_latitude;
+        $property->map_longitude = $request->map_longitude;
+
+        $property->view_north = $request->view_north;
+        $property->view_east = $request->view_east;
+        $property->view_west = $request->view_west;
+        $property->view_south = $request->view_south;
+
+        $property->is_price_request = $request->is_price_request;
+        $property->is_exclusive = $request->is_exclusive;
+
+        $property->owner_name = $request->owner_name;
+        $property->owner_email = $request->owner_email;
+        $property->owner_phone = $request->owner_phone;
+
+        $property->agent_commission = $request->agent_commission;
+        $property->agent_contact = $request->agent_contact;
+        $property->agent_meet_date = $request->agent_meet_date;
+        $property->agent_inspector = $request->agent_inspector;
+
+        $property->sell_reason = $request->sell_reason;
+        $property->sell_note = $request->sell_note;
+        $property->other_agent = $request->other_agent;
+
+        $property->orientation = $request->orientation;
+        $property->sell_in_furnish = $request->sell_in_furnish;
+        $property->lease_period = $request->lease_period;
+        $property->lease_year = $request->lease_year;
+        
+        
+        // find province, country
+        $city = \App\City::where('city_name', $request->city)->first();
+
+        $property->city = $request->city;
+        $property->province = $city->province->province_name;
+        $property->country = $city->province->country->nicename;
+
+        $property->save();
+
+
+        // Model::unguard();
+
+        // category
+        $propertyTerm = new \App\PropertyTerm;
+        $propertyTerm = $propertyTerm->join('terms', 'terms.id', '=', 'property_terms.term_id');
+        $propertyTerm = $propertyTerm->where('terms.type', 'property_category');
+        $propertyTerm = $propertyTerm->where('property_terms.property_id', $property->id);
+        $propertyTerm = $propertyTerm->first();
+
+        $propertyTerm->term_id = $request->category;
+
+        $propertyTerm->save();
+
+        // locale
+        $propertyLocale = $property->propertyLocales()
+            ->where('locale', 'en')
+            ->first();
+
+        $propertyLocale->title = $request->title;
+        $propertyLocale->content = $request->content;
+        $propertyLocale->slug = $request->slug;
+
+        $propertyLocale->save();
+
+        // distances
+        if ($request->distance_name) {
+
+            $property->propertyMetas()->where('type', 'distance')->delete();
+
+            foreach ($request->distance_name as $key => $value) {
+
+                $propertyMeta = new \App\PropertyMeta;
+
+                $propertyMeta->name = $value;
+                $propertyMeta->value = $request->distance_value[$key];
+                $propertyMeta->type = 'distance';
+                $propertyMeta->property_id = $property->id;
+
+                $propertyMeta->save();
+            }
+        }
+
+        // documents
+        if ($request->document_name) {
+
+            $property->propertyMetas()->where('type', 'document')->delete();
+
+            foreach ($request->document_name as $key => $value) {
+
+                $propertyMeta = new \App\PropertyMeta;
+
+                $propertyMeta->name = $value;
+                $propertyMeta->value = 'ready';
+                $propertyMeta->type = 'document';
+                $propertyMeta->property_id = $property->id;
+
+                $propertyMeta->save();
+            }
+        }
+
+        // facilities
+        if ($request->facility_name) {
+
+            $property->propertyMetas()->where('type', 'facility')->delete();
+
+            foreach ($request->facility_name as $key => $value) {
+
+                $propertyMeta = new \App\PropertyMeta;
+
+                $propertyMeta->name = $value;
+                $propertyMeta->value = $request->facility_value[$key];
+                $propertyMeta->type = 'facility';
+                $propertyMeta->property_id = $property->id;
+
+                $propertyMeta->save();
+            }
+
+        }
+
+        // files
+        if ($request->hasFile('files')) {
+
+            foreach ($request->file('files') as $key => $value) {
+
+                $destinationPath = 'uploads/property';
+
+                $extension = $value->getClientOriginalExtension();
+                $fileName = date('YmdHis') . '_' . $key . '_kibarer_property' . '.' . $extension;
+
+                $value->move($destinationPath, $fileName);
+
+                $attachment = new \App\Attachment;
+
+                $attachment->object_id = $property->id;
+                $attachment->name = 'property';
+                $attachment->file = $fileName;
+                $attachment->type = 'img';
+
+                $attachment->save();
+
+            }
+
+        }
+           
+
+        DB::commit();
+
+        return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been updated')));
     }
 
     /**
@@ -376,7 +550,6 @@ class PropertyController extends Controller
 
         $properties = $properties->paginate($limit);
 
-
         return view('pages.search-property', compact('properties', 'term'));
     }
 
@@ -392,7 +565,9 @@ class PropertyController extends Controller
 
         $property = new Property;
 
-        $property = $property->where('slug', $slug);
+        $property = $property->whereHas('propertyLocales', function ($q) use ($slug) {
+            $q->where('slug', $slug);
+        });
 
         if ($property->count() == 0) return $this->search($request, $page, $term);
 

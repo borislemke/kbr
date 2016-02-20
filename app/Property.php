@@ -27,6 +27,13 @@ class Property extends Model
         return $this->hasMany('App\PropertyLocale');
     }
 
+    public function galleries()
+    {
+        return $this->hasMany('App\Attachment', 'object_id')
+            ->where('type', 'img')
+            ->where('name', 'property');
+    }
+
     public function attachments()
     {
         return $this->hasMany('App\Attachment', 'object_id')->where('name', 'property');
@@ -71,6 +78,11 @@ class Property extends Model
         }
 
         return $query;
+    }
+
+    public function thumb()
+    {
+        return $this->propertyMetas()->where('type', 'thumbnail');
     }
 
     public function scopeFilterPrice($query, $minprice, $maxprice)

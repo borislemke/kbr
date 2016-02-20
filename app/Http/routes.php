@@ -31,6 +31,76 @@ foreach(Lang::get('url') as $k => $v) {
 }
 
 
+// API
+Route::group(['prefix' => 'api'], function() {
+
+    Route::resource('branch', 'BranchController');
+
+    Route::resource('city', 'CityController');
+
+    Route::resource('message', 'ContactController');
+
+    Route::resource('country', 'CountryController');
+
+    Route::resource('customer', 'CustomerController');
+
+    Route::resource('enquiry', 'EnquiryController');
+
+    Route::resource('locale', 'LocaleController');
+
+    Route::resource('log_customer', 'LogCustomerController');
+
+    Route::resource('log_user', 'LogUserController');
+
+    Route::resource('notification', 'NotificationController');
+
+    Route::resource('page', 'PageController');
+
+    Route::resource('page_locale', 'PageLocaleController');
+
+    Route::resource('page_meta', 'PageMetaController');
+
+    Route::resource('page_term', 'PageTermController');
+
+    Route::resource('post', 'PostController');
+
+    Route::resource('post_locale', 'PostLocaleController');
+
+    Route::resource('post_meta', 'PostMetaController');
+
+    Route::resource('post_term', 'PostTermController');
+
+    Route::resource('properties', 'PropertyController');
+
+    Route::resource('property_locale', 'PropertyLocaleController');
+
+    Route::resource('property_meta', 'PropertyMetaController');
+
+    Route::resource('property_term', 'PropertyTermController');
+
+    Route::resource('province', 'ProvinceController');
+
+    Route::resource('role', 'RoleController');
+
+    Route::resource('term', 'TermController');
+
+    Route::resource('testimony', 'TestimonyController');
+
+    Route::resource('user', 'UserController');
+
+    Route::resource('wishlist', 'WishlistController');
+
+    Route::resource('attachment', 'AttachmentController');
+
+    Route::post('sellproperty', ['as' => 'sellproperty.store', 'uses' => 'PropertyController@sellProperty']);
+
+    Route::post('property/delete/{id}', ['as' => 'api.property.delete', 'uses' => 'PropertyController@delete']);
+
+    Route::post('property_meta/thumb', ['as' => 'api.thumb.store', 'uses' => 'PropertyMetaController@thumb']);
+
+});
+
+
 // Back-End
 Route::group(['middleware' => 'auth'], function () {
 
@@ -154,71 +224,6 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 
 });
 
-
-// API
-Route::group(['prefix' => 'api'], function() {
-
-    Route::resource('branch', 'BranchController');
-
-    Route::resource('city', 'CityController');
-
-    Route::resource('message', 'ContactController');
-
-    Route::resource('country', 'CountryController');
-
-    Route::resource('customer', 'CustomerController');
-
-    Route::resource('enquiry', 'EnquiryController');
-
-    Route::resource('locale', 'LocaleController');
-
-    Route::resource('log_customer', 'LogCustomerController');
-
-    Route::resource('log_user', 'LogUserController');
-
-    Route::resource('notification', 'NotificationController');
-
-    Route::resource('page', 'PageController');
-
-    Route::resource('page_locale', 'PageLocaleController');
-
-    Route::resource('page_meta', 'PageMetaController');
-
-    Route::resource('page_term', 'PageTermController');
-
-    Route::resource('post', 'PostController');
-
-    Route::resource('post_locale', 'PostLocaleController');
-
-    Route::resource('post_meta', 'PostMetaController');
-
-    Route::resource('post_term', 'PostTermController');
-
-    Route::resource('property', 'PropertyController');
-
-    Route::resource('property_locale', 'PropertyLocaleController');
-
-    Route::resource('property_meta', 'PropertyMetaController');
-
-    Route::resource('property_term', 'PropertyTermController');
-
-    Route::resource('province', 'ProvinceController');
-
-    Route::resource('role', 'RoleController');
-
-    Route::resource('term', 'TermController');
-
-    Route::resource('testimony', 'TestimonyController');
-
-    Route::resource('user', 'UserController');
-
-    Route::resource('wishlist', 'WishlistController');
-
-    Route::post('sellproperty', ['as' => 'sellproperty.store', 'uses' => 'PropertyController@sellProperty']);
-
-    Route::post('property/delete/{id}', ['as' => 'api.property.delete', 'uses' => 'PropertyController@delete']);
-
-});
 
 
 Route::group(['middleware' => 'auth'], function () {

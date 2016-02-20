@@ -62,7 +62,17 @@ class AdminController extends Controller
 
             $property = \App\Property::find($request->id);
 
-            return view('admin.pages.property.edit', compact('property', 'request', 'categories'));
+            // exists document
+            $exist_document = array();
+            foreach ($property->documents() as $key => $value) {
+                $exist_document[] = strtolower($value->name);
+            }
+
+            $thumb = $property->thumb()->first();
+
+            $thumbnail = $thumb ? $thumb->value : 0;
+
+            return view('admin.pages.property.edit', compact('property', 'request', 'categories', 'exist_document', 'thumbnail'));
         }
 
         if ($request->action == 'edit-translation' && isset($request->id)) {
@@ -78,7 +88,7 @@ class AdminController extends Controller
 
         $request = json_decode($request, true);
 
-        $api_url = route('api.property.index', $request);
+        $api_url = route('api.properties.index', $request);
 
         return view('admin.pages.property.listing', compact('api_url', 'request'));
     }
