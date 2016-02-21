@@ -63,6 +63,7 @@
             <label for="title">city</label>
         </div>
     </div>
+    <input type="hidden" name="my_account" value="1">
 <!-- 
     <div class="m-input-group fwidth flexbox justify-between">
         <div class="m-input-wrapper w50-6">

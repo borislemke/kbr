@@ -122,6 +122,19 @@
                     </div>
 
                     <div class="m-input-group fwidth flexbox justify-between">
+                        <!-- <h3 class="input-group-title">Position</h3> -->
+                        <m-input class="m-input-wrapper w50-6">
+                            <input value="{{ $property->map_latitude }}" type="text" name="map_latitude" required>
+                            <label for="map_latitude">latitude</label>
+                        </m-input>
+
+                        <m-input class="m-input-wrapper w50-6">
+                            <input value="{{ $property->map_longitude }}" type="text" name="map_longitude" required>
+                            <label for="map_longitude">longitude</label>
+                        </m-input>
+                    </div>
+
+                    <div class="m-input-group fwidth flexbox justify-between">
                         <m-input select class="m-input-wrapper w50-6">
                             <select name="type">
                                 <option value="free hold" {{ $property->type == 'free hold' ? 'selected' : '' }}>free hold</option>

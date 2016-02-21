@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use App\Post;
 
+use DB;
+
 class PostController extends Controller
 {
     /**
@@ -124,21 +126,21 @@ class PostController extends Controller
 
         DB::beginTransaction();
 
-        $page = new Page;
+        $post = new Post;
 
-        $page->user_id = \Auth::user()->get()->id;
-        $page->slug = $request->slug['en'];
-        $page->route = str_replace('-', '_', $request->slug['en']);
-        $page->status = $request->status;
+        $post->user_id = \Auth::user()->get()->id;
+        $post->slug = $request->slug['en'];
+        $post->route = str_replace('-', '_', $request->slug['en']);
+        $post->status = $request->status;
 
-        $page->save();
+        $post->save();
 
         // locale
         foreach ($request->title as $key => $value) {
 
-            $locale = new \App\PageLocale;
+            $locale = new \App\postLocale;
 
-            $locale->page_id = $page->id;
+            $locale->post_id = $post->id;
             $locale->title = $request->title[$key];
             $locale->content = $request->content[$key];
             $locale->meta_keyword = $request->meta_keyword[$key];
@@ -199,24 +201,24 @@ class PostController extends Controller
 
         DB::beginTransaction();
 
-        $page = Page::find($id);
+        $post = Post::find($id);
 
-        $page->user_id = \Auth::user()->get()->id;
-        $page->slug = $request->slug['en'];
-        $page->route = str_replace('-', '_', $request->slug['en']);
-        $page->status = $request->status;
+        $post->user_id = \Auth::user()->get()->id;
+        $post->slug = $request->slug['en'];
+        $post->route = str_replace('-', '_', $request->slug['en']);
+        $post->status = $request->status;
 
-        $page->save();
+        $post->save();
 
         // delete first
-        $page->pageLocales()->delete();
+        $post->postLocales()->delete();
 
         // locale
         foreach ($request->title as $key => $value) {
 
-            $locale = new \App\PageLocale;
+            $locale = new \App\postLocale;
 
-            $locale->page_id = $page->id;
+            $locale->post_id = $post->id;
             $locale->title = $request->title[$key];
             $locale->content = $request->content[$key];
             $locale->meta_keyword = $request->meta_keyword[$key];
@@ -242,9 +244,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-        $page = Page::find($id);
+        $post = Post::find($id);
 
-        $page->delete();
+        $post->delete();
 
         return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));
     }
@@ -268,10 +270,10 @@ class PostController extends Controller
 
         $posts = $posts->get();
 
-        return view('pages.blog-listing', compact('posts'));
+        return view('posts.blog-listing', compact('posts'));
     }
 
-    public function detail($page, $term = null)
+    public function detail($post, $term = null)
     {
 
         if ($term == null) return $this->listing();
@@ -291,7 +293,7 @@ class PostController extends Controller
 
         $post = $post->first();
 
-        return view('pages.blog-view', compact('post'));
+        return view('posts.blog-view', compact('post'));
     }
 
 }

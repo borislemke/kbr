@@ -230,7 +230,9 @@ class UserController extends Controller
 
         // $user->zipcode = $request->zipcode;
 
-        $user->role_id = $request->role_id;
+        if ($request->my_account != 1) {
+            $user->role_id = $request->role_id;
+        }
 
         $user->branch_id = $request->branch_id;
 

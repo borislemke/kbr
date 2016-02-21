@@ -55,7 +55,7 @@
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
                         <h3 class="input-group-title">content</h3>
                         <div class="input-wrapper fwidth">
-                            <textarea id="editor{{ $locale }}" name="content[{{ $locale }}]" rows="20" style="padding-top: 0"></textarea>
+                            <textarea class="ckeditor" id="editor{{ $locale }}" name="content[{{ $locale }}]" rows="20" style="padding-top: 0"></textarea>
                         </div>
                     </div>      
 
@@ -109,6 +109,10 @@
             event.preventDefault();
             
             console.log('save clicked!');
+
+            <?php foreach(Config::get('app.alt_langs') as $locale) : ?>
+                $('#editor<?= $locale ?>').html(CKEDITOR.instances.editor{{ $locale }}.getData());
+            <?php endforeach ?>
 
             var url = "{{ route('api.post.update', $post->id) }}";
             var fd = new FormData($('form')[0]);

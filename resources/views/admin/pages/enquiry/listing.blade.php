@@ -21,6 +21,7 @@
             </td>
             <td>Image</td>
             <td>Property</td>
+            <td>Category</td>
             <td>Subject</td>
             <td>Name</td>
             <td>Created</td>
@@ -86,12 +87,12 @@
                 {"data": "id"},
                 {
                     "orderable": false,
-                    "data": "property.attachments",
+                    "data": "property.thumb",
                     "render": function (data, type, row) {
 
                         if (data.length != 0) {
 
-                            return '<img width="100" src="'+ baseUrl +'/uploads/property/' + data[0].file +'">';
+                            return '<img width="100" src="'+ baseUrl +'/uploads/property/' + data[0].value +'">';
                         } else {
 
                             return '<img width="100" src="'+ baseUrl +'/no-image.png">';
@@ -100,6 +101,7 @@
                     }
                 },
                 {"data": "property.property_locales.0.title"},
+                {"data": "property.terms.0.name"},
                 {"data": "subject"},
                 {"data": "firstname"},
                 {

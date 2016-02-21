@@ -39,7 +39,9 @@ class EnquiryController extends Controller
 
         $enquiries = $enquiries->select('enquiries.*')
             ->join('properties', 'properties.id', '=', 'enquiries.property_id')
-            ->join('property_locales', 'property_locales.property_id', '=', 'properties.id');
+            ->join('property_locales', 'property_locales.property_id', '=', 'properties.id')
+            ->join('property_terms', 'property_terms.property_id', '=', 'properties.id')
+            ->join('terms', 'terms.id', '=', 'property_terms.term_id');
 
         // with property
         $enquiries = $enquiries->with(['property' => function ($q) {
@@ -48,12 +50,14 @@ class EnquiryController extends Controller
             $q->with(['propertyLocales' => function ($q) {
                 $q->where('locale', 'en');
 
-            // image
-            }])->with(['attachments' => function ($q) {
-                $q->where('type', 'img');
+            // category
+            }])->with(['terms' => function ($q) {
+                $q->where('type', 'property_category');
 
-            // agent
-            }])->with('user');
+            // image
+            }])
+            ->with('thumb')
+            ->with('user');
 
         }]);
 
@@ -84,6 +88,9 @@ class EnquiryController extends Controller
             if ($column == 'property.property_locales.0.title') {
 
                 $enquiries = $enquiries->orderBy('property_locales.title', $sort);
+            } else if ($column == 'property.terms.0.name') {
+
+                $enquiries = $enquiries->orderBy('terms.name', $sort);
             } else {
 
                 $enquiries = $enquiries->orderBy('enquiries.' . $column, $sort);
