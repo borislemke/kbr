@@ -13,7 +13,7 @@ class CitiesTableSeeder extends Seeder
     {
         //
         DB::statement(
-            "INSERT INTO `Cities` (`id`, `province_id`, `city_name`, `city_name_full`, `city_type`, `city_lat`, `city_lon`) VALUES
+            "INSERT INTO `cities` (`id`, `province_id`, `city_name`, `city_name_full`, `city_type`, `city_lat`, `city_lon`) VALUES
             (1101, 11, 'Simeulue', 'Kabupaten Simeulue', 'kabupaten', NULL, NULL),
             (1102, 11, 'Aceh Singkil', 'Kabupaten Aceh Singkil', 'kabupaten', NULL, NULL),
             (1103, 11, 'Aceh Selatan', 'Kabupaten Aceh Selatan', 'kabupaten', NULL, NULL),
