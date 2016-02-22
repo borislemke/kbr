@@ -66,7 +66,9 @@
                     $('#editor-{{ $locale }}').redactor({
                         imageUpload: "{{ route('api.attachment.upload.image', ['name' => 'page']) }}",
                         // fileUpload: "{{ route('api.attachment.upload.file') }}",
-                        imageGetJson: "{{ route('api.attachment.get.image') }}"
+                        imageGetJson: "{{ route('api.attachment.get.image') }}",
+
+                        minHeight: 300
                     });
                 });
                 </script>

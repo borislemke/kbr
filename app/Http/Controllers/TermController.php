@@ -178,7 +178,7 @@ class TermController extends Controller
 
         $term = Term::find($id);
 
-        if ($term->slug == 'uncategorized') {
+        if (in_array($term->id, [1, 2, 3, 4, 5, 6])) {
             return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => 'it is not allowed to delete this item') ));
         }
 
