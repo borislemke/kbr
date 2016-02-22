@@ -40,7 +40,7 @@
 
             <div class="thumbnail nohovereffect">
 
-                @if($property->thumb)
+                @if($property->thumb()->first())
                 <img src="{{ asset('uploads/property/' . $property->thumb()->first()->value) }}">
                 @else
                 <img src="{{ asset('no-image.png') }}">
