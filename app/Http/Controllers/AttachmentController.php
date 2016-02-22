@@ -90,10 +90,10 @@ class AttachmentController extends Controller
         if ($attachment->file) {
 
             if (\Input::get('name'))
-                \File::delete('uploads/' . \Input::get('name') . '/' . $attachment->file);
+                \File::delete('uploads/images/' . \Input::get('name') . '/' . $attachment->file);
 
             else
-                \File::delete('uploads/property/' . $attachment->file);
+                \File::delete('uploads/files/' . $attachment->file);
         }
 
         $attachment->delete();

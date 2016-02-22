@@ -98,7 +98,7 @@
 
                         if (data.length != 0) {
 
-                            return '<img width="100" src="'+ baseUrl +'/uploads/property/' + data[0].value +'">';
+                            return '<img width="100" src="'+ baseUrl +'/uploads/images/property/' + data[0].value +'">';
                         } else {
 
                             return '<img width="100" src="'+ baseUrl +'/no-image.png">';

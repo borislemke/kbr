@@ -268,7 +268,7 @@ class PropertyController extends Controller
 
             foreach ($request->file('files') as $key => $value) {
 
-                $destinationPath = 'uploads/property';
+                $destinationPath = 'uploads/images/property';
 
                 $extension = $value->getClientOriginalExtension();
                 $fileName = date('YmdHis') . '_' . $key . '_kibarer_property' . '.' . $extension;
@@ -475,7 +475,7 @@ class PropertyController extends Controller
 
             foreach ($request->file('files') as $key => $value) {
 
-                $destinationPath = 'uploads/property';
+                $destinationPath = 'uploads/images/property';
 
                 $extension = $value->getClientOriginalExtension();
                 $fileName = date('YmdHis') . '_' . $key . '_kibarer_property' . '.' . $extension;
