@@ -18,15 +18,13 @@ class Enquiry extends Model
 
         // agent
         if ($user->role_id == 4 or $user->role_id == 3) {
-            $query->join('properties', 'properties.id', '=', 'enquiries.property_id')
-                ->where('properties.user_id', $user->id);
+            $query->where('properties.user_id', $user->id);
         }
 
         // super agent or manager
         if ($user->role_id == 2) {
 
-            $query->join('properties', 'properties.id', '=', 'enquiries.property_id')
-                ->join('users', 'users.id', '=', 'properties.user_id')
+            $query->join('users', 'users.id', '=', 'properties.user_id')
                 ->where('users.branch_id', $user->branch_id);
         }
 

@@ -40,8 +40,8 @@ class EnquiryController extends Controller
         $enquiries = $enquiries->select('enquiries.*')
             ->join('properties', 'properties.id', '=', 'enquiries.property_id')
             ->join('property_locales', 'property_locales.property_id', '=', 'properties.id')
-            ->join('property_terms', 'property_terms.property_id', '=', 'properties.id')
-            ->join('terms', 'terms.id', '=', 'property_terms.term_id');
+            ->leftJoin('property_terms', 'property_terms.property_id', '=', 'properties.id')
+            ->leftJoin('terms', 'property_terms.term_id', '=', 'terms.id');
 
         // with property
         $enquiries = $enquiries->with(['property' => function ($q) {
