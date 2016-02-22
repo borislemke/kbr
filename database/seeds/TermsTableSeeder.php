@@ -56,5 +56,15 @@ class TermsTableSeeder extends Seeder
             'order' => 0,
             'parent_id' => 0
         ]);
+
+        \App\Term::create([
+            'name' => 'uncategorized',
+            'slug' => 'uncategorized',
+            'route' => 'uncategorized',
+            'type' => 'post_category',
+            'order' => 0,
+            'parent_id' => 0
+        ]);
+
     }
 }

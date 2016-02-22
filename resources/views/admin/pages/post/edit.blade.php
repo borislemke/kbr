@@ -21,6 +21,19 @@
             </m-caroussel-switch-wrapper>
         </m-caroussel-header>
 
+        <div class="m-input-group fwidth flexbox justify-between">
+
+            <div class="m-input-wrapper w50-6">
+                <select name="term_id">
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ $post->category->id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <label for="title">category</label>
+            </div>
+
+        </div>
+
         <m-caroussel-body>
             <m-caroussel-slider class="flexbox align-start" style="width: <?= $numberOfSlides ?>00%;">
 
@@ -55,25 +68,20 @@
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
                         <h3 class="input-group-title">content</h3>
                         <div class="input-wrapper fwidth">
-                            <textarea class="ckeditor" id="editor{{ $locale }}" name="content[{{ $locale }}]" rows="20" style="padding-top: 0"></textarea>
+                            <textarea rows="10" class="ckeditor" id="editor-{{ $locale }}" name="content[{{ $locale }}]" rows="20" style="padding-top: 0">{{ $postLocale->content or '' }}</textarea>
                         </div>
                     </div>      
 
-                    <script type="text/javascript">
-
-                        CKEDITOR.replace('editor{{ $locale }}', {
-                            height: 500,
-                            filebrowserBrowseUrl : 'assets/plugins/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
-                            filebrowserUploadUrl : 'assets/plugins/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
-                            filebrowserImageBrowseUrl : 'assets/plugins/filemanager/dialog.php?type=1&editor=ckeditor&fldr='
-                        });
-
-
-                        CKEDITOR.instances.editor{{ $locale }}.setData(<?= $postLocale ? json_encode($postLocale->content) : '' ?>);
-
-                    </script>          
-
                 </m-caroussel-slide>
+                <script type="text/javascript">
+                $(document).ready( function() {
+                    $('#editor-{{ $locale }}').redactor({
+                        imageUpload: "{{ route('api.attachment.upload.image', ['name' => 'post']) }}",
+                        // fileUpload: "{{ route('api.attachment.upload.file') }}",
+                        imageGetJson: "{{ route('api.attachment.get.image') }}"
+                    });
+                });
+                </script>
                 @endforeach
 
             </m-caroussel-slider>
@@ -109,10 +117,6 @@
             event.preventDefault();
             
             console.log('save clicked!');
-
-            <?php foreach(Config::get('app.alt_langs') as $locale) : ?>
-                $('#editor<?= $locale ?>').html(CKEDITOR.instances.editor{{ $locale }}.getData());
-            <?php endforeach ?>
 
             var url = "{{ route('api.post.update', $post->id) }}";
             var fd = new FormData($('form')[0]);

@@ -29,6 +29,7 @@ elixir(function(mix) {
         'admin/scripts.js',
         'admin/ajax.js',
         'admin/monolog.js',
-        'admin/ui.js'
+        'admin/ui.js',
+        'admin/redactor.js'
     ], 'public/assets/js/admin/scripts.js');
 });

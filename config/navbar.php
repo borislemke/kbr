@@ -52,8 +52,8 @@ return [
 
         "blog" => "blog",
         "blog/categories" => "categories",
-        "blog/comments" => "comments",
-        "blog/settings" => "settings"
+        // "blog/comments" => "comments",
+        // "blog/settings" => "settings"
     ],
 
     "pages" => [

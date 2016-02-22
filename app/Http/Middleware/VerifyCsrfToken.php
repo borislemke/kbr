@@ -13,5 +13,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         //
+        'api/upload/image',
+        'api/upload/file'
     ];
 }

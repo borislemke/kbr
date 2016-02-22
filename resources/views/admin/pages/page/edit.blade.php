@@ -55,11 +55,21 @@
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
                         <h3 class="input-group-title">content</h3>
                         <div class="input-wrapper fwidth">
-                            <textarea name="content[{{ $locale }}]" rows="10" style="padding-top: 0">{{ $pageLocale->content or '' }}</textarea>
+                            <textarea id="editor-{{ $locale }}" name="content[{{ $locale }}]" rows="10" style="padding-top: 0">{{ $pageLocale->content or '' }}</textarea>
                         </div>
                     </div>                
 
                 </m-caroussel-slide>
+
+                <script type="text/javascript">
+                $(document).ready( function() {
+                    $('#editor-{{ $locale }}').redactor({
+                        imageUpload: "{{ route('api.attachment.upload.image', ['name' => 'page']) }}",
+                        // fileUpload: "{{ route('api.attachment.upload.file') }}",
+                        imageGetJson: "{{ route('api.attachment.get.image') }}"
+                    });
+                });
+                </script>
                 @endforeach
 
             </m-caroussel-slider>

@@ -38,14 +38,13 @@ class PostController extends Controller
         $posts = new Post;
 
         $posts = $posts->select('posts.*')
-
             ->join('post_locales', 'post_locales.post_id', '=', 'posts.id')
             ->where('post_locales.locale', 'en');
 
         $posts = $posts->with(['postLocales' => function ($q) {
 
             $q->where('locale', 'en');
-        }]);
+        }])->with('categories');
 
         // searching
         if ($search) {
@@ -55,6 +54,8 @@ class PostController extends Controller
                 $q->where('post_locales.title', 'like', $search . '%');
             });
         }
+
+        $posts = $posts->groupBy('posts.id');
 
         // total records
         $count = $posts->count();
@@ -70,6 +71,13 @@ class PostController extends Controller
             if ($column == 'post_locales.0.title') {
 
                 $posts = $posts->orderBy('post_locales.title', $sort);
+            } else if ($column == 'categories.0.name') {
+
+                $posts = $posts->join('post_terms', 'post_terms.post_id', '=', 'posts.id')
+                    ->join('terms', 'terms.id', '=', 'post_terms.term_id')
+                    ->where('terms.type', 'post_category')
+                    ->orderBy('terms.name', $sort);
+                    
             } else {
 
                 $posts = $posts->orderBy('posts.' . $column, $sort);
@@ -152,6 +160,14 @@ class PostController extends Controller
 
         }
 
+        // category
+        $postTerm = new \App\PostTerm;
+
+        $postTerm->term_id = $request->term_id;
+        $postTerm->post_id = $post->id;
+
+        $postTerm->save();
+
         DB::commit();
 
         return response()->json(array('status' => 200, 'monolog' => array('title' => 'success', 'message' => 'object has been saved')));
@@ -229,6 +245,18 @@ class PostController extends Controller
             $locale->save();
 
         }
+
+        // category
+        $term = $post->terms()->where('type', 'post_category')->first();
+
+        $postTerm = \App\PostTerm::where('post_id', $post->id)
+            ->where('term_id', $term->id)
+            ->first();
+
+        $postTerm->term_id = $request->term_id;
+        $postTerm->post_id = $post->id;
+
+        $postTerm->save();
 
         DB::commit();
 

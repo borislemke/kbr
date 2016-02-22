@@ -4,7 +4,7 @@
 @section('fab')
 
 <!-- <m-fab salmon class="modal-open" data-target="#post-add"><i class="material-icons">add</i></m-fab> -->
-<a href="{{ route('admin.posts', ['term' => null, 'action' => 'create']) }}"><m-fab salmon data-target="#post-add"><i class="material-icons">add</i></m-fab></a>
+<a href="{{ route('admin.posts', ['term' => 'categories', 'action' => 'create']) }}"><m-fab salmon data-target="#post-add"><i class="material-icons">add</i></m-fab></a>
 
 @stop
 
@@ -19,10 +19,9 @@
                 <!-- <m-list-item-check all class="item-select-all"></m-list-item-check> -->
                 Id
             </td>
-            <td>title</td>
+            <td>name</td>
             <td>slug</td>
-            <td>category</td>
-            <td>status</td>
+            <td>parent</td>
             <td>Created</td>
             <td>Action</td>
         </thead>
@@ -45,7 +44,7 @@
             event.preventDefault();
 
             var id = $(this).parent().attr('data-id');            
-            var url = "{{ route('api.post.destroy', $id = null) }}/" + id;
+            var url = "{{ route('api.term.destroy', $id = null) }}/" + id;
             var method = 'delete';
             var token = "{{ csrf_token() }}";
 
@@ -78,21 +77,15 @@
             "processing": true,
             "serverSide": true,            
             "ajax": {
-                "url": "{!! $api_url !!}",
+                "url": "{!! route('api.term.index', ['type' => 'post_category']) !!}",
                 "type": "GET"
             },
             "deferRender": true,
             "columns": [
                 {"data": "id"},
-                {"data": "post_locales.0.title"},
+                {"data": "name"},
                 {"data": "slug"},
-                {"data": "categories.0.name"},
-                {
-                    "data": "status",
-                    "render": function (data, type, row) {
-                        return data == 1 ? 'publish' : 'draft';
-                    }
-                },
+                {"data": "parent_id"},
                 {
                     "data": "created_at",
                     "render": function (data, type, row) {
@@ -110,7 +103,7 @@
                         + '<m-table-list-more>'
                             + '<i class="material-icons">more_horiz</i>'
                             + '<m-list-menu data-id="'+ data +'">'
-                                + '<a href="'+ baseUrl +'/admin/blog?action=edit&id='+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
+                                + '<a href="'+ baseUrl +'/admin/blog/categories?action=edit&id='+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
                                 + '<m-list-menu-item delete data-url="property/destroy">DELETE</m-list-menu-item>'
                             + '</m-list-menu>'
                         + '</m-table-list-more>';

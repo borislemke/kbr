@@ -215,13 +215,25 @@ class AdminController extends Controller
         // access denied only agent
         if ($this->admin->role_id == 4) return redirect()->back();
 
-        if ($request->action == 'create') return view('admin.pages.post.create');
+
+        // post categories
+        if ($term == 'categories') {
+            return $this->post_categories($request);
+        }
+
+        $post = new \App\Post;
+
+        $categories = \App\Term::where('type', 'post_category')->get();
+
+        if ($request->action == 'create') return view('admin.pages.post.create', compact('categories'));
 
         if ($request->action == 'edit' && isset($request->id)) {
 
             $post = \App\Post::find($request->id);
 
-            return view('admin.pages.post.edit', compact('post'));
+            $post->category = $post->terms()->where('type', 'post_category')->first();
+
+            return view('admin.pages.post.edit', compact('post', 'categories'));
         }
 
         $request = json_encode($request->all());
@@ -231,6 +243,22 @@ class AdminController extends Controller
         $api_url = route('api.post.index', $request);
 
         return view('admin.pages.post.listing', compact('api_url'));
+    }
+
+    public function post_categories(Request $request)
+    {
+        $categories = \App\Term::where('type', 'post_category')->get();
+
+        if ($request->action == 'create') return view('admin.pages.post.category-create', compact('categories'));
+
+        if ($request->action == 'edit' && isset($request->id)) {
+
+            $term = \App\Term::find($request->id);
+
+            return view('admin.pages.post.category-edit', compact('term', 'categories'));
+        }
+
+        return view('admin.pages.post.category-listing');
     }
 
     public function branches(Request $request)

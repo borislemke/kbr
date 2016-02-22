@@ -92,6 +92,12 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::resource('attachment', 'AttachmentController');
 
+    Route::get('attachment/get/image', ['as' => 'api.attachment.get.image', 'uses' => 'AttachmentController@getImage']);
+
+    Route::post('upload/image', ['as' => 'api.attachment.upload.image', 'uses' => 'AttachmentController@uploadImage']);
+
+    Route::post('upload/file', ['as' => 'api.attachment.upload.file', 'uses' => 'AttachmentController@uploadFile']);
+
     Route::post('sellproperty', ['as' => 'sellproperty.store', 'uses' => 'PropertyController@sellProperty']);
 
     Route::post('property/delete/{id}', ['as' => 'api.property.delete', 'uses' => 'PropertyController@delete']);

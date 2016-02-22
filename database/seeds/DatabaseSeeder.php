@@ -74,6 +74,13 @@ class DatabaseSeeder extends Seeder
             factory(App\Post::class, 10)->create(['user_id' => $u->id])->each(function($p) {
 
                 $p->postLocales()->save(factory(App\PostLocale::class)->make());
+
+                Model::unguard();
+                $p->postTerms()->save(
+                    new \App\PostTerm(['term_id' => 6])
+                );
+                Model::reguard();
+
             });
 
         });

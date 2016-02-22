@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     //
+    public function terms()
+    {
+        return $this->belongsToMany('App\Term', 'post_terms');
+    }
+
+    public function categories()
+    {
+        return $this->terms()->where('type', 'post_category');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
