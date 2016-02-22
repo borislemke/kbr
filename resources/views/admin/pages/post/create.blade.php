@@ -19,19 +19,6 @@
             </m-caroussel-switch-wrapper>
         </m-caroussel-header>
 
-        <div class="m-input-group fwidth flexbox justify-between">
-
-            <div class="m-input-wrapper w50-6">
-                <select name="term_id">
-                    @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-                <label for="title">category</label>
-            </div>
-
-        </div>
-
         <m-caroussel-body>
             <m-caroussel-slider class="flexbox align-start" style="width: <?= $numberOfSlides ?>00%;">
 
@@ -89,6 +76,15 @@
     </m-caroussel>
 
     <div class="m-input-group fwidth flexbox justify-between">
+
+        <div class="m-input-wrapper w50-6">
+            <select name="term_id">
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+            <label for="title">category</label>
+        </div>
         <div class="m-input-wrapper w50-6">
             <select name="status">
                 <option value="1">publish</option>

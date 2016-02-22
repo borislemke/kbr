@@ -105,9 +105,13 @@ $factory->define(App\Property::class, function (Faker\Generator $faker) {
         'price_label' => $faker->randomElement($array = array ('none', 'daily', 'weekly', 'monthly', 'annually')),
         'discount' => $faker->randomNumber(2),
         'type' => $faker->randomElement($array = array ('free hold', 'lease hold')),
-        // 'publish' => $faker->randomElement($array = array ('draft', 'moderation', 'publish')),
+
         'building_size' => $faker->randomNumber(2),
         'land_size' => $faker->randomNumber(3),
+        'bedroom' => $faker->randomNumber(1),
+        'bathroom' => $faker->randomNumber(1),
+        'bed' => $faker->randomNumber(1),
+
         'sold' => $faker->randomElement([0, 1]),
         'status' => $faker->randomElement([-2, -1, 0, 1]),
         'year' => $faker->year($max = 'now'),
@@ -137,7 +141,8 @@ $factory->define(App\Property::class, function (Faker\Generator $faker) {
 
         'sell_reason' => $faker->sentence($nbWords = 10, $variableNbWords = true),
         'sell_note' => $faker->sentence($nbWords = 10, $variableNbWords = true),
-        'other_agent' => $faker->name
+        'other_agent' => $faker->name,
+        'sell_in_furnish' => 'include furnish'
         
     ];
 });

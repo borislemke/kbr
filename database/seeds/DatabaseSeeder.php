@@ -54,11 +54,6 @@ class DatabaseSeeder extends Seeder
                     new \App\PropertyMeta(['name' => 'notary details', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
                     new \App\PropertyMeta(['name' => 'owner idcard', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
 
-                    // facilities
-                    new \App\PropertyMeta(['name' => 'bedroom', 'value' => '2', 'type' => 'facility', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'bathroom', 'value' => '1', 'type' => 'facility', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'sale in furnish', 'value' => 'include furnish', 'type' => 'facility', 'status' => 1]),
-
                     // distance                    
                     new \App\PropertyMeta(['name' => 'beach', 'value' => '1 hour', 'type' => 'distance', 'status' => 1]),
                     new \App\PropertyMeta(['name' => 'airport', 'value' => '2 minutes', 'type' => 'distance', 'status' => 1]),

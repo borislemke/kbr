@@ -153,6 +153,10 @@ class PropertyController extends Controller
 
         $property->building_size = $request->building_size;
         $property->land_size = $request->land_size;
+        $property->bedroom = $request->bedroom;
+        $property->bathroom = $request->bathroom;
+        $property->bed = $request->bed;
+        $property->sell_in_furnish = $request->sell_in_furnish;
 
         $property->code = $request->code;
         $property->status = $request->status;
@@ -240,7 +244,7 @@ class PropertyController extends Controller
                 $propertyMeta = new \App\PropertyMeta;
 
                 $propertyMeta->name = $value;
-                $propertyMeta->value = 'ready';
+                $propertyMeta->value = 1;
                 $propertyMeta->type = 'document';
                 $propertyMeta->property_id = $property->id;
 
@@ -255,7 +259,7 @@ class PropertyController extends Controller
                 $propertyMeta = new \App\PropertyMeta;
 
                 $propertyMeta->name = $value;
-                $propertyMeta->value = $request->facility_value[$key];
+                $propertyMeta->value = 1;
                 $propertyMeta->type = 'facility';
                 $propertyMeta->property_id = $property->id;
 
@@ -443,7 +447,7 @@ class PropertyController extends Controller
                 $propertyMeta = new \App\PropertyMeta;
 
                 $propertyMeta->name = $value;
-                $propertyMeta->value = 'ready';
+                $propertyMeta->value = 1;
                 $propertyMeta->type = 'document';
                 $propertyMeta->property_id = $property->id;
 
@@ -461,7 +465,7 @@ class PropertyController extends Controller
                 $propertyMeta = new \App\PropertyMeta;
 
                 $propertyMeta->name = $value;
-                $propertyMeta->value = $request->facility_value[$key];
+                $propertyMeta->value = 1;
                 $propertyMeta->type = 'facility';
                 $propertyMeta->property_id = $property->id;
 

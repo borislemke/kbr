@@ -206,28 +206,45 @@
                 @if($request->category != 'land')
                 <m-caroussel-slide class="flexbox flexbox-wrap" id="caroussel-facilities" style="width: calc(100% / <?= $numberOfSlides ?>)">
 
-                    <div class="m-input-group fwidth flexbox flexbox-wrap justify-between">
+                    <div class="m-input-group fwidth flexbox justify-between">
+                        <!-- <h3 class="input-group-title">Position</h3> -->
+                        <m-input class="m-input-wrapper w50-6">
+                            <input value="{{ $property->bathroom }}" min="0" type="number" name="bathroom" required>
+                            <label for="bathroom">bath room</label>
+                        </m-input>
 
-                        <div class="m-input-group fwidth flexbox flexbox-wrap justify-between" id="facility-wrapper">
-                            
-                            @foreach($property->facilities() as $facility)
-                            <m-input w50-6>
-                                <input type="text" value="{{ $facility->name }}" name="facility_name[]">
-                                <label>name</label>
-                            </m-input>
+                        <m-input class="m-input-wrapper w50-6">
+                            <input value="{{ $property->bedroom }}" min="0" type="number" name="bedroom" required>
+                            <label for="bedroom">bed room</label>
+                        </m-input>
+                    </div>
 
-                            <m-input w50-6>
-                                <input {{ in_array($facility->name, ['bathroom', 'bedroom']) ? 'min=0' : '' }} type="{{ in_array($facility->name, ['bathroom', 'bedroom']) ? 'number' : 'text' }}" value="{{ $facility->value }}" name="facility_value[]">
-                                <label>value</label>
-                            </m-input>
-                            @endforeach
+                    <div class="m-input-group fwidth flexbox justify-between">
+                        <!-- <h3 class="input-group-title">Position</h3> -->
+                        <m-input class="m-input-wrapper w50-6">
+                            <input value="{{ $property->bed }}" min="0" type="number" name="bed" required>
+                            <label for="bed">bed</label>
+                        </m-input>
 
-                        </div>
+                        <m-input class="m-input-wrapper w50-6">
+                            <input value="{{ $property->sell_in_furnish }}" type="text" name="sell_in_furnish" required>
+                            <label for="sell_in_furnish">sell in furnish</label>
+                        </m-input>
+                    </div>
 
-                        <button class="add-facility">add more</button>
 
-                        <div class="push-bottom"></div>
-                        <div class="push-bottom"></div>
+                    <div class="m-input-group textarea fwidth flexbox flexbox-wrap" id="documents-received">
+
+                        <?php 
+                            $arr_facilities = Config::get('facility');
+                        ?>
+
+                        @foreach($arr_facilities as $key => $facility)
+                        <m-checkbox data-label="{{ $facility }}" w25-9>
+                            <input type="checkbox" value="{{ $facility }}" name="facility_name[]" {{ in_array($facility, $exist_facility) ? 'checked' : '' }}>
+                            <lever></lever>
+                        </m-checkbox>
+                        @endforeach
                     </div>
 
                 </m-caroussel-slide>

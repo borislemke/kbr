@@ -46,7 +46,7 @@
 
                         <m-input w25-9>
                             <input type="text" name="code" id="property-input-code" required>
-                            <label for="code">property code</label>
+                            <label for="code">code</label>
                         </m-input>
 
                         <m-input w25-9>
@@ -206,6 +206,32 @@
                 <m-caroussel-slide class="flexbox flexbox-wrap" id="caroussel-facilities" style="width: calc(100% / <?= $numberOfSlides ?>)">
 
 
+                    <div class="m-input-group fwidth flexbox justify-between">
+                        <!-- <h3 class="input-group-title">Position</h3> -->
+                        <m-input class="m-input-wrapper w50-6">
+                            <input min="0" type="number" name="bathroom" required>
+                            <label for="bathroom">bath room</label>
+                        </m-input>
+
+                        <m-input class="m-input-wrapper w50-6">
+                            <input min="0" type="number" name="bedroom" required>
+                            <label for="bedroom">bed room</label>
+                        </m-input>
+                    </div>
+
+                    <div class="m-input-group fwidth flexbox justify-between">
+                        <!-- <h3 class="input-group-title">Position</h3> -->
+                        <m-input class="m-input-wrapper w50-6">
+                            <input min="0" type="number" name="bed" required>
+                            <label for="bed">bed</label>
+                        </m-input>
+
+                        <m-input class="m-input-wrapper w50-6">
+                            <input type="text" name="sell_in_furnish" required>
+                            <label for="sell_in_furnish">sell in furnish</label>
+                        </m-input>
+                    </div>
+
 
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap" id="documents-received">
 
@@ -215,7 +241,7 @@
 
                         @foreach($arr_facilities as $key => $facility)
                         <m-checkbox data-label="{{ $facility }}" w25-9>
-                            <input type="checkbox" value="{{ $facility }}" name="document_name[]">
+                            <input type="checkbox" value="{{ $facility }}" name="facility_name[]">
                             <lever></lever>
                         </m-checkbox>
                         @endforeach

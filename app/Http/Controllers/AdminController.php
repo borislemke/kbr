@@ -68,11 +68,17 @@ class AdminController extends Controller
                 $exist_document[] = strtolower($value->name);
             }
 
+            // exists facility
+            $exist_facility = array();
+            foreach ($property->facilities() as $key => $value) {
+                $exist_facility[] = strtolower($value->name);
+            }
+
             $thumb = $property->thumb()->first();
 
             $thumbnail = $thumb ? $thumb->value : 0;
 
-            return view('admin.pages.property.edit', compact('property', 'request', 'categories', 'exist_document', 'thumbnail'));
+            return view('admin.pages.property.edit', compact('property', 'request', 'categories', 'exist_document', 'exist_facility', 'thumbnail'));
         }
 
         if ($request->action == 'edit-translation' && isset($request->id)) {
