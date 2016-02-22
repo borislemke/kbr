@@ -5,18 +5,21 @@
     <title>{{ env('APP_NAME', 'Matter') }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-    <link rel="apple-touch-icon" href="assets/img/common/apple-touch-icon.png">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/simple-line-icons.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/responsive-slider.css">
-    <link rel="stylesheet" href="assets/css/normalize.min.css">
-    <link rel="stylesheet" href="assets/css/styles_old.css">
-    <link rel="stylesheet" href="assets/css/mediaqueries.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="apple-touch-icon" href="{{ url('/') }}/assets/img/common/apple-touch-icon.png">
+    <link rel="stylesheet" href="{{ url('/') }}/assets/css/animate.css">
+    <link rel="stylesheet" href="{{ url('/') }}/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url('/') }}/assets/css/simple-line-icons.css">
+    <link rel="stylesheet" href="{{ url('/') }}/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ url('/') }}/assets/css/responsive-slider.css">
+    <link rel="stylesheet" href="{{ url('/') }}/assets/css/normalize.min.css">
+    <link rel="stylesheet" href="{{ url('/') }}/assets/css/styles_old.css">
+    <link rel="stylesheet" href="{{ url('/') }}/assets/css/mediaqueries.css">
+    <link rel="stylesheet" href="{{ url('/') }}/assets/css/styles.css">
+    <link rel="stylesheet" href="{{ url('/') }}/bower/ion.rangeslider/css/ion.rangeSlider.css">
+    <link rel="stylesheet" href="{{ url('/') }}/bower/ion.rangeslider/css/ion.rangeSlider.skinNice.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
 
     <!--Start of Zopim Live Chat Script-->
@@ -28,6 +31,4 @@
     type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
     </script>
     <!--End of Zopim Live Chat Script-->
-    
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 </head>
