@@ -120,7 +120,6 @@
         max: 100,
         from: 30,
         to: 70,
-        maxZoom: 15,
         max_interval: 50
     });
 
@@ -140,6 +139,8 @@
             center: myLatLng,
             scrollwheel: false,
             zoom: 13,
+            maxZoom: 15,
+            minZoom: 8,
             streetViewControl: false
         });
 
