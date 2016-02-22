@@ -40,7 +40,13 @@
 
             <div class="thumbnail nohovereffect">
 
+                @if($property->thumb)
+                <img src="{{ asset('uploads/property/' . $property->thumb()->first()->value) }}">
+                @else
                 <img src="{{ asset('no-image.png') }}">
+                @endif
+
+
                 <p for=""><span class="currency">{!! \Config::get('currency') !!}</span> {{ number_format($property->price, 2) }}</p>
 
                 
