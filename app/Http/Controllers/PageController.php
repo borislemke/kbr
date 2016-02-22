@@ -246,6 +246,10 @@ class PageController extends Controller
         //
         $page = Page::find($id);
 
+        if (in_array($page->id, [1, 2, 3])) {
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => 'you are not allowed to delete this item') ));
+        }
+
         $page->delete();
 
         return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));

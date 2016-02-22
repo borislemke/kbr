@@ -205,43 +205,20 @@
                 @if($request->category != 'land')
                 <m-caroussel-slide class="flexbox flexbox-wrap" id="caroussel-facilities" style="width: calc(100% / <?= $numberOfSlides ?>)">
 
-                    <div class="m-input-group fwidth flexbox flexbox-wrap justify-between">
 
-                        <div class="m-input-group fwidth flexbox flexbox-wrap justify-between" id="facility-wrapper">
-                            <m-input w50-6>
-                                <input type="text" value="bedroom" name="facility_name[]">
-                                <label>name</label>
-                            </m-input>
-                            <m-input w50-6>
-                                <input type="text" name="facility_value[]">
-                                <label>value</label>
-                            </m-input>
 
-                            <m-input w50-6>
-                                <input type="text" value="bathroom" name="facility_name[]">
-                                <label>name</label>
-                            </m-input>
+                    <div class="m-input-group textarea fwidth flexbox flexbox-wrap" id="documents-received">
 
-                            <m-input w50-6>
-                                <input type="text" name="facility_value[]">
-                                <label>value</label>
-                            </m-input>
+                        <?php 
+                            $arr_facilities = Config::get('facility');
+                        ?>
 
-                            <m-input w50-6>
-                                <input type="text" value="sale in furnish" name="facility_name[]">
-                                <label>name</label>
-                            </m-input>
-                            
-                            <m-input w50-6>
-                                <input type="text" name="facility_value[]">
-                                <label>value</label>
-                            </m-input>
-
-                        </div>
-                        <button class="add-facility">add more</button>
-
-                        <div class="push-bottom"></div>
-                        <div class="push-bottom"></div>
+                        @foreach($arr_facilities as $key => $facility)
+                        <m-checkbox data-label="{{ $facility }}" w25-9>
+                            <input type="checkbox" value="{{ $facility }}" name="document_name[]">
+                            <lever></lever>
+                        </m-checkbox>
+                        @endforeach
                     </div>
 
                 </m-caroussel-slide>

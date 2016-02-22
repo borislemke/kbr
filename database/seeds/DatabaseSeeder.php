@@ -55,8 +55,8 @@ class DatabaseSeeder extends Seeder
                     new \App\PropertyMeta(['name' => 'owner idcard', 'value' => 'ready', 'type' => 'document', 'status' => 1]),
 
                     // facilities
-                    new \App\PropertyMeta(['name' => 'bedroom', 'value' => '2 room', 'type' => 'facility', 'status' => 1]),
-                    new \App\PropertyMeta(['name' => 'bathroom', 'value' => '1 room', 'type' => 'facility', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'bedroom', 'value' => '2', 'type' => 'facility', 'status' => 1]),
+                    new \App\PropertyMeta(['name' => 'bathroom', 'value' => '1', 'type' => 'facility', 'status' => 1]),
                     new \App\PropertyMeta(['name' => 'sale in furnish', 'value' => 'include furnish', 'type' => 'facility', 'status' => 1]),
 
                     // distance                    

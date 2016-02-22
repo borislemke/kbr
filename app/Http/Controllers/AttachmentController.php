@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Attachment;
+use DB;
 
 class AttachmentController extends Controller
 {
@@ -87,6 +88,14 @@ class AttachmentController extends Controller
         //
         $attachment = Attachment::find($id);
 
+        DB::beginTransaction();
+
+        // delete thumbnail
+        if (\Input::get('name') == 'property') {
+
+            $delete_thumb = \App\PropertyMeta::where('value', $attachment->file)->delete();
+        }
+
         if ($attachment->file) {
 
             if (\Input::get('name'))
@@ -97,6 +106,8 @@ class AttachmentController extends Controller
         }
 
         $attachment->delete();
+
+        DB::commit();
 
         return response()->json(array('status' => 200, 'monolog' => array('title' => 'delete success', 'message' => 'object has been deleted'), 'id' => $id));
     }

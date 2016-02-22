@@ -217,7 +217,7 @@
                             </m-input>
 
                             <m-input w50-6>
-                                <input type="text" value="{{ $facility->value }}" name="facility_value[]">
+                                <input {{ in_array($facility->name, ['bathroom', 'bedroom']) ? 'min=0' : '' }} type="{{ in_array($facility->name, ['bathroom', 'bedroom']) ? 'number' : 'text' }}" value="{{ $facility->value }}" name="facility_value[]">
                                 <label>value</label>
                             </m-input>
                             @endforeach
@@ -271,7 +271,7 @@
                     <div id="gallery-wrapper" flexwrap style="width: 100%">
 
                         @foreach($property->galleries as $gallery)
-                        <m-gallery-item class="gallery-item" style="background-image: url({{ asset('uploads/property/' . $gallery->file) }})" data-id="{{ $gallery->id }}" id="gallery-item-{{ $gallery->id }}" data-file="{{ $gallery->file }}">
+                        <m-gallery-item class="gallery-item" style="background-image: url({{ asset('uploads/images/property/' . $gallery->file) }})" data-id="{{ $gallery->id }}" id="gallery-item-{{ $gallery->id }}" data-file="{{ $gallery->file }}">
                             <m-gallery-item-menu>
                                 <m-button class="make-thumbnail" data-function="makeThumbnail">
                                     <i class="material-icons {{ $gallery->file == $thumbnail ? 'yellow' : '' }}">{{ $gallery->file == $thumbnail ? 'star' : 'star_border' }}</i>

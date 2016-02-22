@@ -179,7 +179,7 @@ class TermController extends Controller
         $term = Term::find($id);
 
         if (in_array($term->id, [1, 2, 3, 4, 5, 6])) {
-            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => 'it is not allowed to delete this item') ));
+            return response()->json(array('status' => 500, 'monolog' => array('title' => 'errors', 'message' => 'you are not allowed to delete this item') ));
         }
 
         $term->delete();

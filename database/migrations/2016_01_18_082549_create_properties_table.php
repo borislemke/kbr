@@ -26,9 +26,12 @@ class CreatePropertiesTable extends Migration
             $table->double('discount')->default(0);
             $table->enum('type', array('free hold', 'lease hold'));
 
-            // $table->enum('publish', array('draft', 'moderation', 'publish'));
+            // size
             $table->double('building_size')->default(0);
             $table->double('land_size')->default(0); 
+            $table->integer('bedroom')->default(0)->nullable();
+            $table->integer('bathroom')->default(0)->nullable();
+            $table->integer('bed')->default(0)->nullable();
 
             $table->boolean('sold')->default(0);
             $table->string('code')->nullable();
