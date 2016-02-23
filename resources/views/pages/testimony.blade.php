@@ -1,4 +1,8 @@
 @extends('index')
+
+@section('meta_description', '')
+@section('meta_keyword', '')
+
 @section('content')
 <div class="bc-bg">
     <ul class="breadcrumb container">

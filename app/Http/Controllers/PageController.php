@@ -257,17 +257,32 @@ class PageController extends Controller
 
     public function home()
     {
-        return view('pages.home');
+        $page = Page::find(1);
+
+        $page->meta_description = $page->lang()->meta_description;
+        $page->meta_keyword = $page->lang()->meta_keyword;
+
+        return view('pages.home', compact('page'));
     }
 
-    public function about()
+    public function about($page = null)
     {
-        return view('pages.about');
+        $page = Page::find(2);
+
+        $page->meta_description = $page->lang()->meta_description;
+        $page->meta_keyword = $page->lang()->meta_keyword;
+
+        return view('pages.about', compact('page'));
     }
 
     public function contact()
     {
-        return view('pages.contact');
+        $page = Page::find(3);
+
+        $page->meta_description = $page->lang()->meta_description;
+        $page->meta_keyword = $page->lang()->meta_keyword;
+
+        return view('pages.contact', compact('page'));
     }
 
     public function testimony()

@@ -92,6 +92,8 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::resource('attachment', 'AttachmentController');
 
+    Route::resource('setting', 'SettingController');
+
     Route::get('attachment/get/image', ['as' => 'api.attachment.get.image', 'uses' => 'AttachmentController@getImage']);
 
     Route::post('upload/image', ['as' => 'api.attachment.upload.image', 'uses' => 'AttachmentController@uploadImage']);

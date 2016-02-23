@@ -27,6 +27,23 @@ class Page extends Model
         return $this->hasMany('App\PageMeta');   
     }
 
+    public function lang()
+    {
+
+        $locale = $this->pageLocales()->where('locale', \Lang::getLocale());
+
+        if ($locale->count() > 0) {
+
+            $lang = $locale->first();
+
+            if ($lang->title != '' && $lang->content != '') return $lang;
+
+        }
+
+        return $this->pageLocales()->where('locale', 'en')->first();
+
+    }
+
     public static function boot()
     {
         parent::boot();

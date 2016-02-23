@@ -3,7 +3,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <base href="{{ asset('/') }}" target="_top">
     <title>{{ env('APP_NAME', 'Matter') }}</title>
-    <meta name="description" content="">
+
+    <meta name="description" content="@yield('meta_description')">
+    <meta name="keywords" content="@yield('meta_keyword')">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <link rel="apple-touch-icon" href="{{ url('/') }}/assets/img/common/apple-touch-icon.png">
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/animate.css">

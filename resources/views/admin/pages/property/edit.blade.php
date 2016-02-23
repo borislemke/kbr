@@ -255,7 +255,7 @@
 
                         <div class="m-input-group fwidth flexbox flexbox-wrap justify-between" id="distance-wrapper">
 
-                            @foreach($property->distances() as $distance)
+                            @foreach($property->distances as $distance)
                             <m-input w50-6>
                                 <input type="text" value="{{ $distance->name }}" name="distance_name[]">
                                 <label>name</label>

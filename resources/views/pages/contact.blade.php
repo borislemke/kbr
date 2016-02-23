@@ -1,4 +1,8 @@
 @extends('index')
+
+@section('meta_description', $page->meta_description)
+@section('meta_keyword', $page->meta_keyword)
+
 @section('content')
 
 <div class="contact-us">

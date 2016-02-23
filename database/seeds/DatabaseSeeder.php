@@ -15,11 +15,16 @@ class DatabaseSeeder extends Seeder
 
         Model::unguard();
 
+        $this->call(SettingsTableSeeder::class);
+
         $this->call(RolesTableSeeder::class);
+
         $this->call(BranchesTableSeeder::class);
 
         $this->call(CountriesTableSeeder::class);
+
         $this->call(ProvincesTableSeeder::class);
+
         $this->call(CitiesTableSeeder::class);
 
         $this->call(LocalesTableSeeder::class);

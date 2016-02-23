@@ -64,13 +64,13 @@ class AdminController extends Controller
 
             // exists document
             $exist_document = array();
-            foreach ($property->documents() as $key => $value) {
+            foreach ($property->documents as $key => $value) {
                 $exist_document[] = strtolower($value->name);
             }
 
             // exists facility
             $exist_facility = array();
-            foreach ($property->facilities() as $key => $value) {
+            foreach ($property->facilities as $key => $value) {
                 $exist_facility[] = strtolower($value->name);
             }
 
