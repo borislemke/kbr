@@ -161,7 +161,7 @@ $factory->define(App\PropertyLocale::class, function (Faker\Generator $faker) {
 $factory->define(App\PropertyTerm::class, function (Faker\Generator $faker) {
 
     return [
-        'term_id' => $faker->randomElement([1, 2])
+        'term_id' => $faker->randomElement([1, 2, 3])
     ];
 });
 

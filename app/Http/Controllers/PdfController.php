@@ -11,7 +11,20 @@ use App\Http\Controllers\Controller;
 class PdfController extends Controller {
 
 
+    public function property($id)
+    {
+        $property = new \App\Property;
 
+        $property = $property->with(['propertyLocales' => function ($q) {
+            $q->where('locale', 'en');
+        }]);
+
+        $property = $property->find($id);
+
+        $pdf = \PDF::loadView('pdf.property', compact('property'));
+
+        return $pdf->stream('property.pdf');
+    }
 
 
     // Sample PDF Download

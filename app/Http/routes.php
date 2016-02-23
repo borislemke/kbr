@@ -147,12 +147,11 @@ Route::group(['middleware' => 'auth'], function () {
         // about
         Route::get('about',['as' => 'admin.about', 'uses' => 'AdminController@about']);
 
+        
+        // PDF Export
+        Route::group(['prefix' => 'pdf'], function () {
 
-        Route::get('pdf', function() {
-
-            $property = \App\Property::find(1);
-
-            return view('pdf.property', compact('property'));
+            Route::get('property/{id}', ['as' => 'admin.pdf.property', 'uses' => 'PdfController@property']);
         });
 
     });

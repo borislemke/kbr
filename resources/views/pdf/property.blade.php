@@ -44,7 +44,7 @@
             <!-- Title -->
             <tr>
                 <td>
-                    <h1>{{ $property->lang()->title }}</h1>
+                    <h1>{{ $property->propertyLocales[0]->title }}</h1>
                 </td>
             </tr>
 
@@ -53,11 +53,11 @@
                 <td>
                     <table>
                         <tr>
-                            <?php for($i = 0; $i < 2; $i++): ?>
+                            @foreach($property->galleries as $gallery)
                             <td width="33.33%">
-                                <img src="http://loremflickr.com/320/240?t={{ microtime() }}" alt="">
+                                <img src="{{ asset('uploads/images/property/' . $gallery->file) }}" alt="">
                             </td>
-                            @endfor
+                            @endforeach
                         </tr>
                     </table>
                 </td>
@@ -94,7 +94,7 @@
                                                     </td>
                                                     <td>
                                                         <ul>
-                                                            <li>{{ $property->location }}</li>
+                                                            <li>{{ $property->city }}</li>
                                                             <li>{{ $property->code }}</li>
                                                             <li>{{ $property->bedroom }}</li>
                                                             <li>{{ $property->bathroom }}</li>
@@ -114,7 +114,25 @@
                                     </tr>
                                     <tr>
                                         <td>
+                                        <table>
+                                            @foreach($property->distances as $distance)
+                                            <tr><td>{{ $distance->name }}</td><td>{{ $distance->value }}</td></tr>
+                                            @endforeach
+                                        </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
                                             <h4>Additional Facilites</h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        <table>
+                                            @foreach($property->facilities as $facility)
+                                            <tr><td>{{ $facility->name }}</td><td>{{ $facility->value }}</td></tr>
+                                            @endforeach
+                                        </table>
                                         </td>
                                     </tr>
                                 </table>

@@ -179,7 +179,7 @@
                             + '<m-list-menu data-id="'+ data +'">'
                                 + '<a href="'+ baseUrl +'/admin/properties?category={{ Input::get("category") }}&action=edit&id='+ data +'"><m-list-menu-item edit data-source="property/get" data-function="populatePropertyEdit">EDIT</m-list-menu-item></a>'
                                 + '<a href="'+ baseUrl +'/admin/properties?category={{ Input::get("category") }}&action=edit-translation&id='+ data +'"><m-list-menu-item data-function="populatePropertyTranslate">TRANSLATION</m-list-menu-item></a>'
-                                + '<m-list-menu-item>EXPORT PDF</m-list-menu-item>'
+                                + '<m-list-menu-item onclick="exportPDF(\''+ baseUrl + '/admin/pdf/property/'+ data + '\', \'Property\', 1000, 600);">EXPORT PDF</m-list-menu-item>'
                                 + '<m-list-menu-item delete data-url="property/destroy">DELETE</m-list-menu-item>'
                             + '</m-list-menu>'
                         + '</m-table-list-more>';
@@ -209,6 +209,12 @@
 
         NProgress.done();
     }
+
+    function exportPDF(url, title, w, h) {
+      var left = (screen.width/2)-(w/2);
+      var top = (screen.height/2)-(h/2);
+      return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+    } 
 
 </script>
 

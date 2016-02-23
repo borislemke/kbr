@@ -128,12 +128,13 @@ class Property extends Model
 
         if ($locale->count() > 0) {
 
-            return $locale->first();
+            $lang = $locale->first();
 
-        } else {
+            if ($lang->title != '' && $lang->content != '') return $lang;
 
-            return $this->propertyLocales()->where('locale', 'en')->first();
         }
+
+        return $this->propertyLocales()->where('locale', 'en')->first();
 
     }
 
@@ -144,17 +145,17 @@ class Property extends Model
 
     public function facilities()
     {
-        return $this->propertyMetas()->where('type', 'facility')->get();
+        return $this->hasMany('App\PropertyMeta')->where('type', 'facility');
     }
 
     public function distances()
     {
-        return $this->propertyMetas()->where('type', 'distance')->get();
+        return $this->hasMany('App\PropertyMeta')->where('type', 'distance');
     }
 
     public function documents()
     {
-        return $this->propertyMetas()->where('type', 'document')->get();
+        return $this->hasMany('App\PropertyMeta')->where('type', 'document');
     }
 
     public static function boot()
