@@ -211,6 +211,16 @@ class PropertyController extends Controller
 
         $propertyTerm->save();
 
+        // tag
+        foreach ($request->tag as $key => $value) {
+            
+            $propertyTag = new \App\PropertyTerm;
+            $propertyTag->term_id = $value;
+            $propertyTag->property_id = $property->id;
+
+            $propertyTag->save();
+        }
+
         // locale
         $propertyLocale = new \App\PropertyLocale;
 
@@ -394,19 +404,24 @@ class PropertyController extends Controller
 
         $property->save();
 
-
-        // Model::unguard();
-
         // category
+        $category_id = $property->categories[0]->id;        
         $propertyTerm = new \App\PropertyTerm;
-        $propertyTerm = $propertyTerm->join('terms', 'terms.id', '=', 'property_terms.term_id');
-        $propertyTerm = $propertyTerm->where('terms.type', 'property_category');
-        $propertyTerm = $propertyTerm->where('property_terms.property_id', $property->id);
-        $propertyTerm = $propertyTerm->first();
-
+        $propertyTerm = $propertyTerm->where('property_id', $property->id)->where('term_id', $category_id)->first();
         $propertyTerm->term_id = $request->category;
-
         $propertyTerm->save();
+
+        // tag
+        $exist_tags = $property->tags->lists('id')->toArray();
+        // delete tags
+        foreach ($exist_tags as $key => $value) {
+             if (!in_array($value, $request->tag)) {
+
+                $property->tags()->detach($value);
+             }
+        }
+
+        $property->tags()->where('type', 'property_tag')->sync($request->tag, false);
 
         // locale
         $propertyLocale = $property->propertyLocales()

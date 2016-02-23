@@ -66,5 +66,23 @@ class TermsTableSeeder extends Seeder
             'parent_id' => 0
         ]);
 
+        \App\Term::create([
+            'name' => '< $500.000',
+            'slug' => 'less-than-500k',
+            'route' => 'less_than_500k',
+            'type' => 'property_tag',
+            'order' => 0,
+            'parent_id' => 0
+        ]);
+
+        \App\Term::create([
+            'name' => '> $500.000',
+            'slug' => 'more-than-500k',
+            'route' => 'less_than_500k',
+            'type' => 'property_tag',
+            'order' => 0,
+            'parent_id' => 0
+        ]);
+
     }
 }

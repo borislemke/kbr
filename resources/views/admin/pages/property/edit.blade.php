@@ -147,7 +147,7 @@
                             <select name="category">
 
                                 @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ $category->id == $property->category()->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ $category->id == $property->categories[0]->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @endforeach
 
                             </select>
@@ -193,6 +193,19 @@
                             </select>
                             <label for="title">status</label>
                         </m-input>
+                    </div>
+
+                    <div class="m-input-group fwidth flexbox flexbox-wrap">
+
+                        <?php $exist_tags = $property->tags->lists('id')->toArray(); ?>
+                        <?php $tags = \App\Term::where('type', 'property_tag')->get(); ?>
+                        @foreach($tags as $tag)
+                        <m-checkbox data-label="{{ $tag->name }}" w25-9>
+                            <input type="checkbox" value="{{ $tag->id }}" name="tag[]" {{ in_array($tag->id, $exist_tags) ? 'checked' : '' }}>
+                            <lever></lever>
+                        </m-checkbox>
+                        @endforeach
+
                     </div>
 
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap">

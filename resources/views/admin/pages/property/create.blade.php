@@ -194,6 +194,18 @@
                         </m-input>
                     </div>
 
+                    <div class="m-input-group fwidth flexbox flexbox-wrap">
+
+                        <?php $tags = \App\Term::where('type', 'property_tag')->get(); ?>
+                        @foreach($tags as $tag)
+                        <m-checkbox data-label="{{ $tag->name }}" w25-9>
+                            <input type="checkbox" value="{{ $tag->id }}" name="tag[]">
+                            <lever></lever>
+                        </m-checkbox>
+                        @endforeach
+
+                    </div>
+
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap">
                         <h3 class="input-group-title">Property Description</h3>
                         <div class="input-wrapper fwidth">
@@ -233,7 +245,7 @@
                     </div>
 
 
-                    <div class="m-input-group textarea fwidth flexbox flexbox-wrap" id="documents-received">
+                    <div class="m-input-group fwidth flexbox flexbox-wrap" id="documents-received">
 
                         <?php 
                             $arr_facilities = Config::get('facility');
