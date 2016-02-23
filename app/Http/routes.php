@@ -174,8 +174,8 @@ Route::controllers([
 Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
 
     // customer
-    Route::get('{login}', ['as' => 'login', 'uses' => 'Auth\AuthController@getCustomerLogin']);  
-    Route::post('{login}',['as' => 'login.attempt', 'uses' => 'Auth\AuthController@postLogin']);  
+    Route::get('{login}', ['as' => 'login', 'uses' => 'Auth\AuthController@getCustomerLogin']);
+    Route::post('{login}',['as' => 'login.attempt', 'uses' => 'Auth\AuthController@postLogin']);
     Route::get('{logout}', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
     Route::get('{register}', ['as' => 'register', 'uses' => 'Auth\AuthController@getCustomerRegister']);
@@ -196,7 +196,7 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
         Route::get('/{account}/{setting}', ['as' => 'account.setting', 'uses' => 'PagesController@accountSetting'])
             ->where('wishlist', trans('url.setting'));
 
-    }); 
+    });
 
 
     // home
@@ -205,19 +205,19 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
     // about
     Route::get('{about}',['as' => 'about', 'uses' => 'PageController@about']);
 
-    // contact    
+    // contact
     Route::any('{contact}',['as' => 'contact', 'uses' => 'PageController@contact']);
 
-    // testimony    
+    // testimony
     Route::any('{testimonials}',['as' => 'testimonials', 'uses' => 'PageController@testimony']);
 
-    // sell_property    
+    // sell_property
     Route::get('{sell_property}',['as' => 'sell_property', 'uses' => 'PageController@sellProperty']);
 
-    // lawyer_notary    
+    // lawyer_notary
     Route::any('{lawyer_notary}',['as' => 'lawyer_notary', 'uses' => 'PageController@lawyerNotary']);
 
-    // search    
+    // search
     // Route::get('{search}/{category?}',['as' => 'search', 'uses' => 'PropertyController@search']);
 
     // property
@@ -284,7 +284,7 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::any('destroy/{id}', 'CustomerController@destroyTestimony');
 
-        });        
+        });
 
         Route::group(['prefix' => 'message'], function () {
 

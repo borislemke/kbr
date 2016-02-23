@@ -12,7 +12,7 @@
                 <div class="search-filter-main">
                     <div class="search-filter-row flexbox" id="search-filter-types">
                         <p>Type</p>
-                        <div class="search-filter-group flexbox justify-between">
+                        <div class="search-filter-group flexbox">
                             <label for="search-type-gt500">
                                 &lt; $500,000
                                 <input type="radio" id="search-type-gt500" name="type" value="lt500k" <?= isset($_GET['type']) ? ($_GET['type'] == 'lt500k' ? 'checked' : 'checked') : 'checked' ?>>
@@ -63,9 +63,11 @@
 
             <div class="search-result-box" style="background-image: url(http://loremflickr.com/320/240/architecture/?{{ $i }})">
 
+                <button class="search-result-box-close" onclick="closeActiveBoxes()"><i class="material-icons">close</i></button>
+
                 <div class="search-result-price-box">
-                    <p class="search-result-currency">{{ $property->currency }}</p>
-                    <p class="search-result-price">{{ $property->price }}</p>
+                    <p class="search-result-currency">{{ /*\Session::get('currency') or*/ 'idr' }}</p>
+                    <p class="search-result-price">{{ convertCurrency($property->price, $property->currency, 'idr') }}</p>
                 </div>
 
                 <div class="search-result-bottom">
@@ -73,17 +75,25 @@
                         <p>{{ $property->lang()->title }}</p>
                     </div>
 
-                    <div class="search-result-short-info flexbox">
+                    <div class="search-result-short-info flexbox flexbox-wrap">
                         <div class="search-result-short-bed"><i class="material-icons">hotel</i>2</div>
-                        <div class="search-result-short-bed"><i class="material-icons">place</i>balangan</div>
+                        <div class="search-result-short-location"><i class="material-icons">place</i>Balangan</div>
                         <div class="search-result-short-more">Details</div>
+
+                        <div class="search-result-action-buttons flexbox">
+                            <div class="search-result-action-button"><i class="material-icons">mail_outline</i>Enquire</div>
+                            <div class="search-result-action-button"><i class="material-icons">star_border</i>Favorite</div>
+                            <a href="{{ url('/') }}/search/{{ $property->lang()->slug }}" class="search-result-action-button"><i class="material-icons">add</i>Details</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="search-result-overlay">
-                    <div class="search-result-overlay-header">
+                <div class="search-result-gallery-buttons" id="result-gallery-prev">
+                    <i class="material-icons">chevron_left</i>
+                </div>
 
-                    </div>
+                <div class="search-result-gallery-buttons" id="result-gallery-next">
+                    <i class="material-icons">chevron_right</i>
                 </div>
             </div>
             <?php $i++ ?>
@@ -129,9 +139,9 @@
     function initMap() {
 
         var myLatLng = { lat: -8.6898657, lng: 115.1567108 };
-                        <?php if(isset($_GET['nw_lat'])): ?>
-                        myLatLng = { lat: (<?= $_GET['nw_lat'] . ' + ' . $_GET['se_lat'] ?>) / 2, lng: (<?= $_GET['nw_lng'] . ' + ' . $_GET['se_lng'] ?>) / 2};
-                        <?php endif ?>
+        <?php if(isset($_GET['nw_lat'])): ?>
+        myLatLng = { lat: (<?= $_GET['nw_lat'] . ' + ' . $_GET['se_lat'] ?>) / 2, lng: (<?= $_GET['nw_lng'] . ' + ' . $_GET['se_lng'] ?>) / 2};
+        <?php endif ?>
 
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -191,6 +201,18 @@
 
             history.pushState({}, '', 'http://kibarer.app/search/villa?nw_lat=' + newNwLat + '&nw_lng=' + newNwLng + '&se_lat=' + newSeLat + '&se_lng=' + newSeLng + '&type=' + type);
         });
+    }
+
+    $(document).on('click', '.search-result-short-more', function() {
+
+        closeActiveBoxes();
+
+        $(this).closest('.search-result-box').addClass('active');
+    });
+
+    function closeActiveBoxes() {
+
+        $('.search-result-box').removeClass('active');
     }
 </script>
 @endsection

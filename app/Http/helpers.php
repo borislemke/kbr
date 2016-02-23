@@ -11,29 +11,6 @@ function baseUrl() {
     return url() . $locale;
 }
 
-// 30x 29 x 43
-function convertToInches($data) {
-
-    $string = preg_replace('/\s+/', '', $data);
-
-    $string = strtolower($string);
-
-    $numbers = explode('x', $string);
-
-    if(count($numbers) != 3) return 'Invalid size';
-
-    $n = array();
-
-    foreach($numbers as $num) {
-
-        $num = $num * 0.39;
-
-        $n[] = number_format($num, 1);
-    }
-
-    return $n[0] . ' x ' . $n[1] . ' x ' . $n[2];
-}
-
 function humanize($value) {
 
     if($value > 1000000000) {
@@ -73,7 +50,9 @@ function social() {
 
 function currency($cur) {
 
-    return json_decode(File::get(storage_path('json/conversion.json')));
+    $currencies = json_decode(File::get(storage_path('json/conversion.json')), true);
+
+    return $currencies[$cur];
 }
 
 function renderCategory($categories, $count = 0)
@@ -97,9 +76,7 @@ function renderCategory($categories, $count = 0)
         if ($category->childs) {
 
             renderCategory($category->childs, ++$count);
-
         }
-
     }
 }
 
@@ -120,11 +97,10 @@ function propertyStatus($status) {
             return 'UNAVAILABLE';
         case 1:
             return 'AVAILABLE';
-        
+
         default:
             return 'UNAVAILABLE';
     }
-
 }
 
 function statusToInteger($status) {
@@ -138,11 +114,10 @@ function statusToInteger($status) {
             return 0;
         case 'available':
             return 1;
-        
+
         default:
             return 0;
     }
-
 }
 
 function checkWishlist($id, $property_id) {
@@ -152,6 +127,18 @@ function checkWishlist($id, $property_id) {
         ->count();
 
     return $count > 0 ? true : false;
+}
 
+function convertCurrency($amount, $cur, $target) {
+
+    $cur = strtolower($cur);
+
+    $target = strtolower($target);
+
+    if($cur == $target) return number_format($amount);
+
+    $targetAmount = $amount / currency($cur);
+
+    return number_format($targetAmount);
 }
 
