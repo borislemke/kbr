@@ -67,7 +67,7 @@ switch ($nav_category) {
     <?php foreach($navigation as $nav => $navlinks): ?>
     <ul class="navbar-ul flexbox <?php childIsActive($navlinks, $link) ?> <?=($link == 'properties' && $nav == $nav_category) ? 'active' : ''; ?>">
         <?php foreach($navlinks as $linkUrl => $linkName): ?>
-        <li class="navbar-item"><a class="<?= $linkUrl == $link ? 'active' :''; ?><?=($link == 'properties' && (isset($_GET['status']) ? $_GET['status'] : '') == $linkName) ? 'active' : ''; ?>" href="{{ URL::to('/') }}/admin/<?= $linkUrl ?>"><?= $linkName ?></a></li>
+        <li class="navbar-item"><a class="<?= $linkUrl == $link ? 'active' :''; ?><?=($link == 'properties' && $nav == $nav_category && (isset($_GET['status']) ? $_GET['status'] : '') == $linkName) ? 'active' : ''; ?>" href="{{ URL::to('/') }}/admin/<?= $linkUrl ?>"><?= $linkName ?></a></li>
         <?php endforeach ?>
     </ul>
     <?php endforeach ?>
