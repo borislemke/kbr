@@ -19,12 +19,12 @@ elixir(function(mix) {
         .scripts('website/jquery.event.move.js', 'public/assets/js/jquery.event.move.js')
         .scripts('website/bootstrap.js', 'public/assets/js/bootstrap.js')
         .scripts('website/theme.js', 'public/assets/js/theme.js')        
-        .scripts('website/markerwithlabel.js', 'public/assets/js/markerwithlabel.js')
         .scripts('website/responsive-slider.js', 'public/assets/js/responsive-slider.js')
         .scripts('website/bootstrap-slider.js', 'public/assets/js/bootstrap-slider.js')
-        .scripts('website/jquery.jscroll.js', 'public/assets/js/jquery.jscroll.js')
-        .scripts('website/select2.js', 'public/assets/js/select2.js')
-        .scripts('website/scripts.js', 'public/assets/js/scripts.js')
+        .scripts(['website/markerwithlabel.js',
+            'website/jquery.jscroll.js',
+            'website/select2.js',
+            'website/scripts.js'], 'public/assets/js/scripts.js')
         .scripts([
         'admin/scripts.js',
         'admin/ajax.js',

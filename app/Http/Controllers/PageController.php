@@ -145,7 +145,7 @@ class PageController extends Controller
             $locale->content = $request->content[$key];
             $locale->meta_keyword = $request->meta_keyword[$key];
             $locale->meta_description = $request->meta_description[$key];
-            $locale->slug = $request->slug[$key];
+            $locale->slug = $locale->slug($request->slug[$key], $property->id);
             $locale->locale = $key;
 
             $locale->save();
@@ -223,7 +223,7 @@ class PageController extends Controller
             $locale->content = $request->content[$key];
             $locale->meta_keyword = $request->meta_keyword[$key];
             $locale->meta_description = $request->meta_description[$key];
-            $locale->slug = $request->slug[$key];
+            $locale->slug = $locale->slug($request->slug[$key], $page->id);
             $locale->locale = $key;
 
             $locale->save();

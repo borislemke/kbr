@@ -212,13 +212,17 @@ class PropertyController extends Controller
         $propertyTerm->save();
 
         // tag
-        foreach ($request->tag as $key => $value) {
+        if ($request->tag) {
             
-            $propertyTag = new \App\PropertyTerm;
-            $propertyTag->term_id = $value;
-            $propertyTag->property_id = $property->id;
+            foreach ($request->tag as $key => $value) {
+                
+                $propertyTag = new \App\PropertyTerm;
+                $propertyTag->term_id = $value;
+                $propertyTag->property_id = $property->id;
 
-            $propertyTag->save();
+                $propertyTag->save();
+            }
+
         }
 
         // locale
@@ -227,7 +231,7 @@ class PropertyController extends Controller
         $propertyLocale->locale = 'en';
         $propertyLocale->title = $request->title;
         $propertyLocale->content = $request->content;
-        $propertyLocale->slug = $request->slug;
+        $propertyLocale->slug = $propertyLocale->slug($request->slug, $property->id);
         $propertyLocale->property_id = $property->id;
 
         $propertyLocale->save();
@@ -412,16 +416,18 @@ class PropertyController extends Controller
         $propertyTerm->save();
 
         // tag
-        $exist_tags = $property->tags->lists('id')->toArray();
-        // delete tags
-        foreach ($exist_tags as $key => $value) {
-             if (!in_array($value, $request->tag)) {
+        if ($request->tag) {
+            $exist_tags = ($property->tags) ? $property->tags->lists('id')->toArray() : array();
+            // delete tags
+            foreach ($exist_tags as $key => $value) {
+                 if (!in_array($value, $request->tag)) {
 
-                $property->tags()->detach($value);
-             }
+                    $property->tags()->detach($value);
+                 }
+            }
+
+            $property->tags()->where('type', 'property_tag')->sync($request->tag, false);
         }
-
-        $property->tags()->where('type', 'property_tag')->sync($request->tag, false);
 
         // locale
         $propertyLocale = $property->propertyLocales()
@@ -430,7 +436,7 @@ class PropertyController extends Controller
 
         $propertyLocale->title = $request->title;
         $propertyLocale->content = $request->content;
-        $propertyLocale->slug = $request->slug;
+        $propertyLocale->slug = $propertyLocale->slug($request->slug, $property->id);
 
         $propertyLocale->save();
 
