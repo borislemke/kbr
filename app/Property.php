@@ -78,6 +78,23 @@ class Property extends Model
             ->first();
     }
 
+    public function scopeCategoryChild($query, $terms){        
+
+        foreach ($terms as $key => $term) {
+
+            // filter category
+            $query = $query->orWhere('terms.slug', $term->slug);
+
+            // check child category
+            if ($term->childs) {
+
+                $query = $this->scopeCategoryChild($query, $term->childs);
+            }
+        }
+
+        return $query;
+    }
+
     public function scopeAccess($query)
     {
         $user = \Auth::user()->get();

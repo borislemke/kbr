@@ -567,12 +567,22 @@ class PropertyController extends Controller
 
             $category = end($segment);
 
+            $term = \App\Term::where('slug', $category);
+
+            // not category abort
+            if ($term->count() == 0) return abort('404');
+
             // $segment = 
             $properties = $properties->join('property_terms', 'property_terms.property_id', '=', 'properties.id')
-                ->join('terms', 'terms.id', '=', 'property_terms.term_id')
-                ->where('terms.slug', $category);
+                ->join('terms', 'terms.id', '=', 'property_terms.term_id');
 
-            if ($properties->count() == 0) abort('404');
+            $term = $term->first();
+
+            // filter category
+            $properties = $properties->where('terms.slug', $term->slug);
+
+            // check child category
+            if ($term->childs) $properties = $properties->categoryChild($term->childs);
         }
 
         $properties = $properties->paginate($limit);

@@ -84,7 +84,7 @@
                             <div class="search-result-action-button"><i class="material-icons">mail_outline</i>Enquire</div>
                             <div class="search-result-action-button"><i class="material-icons">star_border</i>Favorite</div>
 
-                            <a href="{{ route('property', ['property' => trans('url.property'), 'term' => implode('/', term_slug($property->categories[0])) . '/' . $property->lang()->slug] ) }}" class="search-result-action-button"><i class="material-icons">add</i>Details</a>
+                            <a href="{{ route('property', ['property' => trans('url.property'), 'term' => implode('/', category_slug($property->categories[0]) ) . '/' . $property->lang()->slug] ) }}" class="search-result-action-button"><i class="material-icons">add</i>Details</a>
                         </div>
                     </div>
                 </div>

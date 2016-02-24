@@ -52,6 +52,7 @@ function currency($cur) {
 
     $currencies = json_decode(File::get(storage_path('json/conversion.json')), true);
 
+
     return $currencies[$cur];
 }
 
@@ -80,20 +81,26 @@ function renderCategory($categories, $count = 0)
     }
 }
 
+function category_slug($term)
+{
+    
+    $slug = term_slug($term);
+
+    return array_reverse($slug);
+}
+
 function term_slug($term, $slug = array())
 {
     
     $slug[] = $term->name;
 
     // TO DO
-    // if ($term->parent) {
+    if ($term->parent) {
 
-    //     term_slug($term->parent, $slug);
+        $slug = term_slug($term->parent, $slug);
 
-    // } else {
+    }
 
-    //     return $slug;
-    // }
     return $slug;
 
 }
