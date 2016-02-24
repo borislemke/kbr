@@ -220,10 +220,10 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
     Route::any('{lawyer_notary}',['as' => 'lawyer_notary', 'uses' => 'PageController@lawyerNotary']);
 
     // search
-    // Route::get('{search}/{category?}',['as' => 'search', 'uses' => 'PropertyController@search']);
+    Route::get('{search}/{term?}',['as' => 'search', 'uses' => 'PropertyController@search'])->where('term', '(.*)');
 
     // property
-    Route::get('{search}/{term?}',['as' => 'search', 'uses' => 'PropertyController@detail'])->where('term', '(.*)');
+    Route::get('{property}/{term?}',['as' => 'property', 'uses' => 'PropertyController@detail'])->where('term', '(.*)');
 
     // post
     Route::get('{blog}/{term?}',['as' => 'blog', 'uses' => 'PostController@detail']);

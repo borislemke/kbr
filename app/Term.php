@@ -18,6 +18,16 @@ class Term extends Model
         return $this->belongsToMany('App\Post', 'post_terms');
     }
 
+    public function parent()
+    {
+        return $this->belongsTo('App\Term', 'parent_id');
+    }
+
+    public function childs()
+    {
+        return $this->hasMany('App\Term', 'parent_id');
+    }
+
     public static function boot()
     {
         parent::boot();

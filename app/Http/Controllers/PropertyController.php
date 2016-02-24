@@ -213,7 +213,7 @@ class PropertyController extends Controller
 
         // tag
         if ($request->tag) {
-            
+
             foreach ($request->tag as $key => $value) {
                 
                 $propertyTag = new \App\PropertyTerm;
@@ -571,6 +571,8 @@ class PropertyController extends Controller
             $properties = $properties->join('property_terms', 'property_terms.property_id', '=', 'properties.id')
                 ->join('terms', 'terms.id', '=', 'property_terms.term_id')
                 ->where('terms.slug', $category);
+
+            if ($properties->count() == 0) abort('404');
         }
 
         $properties = $properties->paginate($limit);
@@ -580,7 +582,8 @@ class PropertyController extends Controller
 
     public function detail(Request $request, $page, $term = null)
     {
-        if ($term == null) return $this->search($request, $page, $term);
+        // if ($term == null) return $this->search($request, $page, $term);
+        if ($term == null) return abort('404');
 
         $segment = explode('/', $term);
 
@@ -594,9 +597,14 @@ class PropertyController extends Controller
             $q->where('slug', $slug);
         });
 
-        if ($property->count() == 0) return $this->search($request, $page, $term);
+        // if ($property->count() == 0) return $this->search($request, $page, $term);
+        if ($property->count() == 0) return abort('404');
 
         $property = $property->first();
+
+        // return term_slug($property->categories[0]);
+
+        // return $property->categories[0]->parent;
 
         return view('pages.property-view', compact('property'));
     }

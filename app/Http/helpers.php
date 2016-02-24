@@ -80,6 +80,24 @@ function renderCategory($categories, $count = 0)
     }
 }
 
+function term_slug($term, $slug = array())
+{
+    
+    $slug[] = $term->name;
+
+    // TO DO
+    // if ($term->parent) {
+
+    //     term_slug($term->parent, $slug);
+
+    // } else {
+
+    //     return $slug;
+    // }
+    return $slug;
+
+}
+
 function rootCategory($category)
 {
     if ($category->parent) rootCategory($category->parent);
