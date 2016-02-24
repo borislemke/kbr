@@ -281,6 +281,7 @@ class PostController extends Controller
 
     public function listing($term = null)
     {
+        $limit = 3;
 
         $posts = new Post;
 
@@ -296,9 +297,11 @@ class PostController extends Controller
 
         $posts = $posts->where('status', 1);
 
-        $posts = $posts->get();
+        $posts = $posts->orderBy('posts.created_at', 'desc');
 
-        return view('posts.blog-listing', compact('posts'));
+        $posts = $posts->paginate($limit);
+
+        return view('pages.blog-listing', compact('posts'));
     }
 
     public function detail($post, $term = null)
@@ -312,16 +315,20 @@ class PostController extends Controller
 
         $post = new Post;
 
-        $post = $post->where('slug', $slug);
+        $post = $post->whereHas('postLocales', function ($q) use ($slug) {
+            $q->where('slug', $slug);
+        });
 
-        if ($post->count() == 0) return $this->listing($term);
+        if ($post->count() == 0) return abort('404');
 
 
         $post = $post->where('status', 1);
 
         $post = $post->first();
 
-        return view('posts.blog-view', compact('post'));
+        // return $post;
+
+        return view('pages.blog-view', compact('post'));
     }
 
 }

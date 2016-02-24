@@ -37,6 +37,23 @@ class Post extends Model
         return $this->hasMany('App\PostMeta');   
     }
 
+    public function lang()
+    {
+
+        $locale = $this->postLocales()->where('locale', \Lang::getLocale());
+
+        if ($locale->count() > 0) {
+
+            $lang = $locale->first();
+
+            if ($lang->title != '' && $lang->content != '') return $lang;
+
+        }
+
+        return $this->postLocales()->where('locale', 'en')->first();
+
+    }
+
     public static function boot()
     {
         parent::boot();

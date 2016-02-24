@@ -226,7 +226,7 @@ Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
     Route::get('{property}/{term?}',['as' => 'property', 'uses' => 'PropertyController@detail'])->where('term', '(.*)');
 
     // post
-    Route::get('{blog}/{term?}',['as' => 'blog', 'uses' => 'PostController@detail']);
+    Route::get('{blog}/{term?}',['as' => 'blog', 'uses' => 'PostController@detail'])->where('term', '(.*)');
 
     // page
     Route::get('{page?}',['as' => 'page', 'uses' => 'PageController@index']);
