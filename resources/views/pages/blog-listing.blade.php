@@ -10,7 +10,7 @@
            @foreach($posts as $post)
             <div class="blog-content-holder">
                 <div class="blog-content-item-holder">
-                    <div class="blog-item-image"> <img src="{{ baseUrl() }}/assets/img/contact/au.jpg" alt=""> </div>
+                    <div class="blog-item-image"> <img src="{{ asset('assets/img/contact/au.jpg') }}" alt=""> </div>
                     <div class="blog-item-title"><h3>{{ $post->lang()->title }}</h3></div>
                     <div class="blog-item-post-date"> 
                         <ul>

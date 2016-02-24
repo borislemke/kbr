@@ -17,7 +17,7 @@
 
                     T. <a href="tel:623614741212">(+62361) 4741212</a><br>
                     C. <a href="mailto:contact@kibarerproperty.com">contact@kibarerproperty.com</a> <br>
-                    <img src="{{ baseUrl() }}/assets/img/logo-sm.png" class="logo" alt="">
+                    <img src="{{ asset('assets/img/logo-sm.png') }}" class="logo" alt="">
                </p>
            </div>
         </div>
@@ -28,21 +28,21 @@
     <div class="row">
 
         <div class="col-md-4 col-sm-6 company-other-location ">
-            <img src="{{ baseUrl() }}/assets/img/contact/au.jpg" alt="">
+            <img src="{{ asset('assets/img/contact/au.jpg') }}" alt="">
                <div class="caption">
                    <h1>AU</h1> 
                    <p>Australia <span><a href="tel:61-865-558-999">+61 865 558 999</a></span></p>
             </div>
         </div>
         <div class="col-md-4 col-sm-6 company-other-location ">
-            <img src="{{ baseUrl() }}/assets/img/contact/uk.jpg" alt="">
+            <img src="{{ asset('assets/img/contact/uk.jpg') }}" alt="">
                <div class="caption">
                    <h1>UK</h1>
                    <p>United Kingdom <span><a href="tel:44-203-514-2999">+44 203 514 2999</a></span></p>
             </div>
         </div>
         <div class="col-md-4 col-sm-6 company-other-location ">
-            <img src="{{ baseUrl() }}/assets/img/contact/gr.jpg" alt="">
+            <img src="{{ asset('assets/img/contact/gr.jpg') }}" alt="">
                <div class="caption">
                    <h1>GR</h1>
                    <p>Germany <span><a href="tel:49-893-803-875">+49 893 803 875</a></span></p>
@@ -50,21 +50,21 @@
         </div>
 
         <div class="col-md-4 col-sm-6 company-other-location ">
-            <img src="{{ baseUrl() }}/assets/img/contact/za.jpg" alt="">
+            <img src="{{ asset('assets/img/contact/za.jpg') }}" alt="">
                <div class="caption">
                    <h1>ZA</h1>
                    <p>South Africa <span><a href="tel:27-213-002-088">+27 213 002 088</a></span></p>
             </div>
         </div>
         <div class="col-md-4 col-sm-6 company-other-location ">
-            <img src="{{ baseUrl() }}/assets/img/contact/hk.jpg" alt="">
+            <img src="{{ asset('assets/img/contact/hk.jpg') }}" alt="">
                <div class="caption">
                    <h1>HK</h1>
                    <p>Hongkong <span><a href="tel:852-5808-4180">+852 5808 4180</a></span></p>
             </div>
         </div>
         <div class="col-md-4 col-sm-6 company-other-location ">
-            <img src="{{ baseUrl() }}/assets/img/contact/usa.jpg" alt="">
+            <img src="{{ asset('assets/img/contact/usa.jpg') }}" alt="">
                <div class="caption">
                    <h1>USA</h1>
                    <p>United States of Amrica <span><a href="tel:1-518-574-2272">+1 518 574 2272</a></span></p>
