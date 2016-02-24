@@ -24,7 +24,7 @@ elixir(function(mix) {
         .scripts([
             // 'website/markerwithlabel.js',
             'website/jquery.jscroll.js',
-            'website/select2.js',
+            // 'website/select2.js',
             'website/scripts.js'], 'public/assets/js/scripts.js')
         .scripts([
         'admin/scripts.js',

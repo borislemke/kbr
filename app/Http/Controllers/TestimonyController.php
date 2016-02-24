@@ -114,7 +114,7 @@ class TestimonyController extends Controller
         $testimony->customer_id = $request->customer_id;
         $testimony->title = $request->title;
         $testimony->content = $request->content;
-        $testimony->status = $request->status;
+        $testimony->status = ($request->status) ? $request->status : 0;
 
         $testimony->save();
 

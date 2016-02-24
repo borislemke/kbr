@@ -148,14 +148,20 @@
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<script type="text/javascript">
 
-		var myCenter=new google.maps.LatLng(-8.6714246,115.1607031);
+      function initMap() {
+
+
+        var myLatLng = { lat: -8.6714246, lng: 115.1607031 };
+
         var pin = 'assets/img/map-pin.png';
-        var marker=new google.maps.Marker({
-            position:myCenter,
+
+        var marker = new google.maps.Marker({
+            position:myLatLng,
             animation: google.maps.Animation.DROP,
             icon : pin,
             title : 'Kibarer Property'
         });
+
         var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
@@ -168,38 +174,91 @@
             'Heritage Site.</p>'+
             '</div>'+
             '</div>';
+            
         var infowindow = new google.maps.InfoWindow({
             content: contentString,
             maxWidth: 300
         });
-        
-		function initialize() {
-			var mapProp = {
-				center:myCenter,
-				zoom:15,
-                scrollwheel: false,
-				mapTypeId:google.maps.MapTypeId.ROADMAP
-			};
 
-			var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('googleMap'), {
+            mapTypeControl: false,
+            center: myLatLng,
+            scrollwheel: false,
+            zoom: 13,
+            maxZoom: 15,
+            minZoom: 8,
+            draggable: false,
+            zoomControl: false,
+            scrollwheel: false,
+            disableDoubleClickZoom: true,
+            streetViewControl: false
+        });
 
-			marker.setMap(map);
-            marker.addListener('click', function() {
-                infowindow.open(map, marker);
-                
-            });
+        marker.setMap(map);
+
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
             
-		}
-        function toggleBounce() {
-            if (marker.getAnimation() !== null) {
-                marker.setAnimation(null);
-            } else {
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-            }
+        });
+    }
+
+
+
+		// var myCenter=new google.maps.LatLng(-8.6714246,115.1607031);
+  //       var pin = 'assets/img/map-pin.png';
+  //       var marker=new google.maps.Marker({
+  //           position:myCenter,
+  //           animation: google.maps.Animation.DROP,
+  //           icon : pin,
+  //           title : 'Kibarer Property'
+  //       });
+  //       var contentString = '<div id="content">'+
+  //           '<div id="siteNotice">'+
+  //           '</div>'+
+  //           '<h1 id="title" style="font-size: 1.5em;color: #ee5b2c;font-weight: 600; font-color">Kibarer Property</h1>'+
+  //           '<div id="bodyContent">'+
+  //           '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+  //           'sandstone rock formation in the southern part of the '+
+  //           'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+  //           'south west of the nearest large town, Alice Springs; 450&#160;km '+
+  //           'Heritage Site.</p>'+
+  //           '</div>'+
+  //           '</div>';
+  //       var infowindow = new google.maps.InfoWindow({
+  //           content: contentString,
+  //           maxWidth: 300
+  //       });
+        
+		// function initMap() {
+		// 	var mapProp = {
+		// 		center:myCenter,
+		// 		zoom:15,
+  //               scrollwheel: false,
+		// 		mapTypeId:google.maps.MapTypeId.ROADMAP
+		// 	};
+
+		// 	var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+		// 	marker.setMap(map);
+  //           marker.addListener('click', function() {
+  //               infowindow.open(map, marker);
+                
+  //           });
+            
+		// }
+
+
+    function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
         }
+    }
 
 
-		google.maps.event.addDomListener(window, 'load', initialize);
+		// google.maps.event.addDomListener(window, 'load', initialize);
       
       $(document).on('click', 'button[type=submit]', function(event) {
         event.preventDefault();

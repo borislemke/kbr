@@ -31,12 +31,12 @@
 
                     <div class="m-input-group fwidth flexbox justify-between">
                         <div class="m-input-wrapper w50-6">
-                            <input value="{{ $property->localeEN()->title or '' }}" url-format data-target="#property-input-slug" type="text" name="title" id="property-input-title" required>
+                            <input value="{{ ($property->lang())? $property->localeEN()->title : '' }}" url-format data-target="#property-input-slug" type="text" name="title" id="property-input-title" required>
                             <label for="title">title</label>
                         </div>
 
                         <div class="m-input-wrapper w50-6">
-                            <input value="{{ $property->localeEN()->slug }}" type="text" name="slug" id="property-input-slug" required>
+                            <input value="{{ ($property->lang())? $property->localeEN()->slug : '' }}" type="text" name="slug" id="property-input-slug" required>
                             <label for="slug">url</label>
                         </div>
                     </div>

@@ -161,22 +161,30 @@
 
 </script>
 
-  <script type="text/javascript">
+<script type="text/javascript">
+
+function initMap() {
+
     var markersToRemove = [];
-    var myCenter=new google.maps.LatLng(-8.4420734,114.9356164);
 
-    function initialize() {
-      var mapProp = {
-        center:myCenter,
-        zoom:10,
-        mapTypeId:google.maps.MapTypeId.ROADMAP
-      };
+   var myLatLng = { lat: -8.4420734, lng: 114.9356164 };
 
-      var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+   var map = new google.maps.Map(document.getElementById('googleMap'), {
+        mapTypeControl: false,
+        center: myLatLng,
+        scrollwheel: false,
+        zoom: 10,
+        maxZoom: 15,
+        minZoom: 8,
+        draggable: false,
+        zoomControl: false,
+        scrollwheel: false,
+        disableDoubleClickZoom: true,
+        streetViewControl: false
+    });
 
-      //search
-      var input = document.getElementById('pac-input'),
-        searchBox = new google.maps.places.SearchBox(input);
+     var input = document.getElementById('pac-input'),
+    searchBox = new google.maps.places.SearchBox(input);
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
       map.addListener('bounds_changed', function() {
@@ -202,6 +210,7 @@
           map.fitBounds(bounds);
       });
 
+
       google.maps.event.addListener(map, "click", function (e) {
         removeMarkers();
         var latLng = e.latLng,
@@ -216,13 +225,7 @@
 
       });
 
-    }
-
-    $(document).ready(function(){
-      google.maps.event.addDomListener(window, 'load', initialize);
-    });
-
-    function placeMarker(location, map) {
+          function placeMarker(location, map) {
       var marker = new google.maps.Marker({
           position: location, 
           map: map
@@ -236,5 +239,83 @@
           markersToRemove[i].setMap(null);
       }
     }
+
+}
+
+
+    // var markersToRemove = [];
+    // var myCenter=new google.maps.LatLng(-8.4420734,114.9356164);
+
+    // function initialize() {
+    //   var mapProp = {
+    //     center:myCenter,
+    //     zoom:10,
+    //     mapTypeId:google.maps.MapTypeId.ROADMAP
+    //   };
+
+    //   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+    //   //search
+      // var input = document.getElementById('pac-input'),
+      //   searchBox = new google.maps.places.SearchBox(input);
+      // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+      // map.addListener('bounds_changed', function() {
+      //     searchBox.setBounds(map.getBounds());
+      // });
+
+    //   searchBox.addListener('places_changed', function() {
+          
+    //       var places = searchBox.getPlaces();
+    //       if (places.length == 0) {
+    //           return;
+    //       }
+
+    //       var bounds = new google.maps.LatLngBounds();
+    //       places.forEach(function(place) {
+    //           if (place.geometry.viewport) {
+    //               // Only geocodes have viewport.
+    //               bounds.union(place.geometry.viewport);
+    //           } else {
+    //               bounds.extend(place.geometry.location);
+    //           }
+    //       });
+    //       map.fitBounds(bounds);
+    //   });
+
+    //   google.maps.event.addListener(map, "click", function (e) {
+    //     removeMarkers();
+    //     var latLng = e.latLng,
+    //         strlatlng = latLng.toString(),
+    //         spllatlng = strlatlng.split(','),
+    //         lats = spllatlng[0].replace("(", ""), 
+    //         longs = spllatlng[1].replace(")", "");
+
+    //     $("#map_latitude").val(lats);
+    //     $("#map_longitude").val(longs);
+    //     placeMarker(latLng, map);
+
+    //   });
+
+    // }
+
+    // $(document).ready(function(){
+    //   google.maps.event.addDomListener(window, 'load', initialize);
+    // });
+
+    // function placeMarker(location, map) {
+    //   var marker = new google.maps.Marker({
+    //       position: location, 
+    //       map: map
+    //   });
+
+    //   markersToRemove.push(marker);
+    // }
+
+    // function removeMarkers() {
+    //   for(var i = 0; i < markersToRemove.length; i++) {
+    //       markersToRemove[i].setMap(null);
+    //   }
+    // }
   </script>
 @endsection

@@ -59,13 +59,15 @@
 
 </div>
 
-
+@if(Auth::customer()->check())
 <!-- Modal -->
 <div class="modal fade" id="add-testimony" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-        {!! Form::open(['url' => route('api.testimony.store', trans('url.testimony')),'id' => 'testimony-form']) !!}
+        {!! Form::open(['url' => route('api.testimony.store'),'id' => 'testimony-form']) !!}
+
+        <input type="hidden" value="{{ Auth::customer()->get()->id }}" name="customer_id">
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -90,6 +92,7 @@
     </div>
   </div>
 </div>
+@endif
 
 @stop
 
@@ -113,26 +116,27 @@ $(document).ready(function() {
         }
     });
 
-    // $('.testimony-save').click(function(event) {
+    $('.testimony-save').click(function(event) {
 
-    //     console.log('save clicked');
+        console.log('save clicked');
 
-    //     $.post('api/testimony/save', {
-    //         title: $('#testimony-title').val(), 
-    //         content: $('#testimony-content').val(),
-    //         _token: $('input[name=_token]').val()
-    //     },
-    //     function(data, textStatus, xhr) {
+        var frm = $('#testimony-form'),
+        url = frm.attr('action'),
+        data = frm.serialize();;
 
-    //         if(textStatus == 'success') {
+        $.post(url, data, function(data, textStatus, xhr) {
 
-    //             console.log(data);
-    //             $('#add-testimony').modal('hide');
-    //         }
-    //     });
+            if(data.status == 200) {
 
-    //     event.preventDefault();
-    // });
+                $('#add-testimony').modal('hide');
+
+                $('input').val('');
+                $('textarea').val('');
+            }
+        });
+
+        event.preventDefault();
+    });
 
 });
 

@@ -4,11 +4,11 @@
 <!--
 <script src="assets/js/jquery.event.move.js"></script>
 <script src="assets/js/responsive-slider.js"></script>
-<script src="assets/js/bootstrap.js"></script>
 <script src="assets/js/bootstrap-slider.js"></script>
 <script src="assets/js/jquery.jscroll.js"></script> -->
+<script src="assets/js/bootstrap.js"></script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdeZlfIdUJZR6TA1TSCQS6v5HcLdlbZR8&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdeZlfIdUJZR6TA1TSCQS6v5HcLdlbZR8&callback=initMap&libraries=places">
 </script>
 <script src="{{ url('/') }}/assets/js/scripts.js"></script>
 
