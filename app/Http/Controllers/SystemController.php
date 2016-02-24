@@ -79,6 +79,8 @@ class SystemController extends Controller {
 
         $conversion = array();
 
+        $conversion[$baseCurrency] = 1;
+
         foreach($altCurrencies as $c) {
 
             $exchange = file_get_contents("https://currency-api.appspot.com/api/$baseCurrency/$c.json");
@@ -98,6 +100,8 @@ class SystemController extends Controller {
     // Set the exchange rate manually
     public function setExchange() {
 
+        $baseCurrency = Config::get('currencies.base_currency');
+
         $curr = Input::get('currencies');
 
         $conversion = array();
@@ -106,6 +110,8 @@ class SystemController extends Controller {
 
             $conversion[$k] = $c;
         }
+
+        $conversion[$baseCurrency] = 1;
 
         File::put(storage_path('json/conversion.json'), json_encode($conversion));
 

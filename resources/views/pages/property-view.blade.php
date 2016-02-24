@@ -30,7 +30,7 @@ $custLog = Auth::customer()->get();
                     <div class="property-view-head-gallery" style="background-image: url('http://loremflickr.com/320/240/architecture')"></div>
                     <div class="property-head-left-information-wrapper flexbox">
                         <div class="property-view-head-information-block flexbox">
-                            <i class="material-icons">hotel</i>
+                            <i class="material-icons">place</i>
                             <div class="property-view-head-information-text">
                                 <p class="property-view-head-information-bold">Canggu</p>
                                 <p class="property-view-head-information-string">Bali</p>
@@ -39,12 +39,12 @@ $custLog = Auth::customer()->get();
                         <div class="property-view-head-information-block flexbox">
                             <i class="material-icons">hotel</i>
                             <div class="property-view-head-information-text">
-                                <p class="property-view-head-information-bold">2 Bedrooms</p>
-                                <p class="property-view-head-information-string">3 Bathrooms</p>
+                                <p class="property-view-head-information-bold">{{ $property->bedroom }} Bedrooms</p>
+                                <p class="property-view-head-information-string">{{ $property->bathroom }} Bathrooms</p>
                             </div>
                         </div>
                         <div class="property-view-head-information-block flexbox">
-                            <i class="material-icons">hotel</i>
+                            <i class="material-icons">zoom_out_map</i>
                             <div class="property-view-head-information-text">
                                 <p class="property-view-head-information-bold">{{ $property->building_size }}m<span class="superscript">2</span></p>
                                 <p class="property-view-head-information-string">{{ trans('word.land') }}: {{ $property->land_size }}m<span class="superscript">2</span></p>
@@ -64,14 +64,15 @@ $custLog = Auth::customer()->get();
                     <div class="property-view-head-price-box flexbox">
                         <div class="property-head-view-price-currency">
                             <select name="currency_rate" id="currency_select">
-                                <option value="usd" selected>usd</option>
-                                <option value="idr">idr</option>
-                                <option value="eur">eur</option>
-                                <option value="rub">rub</option>
+                                <?php $base_currency = \Config::get('currencies.base_currency') ?>
+                                <option value="{{ $base_currency }}"{{ \Session::get('currency') == $base_currency ? ' selected' : '' }}>{{ $base_currency }}</option>
+                                @foreach(\Config::get('currencies.alt_currencies') as $currency)
+                                <option value="{{ $currency }}"{{ \Session::get('currency') == $currency ? ' selected' : '' }}>{{ $currency }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="property-head-view-price-value">
-                            <p>{{ convertCurrency($property->price, $property->currency, 'idr') }}</p>
+                            <p><span class="subscript">{{ \Session::get('currency') }}</span>{{ convertCurrency($property->price, $property->currency, \Session::get('currency')) }}</p>
                         </div>
                     </div>
                     <button class="property-view-head-enquiry flexbox">
@@ -154,19 +155,20 @@ $custLog = Auth::customer()->get();
                         <p>{{ trans('word.facilities') }}</p>
                     </div>
                     <div class="property-description-column flexbox flexbox-wrap double">
-                        @foreach($property->facilities as $facility)
-                        <p style="text-transform: capitalize;">{{ $facility->name }}</p>
+                        <?php $facilities = $property->facilities()->lists('name')->toArray() ?>
+                        @foreach(\Config::get('facility') as $facility => $icon)
+                        <p class="property-facility{{ in_array($facility, $facilities) ? ' available' : '' }}">{!! in_array($facility, $facilities) ? '<i class="material-icons">' . $icon . '</i>' : '' !!} {{ $facility }}</p>
                         @endforeach
                     </div>
                 </div>
 
-                <div class="property-description-row flexbox">
+                <div class="property-description-row flexbox" id="distance-row">
                     <div class="property-description-column">
                         <p>{{ trans('word.distance_to') }}</p>
                     </div>
                     <div class="property-description-column flexbox flexbox-wrap double">
                         @foreach($property->distances as $distance)
-                        <p>{{ $distance->name }}: <strong>{{ $distance->value }}</strong></p>
+                        <p class="property-distance">{{ $distance->name }}: <strong>{{ $distance->value }}</strong></p>
                         @endforeach
                     </div>
                 </div>

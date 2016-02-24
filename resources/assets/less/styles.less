@@ -363,6 +363,7 @@
 
     .page-view-section-top{
         width: 100%;
+        margin-bottom: 8px;
         background-color: white;
 
         .container{
@@ -608,7 +609,10 @@
                 .property-description-row{
                     width: 100%;
                     padding: 32px 0;
-                    border-bottom: 1px solid #d3d3d3;
+
+                    &:nth-child(n+2) {
+                        border-top: 1px solid #d3d3d3;
+                    }
 
                     .property-description-column{
                         width: 33.33%;
@@ -625,6 +629,40 @@
 
                             p{
                                 width: 100%;
+                            }
+                        }
+
+                        .property-facility{
+                            position: relative;
+                            text-transform: capitalize;
+                            //order: 2;
+                            font-weight: 300;
+                            text-decoration: line-through;
+                            margin-bottom: 10px;
+
+                            &.available{
+                                text-indent: 32px;
+                                //order: 1;
+                                font-weight: 700;
+                                text-decoration: none;
+
+                                i{
+                                    text-indent: 0;
+                                    position: absolute;
+                                    left: 0;
+                                    top: -2px;
+                                    margin-right: 4px;
+                                }
+                            }
+                        }
+                    }
+
+                    &#distance-row{
+
+                        .property-description-column{
+
+                            .property-distance{
+                                text-transform: capitalize;
                             }
                         }
                     }

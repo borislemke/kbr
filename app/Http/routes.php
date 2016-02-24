@@ -19,6 +19,8 @@ if (in_array(Request::segment(1), Config::get('app.alt_langs'))) {
     App::setLocale(Request::segment(1));
 
     Config::set('app.locale_prefix', Request::segment(1));
+
+    Session::set('currency', 'usd');
 }
 
 
@@ -149,7 +151,7 @@ Route::group(['middleware' => 'auth'], function () {
         // about
         Route::get('about',['as' => 'admin.about', 'uses' => 'AdminController@about']);
 
-        
+
         // PDF Export
         Route::group(['prefix' => 'pdf'], function () {
 

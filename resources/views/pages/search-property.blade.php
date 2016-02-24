@@ -66,8 +66,8 @@
                 <button class="search-result-box-close" onclick="closeActiveBoxes()"><i class="material-icons">close</i></button>
 
                 <div class="search-result-price-box">
-                    <p class="search-result-currency">{{ /*\Session::get('currency') or*/ 'idr' }}</p>
-                    <p class="search-result-price">{{ convertCurrency($property->price, $property->currency, 'idr') }}</p>
+                    <p class="search-result-currency">{{ \Session::get('currency') }}</p>
+                    <p class="search-result-price">{{ convertCurrency($property->price, $property->currency, \Session::get('currency')) }}</p>
                 </div>
 
                 <div class="search-result-bottom">
