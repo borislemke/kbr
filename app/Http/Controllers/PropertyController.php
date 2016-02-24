@@ -55,7 +55,7 @@ class PropertyController extends Controller
         $properties = $properties->with('thumb');
 
         // searching
-        if ($search) {            
+        if ($search) {
 
             $properties = $properties->select('properties.*')
                 ->join('property_locales', 'property_locales.property_id', '=', 'properties.id')
@@ -190,8 +190,8 @@ class PropertyController extends Controller
         $property->sell_in_furnish = $request->sell_in_furnish;
         $property->lease_period = $request->lease_period;
         $property->lease_year = $request->lease_year;
-        
-        
+
+
         // find province, country
         $city = \App\City::where('city_name', $request->city)->first();
 
@@ -215,7 +215,7 @@ class PropertyController extends Controller
         if ($request->tag) {
 
             foreach ($request->tag as $key => $value) {
-                
+
                 $propertyTag = new \App\PropertyTerm;
                 $propertyTag->term_id = $value;
                 $propertyTag->property_id = $property->id;
@@ -397,8 +397,8 @@ class PropertyController extends Controller
         $property->sell_in_furnish = $request->sell_in_furnish;
         $property->lease_period = $request->lease_period;
         $property->lease_year = $request->lease_year;
-        
-        
+
+
         // find province, country
         $city = \App\City::where('city_name', $request->city)->first();
 
@@ -409,7 +409,7 @@ class PropertyController extends Controller
         $property->save();
 
         // category
-        $category_id = $property->categories[0]->id;        
+        $category_id = $property->categories[0]->id;
         $propertyTerm = new \App\PropertyTerm;
         $propertyTerm = $propertyTerm->where('property_id', $property->id)->where('term_id', $category_id)->first();
         $propertyTerm->term_id = $request->category;
@@ -519,7 +519,7 @@ class PropertyController extends Controller
             }
 
         }
-           
+
 
         DB::commit();
 
@@ -572,7 +572,7 @@ class PropertyController extends Controller
             // not category abort
             if ($term->count() == 0) return abort('404');
 
-            // $segment = 
+            // $segment =
             $properties = $properties->join('property_terms', 'property_terms.property_id', '=', 'properties.id')
                 ->join('terms', 'terms.id', '=', 'property_terms.term_id');
 
