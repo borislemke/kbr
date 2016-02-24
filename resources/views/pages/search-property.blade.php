@@ -100,12 +100,8 @@
             <?php $i++ ?>
             @endforeach
         </div>
-
-
-
     </div>
     <div id="map" class="searchbox-right">
-
     </div>
     <!--    @include('fragments.pagination', ['paginator' => $properties])-->
 </div>
@@ -133,9 +129,6 @@
         to: 70,
         max_interval: 50
     });
-
-    //var url = search?type=gt500k&location=-8.523412,115.2377871&price=200000,2000000&bed=1&bath=3&facilities=gazebo,pool,garden,garage,wifi&build_size=400&land_size=650
-    //var type = type = [‘gt500k’, ‘lt500k’, ‘beachfront’, ‘homeretirement’];
 
     function initMap() {
 

@@ -20,7 +20,7 @@ if (in_array(Request::segment(1), Config::get('app.alt_langs'))) {
 
     Config::set('app.locale_prefix', Request::segment(1));
 
-    Session::set('currency', 'usd');
+//    Session::set('currency', 'usd');
 }
 
 
@@ -174,6 +174,8 @@ Route::controllers([
 
 // Front-End
 Route::group(['prefix' => Config::get('app.locale_prefix')], function() {
+
+    Session::set('currency', 'usd');
 
     // customer
     Route::get('{login}', ['as' => 'login', 'uses' => 'Auth\AuthController@getCustomerLogin']);

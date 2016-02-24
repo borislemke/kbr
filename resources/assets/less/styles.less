@@ -1,8 +1,14 @@
 
 @import 'bootstrap/bootstrap.less';
 @import (less) 'website/font-awesome.css';
+<<<<<<< 668d2637de0a4fd78a56093a8069384e1435a882
 @import (less) 'website/select2.css';
 @kibarer_orange: #ee5b2c;
+=======
+@kibarer_orange_soft: #F97D5A;
+@kibarer_orange: @kibarer_orange_soft;
+//@kibarer_orange: #ee5b2c;
+>>>>>>> Property details and listings
 
 .search-container{
     margin: 0;
@@ -544,11 +550,13 @@
                             i{
                                 height: 54px;
                                 line-height: 54px;
-                                width: 54px;
+                                width: 40px;
+                                text-align: right;
                             }
 
                             p{
                                 margin: 0;
+                                padding-left: 8px;
                                 line-height: 54px;
                             }
                         }
@@ -567,7 +575,7 @@
                             }
 
                             .head-social-button-icon{
-                                width: 54px;
+                                width: 40px;
                                 height: 54px;
                                 text-align: center;
 
@@ -577,17 +585,27 @@
                             }
 
                             .head-social-button-text{
+                                position: relative;
 
                                 p{
+                                    position: absolute;
                                     margin: 0;
+                                    white-space: nowrap;
+                                    text-transform: uppercase;
                                 }
 
                                 .social-button-hint{
-
+                                    bottom: 50%;
+                                    font-size: 8px;
+                                    font-weight: 800;
+                                    color: #a1a1a1;
                                 }
 
                                 .social-button-name{
-
+                                    top: 50%;
+                                    margin-top: -4px;
+                                    font-size: 10px;
+                                    font-weight: 700;
                                 }
                             }
                         }

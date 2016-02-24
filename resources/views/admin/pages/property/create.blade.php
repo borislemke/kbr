@@ -153,7 +153,7 @@
                             <label for="title">category</label>
                         </m-input>
 
-                    </div>                   
+                    </div>
 
                     <div class="m-input-group fwidth flexbox justify-between">
                         <m-input select class="m-input-wrapper w50-6">
@@ -182,7 +182,7 @@
 
                             </select>
                             <label for="title">city</label>
-                        </m-input>                        
+                        </m-input>
 
                         <m-input select class="m-input-wrapper w50-6">
                             <select name="status">
@@ -247,13 +247,13 @@
 
                     <div class="m-input-group fwidth flexbox flexbox-wrap" id="documents-received">
 
-                        <?php 
+                        <?php
                             $arr_facilities = Config::get('facility');
                         ?>
 
                         @foreach($arr_facilities as $key => $facility)
-                        <m-checkbox data-label="{{ $facility }}" w25-9>
-                            <input type="checkbox" value="{{ $facility }}" name="facility_name[]">
+                        <m-checkbox data-label="{{ $key }}" w25-9>
+                            <input type="checkbox" value="{{ $key }}" name="facility_name[]">
                             <lever></lever>
                         </m-checkbox>
                         @endforeach
@@ -289,7 +289,7 @@
                                 <input type="text" value="market" name="distance_name[]">
                                 <label>name</label>
                             </m-input>
-                            
+
                             <m-input w50-6>
                                 <input type="text" name="distance_value[]">
                                 <label>value</label>
@@ -372,7 +372,7 @@
                     <div class="m-input-group textarea fwidth flexbox flexbox-wrap" id="documents-received">
                         <h3 class="input-group-title">Documents Received</h3>
 
-                        <?php 
+                        <?php
                             $arr_documents = Config::get('document');
                         ?>
 
@@ -425,10 +425,10 @@
     // Matter.admin.properties();
 
     $(document).ready(function() {
-    
+
         $(document).on('click', '[save-form]', function(event) {
             event.preventDefault();
-            
+
             console.log('save clicked!');
 
             var url = "{{ route('api.properties.store') }}";
@@ -437,20 +437,20 @@
             NProgress.start();
 
             Ajax.post(url, fd, saved);
-            
+
 
             NProgress.done();
         });
 
         $(document).on('click', '.add-facility', function(event) {
             event.preventDefault();
-            
+
             var html = ''
                 + '<m-input w50-6>'
                     + '<input type="text" value="" name="facility_name[]">'
                     + '<label>name</label>'
                 + '</m-input>'
-                
+
                 + '<m-input w50-6>'
                     + '<input type="text" value="" name="facility_value[]">'
                     + '<label>value</label>'
@@ -462,13 +462,13 @@
 
         $(document).on('click', '.add-distance', function(event) {
             event.preventDefault();
-            
+
             var html = ''
                 + '<m-input w50-6>'
                     + '<input type="text" value="" name="distance_name[]">'
                     + '<label>name</label>'
                 + '</m-input>'
-                
+
                 + '<m-input w50-6>'
                     + '<input type="text" value="" name="distance_value[]">'
                     + '<label>value</label>'

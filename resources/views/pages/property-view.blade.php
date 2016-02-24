@@ -6,20 +6,43 @@
 $custLog = Auth::customer()->get();
 ?>
 
+
+@if(Auth::user()->check())
+<style>body{ padding-top: 36px; }</style>
+<div class="admin-toolbar" style="position: fixed;
+                                  height: 36px;
+                                  top: 0;
+                                  left: 0;
+                                  z-index: 10000;
+                                  right: 0;
+                                  padding: 8px;
+                                  background-color: white;
+                                  box-shadow: 0 0 4px 2px rgba(0, 0, 0, .05);">
+    <a href="admin/properties?category=villa&action=edit&id={{ $property->id }}" style="position: absolute;
+                                                                                        left: 0;
+                                                                                        top: 0;
+                                                                                        line-height: 36px;
+                                                                                        text-indent: 36px;"><i style="position: absolute;
+        left: 0;
+        line-height: 36px;
+        width: 36px;
+        text-align: center;
+        text-indent: 0;" class="material-icons">edit</i> Edit this Property</a>
+</div>
+@endif
+
 <div class="bc-bg">
     <ul class="breadcrumb container">
         <li><a href="{{ baseUrl() }}">{{ trans('word.home') }}</a></li>
-
         <?php $cats = array(); ?>
         @foreach($segment as $key => $value)
         <?php $cats[] = $value ?>
-            @if($key == count($segment) -1)
-            <li class="active">{{ $value }}</li>
-            @else
-            <li><a href="{{ route('search', ['search' => trans('url.search'), 'term' => implode('/', $cats)]) }}">{{ $value }}</a></li>
-            @endif
+        @if($key == count($segment) -1)
+        <li class="active">{{ $property->lang()->title }}</li>
+        @else
+        <li><a href="{{ route('search', ['search' => trans('url.search'), 'term' => implode('/', $cats)]) }}">{{ $value }}</a></li>
+        @endif
         @endforeach
-
     </ul>
 </div>
 
@@ -103,7 +126,7 @@ $custLog = Auth::customer()->get();
                     </div>
 
                     <div class="property-view-head-social-wrapper flexbox">
-                        <div class="property-view-head-social-button flexbox" id="social-facebook">
+                        <a href="http://www.kibarer.com/search/something" class="property-view-head-social-button flexbox" id="social-facebook">
                             <div class="head-social-button-icon">
                                 <i class="material-icons">android</i>
                             </div>
@@ -111,8 +134,8 @@ $custLog = Auth::customer()->get();
                                 <p class="social-button-hint">share on</p>
                                 <p class="social-button-name">facebook</p>
                             </div>
-                        </div>
-                        <div class="property-view-head-social-button flexbox" id="social-twitter">
+                        </a>
+                        <a href="http://www.kibarer.com/search/something" class="property-view-head-social-button flexbox" id="social-twitter">
                             <div class="head-social-button-icon">
                                 <i class="material-icons">android</i>
                             </div>
@@ -120,8 +143,8 @@ $custLog = Auth::customer()->get();
                                 <p class="social-button-hint">share on</p>
                                 <p class="social-button-name">twitter</p>
                             </div>
-                        </div>
-                        <div class="property-view-head-social-button flexbox" id="social-google">
+                        </a>
+                        <a href="http://www.kibarer.com/search/something" class="property-view-head-social-button flexbox" id="social-google">
                             <div class="head-social-button-icon">
                                 <i class="material-icons">android</i>
                             </div>
@@ -129,7 +152,7 @@ $custLog = Auth::customer()->get();
                                 <p class="social-button-hint">share on</p>
                                 <p class="social-button-name">google +</p>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <div class="property-view-head-map-wrapper" id="map" style="height: 320px;">
@@ -239,11 +262,8 @@ $custLog = Auth::customer()->get();
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary send-enquiry">{{ trans('word.send') }}</button>
             </div>
-
             {!! Form::close() !!}
-
         </div>
-
     </div>
 </div>
 @stop
