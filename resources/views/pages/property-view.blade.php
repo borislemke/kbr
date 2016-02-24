@@ -9,8 +9,17 @@ $custLog = Auth::customer()->get();
 <div class="bc-bg">
     <ul class="breadcrumb container">
         <li><a href="{{ baseUrl() }}">{{ trans('word.home') }}</a></li>
-        <li><a href="{{ url('/') }}/villas">Villas</a></li>
-        <li class="active">{{ $property->lang()->title }}</li>
+
+        <?php $cats = array(); ?>
+        @foreach($segment as $key => $value)
+        <?php $cats[] = $value ?>
+            @if($key == count($segment) -1)
+            <li class="active">{{ $value }}</li>
+            @else
+            <li><a href="{{ route('search', ['search' => trans('url.search'), 'term' => implode('/', $cats)]) }}">{{ $value }}</a></li>
+            @endif
+        @endforeach
+
     </ul>
 </div>
 

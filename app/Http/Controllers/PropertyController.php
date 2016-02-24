@@ -599,24 +599,17 @@ class PropertyController extends Controller
 
         $slug = end($segment);
 
-        // $slug = str_replace('.asp', '', $slug);
-
         $property = new Property;
 
         $property = $property->whereHas('propertyLocales', function ($q) use ($slug) {
             $q->where('slug', $slug);
         });
 
-        // if ($property->count() == 0) return $this->search($request, $page, $term);
         if ($property->count() == 0) return abort('404');
 
         $property = $property->first();
 
-        // return term_slug($property->categories[0]);
-
-        // return $property->categories[0]->parent;
-
-        return view('pages.property-view', compact('property'));
+        return view('pages.property-view', compact('property', 'segment'));
     }
 
     public function sellProperty(Request $request)
