@@ -21,7 +21,8 @@ elixir(function(mix) {
         .scripts('website/theme.js', 'public/assets/js/theme.js')        
         .scripts('website/responsive-slider.js', 'public/assets/js/responsive-slider.js')
         .scripts('website/bootstrap-slider.js', 'public/assets/js/bootstrap-slider.js')
-        .scripts(['website/markerwithlabel.js',
+        .scripts([
+            // 'website/markerwithlabel.js',
             'website/jquery.jscroll.js',
             'website/select2.js',
             'website/scripts.js'], 'public/assets/js/scripts.js')

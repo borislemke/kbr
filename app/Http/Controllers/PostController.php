@@ -153,7 +153,7 @@ class PostController extends Controller
             $locale->content = $request->content[$key];
             $locale->meta_keyword = $request->meta_keyword[$key];
             $locale->meta_description = $request->meta_description[$key];
-            $locale->slug = $request->slug[$key];
+            $locale->slug = $locale->slug($request->slug[$key], $post->id);
             $locale->locale = $key;
 
             $locale->save();
@@ -239,7 +239,7 @@ class PostController extends Controller
             $locale->content = $request->content[$key];
             $locale->meta_keyword = $request->meta_keyword[$key];
             $locale->meta_description = $request->meta_description[$key];
-            $locale->slug = $request->slug[$key];
+            $locale->slug = $locale->slug($request->slug[$key], $post->id);
             $locale->locale = $key;
 
             $locale->save();
