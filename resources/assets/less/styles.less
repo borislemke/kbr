@@ -2,6 +2,8 @@
 @import 'bootstrap/bootstrap.less';
 @import (less) 'website/font-awesome.css';
 
+@kibarer_orange: #ee5b2c;
+
 .search-container{
     margin: 0;
     height: calc(~"100vh - 167px");
@@ -54,7 +56,7 @@
                                 background: #f1f1f1;
                                 padding: 8px 12px;
                                 margin: 0;
-                                margin-right: 24px;
+                                margin-right: 12px;
                                 border-radius: 2px;
                                 border: 1px solid #d3d3d3;
                                 box-shadow: 0 0 4px 0 rgba(0, 0, 0, .05);
@@ -63,6 +65,7 @@
 
                                 input{
                                     margin-left: 12px;
+                                    cursor: pointer;
                                 }
                             }
                         }
@@ -365,28 +368,67 @@
         .container{
 
             .property-view-header{
+                margin-bottom: 12px;
 
                 h1{
-                    font-weight: 600;
                     font-size: 22px;
+                    font-weight: 600;
+                    margin-bottom: 4px;
                     color: @kibarer_orange;
                 }
 
+                h2{
+                    margin: 0;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
             }
 
             .property-view-head{
 
                 .property-view-head-left{
-                    width: 70%;
+                    width: calc(~"70% - 8px");
+                    margin-right: 8px;
 
-                    .property-head-gallery{
-
+                    .property-view-head-gallery{
+                        height: 528px;
+                        background-size: cover;
+                        background-position: center;
                     }
 
                     .property-head-left-information-wrapper{
+                        height: 64px;
 
                         .property-view-head-information-block{
                             width: 25%;
+                            height: 64px;
+
+                            i{
+                                width: 64px;
+                                font-size: 35px;
+                                line-height: 64px;
+                                text-align: center;
+                            }
+
+                            .property-view-head-information-text{
+                                position: relative;
+
+                                p{
+                                    margin: 0;
+                                    position: absolute;
+                                    white-space: nowrap;
+                                }
+
+                                .property-view-head-information-bold{
+                                    color: @kibarer_orange;
+                                    font-weight: 600;
+                                    bottom: 50%;
+                                }
+
+                                .property-view-head-information-string{
+                                    top: 50%;
+                                }
+                            }
                         }
                     }
                 }
@@ -407,14 +449,14 @@
                                 border: 0;
                                 background-color: @kibarer_orange;
                                 color: white;
-                                text-indent: 18px;
+                                text-indent: 14px;
                                 padding: 16px;
                             }
 
                             &:after{
                                 content: '';
                                 position: absolute;
-                                right: 12px;
+                                left: 12px;
                                 top: 0;
                                 bottom: 0;
                                 margin: auto;
@@ -447,26 +489,39 @@
                         color: #f1f1f1;
                         width: 100%;
                         border: 0;
+                        position: relative;
 
                         .head-enquiry-icon{
-                            width: 72px;
+                            width: 80px;
                             text-align: right;
 
                             i{
-                                font-size: 36px;
-                                height: 72px;
-                                line-height: 72px;
+                                font-size: 48px;
+                                height: 80px;
+                                line-height: 80px;
                             }
                         }
 
                         .head-enquiry-text{
+                            text-indent: 12px;
+
+                            p{
+                                margin: 0;
+                                position: absolute;
+                                text-transform: uppercase;
+                            }
 
                             .head-enquiry-bold{
-
+                                bottom: 50%;
+                                margin-bottom: -4px;
+                                font-weight: 500;
+                                font-size: 18px;
                             }
 
                             .head-enquiry-hint{
-
+                                top: 50%;
+                                margin-top: -2px;
+                                font-weight: 400;
                             }
                         }
                     }
@@ -545,5 +600,36 @@
         width: 100%;
         background-color: #f1f1f1;
 
+        .container{
+
+            .property-view-description-container{
+                width: 70%;
+
+                .property-description-row{
+                    width: 100%;
+                    padding: 32px 0;
+                    border-bottom: 1px solid #d3d3d3;
+
+                    .property-description-column{
+                        width: 33.33%;
+
+                        &.double{
+                            width: 66.66%;
+
+                            p{
+                                width: 50%;
+                            }
+                        }
+
+                        &#property-description-container{
+
+                            p{
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

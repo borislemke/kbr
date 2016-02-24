@@ -27,12 +27,36 @@ $custLog = Auth::customer()->get();
 
             <div class="property-view-head flexbox flexbox-wrap">
                 <div class="property-view-head-left">
-                    <div class="property-view-head-gallery"></div>
-                    <div class="property-head-left-information-wrapper">
-                        <div class="property-view-head-information-block"></div>
-                        <div class="property-view-head-information-block"></div>
-                        <div class="property-view-head-information-block"></div>
-                        <div class="property-view-head-information-block"></div>
+                    <div class="property-view-head-gallery" style="background-image: url('http://loremflickr.com/320/240/architecture')"></div>
+                    <div class="property-head-left-information-wrapper flexbox">
+                        <div class="property-view-head-information-block flexbox">
+                            <i class="material-icons">hotel</i>
+                            <div class="property-view-head-information-text">
+                                <p class="property-view-head-information-bold">Canggu</p>
+                                <p class="property-view-head-information-string">Bali</p>
+                            </div>
+                        </div>
+                        <div class="property-view-head-information-block flexbox">
+                            <i class="material-icons">hotel</i>
+                            <div class="property-view-head-information-text">
+                                <p class="property-view-head-information-bold">2 Bedrooms</p>
+                                <p class="property-view-head-information-string">3 Bathrooms</p>
+                            </div>
+                        </div>
+                        <div class="property-view-head-information-block flexbox">
+                            <i class="material-icons">hotel</i>
+                            <div class="property-view-head-information-text">
+                                <p class="property-view-head-information-bold">{{ $property->building_size }}m<span class="superscript">2</span></p>
+                                <p class="property-view-head-information-string">{{ trans('word.land') }}: {{ $property->land_size }}m<span class="superscript">2</span></p>
+                            </div>
+                        </div>
+                        <div class="property-view-head-information-block flexbox">
+                            <i class="material-icons">hotel</i>
+                            <div class="property-view-head-information-text">
+                                <p class="property-view-head-information-bold">{{ $property->type }}</p>
+                                <p class="property-view-head-information-string">Bali</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -114,14 +138,14 @@ $custLog = Auth::customer()->get();
                     <div class="property-description-column">
                         <p>{{ trans('word.general_informations') }}</p>
                     </div>
-                    <div class="property-description-column flexbox double">
-                        <p>Code: <span>{{ $property->code }}</span></p>
-                        <p>{{ trans('word.location') }}: <span>{{ $property->city }}</span></p>
-                        <p>{{ trans('word.land_size') }}: <span>{{ $property->land_size }}</span></p>
+                    <div class="property-description-column flexbox flexbox-wrap double">
+                        <p>Code: <strong>{{ $property->code }}</strong></p>
+                        <p>{{ trans('word.location') }}: <strong>{{ $property->city }}</strong></p>
+                        <p>{{ trans('word.land_size') }}: <strong>{{ $property->land_size }}</strong></p>
 
-                        <p>Status: <span>{{ $property->type }}</span></p>
-                        <p>{{ trans('word.year_built') }}: <span>{{ $property->year }}</span></p>
-                        <p>{{ trans('word.building_size') }}: <span>{{ $property->building_size }}</span></p>
+                        <p>Status: <strong>{{ $property->type }}</strong></p>
+                        <p>{{ trans('word.year_built') }}: <strong>{{ $property->year }}</strong></p>
+                        <p>{{ trans('word.building_size') }}: <strong>{{ $property->building_size }}</strong></p>
                     </div>
                 </div>
 
@@ -129,9 +153,9 @@ $custLog = Auth::customer()->get();
                     <div class="property-description-column">
                         <p>{{ trans('word.facilities') }}</p>
                     </div>
-                    <div class="property-description-column flexbox double">
-                        @foreach($property->facilities() as $facility)
-                        <p>{{ $facility->name }}: <span>{{ $facility->value }}</span></p>
+                    <div class="property-description-column flexbox flexbox-wrap double">
+                        @foreach($property->facilities as $facility)
+                        <p style="text-transform: capitalize;">{{ $facility->name }}</p>
                         @endforeach
                     </div>
                 </div>
@@ -140,9 +164,9 @@ $custLog = Auth::customer()->get();
                     <div class="property-description-column">
                         <p>{{ trans('word.distance_to') }}</p>
                     </div>
-                    <div class="property-description-column flexbox double">
-                        @foreach($property->distances() as $distance)
-                        <p>{{ $distance->name }}: <span>{{ $distance->value }}</span></p>
+                    <div class="property-description-column flexbox flexbox-wrap double">
+                        @foreach($property->distances as $distance)
+                        <p>{{ $distance->name }}: <strong>{{ $distance->value }}</strong></p>
                         @endforeach
                     </div>
                 </div>
@@ -151,8 +175,8 @@ $custLog = Auth::customer()->get();
                     <div class="property-description-column">
                         <p>{{ trans('word.description') }}</p>
                     </div>
-                    <div class="property-description-column double">
-                        <p>{!! $property->lang()->content !!}</p>
+                    <div class="property-description-column double" id="property-description-container">
+                        {!! $property->lang()->content !!}
                     </div>
                 </div>
             </div>

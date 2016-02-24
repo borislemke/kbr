@@ -12,7 +12,8 @@ return [
     'alt_currencies' => [
         'idr',
         'eur',
-        'rub'
+        'aud',
+        'sgd'
     ],
 
 ];

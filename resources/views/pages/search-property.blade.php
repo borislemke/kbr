@@ -154,12 +154,14 @@
             streetViewControl: false
         });
 
+        @foreach($properties as $property)
         // Create a marker and set its position.
         var marker = new google.maps.Marker({
             map: map,
-            position: myLatLng,
+            position: { lat: {{ $property->map_latitude }}, lng: {{ $property->map_longitude }} },
             title: 'Hello World!'
         });
+        @endforeach
 
         google.maps.event.addListener(map, 'bounds_changed', function() {
             //console.log(map.getBounds());
@@ -184,11 +186,13 @@
             console.log(newLat);
             console.log(newLng);
 
+            /*
             var marker = new google.maps.Marker({
                 map: map,
                 position: {lat: newLat, lng: newLng},
                 title: 'Hello World!'
             });
+            */
         });
 
         $(document).on('change', 'input[name="type"]', function() {
