@@ -197,7 +197,7 @@ class PropertyController extends Controller
 
         $property->city = $request->city;
         $property->province = $city->province->province_name;
-        $property->country = $city->province->country->nicename;
+        $property->country = $city->province->country->name;
 
         $property->save();
 
@@ -404,7 +404,7 @@ class PropertyController extends Controller
 
         $property->city = $request->city;
         $property->province = $city->province->province_name;
-        $property->country = $city->province->country->nicename;
+        $property->country = $city->province->country->name;
 
         $property->save();
 
@@ -643,7 +643,7 @@ class PropertyController extends Controller
 
         $property->city = $request->city;
         $property->province = $city->province->province_name;
-        $property->country = $city->province->country->nicename;
+        $property->country = $city->province->country->name;
 
 
         //moderation

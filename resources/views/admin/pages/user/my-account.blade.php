@@ -45,7 +45,7 @@
         <div class="m-input-wrapper w50-6">
             <select name="branch_id">
 
-                @foreach(\App\Branch::all() as $branch)
+                @foreach($branches as $branch)
                 <option value="{{ $branch->id }}" {{ $branch->id == $user->brach_id ? 'selected' : '' }}>{{ $branch->name }}</option>
                 @endforeach
 

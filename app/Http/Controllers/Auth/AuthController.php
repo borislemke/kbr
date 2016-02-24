@@ -156,7 +156,7 @@ class AuthController extends Controller
 
         $customer->city = $request->city;
         $customer->province = $city->province->province_name;
-        $customer->country = $city->province->country->nicename;
+        $customer->country = $city->province->country->name;
 
         $customer->confirmation_code = $confirmation_code;
 

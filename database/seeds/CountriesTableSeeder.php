@@ -13,247 +13,248 @@ class CountriesTableSeeder extends Seeder
     {
         //
 
-
-            \App\Country::create(['iso' => 'AF', 'name' => 'AFGHANISTAN', 'nicename' => 'Afghanistan', 'iso3' => 'AFG', 'numcode' => 4, 'phonecode' => 93]);
-            \App\Country::create(['iso' => 'AL', 'name' => 'ALBANIA', 'nicename' => 'Albania', 'iso3' => 'ALB', 'numcode' => 8, 'phonecode' => 355]);
-            \App\Country::create(['iso' => 'DZ', 'name' => 'ALGERIA', 'nicename' => 'Algeria', 'iso3' => 'DZA', 'numcode' => 12, 'phonecode' => 213]);
-            \App\Country::create(['iso' => 'AS', 'name' => 'AMERICAN SAMOA', 'nicename' => 'American Samoa', 'iso3' => 'ASM', 'numcode' => 16, 'phonecode' => 1684]);
-            \App\Country::create(['iso' => 'AD', 'name' => 'ANDORRA', 'nicename' => 'Andorra', 'iso3' => 'AND', 'numcode' => 20, 'phonecode' => 376]);
-            \App\Country::create(['iso' => 'AO', 'name' => 'ANGOLA', 'nicename' => 'Angola', 'iso3' => 'AGO', 'numcode' => 24, 'phonecode' => 244]);
-            \App\Country::create(['iso' => 'AI', 'name' => 'ANGUILLA', 'nicename' => 'Anguilla', 'iso3' => 'AIA', 'numcode' => 660, 'phonecode' => 1264]);
-            \App\Country::create(['iso' => 'AQ', 'name' => 'ANTARCTICA', 'nicename' => 'Antarctica', 'phonecode' => 0]);
-            \App\Country::create(['iso' => 'AG', 'name' => 'ANTIGUA AND BARBUDA', 'nicename' => 'Antigua and Barbuda', 'iso3' => 'ATG', 'numcode' => 28, 'phonecode' => 1268]);
-            \App\Country::create(['iso' => 'AR', 'name' => 'ARGENTINA', 'nicename' => 'Argentina', 'iso3' => 'ARG', 'numcode' => 32, 'phonecode' => 54]);
-            \App\Country::create(['iso' => 'AM', 'name' => 'ARMENIA', 'nicename' => 'Armenia', 'iso3' => 'ARM', 'numcode' => 51, 'phonecode' => 374]);
-            \App\Country::create(['iso' => 'AW', 'name' => 'ARUBA', 'nicename' => 'Aruba', 'iso3' => 'ABW', 'numcode' => 533, 'phonecode' => 297]);
-            \App\Country::create(['iso' => 'AU', 'name' => 'AUSTRALIA', 'nicename' => 'Australia', 'iso3' => 'AUS', 'numcode' => 36, 'phonecode' => 61]);
-            \App\Country::create(['iso' => 'AT', 'name' => 'AUSTRIA', 'nicename' => 'Austria', 'iso3' => 'AUT', 'numcode' => 40, 'phonecode' => 43]);
-            \App\Country::create(['iso' => 'AZ', 'name' => 'AZERBAIJAN', 'nicename' => 'Azerbaijan', 'iso3' => 'AZE', 'numcode' => 31, 'phonecode' => 994]);
-            \App\Country::create(['iso' => 'BS', 'name' => 'BAHAMAS', 'nicename' => 'Bahamas', 'iso3' => 'BHS', 'numcode' => 44, 'phonecode' => 1242]);
-            \App\Country::create(['iso' => 'BH', 'name' => 'BAHRAIN', 'nicename' => 'Bahrain', 'iso3' => 'BHR', 'numcode' => 48, 'phonecode' => 973]);
-            \App\Country::create(['iso' => 'BD', 'name' => 'BANGLADESH', 'nicename' => 'Bangladesh', 'iso3' => 'BGD', 'numcode' => 50, 'phonecode' => 880]);
-            \App\Country::create(['iso' => 'BB', 'name' => 'BARBADOS', 'nicename' => 'Barbados', 'iso3' => 'BRB', 'numcode' => 52, 'phonecode' => 1246]);
-            \App\Country::create(['iso' => 'BY', 'name' => 'BELARUS', 'nicename' => 'Belarus', 'iso3' => 'BLR', 'numcode' => 112, 'phonecode' => 375]);
-            \App\Country::create(['iso' => 'BE', 'name' => 'BELGIUM', 'nicename' => 'Belgium', 'iso3' => 'BEL', 'numcode' => 56, 'phonecode' => 32]);
-            \App\Country::create(['iso' => 'BZ', 'name' => 'BELIZE', 'nicename' => 'Belize', 'iso3' => 'BLZ', 'numcode' => 84, 'phonecode' => 501]);
-            \App\Country::create(['iso' => 'BJ', 'name' => 'BENIN', 'nicename' => 'Benin', 'iso3' => 'BEN', 'numcode' => 204, 'phonecode' => 229]);
-            \App\Country::create(['iso' => 'BM', 'name' => 'BERMUDA', 'nicename' => 'Bermuda', 'iso3' => 'BMU', 'numcode' => 60, 'phonecode' => 1441]);
-            \App\Country::create(['iso' => 'BT', 'name' => 'BHUTAN', 'nicename' => 'Bhutan', 'iso3' => 'BTN', 'numcode' => 64, 'phonecode' => 975]);
-            \App\Country::create(['iso' => 'BO', 'name' => 'BOLIVIA', 'nicename' => 'Bolivia', 'iso3' => 'BOL', 'numcode' => 68, 'phonecode' => 591]);
-            \App\Country::create(['iso' => 'BA', 'name' => 'BOSNIA AND HERZEGOVINA', 'nicename' => 'Bosnia and Herzegovina', 'iso3' => 'BIH', 'numcode' => 70, 'phonecode' => 387]);
-            \App\Country::create(['iso' => 'BW', 'name' => 'BOTSWANA', 'nicename' => 'Botswana', 'iso3' => 'BWA', 'numcode' => 72, 'phonecode' => 267]);
-            \App\Country::create(['iso' => 'BV', 'name' => 'BOUVET ISLAND', 'nicename' => 'Bouvet Island', 'phonecode' => 0]);
-            \App\Country::create(['iso' => 'BR', 'name' => 'BRAZIL', 'nicename' => 'Brazil', 'iso3' => 'BRA', 'numcode' => 76, 'phonecode' => 55]);
-            \App\Country::create(['iso' => 'IO', 'name' => 'BRITISH INDIAN OCEAN TERRITORY', 'nicename' => 'British Indian Ocean Territory', 'phonecode' => 246]);
-            \App\Country::create(['iso' => 'BN', 'name' => 'BRUNEI DARUSSALAM', 'nicename' => 'Brunei Darussalam', 'iso3' => 'BRN', 'numcode' => 96, 'phonecode' => 673]);
-            \App\Country::create(['iso' => 'BG', 'name' => 'BULGARIA', 'nicename' => 'Bulgaria', 'iso3' => 'BGR', 'numcode' => 100, 'phonecode' => 359]);
-            \App\Country::create(['iso' => 'BF', 'name' => 'BURKINA FASO', 'nicename' => 'Burkina Faso', 'iso3' => 'BFA', 'numcode' => 854, 'phonecode' => 226]);
-            \App\Country::create(['iso' => 'BI', 'name' => 'BURUNDI', 'nicename' => 'Burundi', 'iso3' => 'BDI', 'numcode' => 108, 'phonecode' => 257]);
-            \App\Country::create(['iso' => 'KH', 'name' => 'CAMBODIA', 'nicename' => 'Cambodia', 'iso3' => 'KHM', 'numcode' => 116, 'phonecode' => 855]);
-            \App\Country::create(['iso' => 'CM', 'name' => 'CAMEROON', 'nicename' => 'Cameroon', 'iso3' => 'CMR', 'numcode' => 120, 'phonecode' => 237]);
-            \App\Country::create(['iso' => 'CA', 'name' => 'CANADA', 'nicename' => 'Canada', 'iso3' => 'CAN', 'numcode' => 124, 'phonecode' => 1]);
-            \App\Country::create(['iso' => 'CV', 'name' => 'CAPE VERDE', 'nicename' => 'Cape Verde', 'iso3' => 'CPV', 'numcode' => 132, 'phonecode' => 238]);
-            \App\Country::create(['iso' => 'KY', 'name' => 'CAYMAN ISLANDS', 'nicename' => 'Cayman Islands', 'iso3' => 'CYM', 'numcode' => 136, 'phonecode' => 1345]);
-            \App\Country::create(['iso' => 'CF', 'name' => 'CENTRAL AFRICAN REPUBLIC', 'nicename' => 'Central African Republic', 'iso3' => 'CAF', 'numcode' => 140, 'phonecode' => 236]);
-            \App\Country::create(['iso' => 'TD', 'name' => 'CHAD', 'nicename' => 'Chad', 'iso3' => 'TCD', 'numcode' => 148, 'phonecode' => 235]);
-            \App\Country::create(['iso' => 'CL', 'name' => 'CHILE', 'nicename' => 'Chile', 'iso3' => 'CHL', 'numcode' => 152, 'phonecode' => 56]);
-            \App\Country::create(['iso' => 'CN', 'name' => 'CHINA', 'nicename' => 'China', 'iso3' => 'CHN', 'numcode' => 156, 'phonecode' => 86]);
-            \App\Country::create(['iso' => 'CX', 'name' => 'CHRISTMAS ISLAND', 'nicename' => 'Christmas Island', 'phonecode' => 61]);
-            \App\Country::create(['iso' => 'CC', 'name' => 'COCOS (KEELING) ISLANDS', 'nicename' => 'Cocos (Keeling) Islands', 'phonecode' => 672]);
-            \App\Country::create(['iso' => 'CO', 'name' => 'COLOMBIA', 'nicename' => 'Colombia', 'iso3' => 'COL', 'numcode' => 170, 'phonecode' => 57]);
-            \App\Country::create(['iso' => 'KM', 'name' => 'COMOROS', 'nicename' => 'Comoros', 'iso3' => 'COM', 'numcode' => 174, 'phonecode' => 269]);
-            \App\Country::create(['iso' => 'CG', 'name' => 'CONGO', 'nicename' => 'Congo', 'iso3' => 'COG', 'numcode' => 178, 'phonecode' => 242]);
-            \App\Country::create(['iso' => 'CD', 'name' => 'CONGO', 'nicename' => 'Congo', 'iso3' => 'COD', 'numcode' => 180, 'phonecode' => 242]);
-            \App\Country::create(['iso' => 'CK', 'name' => 'COOK ISLANDS', 'nicename' => 'Cook Islands', 'iso3' => 'COK', 'numcode' => 184, 'phonecode' => 682]);
-            \App\Country::create(['iso' => 'CR', 'name' => 'COSTA RICA', 'nicename' => 'Costa Rica', 'iso3' => 'CRI', 'numcode' => 188, 'phonecode' => 506]);
-            \App\Country::create(['iso' => 'CI', 'name' => 'COTE D IVOIRE', 'nicename' => 'Cote D Ivoire', 'iso3' => 'CIV', 'numcode' => 384, 'phonecode' => 225]);
-            \App\Country::create(['iso' => 'HR', 'name' => 'CROATIA', 'nicename' => 'Croatia', 'iso3' => 'HRV', 'numcode' => 191, 'phonecode' => 385]);
-            \App\Country::create(['iso' => 'CU', 'name' => 'CUBA', 'nicename' => 'Cuba', 'iso3' => 'CUB', 'numcode' => 192, 'phonecode' => 53]);
-            \App\Country::create(['iso' => 'CY', 'name' => 'CYPRUS', 'nicename' => 'Cyprus', 'iso3' => 'CYP', 'numcode' => 196, 'phonecode' => 357]);
-            \App\Country::create(['iso' => 'CZ', 'name' => 'CZECH REPUBLIC', 'nicename' => 'Czech Republic', 'iso3' => 'CZE', 'numcode' => 203, 'phonecode' => 420]);
-            \App\Country::create(['iso' => 'DK', 'name' => 'DENMARK', 'nicename' => 'Denmark', 'iso3' => 'DNK', 'numcode' => 208, 'phonecode' => 45]);
-            \App\Country::create(['iso' => 'DJ', 'name' => 'DJIBOUTI', 'nicename' => 'Djibouti', 'iso3' => 'DJI', 'numcode' => 262, 'phonecode' => 253]);
-            \App\Country::create(['iso' => 'DM', 'name' => 'DOMINICA', 'nicename' => 'Dominica', 'iso3' => 'DMA', 'numcode' => 212, 'phonecode' => 1767]);
-            \App\Country::create(['iso' => 'DO', 'name' => 'DOMINICAN REPUBLIC', 'nicename' => 'Dominican Republic', 'iso3' => 'DOM', 'numcode' => 214, 'phonecode' => 1809]);
-            \App\Country::create(['iso' => 'EC', 'name' => 'ECUADOR', 'nicename' => 'Ecuador', 'iso3' => 'ECU', 'numcode' => 218, 'phonecode' => 593]);
-            \App\Country::create(['iso' => 'EG', 'name' => 'EGYPT', 'nicename' => 'Egypt', 'iso3' => 'EGY', 'numcode' => 818, 'phonecode' => 20]);
-            \App\Country::create(['iso' => 'SV', 'name' => 'EL SALVADOR', 'nicename' => 'El Salvador', 'iso3' => 'SLV', 'numcode' => 222, 'phonecode' => 503]);
-            \App\Country::create(['iso' => 'GQ', 'name' => 'EQUATORIAL GUINEA', 'nicename' => 'Equatorial Guinea', 'iso3' => 'GNQ', 'numcode' => 226, 'phonecode' => 240]);
-            \App\Country::create(['iso' => 'ER', 'name' => 'ERITREA', 'nicename' => 'Eritrea', 'iso3' => 'ERI', 'numcode' => 232, 'phonecode' => 291]);
-            \App\Country::create(['iso' => 'EE', 'name' => 'ESTONIA', 'nicename' => 'Estonia', 'iso3' => 'EST', 'numcode' => 233, 'phonecode' => 372]);
-            \App\Country::create(['iso' => 'ET', 'name' => 'ETHIOPIA', 'nicename' => 'Ethiopia', 'iso3' => 'ETH', 'numcode' => 231, 'phonecode' => 251]);
-            \App\Country::create(['iso' => 'FK', 'name' => 'FALKLAND ISLANDS (MALVINAS)', 'nicename' => 'Falkland Islands (Malvinas)', 'iso3' => 'FLK', 'numcode' => 238, 'phonecode' => 500]);
-            \App\Country::create(['iso' => 'FO', 'name' => 'FAROE ISLANDS', 'nicename' => 'Faroe Islands', 'iso3' => 'FRO', 'numcode' => 234, 'phonecode' => 298]);
-            \App\Country::create(['iso' => 'FJ', 'name' => 'FIJI', 'nicename' => 'Fiji', 'iso3' => 'FJI', 'numcode' => 242, 'phonecode' => 679]);
-            \App\Country::create(['iso' => 'FI', 'name' => 'FINLAND', 'nicename' => 'Finland', 'iso3' => 'FIN', 'numcode' => 246, 'phonecode' => 358]);
-            \App\Country::create(['iso' => 'FR', 'name' => 'FRANCE', 'nicename' => 'France', 'iso3' => 'FRA', 'numcode' => 250, 'phonecode' => 33]);
-            \App\Country::create(['iso' => 'GF', 'name' => 'FRENCH GUIANA', 'nicename' => 'French Guiana', 'iso3' => 'GUF', 'numcode' => 254, 'phonecode' => 594]);
-            \App\Country::create(['iso' => 'PF', 'name' => 'FRENCH POLYNESIA', 'nicename' => 'French Polynesia', 'iso3' => 'PYF', 'numcode' => 258, 'phonecode' => 689]);
-            \App\Country::create(['iso' => 'TF', 'name' => 'FRENCH SOUTHERN TERRITORIES', 'nicename' => 'French Southern Territories', 'phonecode' => 0]);
-            \App\Country::create(['iso' => 'GA', 'name' => 'GABON', 'nicename' => 'Gabon', 'iso3' => 'GAB', 'numcode' => 266, 'phonecode' => 241]);
-            \App\Country::create(['iso' => 'GM', 'name' => 'GAMBIA', 'nicename' => 'Gambia', 'iso3' => 'GMB', 'numcode' => 270, 'phonecode' => 220]);
-            \App\Country::create(['iso' => 'GE', 'name' => 'GEORGIA', 'nicename' => 'Georgia', 'iso3' => 'GEO', 'numcode' => 268, 'phonecode' => 995]);
-            \App\Country::create(['iso' => 'DE', 'name' => 'GERMANY', 'nicename' => 'Germany', 'iso3' => 'DEU', 'numcode' => 276, 'phonecode' => 49]);
-            \App\Country::create(['iso' => 'GH', 'name' => 'GHANA', 'nicename' => 'Ghana', 'iso3' => 'GHA', 'numcode' => 288, 'phonecode' => 233]);
-            \App\Country::create(['iso' => 'GI', 'name' => 'GIBRALTAR', 'nicename' => 'Gibraltar', 'iso3' => 'GIB', 'numcode' => 292, 'phonecode' => 350]);
-            \App\Country::create(['iso' => 'GR', 'name' => 'GREECE', 'nicename' => 'Greece', 'iso3' => 'GRC', 'numcode' => 300, 'phonecode' => 30]);
-            \App\Country::create(['iso' => 'GL', 'name' => 'GREENLAND', 'nicename' => 'Greenland', 'iso3' => 'GRL', 'numcode' => 304, 'phonecode' => 299]);
-            \App\Country::create(['iso' => 'GD', 'name' => 'GRENADA', 'nicename' => 'Grenada', 'iso3' => 'GRD', 'numcode' => 308, 'phonecode' => 1473]);
-            \App\Country::create(['iso' => 'GP', 'name' => 'GUADELOUPE', 'nicename' => 'Guadeloupe', 'iso3' => 'GLP', 'numcode' => 312, 'phonecode' => 590]);
-            \App\Country::create(['iso' => 'GU', 'name' => 'GUAM', 'nicename' => 'Guam', 'iso3' => 'GUM', 'numcode' => 316, 'phonecode' => 1671]);
-            \App\Country::create(['iso' => 'GT', 'name' => 'GUATEMALA', 'nicename' => 'Guatemala', 'iso3' => 'GTM', 'numcode' => 320, 'phonecode' => 502]);
-            \App\Country::create(['iso' => 'GN', 'name' => 'GUINEA', 'nicename' => 'Guinea', 'iso3' => 'GIN', 'numcode' => 324, 'phonecode' => 224]);
-            \App\Country::create(['iso' => 'GW', 'name' => 'GUINEA-BISSAU', 'nicename' => 'Guinea-Bissau', 'iso3' => 'GNB', 'numcode' => 624, 'phonecode' => 245]);
-            \App\Country::create(['iso' => 'GY', 'name' => 'GUYANA', 'nicename' => 'Guyana', 'iso3' => 'GUY', 'numcode' => 328, 'phonecode' => 592]);
-            \App\Country::create(['iso' => 'HT', 'name' => 'HAITI', 'nicename' => 'Haiti', 'iso3' => 'HTI', 'numcode' => 332, 'phonecode' => 509]);
-            \App\Country::create(['iso' => 'HM', 'name' => 'HEARD ISLAND AND MCDONALD ISLANDS', 'nicename' => 'Heard Island and Mcdonald Islands', 'phonecode' => 0]);
-            \App\Country::create(['iso' => 'VA', 'name' => 'HOLY SEE (VATICAN CITY STATE)', 'nicename' => 'Holy See (Vatican City State)', 'iso3' => 'VAT', 'numcode' => 336, 'phonecode' => 39]);
-            \App\Country::create(['iso' => 'HN', 'name' => 'HONDURAS', 'nicename' => 'Honduras', 'iso3' => 'HND', 'numcode' => 340, 'phonecode' => 504]);
-            \App\Country::create(['iso' => 'HK', 'name' => 'HONG KONG', 'nicename' => 'Hong Kong', 'iso3' => 'HKG', 'numcode' => 344, 'phonecode' => 852]);
-            \App\Country::create(['iso' => 'HU', 'name' => 'HUNGARY', 'nicename' => 'Hungary', 'iso3' => 'HUN', 'numcode' => 348, 'phonecode' => 36]);
-            \App\Country::create(['iso' => 'IS', 'name' => 'ICELAND', 'nicename' => 'Iceland', 'iso3' => 'ISL', 'numcode' => 352, 'phonecode' => 354]);
-            \App\Country::create(['iso' => 'IN', 'name' => 'INDIA', 'nicename' => 'India', 'iso3' => 'IND', 'numcode' => 356, 'phonecode' => 91]);
-            \App\Country::create(['iso' => 'ID', 'name' => 'INDONESIA', 'nicename' => 'Indonesia', 'iso3' => 'IDN', 'numcode' => 360, 'phonecode' => 62]);
-            \App\Country::create(['iso' => 'IR', 'name' => 'IRAN', 'nicename' => 'Islamic Republic of', 'iso3' => 'IRN', 'numcode' => 364, 'phonecode' => 98]);
-            \App\Country::create(['iso' => 'IQ', 'name' => 'IRAQ', 'nicename' => 'Iraq', 'iso3' => 'IRQ', 'numcode' => 368, 'phonecode' => 964]);
-            \App\Country::create(['iso' => 'IE', 'name' => 'IRELAND', 'nicename' => 'Ireland', 'iso3' => 'IRL', 'numcode' => 372, 'phonecode' => 353]);
-            \App\Country::create(['iso' => 'IL', 'name' => 'ISRAEL', 'nicename' => 'Israel', 'iso3' => 'ISR', 'numcode' => 376, 'phonecode' => 972]);
-            \App\Country::create(['iso' => 'IT', 'name' => 'ITALY', 'nicename' => 'Italy', 'iso3' => 'ITA', 'numcode' => 380, 'phonecode' => 39]);
-            \App\Country::create(['iso' => 'JM', 'name' => 'JAMAICA', 'nicename' => 'Jamaica', 'iso3' => 'JAM', 'numcode' => 388, 'phonecode' => 1876]);
-            \App\Country::create(['iso' => 'JP', 'name' => 'JAPAN', 'nicename' => 'Japan', 'iso3' => 'JPN', 'numcode' => 392, 'phonecode' => 81]);
-            \App\Country::create(['iso' => 'JO', 'name' => 'JORDAN', 'nicename' => 'Jordan', 'iso3' => 'JOR', 'numcode' => 400, 'phonecode' => 962]);
-            \App\Country::create(['iso' => 'KZ', 'name' => 'KAZAKHSTAN', 'nicename' => 'Kazakhstan', 'iso3' => 'KAZ', 'numcode' => 398, 'phonecode' => 7]);
-            \App\Country::create(['iso' => 'KE', 'name' => 'KENYA', 'nicename' => 'Kenya', 'iso3' => 'KEN', 'numcode' => 404, 'phonecode' => 254]);
-            \App\Country::create(['iso' => 'KI', 'name' => 'KIRIBATI', 'nicename' => 'Kiribati', 'iso3' => 'KIR', 'numcode' => 296, 'phonecode' => 686]);
-            \App\Country::create(['iso' => 'KP', 'name' => 'KOREA DEMOCRATIC PEOPLES REPUBLIC OF', 'nicename' => 'Korea Democratic Peoples Republic of', 'iso3' => 'PRK', 'numcode' => 408, 'phonecode' => 850]);
-            \App\Country::create(['iso' => 'KR', 'name' => 'KOREA REPUBLIC OF', 'nicename' => 'Korea Republic of', 'iso3' => 'KOR', 'numcode' => 410, 'phonecode' => 82]);
-            \App\Country::create(['iso' => 'KW', 'name' => 'KUWAIT', 'nicename' => 'Kuwait', 'iso3' => 'KWT', 'numcode' => 414, 'phonecode' => 965]);
-            \App\Country::create(['iso' => 'KG', 'name' => 'KYRGYZSTAN', 'nicename' => 'Kyrgyzstan', 'iso3' => 'KGZ', 'numcode' => 417, 'phonecode' => 996]);
-            \App\Country::create(['iso' => 'LA', 'name' => 'LAOS', 'nicename' => 'Laos', 'iso3' => 'LAO', 'numcode' => 418, 'phonecode' => 856]);
-            \App\Country::create(['iso' => 'LV', 'name' => 'LATVIA', 'nicename' => 'Latvia', 'iso3' => 'LVA', 'numcode' => 428, 'phonecode' => 371]);
-            \App\Country::create(['iso' => 'LB', 'name' => 'LEBANON', 'nicename' => 'Lebanon', 'iso3' => 'LBN', 'numcode' => 422, 'phonecode' => 961]);
-            \App\Country::create(['iso' => 'LS', 'name' => 'LESOTHO', 'nicename' => 'Lesotho', 'iso3' => 'LSO', 'numcode' => 426, 'phonecode' => 266]);
-            \App\Country::create(['iso' => 'LR', 'name' => 'LIBERIA', 'nicename' => 'Liberia', 'iso3' => 'LBR', 'numcode' => 430, 'phonecode' => 231]);
-            \App\Country::create(['iso' => 'LY', 'name' => 'LIBYAN ARAB JAMAHIRIYA', 'nicename' => 'Libyan Arab Jamahiriya', 'iso3' => 'LBY', 'numcode' => 434, 'phonecode' => 218]);
-            \App\Country::create(['iso' => 'LI', 'name' => 'LIECHTENSTEIN', 'nicename' => 'Liechtenstein', 'iso3' => 'LIE', 'numcode' => 438, 'phonecode' => 423]);
-            \App\Country::create(['iso' => 'LT', 'name' => 'LITHUANIA', 'nicename' => 'Lithuania', 'iso3' => 'LTU', 'numcode' => 440, 'phonecode' => 370]);
-            \App\Country::create(['iso' => 'LU', 'name' => 'LUXEMBOURG', 'nicename' => 'Luxembourg', 'iso3' => 'LUX', 'numcode' => 442, 'phonecode' => 352]);
-            \App\Country::create(['iso' => 'MO', 'name' => 'MACAO', 'nicename' => 'Macao', 'iso3' => 'MAC', 'numcode' => 446, 'phonecode' => 853]);
-            \App\Country::create(['iso' => 'MK', 'name' => 'MACEDONIA', 'nicename' => 'Macedonia', 'iso3' => 'MKD', 'numcode' => 807, 'phonecode' => 389]);
-            \App\Country::create(['iso' => 'MG', 'name' => 'MADAGASCAR', 'nicename' => 'Madagascar', 'iso3' => 'MDG', 'numcode' => 450, 'phonecode' => 261]);
-            \App\Country::create(['iso' => 'MW', 'name' => 'MALAWI', 'nicename' => 'Malawi', 'iso3' => 'MWI', 'numcode' => 454, 'phonecode' => 265]);
-            \App\Country::create(['iso' => 'MY', 'name' => 'MALAYSIA', 'nicename' => 'Malaysia', 'iso3' => 'MYS', 'numcode' => 458, 'phonecode' => 60]);
-            \App\Country::create(['iso' => 'MV', 'name' => 'MALDIVES', 'nicename' => 'Maldives', 'iso3' => 'MDV', 'numcode' => 462, 'phonecode' => 960]);
-            \App\Country::create(['iso' => 'ML', 'name' => 'MALI', 'nicename' => 'Mali', 'iso3' => 'MLI', 'numcode' => 466, 'phonecode' => 223]);
-            \App\Country::create(['iso' => 'MT', 'name' => 'MALTA', 'nicename' => 'Malta', 'iso3' => 'MLT', 'numcode' => 470, 'phonecode' => 356]);
-            \App\Country::create(['iso' => 'MH', 'name' => 'MARSHALL ISLANDS', 'nicename' => 'Marshall Islands', 'iso3' => 'MHL', 'numcode' => 584, 'phonecode' => 692]);
-            \App\Country::create(['iso' => 'MQ', 'name' => 'MARTINIQUE', 'nicename' => 'Martinique', 'iso3' => 'MTQ', 'numcode' => 474, 'phonecode' => 596]);
-            \App\Country::create(['iso' => 'MR', 'name' => 'MAURITANIA', 'nicename' => 'Mauritania', 'iso3' => 'MRT', 'numcode' => 478, 'phonecode' => 222]);
-            \App\Country::create(['iso' => 'MU', 'name' => 'MAURITIUS', 'nicename' => 'Mauritius', 'iso3' => 'MUS', 'numcode' => 480, 'phonecode' => 230]);
-            \App\Country::create(['iso' => 'YT', 'name' => 'MAYOTTE', 'nicename' => 'Mayotte', 'phonecode' => 269]);
-            \App\Country::create(['iso' => 'MX', 'name' => 'MEXICO', 'nicename' => 'Mexico', 'iso3' => 'MEX', 'numcode' => 484, 'phonecode' => 52]);
-            \App\Country::create(['iso' => 'FM', 'name' => 'MICRONESIA', 'nicename' => 'Micronesia', 'iso3' => 'FSM', 'numcode' => 583, 'phonecode' => 691]);
-            \App\Country::create(['iso' => 'MD', 'name' => 'MOLDOVA', 'nicename' => 'Moldova', 'iso3' => 'MDA', 'numcode' => 498, 'phonecode' => 373]);
-            \App\Country::create(['iso' => 'MC', 'name' => 'MONACO', 'nicename' => 'Monaco', 'iso3' => 'MCO', 'numcode' => 492, 'phonecode' => 377]);
-            \App\Country::create(['iso' => 'MN', 'name' => 'MONGOLIA', 'nicename' => 'Mongolia', 'iso3' => 'MNG', 'numcode' => 496, 'phonecode' => 976]);
-            \App\Country::create(['iso' => 'MS', 'name' => 'MONTSERRAT', 'nicename' => 'Montserrat', 'iso3' => 'MSR', 'numcode' => 500, 'phonecode' => 1664]);
-            \App\Country::create(['iso' => 'MA', 'name' => 'MOROCCO', 'nicename' => 'Morocco', 'iso3' => 'MAR', 'numcode' => 504, 'phonecode' => 212]);
-            \App\Country::create(['iso' => 'MZ', 'name' => 'MOZAMBIQUE', 'nicename' => 'Mozambique', 'iso3' => 'MOZ', 'numcode' => 508, 'phonecode' => 258]);
-            \App\Country::create(['iso' => 'MM', 'name' => 'MYANMAR', 'nicename' => 'Myanmar', 'iso3' => 'MMR', 'numcode' => 104, 'phonecode' => 95]);
-            \App\Country::create(['iso' => 'NA', 'name' => 'NAMIBIA', 'nicename' => 'Namibia', 'iso3' => 'NAM', 'numcode' => 516, 'phonecode' => 264]);
-            \App\Country::create(['iso' => 'NR', 'name' => 'NAURU', 'nicename' => 'Nauru', 'iso3' => 'NRU', 'numcode' => 520, 'phonecode' => 674]);
-            \App\Country::create(['iso' => 'NP', 'name' => 'NEPAL', 'nicename' => 'Nepal', 'iso3' => 'NPL', 'numcode' => 524, 'phonecode' => 977]);
-            \App\Country::create(['iso' => 'NL', 'name' => 'NETHERLANDS', 'nicename' => 'Netherlands', 'iso3' => 'NLD', 'numcode' => 528, 'phonecode' => 31]);
-            \App\Country::create(['iso' => 'AN', 'name' => 'NETHERLANDS ANTILLES', 'nicename' => 'Netherlands Antilles', 'iso3' => 'ANT', 'numcode' => 530, 'phonecode' => 599]);
-            \App\Country::create(['iso' => 'NC', 'name' => 'NEW CALEDONIA', 'nicename' => 'New Caledonia', 'iso3' => 'NCL', 'numcode' => 540, 'phonecode' => 687]);
-            \App\Country::create(['iso' => 'NZ', 'name' => 'NEW ZEALAND', 'nicename' => 'New Zealand', 'iso3' => 'NZL', 'numcode' => 554, 'phonecode' => 64]);
-            \App\Country::create(['iso' => 'NI', 'name' => 'NICARAGUA', 'nicename' => 'Nicaragua', 'iso3' => 'NIC', 'numcode' => 558, 'phonecode' => 505]);
-            \App\Country::create(['iso' => 'NE', 'name' => 'NIGER', 'nicename' => 'Niger', 'iso3' => 'NER', 'numcode' => 562, 'phonecode' => 227]);
-            \App\Country::create(['iso' => 'NG', 'name' => 'NIGERIA', 'nicename' => 'Nigeria', 'iso3' => 'NGA', 'numcode' => 566, 'phonecode' => 234]);
-            \App\Country::create(['iso' => 'NU', 'name' => 'NIUE', 'nicename' => 'Niue', 'iso3' => 'NIU', 'numcode' => 570, 'phonecode' => 683]);
-            \App\Country::create(['iso' => 'NF', 'name' => 'NORFOLK ISLAND', 'nicename' => 'Norfolk Island', 'iso3' => 'NFK', 'numcode' => 574, 'phonecode' => 672]);
-            \App\Country::create(['iso' => 'MP', 'name' => 'NORTHERN MARIANA ISLANDS', 'nicename' => 'Northern Mariana Islands', 'iso3' => 'MNP', 'numcode' => 580, 'phonecode' => 1670]);
-            \App\Country::create(['iso' => 'NO', 'name' => 'NORWAY', 'nicename' => 'Norway', 'iso3' => 'NOR', 'numcode' => 578, 'phonecode' => 47]);
-            \App\Country::create(['iso' => 'OM', 'name' => 'OMAN', 'nicename' => 'Oman', 'iso3' => 'OMN', 'numcode' => 512, 'phonecode' => 968]);
-            \App\Country::create(['iso' => 'PK', 'name' => 'PAKISTAN', 'nicename' => 'Pakistan', 'iso3' => 'PAK', 'numcode' => 586, 'phonecode' => 92]);
-            \App\Country::create(['iso' => 'PW', 'name' => 'PALAU', 'nicename' => 'Palau', 'iso3' => 'PLW', 'numcode' => 585, 'phonecode' => 680]);
-            \App\Country::create(['iso' => 'PS', 'name' => 'PALESTINIAN TERRITORY, OCCUPIED', 'nicename' => 'Palestinian Territory, Occupied', 'phonecode' => 970]);
-            \App\Country::create(['iso' => 'PA', 'name' => 'PANAMA', 'nicename' => 'Panama', 'iso3' => 'PAN', 'numcode' => 591, 'phonecode' => 507]);
-            \App\Country::create(['iso' => 'PG', 'name' => 'PAPUA NEW GUINEA', 'nicename' => 'Papua New Guinea', 'iso3' => 'PNG', 'numcode' => 598, 'phonecode' => 675]);
-            \App\Country::create(['iso' => 'PY', 'name' => 'PARAGUAY', 'nicename' => 'Paraguay', 'iso3' => 'PRY', 'numcode' => 600, 'phonecode' => 595]);
-            \App\Country::create(['iso' => 'PE', 'name' => 'PERU', 'nicename' => 'Peru', 'iso3' => 'PER', 'numcode' => 604, 'phonecode' => 51]);
-            \App\Country::create(['iso' => 'PH', 'name' => 'PHILIPPINES', 'nicename' => 'Philippines', 'iso3' => 'PHL', 'numcode' => 608, 'phonecode' => 63]);
-            \App\Country::create(['iso' => 'PN', 'name' => 'PITCAIRN', 'nicename' => 'Pitcairn', 'iso3' => 'PCN', 'numcode' => 612, 'phonecode' => 0]);
-            \App\Country::create(['iso' => 'PL', 'name' => 'POLAND', 'nicename' => 'Poland', 'iso3' => 'POL', 'numcode' => 616, 'phonecode' => 48]);
-            \App\Country::create(['iso' => 'PT', 'name' => 'PORTUGAL', 'nicename' => 'Portugal', 'iso3' => 'PRT', 'numcode' => 620, 'phonecode' => 351]);
-            \App\Country::create(['iso' => 'PR', 'name' => 'PUERTO RICO', 'nicename' => 'Puerto Rico', 'iso3' => 'PRI', 'numcode' => 630, 'phonecode' => 1787]);
-            \App\Country::create(['iso' => 'QA', 'name' => 'QATAR', 'nicename' => 'Qatar', 'iso3' => 'QAT', 'numcode' => 634, 'phonecode' => 974]);
-            \App\Country::create(['iso' => 'RE', 'name' => 'REUNION', 'nicename' => 'Reunion', 'iso3' => 'REU', 'numcode' => 638, 'phonecode' => 262]);
-            \App\Country::create(['iso' => 'RO', 'name' => 'ROMANIA', 'nicename' => 'Romania', 'iso3' => 'ROM', 'numcode' => 642, 'phonecode' => 40]);
-            \App\Country::create(['iso' => 'RU', 'name' => 'RUSSIAN FEDERATION', 'nicename' => 'Russian Federation', 'iso3' => 'RUS', 'numcode' => 643, 'phonecode' => 70]);
-            \App\Country::create(['iso' => 'RW', 'name' => 'RWANDA', 'nicename' => 'Rwanda', 'iso3' => 'RWA', 'numcode' => 646, 'phonecode' => 250]);
-            \App\Country::create(['iso' => 'SH', 'name' => 'SAINT HELENA', 'nicename' => 'Saint Helena', 'iso3' => 'SHN', 'numcode' => 654, 'phonecode' => 290]);
-            \App\Country::create(['iso' => 'KN', 'name' => 'SAINT KITTS AND NEVIS', 'nicename' => 'Saint Kitts and Nevis', 'iso3' => 'KNA', 'numcode' => 659, 'phonecode' => 1869]);
-            \App\Country::create(['iso' => 'LC', 'name' => 'SAINT LUCIA', 'nicename' => 'Saint Lucia', 'iso3' => 'LCA', 'numcode' => 662, 'phonecode' => 1758]);
-            \App\Country::create(['iso' => 'PM', 'name' => 'SAINT PIERRE AND MIQUELON', 'nicename' => 'Saint Pierre and Miquelon', 'iso3' => 'SPM', 'numcode' => 666, 'phonecode' => 508]);
-            \App\Country::create(['iso' => 'VC', 'name' => 'SAINT VINCENT AND THE GRENADINES', 'nicename' => 'Saint Vincent and the Grenadines', 'iso3' => 'VCT', 'numcode' => 670, 'phonecode' => 1784]);
-            \App\Country::create(['iso' => 'WS', 'name' => 'SAMOA', 'nicename' => 'Samoa', 'iso3' => 'WSM', 'numcode' => 882, 'phonecode' => 684]);
-            \App\Country::create(['iso' => 'SM', 'name' => 'SAN MARINO', 'nicename' => 'San Marino', 'iso3' => 'SMR', 'numcode' => 674, 'phonecode' => 378]);
-            \App\Country::create(['iso' => 'ST', 'name' => 'SAO TOME AND PRINCIPE', 'nicename' => 'Sao Tome and Principe', 'iso3' => 'STP', 'numcode' => 678, 'phonecode' => 239]);
-            \App\Country::create(['iso' => 'SA', 'name' => 'SAUDI ARABIA', 'nicename' => 'Saudi Arabia', 'iso3' => 'SAU', 'numcode' => 682, 'phonecode' => 966]);
-            \App\Country::create(['iso' => 'SN', 'name' => 'SENEGAL', 'nicename' => 'Senegal', 'iso3' => 'SEN', 'numcode' => 686, 'phonecode' => 221]);
-            \App\Country::create(['iso' => 'CS', 'name' => 'SERBIA AND MONTENEGRO', 'nicename' => 'Serbia and Montenegro', 'phonecode' => 381]);
-            \App\Country::create(['iso' => 'SC', 'name' => 'SEYCHELLES', 'nicename' => 'Seychelles', 'iso3' => 'SYC', 'numcode' => 690, 'phonecode' => 248]);
-            \App\Country::create(['iso' => 'SL', 'name' => 'SIERRA LEONE', 'nicename' => 'Sierra Leone', 'iso3' => 'SLE', 'numcode' => 694, 'phonecode' => 232]);
-            \App\Country::create(['iso' => 'SG', 'name' => 'SINGAPORE', 'nicename' => 'Singapore', 'iso3' => 'SGP', 'numcode' => 702, 'phonecode' => 65]);
-            \App\Country::create(['iso' => 'SK', 'name' => 'SLOVAKIA', 'nicename' => 'Slovakia', 'iso3' => 'SVK', 'numcode' => 703, 'phonecode' => 421]);
-            \App\Country::create(['iso' => 'SI', 'name' => 'SLOVENIA', 'nicename' => 'Slovenia', 'iso3' => 'SVN', 'numcode' => 705, 'phonecode' => 386]);
-            \App\Country::create(['iso' => 'SB', 'name' => 'SOLOMON ISLANDS', 'nicename' => 'Solomon Islands', 'iso3' => 'SLB', 'numcode' => 90, 'phonecode' => 677]);
-            \App\Country::create(['iso' => 'SO', 'name' => 'SOMALIA', 'nicename' => 'Somalia', 'iso3' => 'SOM', 'numcode' => 706, 'phonecode' => 252]);
-            \App\Country::create(['iso' => 'ZA', 'name' => 'SOUTH AFRICA', 'nicename' => 'South Africa', 'iso3' => 'ZAF', 'numcode' => 710, 'phonecode' => 27]);
-            \App\Country::create(['iso' => 'GS', 'name' => 'SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS', 'nicename' => 'South Georgia and the South Sandwich Islands', 'phonecode' => 0]);
-            \App\Country::create(['iso' => 'ES', 'name' => 'SPAIN', 'nicename' => 'Spain', 'iso3' => 'ESP', 'numcode' => 724, 'phonecode' => 34]);
-            \App\Country::create(['iso' => 'LK', 'name' => 'SRI LANKA', 'nicename' => 'Sri Lanka', 'iso3' => 'LKA', 'numcode' => 144, 'phonecode' => 94]);
-            \App\Country::create(['iso' => 'SD', 'name' => 'SUDAN', 'nicename' => 'Sudan', 'iso3' => 'SDN', 'numcode' => 736, 'phonecode' => 249]);
-            \App\Country::create(['iso' => 'SR', 'name' => 'SURINAME', 'nicename' => 'Suriname', 'iso3' => 'SUR', 'numcode' => 740, 'phonecode' => 597]);
-            \App\Country::create(['iso' => 'SJ', 'name' => 'SVALBARD AND JAN MAYEN', 'nicename' => 'Svalbard and Jan Mayen', 'iso3' => 'SJM', 'numcode' => 744, 'phonecode' => 47]);
-            \App\Country::create(['iso' => 'SZ', 'name' => 'SWAZILAND', 'nicename' => 'Swaziland', 'iso3' => 'SWZ', 'numcode' => 748, 'phonecode' => 268]);
-            \App\Country::create(['iso' => 'SE', 'name' => 'SWEDEN', 'nicename' => 'Sweden', 'iso3' => 'SWE', 'numcode' => 752, 'phonecode' => 46]);
-            \App\Country::create(['iso' => 'CH', 'name' => 'SWITZERLAND', 'nicename' => 'Switzerland', 'iso3' => 'CHE', 'numcode' => 756, 'phonecode' => 41]);
-            \App\Country::create(['iso' => 'SY', 'name' => 'SYRIAN ARAB REPUBLIC', 'nicename' => 'Syrian Arab Republic', 'iso3' => 'SYR', 'numcode' => 760, 'phonecode' => 963]);
-            \App\Country::create(['iso' => 'TW', 'name' => 'TAIWAN', 'nicename' => 'Taiwan', 'iso3' => 'TWN', 'numcode' => 158, 'phonecode' => 886]);
-            \App\Country::create(['iso' => 'TJ', 'name' => 'TAJIKISTAN', 'nicename' => 'Tajikistan', 'iso3' => 'TJK', 'numcode' => 762, 'phonecode' => 992]);
-            \App\Country::create(['iso' => 'TZ', 'name' => 'TANZANIA', 'nicename' => 'Tanzania', 'iso3' => 'TZA', 'numcode' => 834, 'phonecode' => 255]);
-            \App\Country::create(['iso' => 'TH', 'name' => 'THAILAND', 'nicename' => 'Thailand', 'iso3' => 'THA', 'numcode' => 764, 'phonecode' => 66]);
-            \App\Country::create(['iso' => 'TL', 'name' => 'TIMOR-LESTE', 'nicename' => 'Timor-Leste', 'phonecode' => 670]);
-            \App\Country::create(['iso' => 'TG', 'name' => 'TOGO', 'nicename' => 'Togo', 'iso3' => 'TGO', 'numcode' => 768, 'phonecode' => 228]);
-            \App\Country::create(['iso' => 'TK', 'name' => 'TOKELAU', 'nicename' => 'Tokelau', 'iso3' => 'TKL', 'numcode' => 772, 'phonecode' => 690]);
-            \App\Country::create(['iso' => 'TO', 'name' => 'TONGA', 'nicename' => 'Tonga', 'iso3' => 'TON', 'numcode' => 776, 'phonecode' => 676]);
-            \App\Country::create(['iso' => 'TT', 'name' => 'TRINIDAD AND TOBAGO', 'nicename' => 'Trinidad and Tobago', 'iso3' => 'TTO', 'numcode' => 780, 'phonecode' => 1868]);
-            \App\Country::create(['iso' => 'TN', 'name' => 'TUNISIA', 'nicename' => 'Tunisia', 'iso3' => 'TUN', 'numcode' => 788, 'phonecode' => 216]);
-            \App\Country::create(['iso' => 'TR', 'name' => 'TURKEY', 'nicename' => 'Turkey', 'iso3' => 'TUR', 'numcode' => 792, 'phonecode' => 90]);
-            \App\Country::create(['iso' => 'TM', 'name' => 'TURKMENISTAN', 'nicename' => 'Turkmenistan', 'iso3' => 'TKM', 'numcode' => 795, 'phonecode' => 7370]);
-            \App\Country::create(['iso' => 'TC', 'name' => 'TURKS AND CAICOS ISLANDS', 'nicename' => 'Turks anumcodend Caicos Islands', 'iso3' => 'TCA', 'numcode' => 796, 'phonecode' => 1649]);
-            \App\Country::create(['iso' => 'TV', 'name' => 'TUVALU', 'nicename' => 'Tuvalu', 'iso3' => 'TUV', 'numcode' => 798, 'phonecode' => 688]);
-            \App\Country::create(['iso' => 'UG', 'name' => 'UGANDA', 'nicename' => 'Uganda', 'iso3' => 'UGA', 'numcode' => 800, 'phonecode' => 256]);
-            \App\Country::create(['iso' => 'UA', 'name' => 'UKRAINE', 'nicename' => 'Ukraine', 'iso3' => 'UKR', 'numcode' => 804, 'phonecode' => 380]);
-            \App\Country::create(['iso' => 'AE', 'name' => 'UNITED ARAB EMIRATES', 'nicename' => 'United Arab Emirates', 'iso3' => 'ARE', 'numcode' => 784, 'phonecode' => 971]);
-            \App\Country::create(['iso' => 'GB', 'name' => 'UNITED KINGDOM', 'nicename' => 'United Kingdom', 'iso3' => 'GBR', 'numcode' => 826, 'phonecode' => 44]);
-            \App\Country::create(['iso' => 'US', 'name' => 'UNITED STATES', 'nicename' => 'United States', 'iso3' => 'USA', 'numcode' => 840, 'phonecode' => 1]);
-            \App\Country::create(['iso' => 'UM', 'name' => 'UNITED STATES MINOR OUTLYING ISLANDS', 'nicename' => 'United States Minor Outlying Islands', 'phonecode' => 1]);
-            \App\Country::create(['iso' => 'UY', 'name' => 'URUGUAY', 'nicename' => 'Uruguay', 'iso3' => 'URY', 'numcode' => 858, 'phonecode' => 598]);
-            \App\Country::create(['iso' => 'UZ', 'name' => 'UZBEKISTAN', 'nicename' => 'Uzbekistan', 'iso3' => 'UZB', 'numcode' => 860, 'phonecode' => 998]);
-            \App\Country::create(['iso' => 'VU', 'name' => 'VANUATU', 'nicename' => 'Vanuatu', 'iso3' => 'VUT', 'numcode' => 548, 'phonecode' => 678]);
-            \App\Country::create(['iso' => 'VE', 'name' => 'VENEZUELA', 'nicename' => 'Venezuela', 'iso3' => 'VEN', 'numcode' => 862, 'phonecode' => 58]);
-            \App\Country::create(['iso' => 'VN', 'name' => 'VIET NAM', 'nicename' => 'Viet Nam', 'iso3' => 'VNM', 'numcode' => 704, 'phonecode' => 84]);
-            \App\Country::create(['iso' => 'VG', 'name' => 'VIRGIN ISLANDS, BRITISH', 'nicename' => 'Virgin Islands, British', 'iso3' => 'VGB', 'numcode' => 92, 'phonecode' => 1284]);
-            \App\Country::create(['iso' => 'VI', 'name' => 'VIRGIN ISLANDS, U.S.', 'nicename' => 'Virgin Islands, U.s.', 'iso3' => 'VIR', 'numcode' => 850, 'phonecode' => 1340]);
-            \App\Country::create(['iso' => 'WF', 'name' => 'WALLIS AND FUTUNA', 'nicename' => 'Wallis and Futuna', 'iso3' => 'WLF', 'numcode' => 876, 'phonecode' => 681]);
-            \App\Country::create(['iso' => 'EH', 'name' => 'WESTERN SAHARA', 'nicename' => 'Western Sahara', 'iso3' => 'ESH', 'numcode' => 732, 'phonecode' => 212]);
-            \App\Country::create(['iso' => 'YE', 'name' => 'YEMEN', 'nicename' => 'Yemen', 'iso3' => 'YEM', 'numcode' => 887, 'phonecode' => 967]);
-            \App\Country::create(['iso' => 'ZM', 'name' => 'ZAMBIA', 'nicename' => 'Zambia', 'iso3' => 'ZMB', 'numcode' => 894, 'phonecode' => 260]);
-            \App\Country::create(['iso' => 'ZW', 'name' => 'ZIMBABWE', 'nicename' => 'Zimbabwe', 'iso3' => 'ZWE', 'numcode' => 716, 'phonecode' => 263]);
-        
+      DB::statement(
+            "INSERT INTO `countries` (`id`, `iso`, `name`, `nicename`, `iso3`, `numcode`, `phonecode`, `created_at`, `updated_at`) VALUES
+            (1, 'AF', 'afghanistan', 'Afghanistan', 'AFG', '4', '93', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (2, 'AL', 'albania', 'Albania', 'ALB', '8', '355', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (3, 'DZ', 'algeria', 'Algeria', 'DZA', '12', '213', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (4, 'AS', 'american samoa', 'American Samoa', 'ASM', '16', '1684', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (5, 'AD', 'andorra', 'Andorra', 'AND', '20', '376', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (6, 'AO', 'angola', 'Angola', 'AGO', '24', '244', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (7, 'AI', 'anguilla', 'Anguilla', 'AIA', '660', '1264', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (8, 'AQ', 'antarctica', 'Antarctica', '', '', '0', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (9, 'AG', 'antigua and barbuda', 'Antigua and Barbuda', 'ATG', '28', '1268', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (10, 'AR', 'argentina', 'Argentina', 'ARG', '32', '54', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (11, 'AM', 'armenia', 'Armenia', 'ARM', '51', '374', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (12, 'AW', 'aruba', 'Aruba', 'ABW', '533', '297', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (13, 'AU', 'australia', 'Australia', 'AUS', '36', '61', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (14, 'AT', 'austria', 'Austria', 'AUT', '40', '43', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (15, 'AZ', 'azerbaijan', 'Azerbaijan', 'AZE', '31', '994', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (16, 'BS', 'bahamas', 'Bahamas', 'BHS', '44', '1242', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (17, 'BH', 'bahrain', 'Bahrain', 'BHR', '48', '973', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (18, 'BD', 'bangladesh', 'Bangladesh', 'BGD', '50', '880', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (19, 'BB', 'barbados', 'Barbados', 'BRB', '52', '1246', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (20, 'BY', 'belarus', 'Belarus', 'BLR', '112', '375', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (21, 'BE', 'belgium', 'Belgium', 'BEL', '56', '32', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (22, 'BZ', 'belize', 'Belize', 'BLZ', '84', '501', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (23, 'BJ', 'benin', 'Benin', 'BEN', '204', '229', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (24, 'BM', 'bermuda', 'Bermuda', 'BMU', '60', '1441', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (25, 'BT', 'bhutan', 'Bhutan', 'BTN', '64', '975', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (26, 'BO', 'bolivia', 'Bolivia', 'BOL', '68', '591', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (27, 'BA', 'bosnia and herzegovina', 'Bosnia and Herzegovina', 'BIH', '70', '387', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (28, 'BW', 'botswana', 'Botswana', 'BWA', '72', '267', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (29, 'BV', 'bouvet island', 'Bouvet Island', '', '', '0', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (30, 'BR', 'brazil', 'Brazil', 'BRA', '76', '55', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (31, 'IO', 'british indian ocean territory', 'British Indian Ocean Territory', '', '', '246', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (32, 'BN', 'brunei darussalam', 'Brunei Darussalam', 'BRN', '96', '673', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (33, 'BG', 'bulgaria', 'Bulgaria', 'BGR', '100', '359', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (34, 'BF', 'burkina faso', 'Burkina Faso', 'BFA', '854', '226', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (35, 'BI', 'burundi', 'Burundi', 'BDI', '108', '257', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (36, 'KH', 'cambodia', 'Cambodia', 'KHM', '116', '855', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (37, 'CM', 'cameroon', 'Cameroon', 'CMR', '120', '237', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (38, 'CA', 'canada', 'Canada', 'CAN', '124', '1', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (39, 'CV', 'cape verde', 'Cape Verde', 'CPV', '132', '238', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (40, 'KY', 'cayman islands', 'Cayman Islands', 'CYM', '136', '1345', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (41, 'CF', 'central african republic', 'Central African Republic', 'CAF', '140', '236', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (42, 'TD', 'chad', 'Chad', 'TCD', '148', '235', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (43, 'CL', 'chile', 'Chile', 'CHL', '152', '56', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (44, 'CN', 'china', 'China', 'CHN', '156', '86', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (45, 'CX', 'christmas island', 'Christmas Island', '', '', '61', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (46, 'CC', 'cocos (keeling) islands', 'Cocos (Keeling) Islands', '', '', '672', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (47, 'CO', 'colombia', 'Colombia', 'COL', '170', '57', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (48, 'KM', 'comoros', 'Comoros', 'COM', '174', '269', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (49, 'CG', 'congo', 'Congo', 'COG', '178', '242', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (50, 'CD', 'congo', 'Congo', 'COD', '180', '242', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (51, 'CK', 'cook islands', 'Cook Islands', 'COK', '184', '682', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (52, 'CR', 'costa rica', 'Costa Rica', 'CRI', '188', '506', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (53, 'CI', 'cote d ivoire', 'Cote D Ivoire', 'CIV', '384', '225', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (54, 'HR', 'croatia', 'Croatia', 'HRV', '191', '385', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (55, 'CU', 'cuba', 'Cuba', 'CUB', '192', '53', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (56, 'CY', 'cyprus', 'Cyprus', 'CYP', '196', '357', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (57, 'CZ', 'czech republic', 'Czech Republic', 'CZE', '203', '420', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (58, 'DK', 'denmark', 'Denmark', 'DNK', '208', '45', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (59, 'DJ', 'djibouti', 'Djibouti', 'DJI', '262', '253', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (60, 'DM', 'dominica', 'Dominica', 'DMA', '212', '1767', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (61, 'DO', 'dominican republic', 'Dominican Republic', 'DOM', '214', '1809', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (62, 'EC', 'ecuador', 'Ecuador', 'ECU', '218', '593', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (63, 'EG', 'egypt', 'Egypt', 'EGY', '818', '20', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (64, 'SV', 'el salvador', 'El Salvador', 'SLV', '222', '503', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (65, 'GQ', 'equatorial guinea', 'Equatorial Guinea', 'GNQ', '226', '240', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (66, 'ER', 'eritrea', 'Eritrea', 'ERI', '232', '291', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (67, 'EE', 'estonia', 'Estonia', 'EST', '233', '372', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (68, 'ET', 'ethiopia', 'Ethiopia', 'ETH', '231', '251', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (69, 'FK', 'falkland islands (malvinas)', 'Falkland Islands (Malvinas)', 'FLK', '238', '500', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (70, 'FO', 'faroe islands', 'Faroe Islands', 'FRO', '234', '298', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (71, 'FJ', 'fiji', 'Fiji', 'FJI', '242', '679', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (72, 'FI', 'finland', 'Finland', 'FIN', '246', '358', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (73, 'FR', 'france', 'France', 'FRA', '250', '33', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (74, 'GF', 'french guiana', 'French Guiana', 'GUF', '254', '594', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (75, 'PF', 'french polynesia', 'French Polynesia', 'PYF', '258', '689', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (76, 'TF', 'french southern territories', 'French Southern Territories', '', '', '0', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (77, 'GA', 'gabon', 'Gabon', 'GAB', '266', '241', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (78, 'GM', 'gambia', 'Gambia', 'GMB', '270', '220', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (79, 'GE', 'georgia', 'Georgia', 'GEO', '268', '995', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (80, 'DE', 'germany', 'Germany', 'DEU', '276', '49', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (81, 'GH', 'ghana', 'Ghana', 'GHA', '288', '233', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (82, 'GI', 'gibraltar', 'Gibraltar', 'GIB', '292', '350', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (83, 'GR', 'greece', 'Greece', 'GRC', '300', '30', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (84, 'GL', 'greenland', 'Greenland', 'GRL', '304', '299', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (85, 'GD', 'grenada', 'Grenada', 'GRD', '308', '1473', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (86, 'GP', 'guadeloupe', 'Guadeloupe', 'GLP', '312', '590', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (87, 'GU', 'guam', 'Guam', 'GUM', '316', '1671', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (88, 'GT', 'guatemala', 'Guatemala', 'GTM', '320', '502', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (89, 'GN', 'guinea', 'Guinea', 'GIN', '324', '224', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (90, 'GW', 'guinea-bissau', 'Guinea-Bissau', 'GNB', '624', '245', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (91, 'GY', 'guyana', 'Guyana', 'GUY', '328', '592', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (92, 'HT', 'haiti', 'Haiti', 'HTI', '332', '509', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (93, 'HM', 'heard island and mcdonald islands', 'Heard Island and Mcdonald Islands', '', '', '0', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (94, 'VA', 'holy see (vatican city state)', 'Holy See (Vatican City State)', 'VAT', '336', '39', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (95, 'HN', 'honduras', 'Honduras', 'HND', '340', '504', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (96, 'HK', 'hong kong', 'Hong Kong', 'HKG', '344', '852', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (97, 'HU', 'hungary', 'Hungary', 'HUN', '348', '36', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (98, 'IS', 'iceland', 'Iceland', 'ISL', '352', '354', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (99, 'IN', 'india', 'India', 'IND', '356', '91', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (100, 'ID', 'indonesia', 'Indonesia', 'IDN', '360', '62', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (101, 'IR', 'iran', 'Islamic Republic of', 'IRN', '364', '98', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (102, 'IQ', 'iraq', 'Iraq', 'IRQ', '368', '964', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (103, 'IE', 'ireland', 'Ireland', 'IRL', '372', '353', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (104, 'IL', 'israel', 'Israel', 'ISR', '376', '972', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (105, 'IT', 'italy', 'Italy', 'ITA', '380', '39', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (106, 'JM', 'jamaica', 'Jamaica', 'JAM', '388', '1876', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (107, 'JP', 'japan', 'Japan', 'JPN', '392', '81', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (108, 'JO', 'jordan', 'Jordan', 'JOR', '400', '962', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (109, 'KZ', 'kazakhstan', 'Kazakhstan', 'KAZ', '398', '7', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (110, 'KE', 'kenya', 'Kenya', 'KEN', '404', '254', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (111, 'KI', 'kiribati', 'Kiribati', 'KIR', '296', '686', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (112, 'KP', 'korea democratic peoples republic of', 'Korea Democratic Peoples Republic of', 'PRK', '408', '850', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (113, 'KR', 'korea republic of', 'Korea Republic of', 'KOR', '410', '82', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (114, 'KW', 'kuwait', 'Kuwait', 'KWT', '414', '965', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (115, 'KG', 'kyrgyzstan', 'Kyrgyzstan', 'KGZ', '417', '996', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (116, 'LA', 'laos', 'Laos', 'LAO', '418', '856', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (117, 'LV', 'latvia', 'Latvia', 'LVA', '428', '371', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (118, 'LB', 'lebanon', 'Lebanon', 'LBN', '422', '961', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (119, 'LS', 'lesotho', 'Lesotho', 'LSO', '426', '266', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (120, 'LR', 'liberia', 'Liberia', 'LBR', '430', '231', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (121, 'LY', 'libyan arab jamahiriya', 'Libyan Arab Jamahiriya', 'LBY', '434', '218', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (122, 'LI', 'liechtenstein', 'Liechtenstein', 'LIE', '438', '423', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (123, 'LT', 'lithuania', 'Lithuania', 'LTU', '440', '370', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (124, 'LU', 'luxembourg', 'Luxembourg', 'LUX', '442', '352', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (125, 'MO', 'macao', 'Macao', 'MAC', '446', '853', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (126, 'MK', 'macedonia', 'Macedonia', 'MKD', '807', '389', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (127, 'MG', 'madagascar', 'Madagascar', 'MDG', '450', '261', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (128, 'MW', 'malawi', 'Malawi', 'MWI', '454', '265', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (129, 'MY', 'malaysia', 'Malaysia', 'MYS', '458', '60', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (130, 'MV', 'maldives', 'Maldives', 'MDV', '462', '960', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (131, 'ML', 'mali', 'Mali', 'MLI', '466', '223', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (132, 'MT', 'malta', 'Malta', 'MLT', '470', '356', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (133, 'MH', 'marshall islands', 'Marshall Islands', 'MHL', '584', '692', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (134, 'MQ', 'martinique', 'Martinique', 'MTQ', '474', '596', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (135, 'MR', 'mauritania', 'Mauritania', 'MRT', '478', '222', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (136, 'MU', 'mauritius', 'Mauritius', 'MUS', '480', '230', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (137, 'YT', 'mayotte', 'Mayotte', '', '', '269', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (138, 'MX', 'mexico', 'Mexico', 'MEX', '484', '52', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (139, 'FM', 'micronesia', 'Micronesia', 'FSM', '583', '691', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (140, 'MD', 'moldova', 'Moldova', 'MDA', '498', '373', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (141, 'MC', 'monaco', 'Monaco', 'MCO', '492', '377', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (142, 'MN', 'mongolia', 'Mongolia', 'MNG', '496', '976', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (143, 'MS', 'montserrat', 'Montserrat', 'MSR', '500', '1664', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (144, 'MA', 'morocco', 'Morocco', 'MAR', '504', '212', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (145, 'MZ', 'mozambique', 'Mozambique', 'MOZ', '508', '258', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (146, 'MM', 'myanmar', 'Myanmar', 'MMR', '104', '95', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (147, 'NA', 'namibia', 'Namibia', 'NAM', '516', '264', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (148, 'NR', 'nauru', 'Nauru', 'NRU', '520', '674', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (149, 'NP', 'nepal', 'Nepal', 'NPL', '524', '977', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (150, 'NL', 'netherlands', 'Netherlands', 'NLD', '528', '31', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (151, 'AN', 'netherlands antilles', 'Netherlands Antilles', 'ANT', '530', '599', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (152, 'NC', 'new caledonia', 'New Caledonia', 'NCL', '540', '687', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (153, 'NZ', 'new zealand', 'New Zealand', 'NZL', '554', '64', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (154, 'NI', 'nicaragua', 'Nicaragua', 'NIC', '558', '505', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (155, 'NE', 'niger', 'Niger', 'NER', '562', '227', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (156, 'NG', 'nigeria', 'Nigeria', 'NGA', '566', '234', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (157, 'NU', 'niue', 'Niue', 'NIU', '570', '683', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (158, 'NF', 'norfolk island', 'Norfolk Island', 'NFK', '574', '672', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (159, 'MP', 'northern mariana islands', 'Northern Mariana Islands', 'MNP', '580', '1670', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (160, 'NO', 'norway', 'Norway', 'NOR', '578', '47', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (161, 'OM', 'oman', 'Oman', 'OMN', '512', '968', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (162, 'PK', 'pakistan', 'Pakistan', 'PAK', '586', '92', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (163, 'PW', 'palau', 'Palau', 'PLW', '585', '680', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (164, 'PS', 'palestinian territory, occupied', 'Palestinian Territory, Occupied', '', '', '970', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (165, 'PA', 'panama', 'Panama', 'PAN', '591', '507', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (166, 'PG', 'papua new guinea', 'Papua New Guinea', 'PNG', '598', '675', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (167, 'PY', 'paraguay', 'Paraguay', 'PRY', '600', '595', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (168, 'PE', 'peru', 'Peru', 'PER', '604', '51', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (169, 'PH', 'philippines', 'Philippines', 'PHL', '608', '63', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (170, 'PN', 'pitcairn', 'Pitcairn', 'PCN', '612', '0', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (171, 'PL', 'poland', 'Poland', 'POL', '616', '48', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (172, 'PT', 'portugal', 'Portugal', 'PRT', '620', '351', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (173, 'PR', 'puerto rico', 'Puerto Rico', 'PRI', '630', '1787', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (174, 'QA', 'qatar', 'Qatar', 'QAT', '634', '974', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (175, 'RE', 'reunion', 'Reunion', 'REU', '638', '262', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (176, 'RO', 'romania', 'Romania', 'ROM', '642', '40', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (177, 'RU', 'russian federation', 'Russian Federation', 'RUS', '643', '70', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (178, 'RW', 'rwanda', 'Rwanda', 'RWA', '646', '250', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (179, 'SH', 'saint helena', 'Saint Helena', 'SHN', '654', '290', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (180, 'KN', 'saint kitts and nevis', 'Saint Kitts and Nevis', 'KNA', '659', '1869', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (181, 'LC', 'saint lucia', 'Saint Lucia', 'LCA', '662', '1758', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (182, 'PM', 'saint pierre and miquelon', 'Saint Pierre and Miquelon', 'SPM', '666', '508', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (183, 'VC', 'saint vincent and the grenadines', 'Saint Vincent and the Grenadines', 'VCT', '670', '1784', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (184, 'WS', 'samoa', 'Samoa', 'WSM', '882', '684', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (185, 'SM', 'san marino', 'San Marino', 'SMR', '674', '378', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (186, 'ST', 'sao tome and principe', 'Sao Tome and Principe', 'STP', '678', '239', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (187, 'SA', 'saudi arabia', 'Saudi Arabia', 'SAU', '682', '966', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (188, 'SN', 'senegal', 'Senegal', 'SEN', '686', '221', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (189, 'CS', 'serbia and montenegro', 'Serbia and Montenegro', '', '', '381', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (190, 'SC', 'seychelles', 'Seychelles', 'SYC', '690', '248', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (191, 'SL', 'sierra leone', 'Sierra Leone', 'SLE', '694', '232', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (192, 'SG', 'singapore', 'Singapore', 'SGP', '702', '65', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (193, 'SK', 'slovakia', 'Slovakia', 'SVK', '703', '421', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (194, 'SI', 'slovenia', 'Slovenia', 'SVN', '705', '386', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (195, 'SB', 'solomon islands', 'Solomon Islands', 'SLB', '90', '677', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (196, 'SO', 'somalia', 'Somalia', 'SOM', '706', '252', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (197, 'ZA', 'south africa', 'South Africa', 'ZAF', '710', '27', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (198, 'GS', 'south georgia and the south sandwich islands', 'South Georgia and the South Sandwich Islands', '', '', '0', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (199, 'ES', 'spain', 'Spain', 'ESP', '724', '34', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (200, 'LK', 'sri lanka', 'Sri Lanka', 'LKA', '144', '94', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (201, 'SD', 'sudan', 'Sudan', 'SDN', '736', '249', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (202, 'SR', 'suriname', 'Suriname', 'SUR', '740', '597', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (203, 'SJ', 'svalbard and jan mayen', 'Svalbard and Jan Mayen', 'SJM', '744', '47', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (204, 'SZ', 'swaziland', 'Swaziland', 'SWZ', '748', '268', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (205, 'SE', 'sweden', 'Sweden', 'SWE', '752', '46', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (206, 'CH', 'switzerland', 'Switzerland', 'CHE', '756', '41', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (207, 'SY', 'syrian arab republic', 'Syrian Arab Republic', 'SYR', '760', '963', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (208, 'TW', 'taiwan', 'Taiwan', 'TWN', '158', '886', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (209, 'TJ', 'tajikistan', 'Tajikistan', 'TJK', '762', '992', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (210, 'TZ', 'tanzania', 'Tanzania', 'TZA', '834', '255', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (211, 'TH', 'thailand', 'Thailand', 'THA', '764', '66', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (212, 'TL', 'timor-leste', 'Timor-Leste', '', '', '670', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (213, 'TG', 'togo', 'Togo', 'TGO', '768', '228', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (214, 'TK', 'tokelau', 'Tokelau', 'TKL', '772', '690', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (215, 'TO', 'tonga', 'Tonga', 'TON', '776', '676', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (216, 'TT', 'trinidad and tobago', 'Trinidad and Tobago', 'TTO', '780', '1868', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (217, 'TN', 'tunisia', 'Tunisia', 'TUN', '788', '216', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (218, 'TR', 'turkey', 'Turkey', 'TUR', '792', '90', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (219, 'TM', 'turkmenistan', 'Turkmenistan', 'TKM', '795', '7370', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (220, 'TC', 'turks and caicos islands', 'Turks anumcodend Caicos Islands', 'TCA', '796', '1649', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (221, 'TV', 'tuvalu', 'Tuvalu', 'TUV', '798', '688', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (222, 'UG', 'uganda', 'Uganda', 'UGA', '800', '256', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (223, 'UA', 'ukraine', 'Ukraine', 'UKR', '804', '380', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (224, 'AE', 'united arab emirates', 'United Arab Emirates', 'ARE', '784', '971', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (225, 'GB', 'united kingdom', 'United Kingdom', 'GBR', '826', '44', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (226, 'US', 'united states', 'United States', 'USA', '840', '1', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (227, 'UM', 'united states minor outlying islands', 'United States Minor Outlying Islands', '', '', '1', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (228, 'UY', 'uruguay', 'Uruguay', 'URY', '858', '598', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (229, 'UZ', 'uzbekistan', 'Uzbekistan', 'UZB', '860', '998', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (230, 'VU', 'vanuatu', 'Vanuatu', 'VUT', '548', '678', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (231, 'VE', 'venezuela', 'Venezuela', 'VEN', '862', '58', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (232, 'VN', 'viet nam', 'Viet Nam', 'VNM', '704', '84', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (233, 'VG', 'virgin islands, british', 'Virgin Islands, British', 'VGB', '92', '1284', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (234, 'VI', 'virgin islands, u.s.', 'Virgin Islands, U.s.', 'VIR', '850', '1340', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (235, 'WF', 'wallis and futuna', 'Wallis and Futuna', 'WLF', '876', '681', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (236, 'EH', 'western sahara', 'Western Sahara', 'ESH', '732', '212', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (237, 'YE', 'yemen', 'Yemen', 'YEM', '887', '967', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (238, 'ZM', 'zambia', 'Zambia', 'ZMB', '894', '260', '2016-02-23 00:09:22', '2016-02-23 00:09:22'),
+            (239, 'ZW', 'zimbabwe', 'Zimbabwe', 'ZWE', '716', '263', '2016-02-23 00:09:22', '2016-02-23 00:09:22')"
+        );
 
     }
 }

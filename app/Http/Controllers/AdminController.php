@@ -295,7 +295,17 @@ class AdminController extends Controller
         // access all users
         $user = $this->admin;
 
-        return view('admin.pages.user.my-account', compact('user'));
+        $branches = new \App\Branch;        
+
+        if ($this->admin->role_id != 1) {
+
+            $branches = $branches->where('id', $this->admin->branch_id);
+        }
+
+        $branches = $branches->orderBy('name', 'asc');
+        $branches = $branches->get();
+
+        return view('admin.pages.user.my-account', compact('user', 'branches'));
     }
 
     public function accounts(Request $request)
@@ -303,7 +313,28 @@ class AdminController extends Controller
         // access only super admin & manager
         if ($this->admin->role_id == 3 OR $this->admin->role_id == 4) return redirect()->back();
 
-        if ($request->action == 'create') return view('admin.pages.user.create');
+
+        $roles = new \App\Role;
+
+        $branches = new \App\Branch;
+
+        if ($this->admin->role_id == 2) {
+
+            $roles = $roles->where('id', '!=', 1);
+
+            $branches = $branches->where('id', $this->admin->branch_id);
+        }
+
+        $roles = $roles->orderBy('id', 'asc');
+        $roles = $roles->get();
+
+        $branches = $branches->orderBy('name', 'asc');
+        $branches = $branches->get();
+
+        if ($request->action == 'create') {
+
+            return view('admin.pages.user.create', compact('roles', 'branches'));
+        }
 
         if ($request->action == 'edit' && isset($request->id)) {
 
@@ -311,7 +342,7 @@ class AdminController extends Controller
 
             $user = \App\User::find($request->id);
 
-            return view('admin.pages.user.edit', compact('user'));
+            return view('admin.pages.user.edit', compact('user', 'roles', 'branches'));
         }
 
         $request = json_encode($request->all());

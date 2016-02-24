@@ -45,7 +45,7 @@
         <div class="m-input-wrapper w50-6">
             <select name="branch_id">
 
-                @foreach(\App\Branch::all() as $branch)
+                @foreach($branches as $branch)
                 <option value="{{ $branch->id }}" {{ $branch->id == $user->brach_id ? 'selected' : '' }}>{{ $branch->name }}</option>
                 @endforeach
 
@@ -68,15 +68,9 @@
         <div class="m-input-wrapper w50-6">
             <select name="role_id">
 
-                @if(Auth::user()->get()->role_id == 1)
-                    @foreach(\App\Role::all() as $role)
-                    <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : ''}}>{{ $role->name }}</option>
-                    @endforeach
-                @else                
-                    @foreach(\App\Role::where('id', '!=', 1)->get() as $role)
-                    <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : ''}}>{{ $role->name }}</option>
-                    @endforeach
-                @endif
+                @foreach($roles as $role)
+                <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : ''}}>{{ $role->name }}</option>
+                @endforeach                    
 
             </select>
             <label for="title">role</label>

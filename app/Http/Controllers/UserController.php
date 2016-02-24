@@ -112,7 +112,8 @@ class UserController extends Controller
         //
 
         $validator = \Validator::make($request->all(), [
-            'email' => 'required|unique:users,email',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
             'firstname' => 'required'
         ]);
 
@@ -142,7 +143,7 @@ class UserController extends Controller
 
         $user->city = $request->city;
         $user->province = $city->province->province_name;
-        $user->country = $city->province->country->nicename;
+        $user->country = $city->province->country->name;
 
         // $user->zipcode = $request->zipcode;
 
@@ -226,7 +227,7 @@ class UserController extends Controller
 
         $user->city = $request->city;
         $user->province = $city->province->province_name;
-        $user->country = $city->province->country->nicename;
+        $user->country = $city->province->country->name;
 
         // $user->zipcode = $request->zipcode;
 

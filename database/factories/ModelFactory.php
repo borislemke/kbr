@@ -24,9 +24,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'lastname' => $faker->lastName,
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
-        'city' => 'Denpasar',
-        'province' => 'Bali',
-        'country' => 'Indonesia',
+        'city' => 'denpasar',
+        'province' => 'bali',
+        'country' => 'indonesia',
         'zipcode' => $faker->postcode,
         'image' => 'user.jpg',
         'active' => 1
@@ -51,9 +51,9 @@ $factory->define(App\Customer::class, function (Faker\Generator $faker) {
         'lastname' => $faker->lastName,
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
-        'city' => 'Denpasar',
-        'province' => 'Bali',
-        'country' => 'Indonesia',
+        'city' => 'denpasar',
+        'province' => 'bali',
+        'country' => 'indonesia',
         'zipcode' => $faker->postcode,
         'image_profile' => 'customer.jpg',
         'newsletter' => 1,
@@ -121,6 +121,10 @@ $factory->define(App\Property::class, function (Faker\Generator $faker) {
 
         'map_latitude' => (rand(8082268, 8842932) / 1000000) * -1,
         'map_longitude' => rand(114443923, 115689498) / 1000000,
+        
+        'city' => 'denpasar',
+        'province' => 'bali',
+        'country' => 'indonesia',
 
         'view_north' => $faker->sentence($nbWords = 3, $variableNbWords = true),
         'view_east' => $faker->sentence($nbWords = 3, $variableNbWords = true),
